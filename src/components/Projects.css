@@ -1,0 +1,39 @@
+.projects {
+  padding: 2rem;
+}
+.projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.project-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+.project-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transform: translateY(-5px);
+    transition: all 0.4s ease;
+}
+.project-card h3 {
+  margin-top: 0;
+}
+.tech {
+  display: block;
+  margin: 0.5rem 0;
+  color: #61dafb;
+  font-weight: bold;
+}
+.project-card a {
+  color: #222;
+  text-decoration: underline;
+}
+.project-card a:hover {
+  color: #61dafb;
+}

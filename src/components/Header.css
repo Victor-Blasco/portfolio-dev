@@ -1,0 +1,20 @@
+.header {
+  text-align: center;
+  padding: 2rem 0;
+  background: #222;
+  color: #fff;
+}
+.avatar {
+  width: 120px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+.header-links a {
+  margin: 0 1rem;
+  color: #61dafb;
+  text-decoration: none;
+  font-weight: bold;
+}
+.header-links a:hover {
+  text-decoration: underline;
+}
