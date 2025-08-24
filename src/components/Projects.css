@@ -1,5 +1,9 @@
 .projects {
   padding: 2rem;
+  background: var(--section-bg);
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  transition: background 0.3s, border 0.3s;
 }
 .projects-list {
   display: flex;
@@ -7,12 +11,14 @@
   gap: 2rem;
 }
 .project-card {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   padding: 1.5rem;
   width: 300px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: background 0.3s, border 0.3s;
+
 }
 
 
@@ -23,17 +29,21 @@
 }
 .project-card h3 {
   margin-top: 0;
+  color: var(--text-color);
+
 }
 .tech {
   display: block;
   margin: 0.5rem 0;
-  color: #61dafb;
+  color: var(--accent);
   font-weight: bold;
 }
 .project-card a {
-  color: #222;
+  color: var(--text-color);
   text-decoration: underline;
+  transition: color 0.3s;
+
 }
 .project-card a:hover {
-  color: #61dafb;
+  color: var(--accent);
 }

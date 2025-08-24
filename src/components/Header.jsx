@@ -3,7 +3,7 @@ import "./Header.css";
 function Header() {
   return (
     <header className="header">
-      <img src="/avatar.png" alt="Victor Blasco" className="avatar" />
+      <img src="/avatar.jpg" alt="Victor Blasco" className="avatar" />
       <h1>Victor Blasco García</h1>
       <h2>Desarrollador Full Stack Junior</h2>
       <p>
@@ -28,10 +28,9 @@ function Header() {
           LinkedIn
         </a>
         <a
-          href="/CV%20Victor%20Blasco.pdf"
+          href="/src/CV%20Victor%20Blasco.pdf"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Descargar CV
         </a>
       </div>
