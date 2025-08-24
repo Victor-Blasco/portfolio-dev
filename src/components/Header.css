@@ -1,20 +1,30 @@
 .header {
   text-align: center;
-  padding: 2rem 0;
-  background: #222;
-  color: #fff;
+  padding: 2rem 1rem;
+  background: var(--section-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  transition: background 0.3s, color 0.3s;
 }
 .avatar {
-  width: 120px;
-  border-radius: 50%;
+  width: 160px;
+  border-radius: 30%;
   margin-bottom: 1rem;
 }
 .header-links a {
+  display: inline-block;
   margin: 0 1rem;
-  color: #61dafb;
+  color: var(--accent);
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s;
 }
 .header-links a:hover {
   text-decoration: underline;
+}
+
+.header h1,.header h2{
+  margin: 0.5rem 0;
+  color: var(--text-color);
 }
