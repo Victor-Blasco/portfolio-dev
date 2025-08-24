@@ -23,5 +23,11 @@
   border-radius: 4px;
   transition: background 0.3s, color 0.3s;
   border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
 
+}
+.skills-list li:hover {
+  background: var(--accent);
+  color: var(--text-color);
+  transform: scale(1.02);
 }

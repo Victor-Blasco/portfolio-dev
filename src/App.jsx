@@ -7,6 +7,7 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,10 +25,13 @@ function App() {
         {darkMode ? "🌙 Modo oscuro" : "☀️ Modo claro"}
       </button>
       <Header />
-      <About />
-      <Projects />
-      <Experience />
-      <Contact />
+      <main>
+        <About />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }

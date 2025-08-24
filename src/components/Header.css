@@ -9,9 +9,16 @@
 }
 .avatar {
   width: 160px;
-  border-radius: 30%;
+  border-radius: 25%;
   margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: all 0.4s ease;
 }
+.avatar:hover {
+  transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
 .header-links a {
   display: inline-block;
   margin: 0 1rem;

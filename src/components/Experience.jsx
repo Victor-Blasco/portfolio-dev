@@ -2,7 +2,7 @@ import "./Experience.css";
 
 function Experience() {
   return (
-    <section className="experience">
+    <section className="experience" id="experience">
       <h2>Experiencia</h2>
       <div className="exp-list">
         <div className="exp-item">
@@ -18,7 +18,7 @@ function Experience() {
           <span>Julio-Agosto 2025</span>
           <p>
             Resolución de problemas de forma proactiva en un entorno de
-            producción, permitiendo reforzar habilidades de trabajo en equipo.
+            producción, permitiendo reforzar habilidades de resolución de problemas.
           </p>
         </div>
       </div>
