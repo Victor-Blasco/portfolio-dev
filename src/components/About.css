@@ -1,12 +1,4 @@
 .about {
-  padding: 2rem;
-  background: var(--section-bg);
-  color: var(--text-color);
-  border-radius: 8px;
-  margin: 2rem 0;
-  border: 1px solid var(--card-border);
-  transition: background 0.3s, color 0.3s, border 0.3s;
-
 
 }
 .skills-list {
@@ -21,7 +13,12 @@
   color: var(--button-text);
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
   border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
 
+}
+.skills-list li:hover {
+  background: var(--accent);
+  color: var(--text-color);
+  transform: scale(1.02);
 }

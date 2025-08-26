@@ -1,0 +1,46 @@
+  
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px; 
+  margin-bottom: 1.5rem; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.4s ease;  
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card h3{
+  margin-left: 0;
+  font-size: 1.3rem;
+}
+
+.card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+
+.card p {
+  margin-top: 0;
+  color: var(--text-color);
+  line-height: 1.4;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+
+}
+
+.tech {
+  margin: 0.5rem 0;
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 0.9rem;
+}

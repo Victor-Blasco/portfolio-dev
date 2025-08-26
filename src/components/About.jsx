@@ -2,7 +2,7 @@ import "./About.css";
 
 function About() {
   return (
-    <section className="about">
+    <section className="about section-card" id="about">
       <h2>Sobre mí</h2>
       <p>
         Soy estudiante de Ingeniería Informática en la Universitat Jaume I, con
