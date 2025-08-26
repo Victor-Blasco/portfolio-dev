@@ -2,7 +2,7 @@ import './Footer.css';
 
 function Footer() {
     return (
-      <footer className="footer">
+      <footer className="footer section-card">
         <a href="#header">Inicio</a>
         <a href="#about">Sobre mí</a>
         <a href="#projects">Proyectos</a>

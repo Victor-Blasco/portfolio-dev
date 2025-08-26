@@ -1,11 +1,6 @@
 .header {
   text-align: center;
   padding: 2rem 1rem;
-  background: var(--section-bg);
-  color: var(--text-color);
-  border-radius: 8px;
-  border: 1px solid var(--card-border);
-  transition: background 0.3s, color 0.3s;
 }
 .avatar {
   width: 160px;

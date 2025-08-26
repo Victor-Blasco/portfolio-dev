@@ -2,7 +2,7 @@ import "./Contact.css";
 
 function Contact() {
   return (
-    <section className="contact" aria-labelledby="contact-title" id="contact">
+    <section className="contact section-card" aria-labelledby="contact-title" id="contact">
       <h2 id="contact-title">Contacto</h2>
       <form
         className="contact-form"
@@ -16,11 +16,10 @@ function Contact() {
         <input id="contact-email" type="email" placeholder="Tu email" required />
 
         <label htmlFor="contact-message">Mensaje</label>
-        <textarea
+        <input
           id="contact-message"
           placeholder="Tu mensaje"
           required
-          rows={4}
         />
 
         <button type="submit">Enviar</button>

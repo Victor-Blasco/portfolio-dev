@@ -2,7 +2,7 @@ import "./Header.css";
 
 function Header() {
   return (
-    <header className="header" id="header">
+    <header className="header section-card" id="header">
       <img src="/avatar.jpg" alt="Victor Blasco" className="avatar" />
       <h1>Victor Blasco García</h1>
       <h2>Desarrollador Full Stack Junior</h2>

@@ -1,50 +1,10 @@
 .projects {
-  padding: 2rem;
-  background: var(--section-bg);
-  border-radius: 8px;
-  border: 1px solid var(--card-border);
-  transition: background 0.3s, border 0.3s;
 }
+
 .projects-list {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
-.project-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 300px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: all 0.4s ease;
-
-}
 
 
-.project-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transform: translateY(-5px) scale(1.02);
-}
-.project-card h3 {
-  margin-top: 0;
-  color: var(--text-color);
-
-}
-.tech {
-  display: block;
-  margin: 0.5rem 0;
-  color: var(--accent);
-  font-weight: bold;
-}
-.project-card a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: color 0.3s;
-  font-style: italic;
-
-}
-.project-card a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}

@@ -1,38 +1,33 @@
 import "./Experience.css";
+import Card from "./Card";
 
 function Experience() {
   return (
-    <section className="experience" id="experience">
+    <section className="experience section-card" id="experience">
       <h2>Experiencia</h2>
       <div className="exp-list">
-        <div className="exp-item">
-          <h3>Operario de producción | WANDREGAR 2001 S.L.U.</h3>
-          <span>Julio-Agosto 2024</span>
-          <p>
-            Colaboración en el equipo para optimizar la eficiencia de la
-            producción, asumiendo diferentes tareas y responsabilidades.
-          </p>
-        </div>
-        <div className="exp-item">
-          <h3>Operario de producción | ECO PORCELÁNICO S.L.U.</h3>
-          <span>Julio-Agosto 2025</span>
-          <p>
-            Resolución de problemas de forma proactiva en un entorno de
-            producción, permitiendo reforzar habilidades de resolución de problemas.
-          </p>
-        </div>
+        <Card
+          title="Operario de producción | WANDREGAR 2001 S.L.U."
+          subtitle="Julio-Agosto 2024"
+          description="Colaboración en el equipo para optimizar la eficiencia de la
+              producción, asumiendo diferentes tareas y responsabilidades."
+        />
+
+        <Card title="Operario de producción | ECO PORCELÁNICO S.L.U."
+              subtitle="Julio-Agosto 2025"
+              description="Resolución de problemas de forma proactiva en un entorno de
+              producción, permitiendo reforzar habilidades de resolución de problemas." 
+        />
       </div>
+
       <h2>Educación</h2>
       <div className="exp-list">
-        <div className="exp-item">
-          <h3>Grado en Ingeniería Informática</h3>
-          <span>Universitat Jaume I (2022-presente)</span>
-        </div>
-        <div className="exp-item">
-          <h3>Bachillerato</h3>
-          <span>IES Politécnico (2020-2022)
-          </span>
-        </div>
+
+        <Card title="Grado en Ingeniería Informática"
+              subtitle="Universitat Jaume I (2022-presente)" 
+              description="Aqui adquirí conocimientos en programación, estructuras de datos, algoritmos, bases de datos, redes y desarrollo web." 
+        />
+
       </div>
     </section>
   );
