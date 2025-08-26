@@ -10,7 +10,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   useEffect(() => {
   document.documentElement.classList.toggle("dark-mode", darkMode);
 }, [darkMode]);
