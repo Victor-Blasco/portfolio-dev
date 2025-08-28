@@ -1,6 +1,10 @@
 import SkillsList from "./SkillsList";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+
 
 function About() {
+
+  const sectionRef = useIntersectionObserver();
 
   const hardSkills = [
     "Python, Java, C, C#",
@@ -23,7 +27,7 @@ function About() {
   ];
 
   return (
-    <section className="section-card" id="about">
+    <section className="section-card" id="about" ref={sectionRef}>
       <h2>Sobre mí</h2>
       <p>
         Soy estudiante de Ingeniería Informática en la Universitat Jaume I, con

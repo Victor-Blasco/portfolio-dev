@@ -1,15 +1,19 @@
 import "./Header.css";
+import  { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 function Header() {
+
+  const sectionRef = useIntersectionObserver("header");
+
   return (
-    <header className="header section-card" id="header">
+    <header className="header section-card" id="header" ref={sectionRef}>
       <img src="/avatar.jpg" alt="Victor Blasco" className="avatar" />
       <h1>Victor Blasco García</h1>
       <h2>Desarrollador Full Stack Junior</h2>
       <p>
-        Estudiante de Ingeniería Informática, orientado al desarrollo software con
-        experiencia en proyectos académicos.
-        Apasionado por aprender y aportar en equipos multidisciplinares.
+        Estudiante de Ingeniería Informática, orientado al desarrollo software
+        con experiencia en proyectos académicos. Apasionado por aprender y
+        aportar en equipos multidisciplinares.
       </p>
       <div className="header-links">
         <a href="mailto:victorblascogar@gmail.com">Email</a>
@@ -21,7 +25,7 @@ function Header() {
           GitHub
         </a>
         <a
-          href="https://linkedin.com/in/tuusuario"
+          href="https://linkedin.com/in/victor-blasco-garcia"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -30,7 +34,8 @@ function Header() {
         <a
           href="/src/CV%20Victor%20Blasco.pdf"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           Descargar CV
         </a>
       </div>

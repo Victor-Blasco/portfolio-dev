@@ -8,6 +8,8 @@
   max-width: 1200px;
 }
 
+/* Estilos para las secciones */
+
 .section-card {
   padding: 2rem;
   background: var(--card-bg);
@@ -15,7 +17,15 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
   margin: 2rem 0;
   border: 1px solid var(--card-border);
-  transition: all 0.3s, color 0.3s, border 0.3s;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 h1, h2, h3 {
@@ -35,6 +45,8 @@ h1, h2, h3 {
   }
 }
 
+/* Variables de color para modo claro */
+
 :root {
   --bg-color: #e9ecef;
   --text-color: #222;
@@ -48,6 +60,8 @@ h1, h2, h3 {
   --button-text: #fff;
 
 }
+
+/* Variables de color para modo oscuro */
 
 :root.dark-mode {
   --bg-color: #181a1b;
@@ -70,9 +84,11 @@ body, html, #root {
   background: var(--bg-color);
   color: var(--text-color);
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  transition: background 0.3s, color 0.3s;
+  transition: all 0.3s ease;
   scroll-behavior: smooth;
 }
+
+/* Estilos para el botón de cambio de modo */
 
 .mode-toggle {
   position: fixed;

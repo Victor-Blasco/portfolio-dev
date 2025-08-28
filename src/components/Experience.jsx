@@ -1,9 +1,13 @@
 import "./Experience.css";
 import Card from "./Card";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 function Experience() {
+
+  const sectionRef = useIntersectionObserver("experience");
+
   return (
-    <section className="section-card" id="experience">
+    <section className="section-card" id="experience" ref={sectionRef}>
       <h2>Experiencia</h2>
       <div className="exp-list">
         <Card

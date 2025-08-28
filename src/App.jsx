@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import './App.css'
 
-import { useEffect, useState } from "react";
+// Función para obtener el modo inicial
+const getInitialMode = () => {
+  const savedMode = localStorage.getItem('darkMode');
+  if (savedMode !== null) {
+    return JSON.parse(savedMode);
+  }
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+
+// Aplicar modo oscuro antes del primer render
+const darkModeInitial = getInitialMode();
+document.documentElement.classList.toggle("dark-mode", darkModeInitial);
 
 import Header from './components/Header'
 import About from './components/About'
@@ -10,10 +22,12 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const [darkMode, setDarkMode] = useState(darkModeInitial);
+
   useEffect(() => {
-  document.documentElement.classList.toggle("dark-mode", darkMode);
-}, [darkMode]);
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    document.documentElement.classList.toggle("dark-mode", darkMode);
+  }, [darkMode]);
 
   return (
     <div className="app-container">
