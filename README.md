@@ -24,7 +24,7 @@ Sigue estos pasos para clonar el repositorio y ejecutar el proyecto en tu máqui
 
 1.  Clona el repositorio:
     ```bash
-    git clone [https://github.com/Victor-Blasco/portfolio-dev.git](https://github.com/Victor-Blasco/portfolio-dev.git)
+    git clone https://github.com/Victor-Blasco/portfolio-dev.git
     ```
 
 2.  Navega al directorio del proyecto:
