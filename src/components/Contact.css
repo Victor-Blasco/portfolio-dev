@@ -1,6 +1,5 @@
-.contact {
-  
-}
+/* Contact.css */
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -31,7 +30,7 @@
 }
 .contact-form button:hover {
   background: var(--accent);
-  color: var(--section-bg);
+  color: var(--text-color);
 }
 .contact-info a {
   color: var(--accent);

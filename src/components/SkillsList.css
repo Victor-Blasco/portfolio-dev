@@ -1,0 +1,23 @@
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+}
+
+.skills-list li {
+    background: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+
+}
+
+.skills-list li:hover {
+    background: var(--accent);
+    color: var(--text-color);
+    transform: scale(1.02);
+}

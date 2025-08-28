@@ -3,7 +3,7 @@ import Card from "./Card";
 
 function Experience() {
   return (
-    <section className="experience section-card" id="experience">
+    <section className="section-card" id="experience">
       <h2>Experiencia</h2>
       <div className="exp-list">
         <Card

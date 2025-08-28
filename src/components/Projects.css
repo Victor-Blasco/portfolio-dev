@@ -1,10 +1,7 @@
-.projects {
-}
+/* Projects.css */
 
 .projects-list {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
-
-

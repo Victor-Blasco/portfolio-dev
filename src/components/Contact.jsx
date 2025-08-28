@@ -2,7 +2,7 @@ import "./Contact.css";
 
 function Contact() {
   return (
-    <section className="contact section-card" aria-labelledby="contact-title" id="contact">
+    <section className="section-card" aria-labelledby="contact-title" id="contact">
       <h2 id="contact-title">Contacto</h2>
       <form
         className="contact-form"

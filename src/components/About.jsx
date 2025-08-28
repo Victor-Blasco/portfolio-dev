@@ -1,8 +1,29 @@
-import "./About.css";
+import SkillsList from "./SkillsList";
 
 function About() {
+
+  const hardSkills = [
+    "Python, Java, C, C#",
+    "HTML, CSS, JavaScript",
+    "PostgreSQL",
+    "React",
+    "Git, GitHub"
+  ];
+  const softSkills = [
+    "Trabajo en equipo",
+    "Proactividad",
+    "Resolución de problemas",
+    "Adaptación a nuevos ambientes",
+  ];
+  const languages = [
+    "Castellano: Nativo",
+    "Valenciano: Avanzado (C1)",
+    "Inglés: Avanzado (C1)",
+    "Italiano: Básico (A2)",
+  ];
+
   return (
-    <section className="about section-card" id="about">
+    <section className="section-card" id="about">
       <h2>Sobre mí</h2>
       <p>
         Soy estudiante de Ingeniería Informática en la Universitat Jaume I, con
@@ -12,28 +33,9 @@ function About() {
         buscando oportunidades para aplicar mis conocimientos y crecer profesionalmente en el campo de la programación.
         
       </p>
-      <h3>Hard Skills</h3>
-      <ul className="skills-list">
-        <li>Python, Java, C, C#</li>
-        <li>HTML, CSS, JavaScript</li>
-        <li>PostgreSQL</li>
-        <li>React</li>
-        <li>Git, GitHub</li>
-      </ul>
-      <h3>Soft Skills</h3>
-      <ul className="skills-list">
-        <li>Trabajo en equipo</li>
-        <li>Proactividad</li>
-        <li>Resolución de problemas</li>
-        <li>Adaptación a nuevos ambientes</li>
-      </ul>
-      <h3>Idiomas</h3>
-      <ul className="skills-list">
-        <li>Castellano: Nativo</li>
-        <li>Valenciano: Avanzado (C1)</li>
-        <li>Inglés: Avanzado (C1)</li>
-        <li>Italiano: Básico (A2)</li>
-      </ul>
+      <SkillsList title="Hard Skills" skills={hardSkills} />
+      <SkillsList title="Soft Skills" skills={softSkills} />
+      <SkillsList title="Idiomas" skills={languages} />
     </section>
   );
 }
