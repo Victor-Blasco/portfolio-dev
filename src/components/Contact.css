@@ -30,7 +30,6 @@
 }
 .contact-form button:hover {
   background: var(--accent);
-  color: var(--text-color);
 }
 .contact-info a {
   color: var(--accent);

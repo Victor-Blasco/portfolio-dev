@@ -10,7 +10,7 @@ function Footer() {
         <a href="#projects">Proyectos</a>
         <a href="#experience">Experiencia</a>
         <a href="#contact">Contacto</a>
-        <p>© 2025 Victor Blasco. Todos los derechos reservados.</p>
+        <p>© 2025 Victor Blasco</p>
       </footer>
     );
 }

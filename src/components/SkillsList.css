@@ -18,6 +18,5 @@
 
 .skills-list li:hover {
     background: var(--accent);
-    color: var(--text-color);
     transform: scale(1.02);
 }

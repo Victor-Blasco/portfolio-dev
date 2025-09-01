@@ -7,7 +7,7 @@ function Header() {
 
   return (
     <header className="header section-card" id="header" ref={sectionRef}>
-      <img src="/avatar.jpg" alt="Victor Blasco" className="avatar" />
+      <img src="/src/assets/avatar.webp" alt="Victor Blasco" className="avatar" />
       <h1>Victor Blasco García</h1>
       <h2>Desarrollador Full Stack Junior</h2>
       <p>
@@ -32,7 +32,7 @@ function Header() {
           LinkedIn
         </a>
         <a
-          href="/src/CV%20Victor%20Blasco.pdf"
+          href="/src/assets/CV%20Victor%20Blasco.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >

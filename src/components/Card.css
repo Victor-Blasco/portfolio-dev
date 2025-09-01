@@ -30,16 +30,6 @@
   font-weight: bold;
 }
 
-
-.card p {
-  margin-top: 0;
-  color: var(--text-color);
-  line-height: 1.4;
-  flex-grow: 1;
-  margin-bottom: 1rem;
-
-}
-
 .tech {
   margin: 0.5rem 0;
   color: var(--accent);
