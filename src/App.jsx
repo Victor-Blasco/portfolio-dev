@@ -20,6 +20,7 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Navbar from "./components/Navbar";
 
 function App() {
   const [darkMode, setDarkMode] = useState(darkModeInitial);
@@ -31,13 +32,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <button
-        className="mode-toggle"
-        onClick={() => setDarkMode((dm) => !dm)}
-        aria-label="Cambiar modo claro/oscuro"
-      >
-        {darkMode ? "🌙 Modo oscuro" : "☀️ Modo claro"}
-      </button>
+      <Navbar darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
       <Header />
       <main>
         <About />

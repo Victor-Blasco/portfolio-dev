@@ -1,6 +1,6 @@
 import "./Experience.css";
-import Card from "./Card";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import Card from "@/Components/Card/Card";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 function Experience() {
 

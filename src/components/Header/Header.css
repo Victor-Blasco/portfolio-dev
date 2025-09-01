@@ -16,16 +16,13 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.8);
 }
 
-.header-links a {
-  display: inline-block;
-  margin: 0 1rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-.header-links a:hover {
-  text-decoration: underline;
+.header-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+
 }
 
 .header h1,.header h2{

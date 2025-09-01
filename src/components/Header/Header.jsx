@@ -1,5 +1,12 @@
 import "./Header.css";
-import  { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import  { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { HiOutlineMail } from "react-icons/hi";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { IoDocumentTextOutline } from "react-icons/io5";
+
+
+
 
 function Header() {
 
@@ -16,26 +23,29 @@ function Header() {
         aportar en equipos multidisciplinares.
       </p>
       <div className="header-links">
-        <a href="mailto:victorblascogar@gmail.com">Email</a>
+        <a href="mailto:victorblascogar@gmail.com"
+        >
+          <HiOutlineMail className="icon"/>Email
+        </a>
         <a
           href="https://github.com/Victor-Blasco"
           target="_blank"
           rel="noopener noreferrer"
-        >
+        ><FaGithub className="icon"/>
           GitHub
         </a>
         <a
           href="https://linkedin.com/in/victor-blasco-garcia"
           target="_blank"
           rel="noopener noreferrer"
-        >
+        ><FaLinkedin className="icon"/>
           LinkedIn
         </a>
         <a
           href="/src/assets/CV%20Victor%20Blasco.pdf"
           target="_blank"
           rel="noopener noreferrer"
-        >
+        ><IoDocumentTextOutline className="icon"/>
           Descargar CV
         </a>
       </div>

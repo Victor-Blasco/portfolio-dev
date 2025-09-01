@@ -1,0 +1,21 @@
+/* Footer.css */
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0rem;
+}
+.footer-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+.footer p{
+    margin-bottom: 1rem;
+}

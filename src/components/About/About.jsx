@@ -1,5 +1,5 @@
-import SkillsList from "./SkillsList";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import SkillsList from "@/components/SkillsList/SkillsList";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 
 function About() {

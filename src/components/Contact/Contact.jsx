@@ -1,9 +1,9 @@
 import "./Contact.css";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 function Contact() {
 
-  const sectionRef = useIntersectionObserver();
+  const sectionRef = useIntersectionObserver("contact");
 
   return (
     <section
@@ -34,31 +34,6 @@ function Contact() {
 
         <button type="submit">Enviar</button>
       </form>
-      <address className="contact-info">
-        <p>
-          Email:{" "}
-          <a href="mailto:victorblascogar@gmail.com">
-            victorblascogar@gmail.com
-          </a>
-        </p>
-        <p>
-          <a
-            href="https://linkedin.com/in/victor-blasco-garcia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>{" "}
-          |{" "}
-          <a
-            href="https://github.com/Victor-Blasco"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-        </p>
-      </address>
     </section>
   );
 }
