@@ -19,8 +19,7 @@ function Header() {
       <h2>Desarrollador Full Stack Junior</h2>
       <p>
         Estudiante de Ingeniería Informática, orientado al desarrollo software
-        con experiencia en proyectos académicos. Apasionado por aprender y
-        aportar en equipos multidisciplinares.
+        con experiencia en proyectos académicos. Busco aplicar mis conocimientos y habilidades en un entorno profesional.
       </p>
       <div className="header-links">
         <a href="mailto:victorblascogar@gmail.com"

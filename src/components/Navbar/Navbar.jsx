@@ -1,4 +1,7 @@
 import './Navbar.css'
+import { MdOutlineLightMode } from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
+
 
 function Navbar({ darkMode, onToggleTheme }) {
   return (
@@ -18,7 +21,7 @@ function Navbar({ darkMode, onToggleTheme }) {
           onClick={onToggleTheme}
           aria-label="Cambiar modo claro/oscuro"
         >
-          {darkMode ? "🌙" : "☀️"}
+          {darkMode ? <MdOutlineDarkMode className='icon'/> : <MdOutlineLightMode className='icon'/>}
         </button>
       </div>
     </nav>

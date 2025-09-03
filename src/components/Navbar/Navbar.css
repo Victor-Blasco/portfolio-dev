@@ -34,12 +34,12 @@ nav {
 }
 
 .mode-toggle {
+  
   background: transparent;
-  border: 1 px solid var(--card-border);
-  font-size: 1.3rem;
   cursor: pointer;
   border-radius: 20%;
   transition: transform 0.3s;
+  border: none;
 }
 
 .mode-toggle:hover {
@@ -47,9 +47,12 @@ nav {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-links a{
     display: none;
   }
-  
-
+}
+.mode-toggle .icon {
+  vertical-align: middle;
+  font-size: 1.5rem;
+  color: var(--text-color);
 }

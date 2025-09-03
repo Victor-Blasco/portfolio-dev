@@ -10,17 +10,16 @@ function Experience() {
     <section className="section-card" id="experience" ref={sectionRef}>
       <h2>Experiencia</h2>
       <div className="exp-list">
-        <Card
-          title="Operario de producción | WANDREGAR 2001 S.L.U."
-          subtitle="Julio-Agosto 2024"
-          description="Colaboración en el equipo para optimizar la eficiencia de la
-              producción, asumiendo diferentes tareas y responsabilidades."
+        <Card title="Operario de producción | WANDREGAR 2001 S.L.U."
+              subtitle="Julio-Agosto 2024"
+              description="Colaboración en el equipo para optimizar la eficiencia de la
+              producción, asumiendo diferentes tareas y responsabilidades donde reforcé mi proactividad y capacidad de adaptación."
         />
 
         <Card title="Operario de producción | ECO PORCELÁNICO S.L.U."
               subtitle="Julio-Agosto 2025"
-              description="Resolución de problemas de forma proactiva en un entorno de
-              producción, permitiendo reforzar habilidades de resolución de problemas." 
+              description="Participación activa en el proceso de producción junto a un equipo,
+              desarrollando habilidades de colaboración, comunicación y resolución de problemas." 
         />
       </div>
 
