@@ -10,6 +10,8 @@
 /* Estilos para las secciones */
 
 .section-card {
+  min-height: 200px;
+  contain: layout paint;
   padding: 2rem;
   background: var(--card-bg);
   border-radius: 8px;
@@ -85,6 +87,7 @@ body, html, #root {
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
   transition: all 0.2s ease;
   scroll-behavior: smooth;
+  font-display: swap;
 }
 
 a {
@@ -97,27 +100,22 @@ a {
   text-decoration: none;
   font-style: italic;
   transition: color 0.3s;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
 }
 a:hover {
   text-decoration: underline;
 }
 
 img {
-  margin-top: 1rem;
-  max-width: 100%;
-  width: 200px;
-  height: auto;
-  
+  margin: 1rem;
 }
 p {
   margin-top: 0;
   color: var(--text-color);
   line-height: 1.4;
   flex-grow: 1;
-  margin-bottom: 1lh;
-}
-a .icon{
-  vertical-align: middle;
-  margin: 0 0.5rem 0.25rem 0;
-  font-size: 1.2rem;
 }

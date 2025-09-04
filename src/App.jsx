@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import './App.css'
+import { lazy } from "react";
 
 // Función para obtener el modo inicial
 const getInitialMode = () => {
@@ -16,11 +17,14 @@ document.documentElement.classList.toggle("dark-mode", darkModeInitial);
 
 import Header from './components/Header'
 import About from './components/About'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import Navbar from "./components/Navbar";
+
+
+const Projects = lazy(() => import("./components/Projects"));
+const Experience = lazy(() => import("./components/Experience"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(darkModeInitial);
@@ -36,11 +40,15 @@ function App() {
       <Header />
       <main>
         <About />
+        <Suspense fallback={<div>Loading...</div>}>
         <Projects />
         <Experience />
         <Contact />
+        </Suspense>
       </main>
+      <Suspense fallback={<div>Loading...</div>}>
       <Footer />
+      </Suspense>
     </div>
   );
 }
