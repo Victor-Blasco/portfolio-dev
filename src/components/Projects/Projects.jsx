@@ -1,7 +1,7 @@
 import Card from "@/components/Card/Card";
 import "./Projects.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { FaGithub } from "react-icons/fa";
+import Icon from "../Icon/icon";
 
 function Projects() {
 
@@ -21,7 +21,7 @@ function Projects() {
               url: "https://github.com/Victor-Blasco/MoRMaS",
             },
           ]}
-          icon=<FaGithub className="icon"/>
+          icon=<Icon name="github" className="github" />
         />
 
         <Card
@@ -34,7 +34,7 @@ function Projects() {
               url: "https://github.com/Victor-Blasco/portfolio-dev",
             },
           ]}
-          icon=<FaGithub className="icon"/>
+          icon=<Icon name="github" className="github" />
         />
       </div>
     </section>

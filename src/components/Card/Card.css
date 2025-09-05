@@ -35,3 +35,7 @@
   font-size: 0.9rem;
   margin-bottom: 1lh;
 }
+
+.card p {
+  flex-grow: 1;
+}

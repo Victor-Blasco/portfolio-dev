@@ -28,7 +28,7 @@ function Header() {
       </p>
       <div className="header-links">
         <a href="mailto:victorblascogar@gmail.com">
-          <Icon name="email" className="" />
+          <Icon name="email" className="email" />
           Email
         </a>
         <a
@@ -36,6 +36,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
+         <Icon name="github" className="github" />
           GitHub
         </a>
         <a
@@ -43,6 +44,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
+         <Icon name="linkedin" className="linkedin"/>
           LinkedIn
         </a>
         <a
@@ -50,6 +52,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
+          <Icon name="curriculum" className="curriculum" />
           Descargar CV
         </a>
       </div>

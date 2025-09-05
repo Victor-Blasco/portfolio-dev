@@ -9,7 +9,7 @@
   border-radius: 25%;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .avatar:hover {
   transform: scale(1.02);

@@ -1,4 +1,3 @@
-import { FaGithub } from "react-icons/fa";
 import "./Card.css"
 
 function Card({ title, subtitle, description, tech, references, icon }) {

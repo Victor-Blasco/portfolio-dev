@@ -80,8 +80,6 @@ h1, h2, h3 {
 body, html, #root {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
   background: var(--bg-color);
   color: var(--text-color);
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
@@ -91,7 +89,10 @@ body, html, #root {
 }
 
 a {
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   background-color: var(--button-bg);
   border: 1px solid var(--card-border);
   border-radius: 15px;
@@ -100,10 +101,7 @@ a {
   text-decoration: none;
   font-style: italic;
   transition: color 0.3s;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-weight: 500;
 
 }
 a:hover {
@@ -117,5 +115,4 @@ p {
   margin-top: 0;
   color: var(--text-color);
   line-height: 1.4;
-  flex-grow: 1;
 }

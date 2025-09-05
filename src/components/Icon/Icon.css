@@ -1,3 +1,7 @@
 .icon{
+    fill: currentColor;
+}
+.email{
+    fill: none;
     stroke: currentColor;
 }
