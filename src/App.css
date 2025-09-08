@@ -4,13 +4,14 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   min-height: 100vh;
-  transition: all 0.3s ease;
   max-width: 1200px;
 }
 
 /* Estilos para las secciones */
 
 .section-card {
+  min-height: 200px;
+  contain: layout paint;
   padding: 2rem;
   background: var(--card-bg);
   border-radius: 8px;
@@ -20,7 +21,7 @@
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .section-card.visible {
@@ -53,7 +54,7 @@ h1, h2, h3 {
   --section-bg: #fff;
   --card-bg: #f9f9f9;
   --card-border: #ddd;
-  --accent: #61dafb;
+  --accent: #0048df;
   --input-bg: #fff;
   --input-text: #222;
   --button-bg: #222;
@@ -79,44 +80,39 @@ h1, h2, h3 {
 body, html, #root {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
   background: var(--bg-color);
   color: var(--text-color);
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   scroll-behavior: smooth;
+  font-display: swap;
 }
 
-/* Estilos para el botón de cambio de modo */
-
-.mode-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: var(--card-bg);
-  color: var(--card-text);
-  border: 1px solid var(--card-border);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-.mode-toggle:hover {
-  opacity: 0.8;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  transform: translateY(-1px);
-
-}
 a {
-  color: var(--text-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--button-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  color: var(--button-text);
   text-decoration: none;
   font-style: italic;
   transition: color 0.3s;
+  font-weight: 500;
+
 }
 a:hover {
-  color: var(--accent);
   text-decoration: underline;
+}
+
+img {
+  margin: 1rem;
+}
+p {
+  margin-top: 0;
+  color: var(--text-color);
+  line-height: 1.4;
 }

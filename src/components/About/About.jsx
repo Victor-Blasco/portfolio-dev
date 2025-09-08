@@ -1,5 +1,5 @@
-import SkillsList from "./SkillsList";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import SkillsList from "@/components/SkillsList/SkillsList";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 
 function About() {
@@ -18,6 +18,7 @@ function About() {
     "Proactividad",
     "Resolución de problemas",
     "Adaptación a nuevos ambientes",
+    "Comunicación efectiva"
   ];
   const languages = [
     "Castellano: Nativo",
@@ -30,11 +31,11 @@ function About() {
     <section className="section-card" id="about" ref={sectionRef}>
       <h2>Sobre mí</h2>
       <p>
-        Soy estudiante de Ingeniería Informática en la Universitat Jaume I, con
+        Estudiante de Ingeniería Informática en la Universitat Jaume I, con
         experiencia en desarrollo web y backend. Me considero proactivo, con
         facilidad para el trabajo en equipo y la resolución de problemas, y
-        siempre dispuesto a aprender y adaptarme a nuevos entornos. Estoy
-        buscando oportunidades para aplicar mis conocimientos y crecer profesionalmente en el campo de la programación.
+        siempre dispuesto a aceptar nuevos desafíos y entornos. Estoy
+        buscando oportunidades para aplicar mis conocimientos y crecer profesionalmente en el campo del desarrollo de software.
         
       </p>
       <SkillsList title="Hard Skills" skills={hardSkills} />

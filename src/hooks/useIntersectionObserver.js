@@ -24,7 +24,7 @@ export function useIntersectionObserver(options = {}) {
         observer.unobserve(node);
       }
     };
-  });
+  }, [options]);
 
   return elementRef;
 }
