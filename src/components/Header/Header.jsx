@@ -1,5 +1,6 @@
 import Icon from "../Icon/icon";
 import "./Header.css";
+import avatar from "@/assets/avatar.webp";
 import  { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 
@@ -12,7 +13,7 @@ function Header() {
   return (
     <header className="header section-card" id="header" ref={sectionRef}>
       <img
-        src="/src/assets/avatar.webp"
+        src={avatar}
         alt="Victor Blasco"
         width="160"
         height="200"
