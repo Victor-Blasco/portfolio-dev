@@ -6,7 +6,7 @@ import { ReactComponent as CurriculumIcon } from '@/assets/icons/curriculum.svg?
 import{ ReactComponent as DarkModeIcon } from '@/assets/icons/dark-mode.svg?react';
 import{ ReactComponent as LightModeIcon } from '@/assets/icons/light-mode.svg?react';
 
-function Icon ( {name, className= '', size=20, } ) {
+function Icon ( {name, className= '', size=20} ) {
     const icons = {
     email: EmailIcon,
     github: GitHubIcon,
