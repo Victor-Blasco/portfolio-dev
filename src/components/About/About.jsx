@@ -2,29 +2,36 @@ import SkillsList from "@/components/SkillsList/SkillsList";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 
+/**
+ * Componente sobre mí (About).
+ * Presenta un resumen personal y listas de habilidades (hard, soft, idiomas).
+ * 
+ * @returns {JSX.Element} La sección sobre mí.
+ */
 function About() {
 
   const sectionRef = useIntersectionObserver();
 
   const hardSkills = [
-    "Python, Java, C, C#",
-    "HTML, CSS, JavaScript",
-    "PostgreSQL",
-    "React",
-    "Git, GitHub"
+    "Python (Django)",
+    "Java (Spring Boot)",
+    "PostgreSQL, MongoDB",
+    "Docker, Git, GitHub",
+    "Celery, Redis, Jira",
+    "HTML, CSS, Tailwind",
+    "JavaScript (React)",
   ];
   const softSkills = [
     "Trabajo en equipo",
     "Proactividad",
     "Resolución de problemas",
     "Adaptación a nuevos ambientes",
-    "Comunicación efectiva"
   ];
   const languages = [
     "Castellano: Nativo",
     "Valenciano: Avanzado (C1)",
     "Inglés: Avanzado (C1)",
-    "Italiano: Básico (A2)",
+    "Italiano: Intermedio (B1)",
   ];
 
   return (
