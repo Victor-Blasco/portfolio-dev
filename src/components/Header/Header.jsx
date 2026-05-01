@@ -1,17 +1,24 @@
 import Icon from "../Icon/icon";
 import "./Header.css";
 import avatar from "@/assets/avatar.webp";
+import cv from "@/assets/CV Victor Blasco.pdf"; 
 import  { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 
 
 
+/**
+ * Componente principal de cabecera (Header).
+ * Muestra la información personal, rol, breve descripción y enlaces de contacto/redes.
+ * 
+ * @returns {JSX.Element} El componente de cabecera renderizado.
+ */
 function Header() {
 
   const sectionRef = useIntersectionObserver("header");
 
   return (
-    <header className="header section-card" id="header" ref={sectionRef}>
+    <header className="header section-card glass-panel" id="header" ref={sectionRef}>
       <img
         src={avatar}
         alt="Victor Blasco"
@@ -28,7 +35,7 @@ function Header() {
         y habilidades en un entorno profesional.
       </p>
       <div className="header-links">
-        <a href="mailto:victorblascogar@gmail.com">
+        <a href="mailto:victorblascogar@gmail.com" className="social-link">
           <Icon name="email" className="email" />
           Email
         </a>
@@ -36,6 +43,7 @@ function Header() {
           href="https://github.com/Victor-Blasco"
           target="_blank"
           rel="noopener noreferrer"
+          className="social-link"
         >
          <Icon name="github" className="github" />
           GitHub
@@ -44,14 +52,16 @@ function Header() {
           href="https://linkedin.com/in/victor-blasco-garcia"
           target="_blank"
           rel="noopener noreferrer"
+          className="social-link"
         >
          <Icon name="linkedin" className="linkedin"/>
           LinkedIn
         </a>
         <a
-          href="/src/assets/CV%20Victor%20Blasco.pdf"
+          href={cv}
           target="_blank"
           rel="noopener noreferrer"
+          className="social-link"
         >
           <Icon name="curriculum" className="curriculum" />
           Descargar CV

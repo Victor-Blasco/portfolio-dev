@@ -10,8 +10,8 @@ nav {
   justify-content: space-between;
   padding: 0.5rem 0.5rem;
   background: var(--section-bg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   z-index: 1000;
+  border-bottom: 1px solid var(--card-border);
 }
 
 .nav-logo a {
@@ -20,7 +20,8 @@ nav {
   color: var(--text-color);
   text-decoration: none;
   border: none;
-  background: none;
+  background: transparent;
+  padding: 0;
 }
 
 .nav-links {
@@ -32,7 +33,17 @@ nav {
 .nav-links a {
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  padding: 0;
+  opacity: 0.8;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--accent);
 }
 
 .mode-toggle {
@@ -48,11 +59,81 @@ nav {
   transform: scale(1.1);
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  z-index: 1001; /* To stay above the mobile menu */
+}
+
+.hamburger .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--text-color);
+  border-radius: 3px;
+}
+
 @media (max-width: 768px) {
-  .nav-links a{
-    display: none;
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--section-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    padding: 0;
+    gap: 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav-links.active {
+    max-height: 400px;
+    opacity: 1;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+    width: 100%;
+    display: block;
+    text-align: center;
   }
 }
+
 .mode-toggle .icon {
   vertical-align: middle;
   font-size: 1.5rem;
