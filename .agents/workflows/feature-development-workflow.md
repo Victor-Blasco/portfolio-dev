@@ -1,6 +1,5 @@
 ---
-nombre: flujo-desarrollo-funcionalidades
-descripcion: Procedimiento estándar para agentes al implementar nuevas funcionalidades o refactorizar el portfolio.
+description: Este workflow se aplica siempre que el usuario solicita crear una nueva funcionalidad para la aplicación.
 ---
 
 # Flujo de Desarrollo y Refactorización

@@ -1,6 +1,6 @@
 ---
-nombre: calidad-codigo
-descripcion: Reglas de calidad de código adaptadas para React y JavaScript. Define cuándo usar helpers, cómo validar defensivamente y estándares de estilo y JSDoc.
+trigger: model_decision
+description: Esta regla se aplica siempre que se va a crear/modificar o borrar código, siguiéndola de forma rigurosa para el correcto desarrollo del código del proyecto.
 ---
 
 # Calidad de Código (React/JS)

@@ -1,15 +1,8 @@
 ---
-name: git-workflow
-description: >
-  Convenciones críticas de Git del proyecto. Prioridad: (1) nombres y creación de ramas,
-  (2) formato y tipos de commits, (3) flujo de pull requests. Usar al crear ramas,
-  hacer commits, revisar historial de Git o determinar el tipo de cambio antes de modificar código.
-context: >
-  Este skill se aplica a cualquier interacción con Git relacionada con desarrollo de código en el proyecto.
-  Las reglas de ramas y commits son obligatorias y siempre deben aplicarse en cada desarrollo de código.
-  Las reglas de PRs son obligatorias al abrir una pull request y durante su revisión, gestión de feedback y merge.
-  El objetivo es mantener un historial de Git claro, coherente y fácil de revisar.
+trigger: model_decision
+description: > Esta skill es usada cuando se solicita guardar los cambios realizados en el repositorio de Git del proyecto, añadiéndolos y guardándolos a un commit según las reglas definidas.
 ---
+
 # Git Workflow
 
 Convenciones de ramas y commits del proyecto. Este skill está organizado en tres secciones priorizadas:
