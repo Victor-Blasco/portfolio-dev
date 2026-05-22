@@ -31,7 +31,7 @@ function Header() {
       <h2>Desarrollador Full Stack Junior</h2>
       <p>
         Estudiante de Ingeniería Informática, orientado al desarrollo software
-        con experiencia en proyectos académicos. Busco aplicar mis conocimientos
+        con experiencia en proyectos profesionales y académicos. Busco aplicar mis conocimientos
         y habilidades en un entorno profesional.
       </p>
       <div className="header-links">

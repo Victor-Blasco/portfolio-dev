@@ -7,7 +7,7 @@ import Icon from "../Icon/icon";
 import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
 import mormasImage from "@/assets/projects/mormas_dashboard.png";
 import marketPulseImage from "@/assets/projects/market_pulse_dashboard.png";
-import gustomeImage from "@/assets/projects/gustome_dashboard.png";
+import gustomeImage from "@/assets/projects/gustome.png";
 
 /**
  * Componente que muestra la lista de proyectos destacados.
@@ -25,6 +25,7 @@ function Projects() {
       <div className="projects-list">
         <Card
           title="Gustomé - Gestión Inteligente de Cartas"
+          subtitle="Septiembre 2025 - Mayo 2026"
           description="Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos por alérgenos y preferencias dietéticas en tiempo real."
           tech="React (Vite), Firebase (Auth & Firestore)"
           image={gustomeImage}
@@ -39,6 +40,7 @@ function Projects() {
         />
         <Card
           title="Plataforma BI de Ciberseguridad (TFG)"
+          subtitle="Febrero 2026 - Mayo 2026"
           description="Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Incluye un pipeline ETL automatizado, orquestación asíncrona con Celery/Redis y dashboards interactivos."
           tech="Python (Django), PostgreSQL, Tailwind CSS, Docker, Celery/Redis"
           image={tfgImage}
@@ -53,6 +55,7 @@ function Projects() {
         />
         <Card
           title="Mountain Race Management System (MoRMaS)"
+          subtitle="Septiembre 2024 - Mayo 2025"
           description="Aplicación web de gestión de carreras de montaña, desarrollado en equipo. Incluye gestión de usuarios, inscripciones y resultados de carreras con roles diferenciados (promotor y participante) y funcionalidades como operaciones CRUD, búsqueda y filtrado de carreras, envio de emails automáticos y generación de inscripciones en PDF."
           tech="Java (Spring Boot), HTML/CSS, PostgreSQL"
           image={mormasImage}
@@ -68,6 +71,7 @@ function Projects() {
 
         <Card
           title="Market Pulse - Análisis Financiero & Dashboard"
+          subtitle="Octubre 2025 - Diciembre 2025"
           description="Aplicación sencilla de análisis bursátil en tiempo real mediante APIs (Yahoo Finance), cálculo estadístico de riesgo (volatilidad) y dashboard interactivo con visualización de datos."
           tech="Python (Pandas, NumPy), Streamlit"
           image={marketPulseImage}
@@ -82,6 +86,7 @@ function Projects() {
 
         <Card
           title="Portfolio Web"
+          subtitle="2025 - 2026"
           description="Página web personal para mostrar mi experiencia, educación y proyectos. Desarrollada con React, presenta un diseño limpio y profesional, optimizada para dispositivos móviles y con enlaces a mis perfiles profesionales. "
           tech="JavaScript (React), HTML/CSS"
           references={[
