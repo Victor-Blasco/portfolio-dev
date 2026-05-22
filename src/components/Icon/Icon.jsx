@@ -1,4 +1,4 @@
-import "./icon.css"
+import "./Icon.css"
 import { ReactComponent as EmailIcon } from '@/assets/icons/email.svg?react';
 import { ReactComponent as GitHubIcon } from '@/assets/icons/github.svg?react';
 import { ReactComponent as LinkedInIcon } from '@/assets/icons/linkedin.svg?react';

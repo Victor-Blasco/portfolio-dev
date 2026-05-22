@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Navbar.css'
-import Icon from '../Icon/icon'
+import Icon from '../Icon/Icon'
 
 /**
  * Componente de navegación superior (Navbar).

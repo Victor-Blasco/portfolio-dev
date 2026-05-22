@@ -1,4 +1,4 @@
-import Icon from "../Icon/icon";
+import Icon from "../Icon/Icon";
 import "./Header.css";
 import avatar from "@/assets/avatar.webp";
 import cv from "@/assets/CV Victor Blasco.pdf"; 

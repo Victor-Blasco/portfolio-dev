@@ -1,6 +1,6 @@
 import "./Contact.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import Icon from "../Icon/icon";
+import Icon from "../Icon/Icon";
 
 /**
  * Componente de contacto.

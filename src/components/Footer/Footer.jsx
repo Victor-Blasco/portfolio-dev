@@ -1,6 +1,6 @@
 import './Footer.css';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import Icon from '@/components/Icon/icon';
+import Icon from '@/components/Icon/Icon';
 
 function Footer() {
   const sectionRef = useIntersectionObserver();

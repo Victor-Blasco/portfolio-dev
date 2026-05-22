@@ -1,7 +1,7 @@
 import Card from "@/components/Card/Card";
 import "./Projects.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import Icon from "../Icon/icon";
+import Icon from "../Icon/Icon";
 
 // Importar imágenes de proyectos
 import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
