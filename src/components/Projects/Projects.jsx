@@ -31,6 +31,7 @@ function Projects() {
             {
               label: "Enlace a GitHub",
               url: "https://github.com/VictorBlascoPamesa/Plataforma_BI",
+              isPrivate: true,
             },
           ]}
           icon={<Icon name="github" className="github" />}
@@ -44,6 +45,7 @@ function Projects() {
             {
               label: "Enlace a GitHub",
               url: "https://github.com/Victor-Blasco/MoRMaS",
+              isPrivate: true,
             },
           ]}
           icon={<Icon name="github" className="github" />}

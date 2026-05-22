@@ -99,18 +99,31 @@ function Card({ title, subtitle, description, tech, references, icon, image }) {
 
       {tech && <span className="tech">{tech}</span>}
 
-      {references && references.map((ref, index) => (
-        <a
-          key={index}
-          href={ref.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`social-link ${ref.url.includes("github") ? "github-link" : ""}`}
-        >
-          {icon}
-          {ref.label}
-        </a>
-      ))}
+      {references && references.map((ref, index) => {
+        const isPrivate = ref.isPrivate;
+        const label = isPrivate ? "Repositorio Privado" : ref.label;
+        return isPrivate ? (
+          <span
+            key={index}
+            className="social-link private-link"
+            title="Este repositorio es privado"
+          >
+            {icon}
+            {label}
+          </span>
+        ) : (
+          <a
+            key={index}
+            href={ref.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`social-link ${ref.url.includes("github") ? "github-link" : ""}`}
+          >
+            {icon}
+            {ref.label}
+          </a>
+        );
+      })}
 
       {isLightboxOpen && createPortal(
         <div className="lightbox-overlay" onClick={() => setIsLightboxOpen(false)}>

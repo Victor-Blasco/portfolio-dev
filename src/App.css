@@ -139,6 +139,22 @@ a:hover {
   color: var(--button-text);
 }
 
+.social-link.private-link {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background-color: rgba(148, 163, 184, 0.15);
+  color: var(--text-color);
+  font-style: normal;
+  box-shadow: none;
+}
+
+.social-link.private-link:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: rgba(148, 163, 184, 0.15);
+  color: var(--text-color);
+}
+
 
 img {
   margin: 1rem;
