@@ -3,7 +3,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import Icon from '@/components/Icon/icon';
 
 function Footer() {
-  const sectionRef = useIntersectionObserver("footer");
+  const sectionRef = useIntersectionObserver();
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {

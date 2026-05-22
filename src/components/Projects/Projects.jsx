@@ -17,7 +17,7 @@ import gustomeImage from "@/assets/projects/gustome.png";
  */
 function Projects() {
 
-  const sectionRef = useIntersectionObserver("projects");
+  const sectionRef = useIntersectionObserver();
 
   return (
     <section className="section-card" id="projects" ref={sectionRef}>

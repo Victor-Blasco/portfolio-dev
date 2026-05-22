@@ -10,7 +10,7 @@ import Icon from "../Icon/icon";
  */
 function Contact() {
 
-  const sectionRef = useIntersectionObserver("contact");
+  const sectionRef = useIntersectionObserver();
 
   return (
     <section

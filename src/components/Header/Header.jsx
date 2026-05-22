@@ -15,7 +15,7 @@ import  { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
  */
 function Header() {
 
-  const sectionRef = useIntersectionObserver("header");
+  const sectionRef = useIntersectionObserver();
 
   return (
     <header className="header section-card glass-panel" id="header" ref={sectionRef}>

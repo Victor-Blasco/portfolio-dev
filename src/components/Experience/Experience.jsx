@@ -9,7 +9,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
  * @returns {JSX.Element} La sección de experiencia.
  */
 function Experience() {
-  const sectionRef = useIntersectionObserver("experience");
+  const sectionRef = useIntersectionObserver();
 
   return (
     <section className="section-card" id="experience" ref={sectionRef}>
