@@ -92,6 +92,8 @@
   transform: translateY(0) scale(1);
   visibility: visible;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
 .card-image-container.visible {
@@ -118,6 +120,14 @@
   border: 1px solid var(--card-border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: block;
+  cursor: zoom-in;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-image:hover {
+  transform: scale(1.03);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Botón glassmorphic circular con el icono del ojo */
@@ -166,4 +176,119 @@
   font-weight: bold;
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
+}
+
+/* Lightbox Modal */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(9, 9, 11, 0.85); /* Fondo oscuro slaty oscuro */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  animation: lightbox-fade-in 0.3s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes lightbox-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              background-color 0.3s ease, 
+              color 0.3s ease;
+}
+
+.lightbox-close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.lightbox-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  max-height: 90%;
+  transform: scale(0.95);
+  animation: lightbox-scale-up 0.3s forwards cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes lightbox-scale-up {
+  to {
+    transform: scale(1);
+  }
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: zoom-out;
+  transition: transform 0.3s ease;
+}
+
+.lightbox-image:hover {
+  transform: scale(1.01);
+}
+
+.lightbox-caption {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #f8fafc;
+  font-family: 'Outfit', sans-serif;
+  animation: lightbox-caption-fade 0.4s 0.1s forwards ease;
+  opacity: 0;
+}
+
+@keyframes lightbox-caption-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-caption h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  color: #f8fafc;
+}
+
+.lightbox-caption p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #94a3b8;
 }

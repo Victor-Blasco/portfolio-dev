@@ -7,7 +7,6 @@ import Icon from "../Icon/icon";
 import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
 import mormasImage from "@/assets/projects/mormas_dashboard.png";
 import marketPulseImage from "@/assets/projects/market_pulse_dashboard.png";
-import portfolioImage from "@/assets/projects/portfolio_mockup.png";
 
 /**
  * Componente que muestra la lista de proyectos destacados.
@@ -68,7 +67,6 @@ function Projects() {
           title="Portfolio Web"
           description="Página web personal para mostrar mi experiencia, educación y proyectos. Desarrollada con React, presenta un diseño limpio y profesional, optimizada para dispositivos móviles y con enlaces a mis perfiles profesionales. "
           tech="JavaScript (React), HTML/CSS"
-          image={portfolioImage}
           references={[
             {
               label: "Enlace a GitHub",

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import "./Card.css"
 
 // Iconos inline para el botón de alternar vista
@@ -16,9 +17,17 @@ const EyeOffIcon = () => (
   </svg>
 );
 
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="close-icon">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
 /**
  * Componente de tarjeta genérica para proyectos o experiencias.
  * Permite alternar dinámicamente entre descripción y una imagen si se proporciona.
+ * Permite además abrir una vista previa de la imagen a pantalla completa (lightbox).
  * 
  * @param {Object} props - Propiedades del componente.
  * @param {string} props.title - Título principal de la tarjeta.
@@ -32,6 +41,24 @@ const EyeOffIcon = () => (
  */
 function Card({ title, subtitle, description, tech, references, icon, image }) {
   const [showImage, setShowImage] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  // Manejar el cierre con la tecla Escape y evitar scroll de fondo
+  useEffect(() => {
+    if (isLightboxOpen) {
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") {
+          setIsLightboxOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "";
+      };
+    }
+  }, [isLightboxOpen]);
 
   return (
     <div className="card glass-panel">
@@ -59,7 +86,13 @@ function Card({ title, subtitle, description, tech, references, icon, image }) {
 
         {image && (
           <div className={`card-image-container ${showImage ? "visible" : "hidden"}`}>
-            <img src={image} alt={title} className="card-image" loading="lazy" />
+            <img 
+              src={image} 
+              alt={title} 
+              className="card-image" 
+              loading="lazy" 
+              onClick={() => setIsLightboxOpen(true)}
+            />
           </div>
         )}
       </div>
@@ -78,6 +111,31 @@ function Card({ title, subtitle, description, tech, references, icon, image }) {
           {ref.label}
         </a>
       ))}
+
+      {isLightboxOpen && createPortal(
+        <div className="lightbox-overlay" onClick={() => setIsLightboxOpen(false)}>
+          <button 
+            className="lightbox-close-btn glass-panel"
+            onClick={() => setIsLightboxOpen(false)}
+            aria-label="Cerrar vista previa"
+          >
+            <CloseIcon />
+          </button>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={image} 
+              alt={title} 
+              className="lightbox-image" 
+              onClick={() => setIsLightboxOpen(false)}
+            />
+            <div className="lightbox-caption">
+              <h3>{title}</h3>
+              {subtitle && <p>{subtitle}</p>}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
