@@ -16,7 +16,7 @@ function Experience() {
       <h2>Experiencia</h2>
       <div className="exp-list">
         <Card
-          title="Programador Fullstack (Prácticas) | Pamesa Grupo Empresarial"
+          title="Ingeniero de Software (Prácticas) | Pamesa Grupo Empresarial"
           subtitle="Febrero 2026 - Mayo 2026"
           description="Desarrollo integral de una plataforma BI para monitorización de KPIs de ciberseguridad. Implementé un pipeline ETL en Python, modelos en PostgreSQL y dashboards con Django y Tailwind CSS, utilizando Celery/Redis para orquestación asíncrona y Docker para el despliegue."
         />
