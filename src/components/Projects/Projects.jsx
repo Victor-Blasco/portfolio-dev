@@ -7,6 +7,7 @@ import Icon from "../Icon/icon";
 import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
 import mormasImage from "@/assets/projects/mormas_dashboard.png";
 import marketPulseImage from "@/assets/projects/market_pulse_dashboard.png";
+import gustomeImage from "@/assets/projects/gustome_dashboard.png";
 
 /**
  * Componente que muestra la lista de proyectos destacados.
@@ -22,6 +23,20 @@ function Projects() {
     <section className="section-card" id="projects" ref={sectionRef}>
       <h2>Proyectos</h2>
       <div className="projects-list">
+        <Card
+          title="Gustomé - Gestión Inteligente de Cartas"
+          description="Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos por alérgenos y preferencias dietéticas en tiempo real."
+          tech="React (Vite), Firebase (Auth & Firestore)"
+          image={gustomeImage}
+          references={[
+            {
+              label: "Enlace a GitHub",
+              url: "https://github.com/Victor-Blasco/Gustome-main",
+              isPrivate: true,
+            },
+          ]}
+          icon={<Icon name="github" className="github" />}
+        />
         <Card
           title="Plataforma BI de Ciberseguridad (TFG)"
           description="Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Incluye un pipeline ETL automatizado, orquestación asíncrona con Celery/Redis y dashboards interactivos."
