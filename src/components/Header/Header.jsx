@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Icon from "../Icon/Icon";
 import "./Header.css";
 import avatar from "@/assets/avatar.webp";
@@ -12,6 +13,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
  */
 function Header() {
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
 
   return (
     <header className="header section-card glass-panel" id="header" ref={sectionRef}>
@@ -30,22 +32,22 @@ function Header() {
           <div className="avatar-glow"></div>
         </div>
         <div className="avatar-bubble">
-          <span>¡Hola! Soy Victor Blasco 👋</span>
+          <span>{t("header.greeting")}</span>
         </div>
       </div>
 
       <div className="hero-content">
-        <p className="hero-eyebrow">Ingeniero de Software</p>
-        <h1 className="hero-headline">
-          Construyendo software de <br />
-          extremo a <span className="highlight-text">extremo.</span>
-        </h1>
+        <p className="hero-eyebrow">{t("header.role")}</p>
+        <h1 
+          className="hero-headline"
+          dangerouslySetInnerHTML={{ __html: t("header.headline") }}
+        />
         <p className="hero-subheadline">
-          Diseñando interfaces intuitivas y arquitecturas backend sólidas.
+          {t("header.subheadline")}
         </p>
         
         <p className="hero-role">
-          Estudiante de Ingeniería Informática, apasionado del desarrollo de software y enfocado en construir interfaces y backends elegantes, responsivos y eficientes.
+          {t("header.role_description")}
         </p>
       </div>
 
@@ -79,7 +81,7 @@ function Header() {
           className="social-link"
         >
           <Icon name="curriculum" className="curriculum" />
-          Descargar CV
+          {t("header.download_cv")}
         </a>
       </div>
     </header>

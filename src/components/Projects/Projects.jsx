@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import "./Projects.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import Icon from "../Icon/Icon";
@@ -16,72 +17,73 @@ import gustomeImage from "@/assets/projects/gustome.png";
  */
 function Projects() {
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
 
   const projectsData = [
     {
-      title: "Gustomé - Gestión Inteligente de Cartas",
-      subtitle: "Septiembre 2025 - Mayo 2026",
-      description: "Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos por alérgenos y preferencias dietéticas en tiempo real.",
+      title: t("projects.titles.gustome"),
+      subtitle: t("projects.periods.gustome"),
+      description: t("projects.descriptions.gustome"),
       tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore"],
       image: gustomeImage,
       references: [
         {
-          label: "Enlace a GitHub",
+          label: "GitHub",
           url: "https://github.com/Victor-Blasco/Gustome-main",
           isPrivate: true,
         },
       ],
     },
     {
-      title: "Plataforma BI de Ciberseguridad (TFG)",
-      subtitle: "Febrero 2026 - Mayo 2026",
-      description: "Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Incluye un pipeline ETL automatizado, orquestación asíncrona con Celery/Redis y dashboards interactivos en tiempo real.",
+      title: t("projects.titles.tfg"),
+      subtitle: t("projects.periods.tfg"),
+      description: t("projects.descriptions.tfg"),
       tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Tailwind CSS", "Docker"],
       image: tfgImage,
       references: [
         {
-          label: "Enlace a GitHub",
+          label: "GitHub",
           url: "https://github.com/VictorBlascoPamesa/Plataforma_BI",
           isPrivate: true,
         },
       ],
     },
     {
-      title: "Mountain Race Management System (MoRMaS)",
-      subtitle: "Septiembre 2024 - Mayo 2025",
-      description: "Aplicación web corporativa para la gestión integral de carreras de montaña. Incluye control de inscripciones, publicación de resultados en tiempo real, perfiles diferenciados para promotores y corredores, envíos de correo automáticos y exportación de justificantes en PDF.",
+      title: t("projects.titles.mormas"),
+      subtitle: t("projects.periods.mormas"),
+      description: t("projects.descriptions.mormas"),
       tech: ["Java (Spring Boot)", "HTML/CSS", "PostgreSQL"],
       image: mormasImage,
       references: [
         {
-          label: "Enlace a GitHub",
+          label: "GitHub",
           url: "https://github.com/Victor-Blasco/MoRMaS",
           isPrivate: true,
         },
       ],
     },
     {
-      title: "Market Pulse - Análisis Financiero & Dashboard",
-      subtitle: "Octubre 2025 - Diciembre 2025",
-      description: "Aplicación interactiva de análisis bursátil en tiempo real. Consume APIs de Yahoo Finance para graficar históricos y calcular métricas estadísticas clave como la volatilidad y el valor en riesgo (VaR).",
+      title: t("projects.titles.marketpulse"),
+      subtitle: t("projects.periods.marketpulse"),
+      description: t("projects.descriptions.marketpulse"),
       tech: ["Python (Pandas, NumPy)", "Streamlit", "Yahoo Finance API"],
       image: marketPulseImage,
       references: [
         {
-          label: "Enlace a GitHub",
+          label: "GitHub",
           url: "https://github.com/Victor-Blasco/market-pulse-project",
         },
       ],
     },
     {
-      title: "Portfolio Web Personal",
-      subtitle: "2025 - 2026",
-      description: "Página web personal diseñada con enfoque premium en UI/UX para mostrar mi trayectoria profesional y académica. Cuenta con optimización móvil, soporte de modo oscuro automático y componentes interactivos como redes SVG.",
+      title: t("projects.titles.portfolio"),
+      subtitle: t("projects.periods.portfolio"),
+      description: t("projects.descriptions.portfolio"),
       tech: ["JavaScript (React)", "CSS Vanilla", "Vite"],
       image: null,
       references: [
         {
-          label: "Enlace a GitHub",
+          label: "GitHub",
           url: "https://github.com/Victor-Blasco/portfolio-dev",
         },
       ],
@@ -90,7 +92,7 @@ function Projects() {
 
   return (
     <section className="section-card projects-section" id="projects" ref={sectionRef}>
-      <h2>Proyectos</h2>
+      <h2>{t("projects.title")}</h2>
       <div className="projects-grid-list">
         {projectsData.map((project, index) => {
           const isEven = index % 2 === 0;
@@ -99,7 +101,7 @@ function Projects() {
             <div key={index} className={`project-row ${isEven ? "normal" : "reversed"}`}>
               {/* Lado A: Información */}
               <div className="project-info-side">
-                <span className="project-tag">Proyecto Destacado</span>
+                <span className="project-tag">{t("projects.featured_tag")}</span>
                 <h3 className="project-title">{project.title}</h3>
                 <span className="project-duration">{project.subtitle}</span>
                 <p className="project-desc">{project.description}</p>
@@ -114,16 +116,16 @@ function Projects() {
                   {project.references.map((ref, rIdx) => {
                     if (ref.isPrivate) {
                       return (
-                        <span key={rIdx} className="social-link private-link" title="Este repositorio es privado">
+                        <span key={rIdx} className="social-link private-link" title={t("projects.private_repo")}>
                           <Icon name="github" className="github" />
-                          Repositorio Privado
+                          {t("projects.private_repo")}
                         </span>
                       );
                     }
                     return (
                       <a key={rIdx} href={ref.url} target="_blank" rel="noopener noreferrer" className="social-link github-link">
                         <Icon name="github" className="github" />
-                        Ver en GitHub
+                        {t("projects.view_on_github")}
                       </a>
                     );
                   })}

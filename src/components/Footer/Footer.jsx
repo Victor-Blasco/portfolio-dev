@@ -1,9 +1,11 @@
 import './Footer.css';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { useTranslation } from 'react-i18next';
 import Icon from '@/components/Icon/Icon';
 
 function Footer() {
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -15,7 +17,7 @@ function Footer() {
       <div className="footer-content">
         <div className="footer-brand">
           <h3>Victor Blasco</h3>
-          <p>Ingeniería Informática | Desarrollo de Software</p>
+          <p>{t("footer.role")}</p>
           <div className="footer-socials">
             <a href="https://github.com/Victor-Blasco" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Icon name="github" />
@@ -30,18 +32,18 @@ function Footer() {
         </div>
 
         <div className='footer-links'>
-          <a href="#root">Inicio</a>
-          <a href="#about">Sobre mí</a>
-          <a href="#projects">Proyectos</a>
-          <a href="#experience">Experiencia</a>
-          <a href="#contact">Contacto</a>
+          <a href="#root">{t("footer.home")}</a>
+          <a href="#about">{t("navbar.about")}</a>
+          <a href="#projects">{t("navbar.projects")}</a>
+          <a href="#experience">{t("navbar.experience")}</a>
+          <a href="#contact">{t("navbar.contact")}</a>
         </div>
       </div>
       
       <div className="footer-bottom">
-        <p>© {currentYear} Victor Blasco. Todos los derechos reservados.</p>
-        <button onClick={scrollToTop} className="scroll-top-btn" aria-label="Volver arriba">
-          ↑ Volver arriba
+        <p>{t("footer.copyright", { year: currentYear })} • {t("footer.design_by")}</p>
+        <button onClick={scrollToTop} className="scroll-top-btn" aria-label={t("footer.back_to_top")}>
+          ↑ {t("footer.back_to_top")}
         </button>
       </div>
     </footer>

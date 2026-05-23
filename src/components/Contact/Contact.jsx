@@ -1,5 +1,6 @@
 import "./Contact.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useTranslation } from "react-i18next";
 import Icon from "../Icon/Icon";
 
 /**
@@ -9,8 +10,8 @@ import Icon from "../Icon/Icon";
  * @returns {JSX.Element} La sección de contacto.
  */
 function Contact() {
-
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
 
   return (
     <section
@@ -19,15 +20,13 @@ function Contact() {
       id="contact"
       ref={sectionRef}
     >
-      <h2 id="contact-title">Contacto</h2>
+      <h2 id="contact-title">{t("contact.title")}</h2>
 
       <div className="contact-container">
         <div className="contact-info">
-          <h3>¡Trabajemos juntos!</h3>
+          <h3>{t("contact.headline")}</h3>
           <p>
-            Actualmente estoy buscando nuevas oportunidades profesionales. Si
-            tienes alguna pregunta o simplemente quieres saludar, ¡no dudes en
-            escribirme!
+            {t("contact.text")}
           </p>
           <div className="contact-links">
             <a href="mailto:victorblascogar@gmail.com" className="contact-link">
@@ -60,40 +59,40 @@ function Contact() {
           aria-label="Formulario de contacto"
         >
           <div className="form-group">
-            <label htmlFor="contact-name">Nombre</label>
+            <label htmlFor="contact-name">{t("contact.form_name")}</label>
             <input
               id="contact-name"
               type="text"
               name="name"
-              placeholder="Tu nombre"
+              placeholder={t("contact.form_name_placeholder")}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="contact-email">Email</label>
+            <label htmlFor="contact-email">{t("contact.form_email")}</label>
             <input
               id="contact-email"
               type="email"
               name="email"
-              placeholder="Tu email"
+              placeholder={t("contact.form_email_placeholder")}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="contact-message">Mensaje</label>
+            <label htmlFor="contact-message">{t("contact.form_message")}</label>
             <textarea
               id="contact-message"
               name="message"
-              placeholder="Tu mensaje"
+              placeholder={t("contact.form_message_placeholder")}
               rows="5"
               required
             ></textarea>
           </div>
 
           <button type="submit" className="btn-primary">
-            Enviar Mensaje
+            {t("contact.form_submit")}
           </button>
         </form>
       </div>

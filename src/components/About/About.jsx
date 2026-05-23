@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import TechStack from "./TechStack";
 import "./About.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -50,46 +51,43 @@ function SkillIcon({ name }) {
  */
 function About() {
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
 
   const softSkills = [
     { 
-      name: "Trabajo en equipo", 
-      desc: "Colaboración activa y comunicación fluida en equipos de trabajo multidisciplinares.",
+      name: t("about.skill_teamwork_title"), 
+      desc: t("about.skill_teamwork_desc"),
       icon: "team"
     },
     { 
-      name: "Proactividad e iniciativa", 
-      desc: "Búsqueda constante de mejoras, proponer ideas y aprender nuevas tecnologías de forma autónoma.",
+      name: t("about.skill_proactivity_title"), 
+      desc: t("about.skill_proactivity_desc"),
       icon: "rocket"
     },
     { 
-      name: "Resolución de problemas", 
-      desc: "Enfoque analítico para diagnosticar fallos y encontrar soluciones de forma eficaz.",
+      name: t("about.skill_problem_solving_title"), 
+      desc: t("about.skill_problem_solving_desc"),
       icon: "puzzle"
     },
     { 
-      name: "Adaptación al cambio", 
-      desc: "Flexibilidad para integrarme rápidamente en dinámicas de equipo y entornos tecnológicos diversos.",
+      name: t("about.skill_adaptation_title"), 
+      desc: t("about.skill_adaptation_desc"),
       icon: "sync"
     },
   ];
 
   const languages = [
-    { name: "Castellano", level: "Nativo", percentage: 100 },
-    { name: "Valenciano", level: "Avanzado (C1)", percentage: 85 },
-    { name: "Inglés", level: "Avanzado (C1)", percentage: 85 },
-    { name: "Italiano", level: "Intermedio (B1)", percentage: 55 },
+    { name: t("about.lang_spanish"), level: t("about.level_native"), percentage: 100 },
+    { name: t("about.lang_valencian"), level: t("about.level_advanced_c1"), percentage: 85 },
+    { name: t("about.lang_english"), level: t("about.level_advanced_c1"), percentage: 85 },
+    { name: t("about.lang_italian"), level: t("about.level_intermediate_b1"), percentage: 55 },
   ];
 
   return (
     <section className="section-card" id="about" ref={sectionRef}>
-      <h2>Sobre mí</h2>
+      <h2>{t("about.title")}</h2>
       <p className="about-text">
-        Estudiante de Ingeniería Informática en la Universitat Jaume I, con
-        experiencia en desarrollo web y backend. Me considero proactivo, con
-        facilidad para el trabajo en equipo y la resolución de problemas, y
-        siempre dispuesto a aceptar nuevos desafíos y entornos. Estoy
-        buscando oportunidades para aplicar mis conocimientos y crecer profesionalmente en el campo del desarrollo de software.
+        {t("about.text")}
       </p>
       
       <div className="about-grid">
@@ -98,7 +96,7 @@ function About() {
         </div>
         <div className="about-skills-col">
           <div className="soft-skills-container">
-            <h3>Soft Skills</h3>
+            <h3>{t("about.soft_skills_title")}</h3>
             <ul className="skills-list-premium">
               {softSkills.map((skill, index) => (
                 <li key={index} className="skill-item-premium">
@@ -113,9 +111,9 @@ function About() {
               ))}
             </ul>
           </div>
-
+ 
           <div className="languages-container">
-            <h3>Idiomas</h3>
+            <h3>{t("about.languages_title")}</h3>
             <ul className="languages-list-premium">
               {languages.map((lang, index) => (
                 <li key={index} className="language-item-premium">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./Experience.css";
 import Card from "@/components/Card/Card";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -27,50 +28,6 @@ const GraduationCapIcon = () => (
   </svg>
 );
 
-// Datos cronológicos ordenados de más reciente a más antiguo
-const timelineData = [
-  {
-    id: "pamesa",
-    type: "work",
-    title: "Ingeniero de Software (Prácticas)",
-    institution: "Pamesa Grupo Empresarial",
-    period: "Febrero 2026 - Mayo 2026",
-    description: "Desarrollo integral de una plataforma BI para monitorización de KPIs de ciberseguridad. Implementé un pipeline ETL en Python, modelos en PostgreSQL y dashboards con Django y Tailwind CSS, utilizando Celery/Redis para orquestación asíncrona y Docker para el despliegue."
-  },
-  {
-    id: "milano",
-    type: "education",
-    title: "Estancia Erasmus+",
-    institution: "Università degli Studi di Milano",
-    period: "Septiembre 2025 - Enero 2026",
-    description: "Cursé asignaturas de máster en Computer Science y Data Science for Economics, aprendiendo NoSQL (MongoDB), Business Intelligence y Data Science, y fortaleciendo mi adaptabilidad a entornos internacionales."
-  },
-  {
-    id: "ecoporcelanico",
-    type: "work",
-    title: "Operario de producción",
-    institution: "ECO PORCELÁNICO S.L.U.",
-    period: "Julio-Agosto 2025",
-    description: "Participación activa en el proceso de producción junto a un equipo, desarrollando habilidades de colaboración, comunicación y resolución de problemas."
-  },
-  {
-    id: "wandregar",
-    type: "work",
-    title: "Operario de producción",
-    institution: "WANDREGAR 2001 S.L.U.",
-    period: "Julio-Agosto 2024",
-    description: "Colaboración en el equipo para optimizar la eficiencia de la producción, asumiendo diferentes tareas y responsabilidades donde reforcé mi proactividad y capacidad de adaptación."
-  },
-  {
-    id: "uji",
-    type: "education",
-    title: "Grado en Ingeniería Informática",
-    institution: "Universitat Jaume I",
-    period: "2022 - presente",
-    description: "Durante el grado adquirí una base sólida en programación, estructuras de datos, algoritmos, bases de datos, redes y desarrollo web, fortaleciendo habilidades colaborativas en entornos de desarrollo."
-  }
-];
-
 /**
  * Componente de Experiencia y Educación (Timeline Interactivo).
  * Muestra el historial profesional y educativo de forma unificada y cronológica.
@@ -80,14 +37,59 @@ const timelineData = [
  */
 function Experience() {
   const sectionRef = useIntersectionObserver();
+  const { t } = useTranslation();
   const [filter, setFilter] = useState("all");
   const [hoveredId, setHoveredId] = useState(null);
 
+  // Datos cronológicos de traducción dinámica
+  const timelineData = [
+    {
+      id: "pamesa",
+      type: "work",
+      title: t("experience.titles.pamesa"),
+      institution: t("experience.institutions.pamesa"),
+      period: t("experience.periods.pamesa"),
+      description: t("experience.descriptions.pamesa")
+    },
+    {
+      id: "milano",
+      type: "education",
+      title: t("experience.titles.milano"),
+      institution: t("experience.institutions.milano"),
+      period: t("experience.periods.milano"),
+      description: t("experience.descriptions.milano")
+    },
+    {
+      id: "ecoporcelanico",
+      type: "work",
+      title: t("experience.titles.ecoporcelanico"),
+      institution: t("experience.institutions.ecoporcelanico"),
+      period: t("experience.periods.ecoporcelanico"),
+      description: t("experience.descriptions.ecoporcelanico")
+    },
+    {
+      id: "wandregar",
+      type: "work",
+      title: t("experience.titles.wandregar"),
+      institution: t("experience.institutions.wandregar"),
+      period: t("experience.periods.wandregar"),
+      description: t("experience.descriptions.wandregar")
+    },
+    {
+      id: "uji",
+      type: "education",
+      title: t("experience.titles.uji"),
+      institution: t("experience.institutions.uji"),
+      period: t("experience.periods.uji"),
+      description: t("experience.descriptions.uji")
+    }
+  ];
+
   return (
     <section className="section-card" id="experience" ref={sectionRef}>
-      <h2>Experiencia & Educación</h2>
+      <h2>{t("experience.title")}</h2>
       <p className="experience-subtitle">
-        Una mirada cronológica a mi formación académica y mi trayectoria profesional.
+        {t("experience.subtitle")}
       </p>
 
       {/* Controles de Filtrado */}
@@ -98,21 +100,21 @@ function Experience() {
             onClick={() => setFilter("all")}
             type="button"
           >
-            Ver Todo
+            {t("experience.filter_all")}
           </button>
           <button
             className={`filter-btn ${filter === "work" ? "active" : ""}`}
             onClick={() => setFilter("work")}
             type="button"
           >
-            Experiencia
+            {t("experience.filter_work")}
           </button>
           <button
             className={`filter-btn ${filter === "education" ? "active" : ""}`}
             onClick={() => setFilter("education")}
             type="button"
           >
-            Educación
+            {t("experience.filter_education")}
           </button>
         </div>
       </div>

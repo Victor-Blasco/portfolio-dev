@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./TechStack.css";
 
 /**
@@ -10,6 +11,7 @@ import "./TechStack.css";
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
 function TechStack() {
+  const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
   const closeTimeoutRef = useRef(null);
@@ -64,23 +66,23 @@ function TechStack() {
   const techItems = [
     {
       name: "HTML5",
-      type: "[Lenguaje]",
+      type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
       x: 78,
       y: 280,
       color: "#E34F26",
-      desc: "Maquetado web estructurado y semántico según estándares modernos de la W3C.",
+      desc: t("techstack.descriptions.html"),
     },
     {
       name: "CSS3",
-      type: "[Lenguaje]",
+      type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
       x: 107,
       y: 215,
       color: "#1572B6",
-      desc: "Diseño visual, layouts flexibles (Grid/Flexbox) y animaciones responsivas.",
+      desc: t("techstack.descriptions.css"),
       subnode: {
         name: "Tailwind",
         iconUrl:
@@ -88,18 +90,18 @@ function TechStack() {
         x: 57,
         y: 182,
         color: "#38B2AC",
-        desc: "Framework CSS utilitario para maquetación ágil de interfaces mediante clases predefinidas y configurables."
+        desc: t("techstack.descriptions.tailwind")
       }
     },
     {
       name: "JavaScript",
-      type: "[Lenguaje]",
+      type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
       x: 155,
       y: 161,
       color: "#F7DF1E",
-      desc: "Programación de lógica frontend interactiva y asincronía en el navegador.",
+      desc: t("techstack.descriptions.javascript"),
       subnode: {
         name: "React",
         iconUrl:
@@ -107,18 +109,18 @@ function TechStack() {
         x: 117,
         y: 114,
         color: "#61DAFB",
-        desc: "Librería SPA para construir componentes reactivos, Hooks y renderizado ágil.",
+        desc: t("techstack.descriptions.react"),
       },
     },
     {
       name: "Python",
-      type: "[Lenguaje]",
+      type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       x: 218,
       y: 125,
       color: "#3776AB",
-      desc: "Desarrollo backend rápido, scripts de análisis de datos y automatización.",
+      desc: t("techstack.descriptions.python"),
       subnode: {
         name: "Django",
         iconUrl:
@@ -126,18 +128,18 @@ function TechStack() {
         x: 197,
         y: 69,
         color: "#44B78B",
-        desc: "Framework de desarrollo rápido de APIs, ORM integrado y gestión segura de datos.",
+        desc: t("techstack.descriptions.django"),
       },
     },
     {
       name: "Java",
-      type: "[Lenguaje]",
+      type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
       x: 290,
       y: 110,
       color: "#F89820",
-      desc: "Programación orientada a objetos robusta con tipado fuerte y alto rendimiento.",
+      desc: t("techstack.descriptions.java"),
       subnode: {
         name: "Spring Boot",
         iconUrl:
@@ -145,55 +147,55 @@ function TechStack() {
         x: 287,
         y: 50,
         color: "#6DB33F",
-        desc: "Framework empresarial para microservicios y APIs REST autoconfiguradas.",
+        desc: t("techstack.descriptions.spring"),
       },
     },
     {
       name: "PostgreSQL",
-      type: "[Base de Datos]",
+      type: t("techstack.types.database"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
       x: 363,
       y: 119,
       color: "#336791",
-      desc: "Gestión de bases de datos relacionales, transacciones ACID y consultas SQL complejas.",
+      desc: t("techstack.descriptions.postgresql"),
     },
     {
       name: "MongoDB",
-      type: "[Base de Datos]",
+      type: t("techstack.types.database"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
       x: 429,
       y: 149,
       color: "#47A248",
-      desc: "Almacenamiento NoSQL documental con esquemas flexibles y alta disponibilidad.",
+      desc: t("techstack.descriptions.mongodb"),
     },
     {
       name: "Docker",
-      type: "[Herramienta]",
+      type: t("techstack.types.tool"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
       x: 481,
       y: 198,
       color: "#2496ED",
-      desc: "Contenedores virtuales para asegurar la paridad de entornos de desarrollo y producción.",
+      desc: t("techstack.descriptions.docker"),
     },
     {
       name: "Git",
-      type: "[Herramienta]",
+      type: t("techstack.types.tool"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
       x: 516,
       y: 261,
       color: "#F05032",
-      desc: "Sistema de control de versiones distribuido local para el desarrollo ágil.",
+      desc: t("techstack.descriptions.git"),
       subnode: {
         name: "GitHub",
         iconUrl: "https://cdn.simpleicons.org/github/ffffff",
         x: 572,
         y: 240,
         color: "#ffffff",
-        desc: "Plataforma de alojamiento en la nube para el control de versiones y trabajo en equipo.",
+        desc: t("techstack.descriptions.github"),
       },
     },
   ];
@@ -202,7 +204,7 @@ function TechStack() {
     if (hoveredIndex === null) {
       return (
         <p className="tech-detail-placeholder">
-          Pasa el cursor sobre un nodo para explorar mis tecnologías y ver sus dependencias o frameworks
+          {t("techstack.placeholder")}
         </p>
       );
     }
@@ -219,7 +221,7 @@ function TechStack() {
               borderColor: tech.subnode.color
             }}
           >
-            {tech.subnode.name === "GitHub" ? "[Plataforma]" : "[Framework]"} {tech.subnode.name}
+            {tech.subnode.name === "GitHub" ? t("techstack.types.platform") : t("techstack.types.framework")} {tech.subnode.name}
           </span>
           <p className="tech-detail-desc">{tech.subnode.desc}</p>
         </div>
@@ -245,9 +247,9 @@ function TechStack() {
 
   return (
     <div className="tech-stack-container">
-      <h3 className="tech-stack-title">Mi Stack de Tecnologías</h3>
+      <h3 className="tech-stack-title">{t("techstack.title")}</h3>
       <p className="tech-stack-subtitle">
-        Desplaza el cursor sobre los lenguajes principales para desplegar sus frameworks de soporte.
+        {t("techstack.subtitle")}
       </p>
 
       <div className="tech-stack-canvas">
