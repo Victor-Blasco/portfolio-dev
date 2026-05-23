@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./TechStack.css";
+import githubWhiteIcon from "@/assets/icons/github-white.svg";
 
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
@@ -191,7 +192,7 @@ function TechStack() {
       desc: t("techstack.descriptions.git"),
       subnode: {
         name: "GitHub",
-        iconUrl: "https://cdn.simpleicons.org/github/ffffff",
+        iconUrl: githubWhiteIcon,
         x: 572,
         y: 240,
         color: "#ffffff",
