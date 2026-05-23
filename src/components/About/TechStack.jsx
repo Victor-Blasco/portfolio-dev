@@ -16,7 +16,7 @@ function TechStack() {
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
   const [rotation, setRotation] = useState(0);
   
-  const currentSpeedRef = useRef(0.25); // Velocidad base (grados por frame)
+  const currentSpeedRef = useRef(0.18); // Velocidad base (grados por frame, reducida para órbita más lenta)
   const closeTimeoutRef = useRef(null);
 
   // Limpiar el timeout al desmontar
@@ -33,7 +33,7 @@ function TechStack() {
     let animationFrameId;
     const updateRotation = () => {
       // Ralentizar solo cuando se está haciendo hover sobre un nodo específico
-      const targetSpeed = hoveredIndex !== null ? 0 : 0.25;
+      const targetSpeed = hoveredIndex !== null ? 0 : 0.18;
       
       // Interpolación lineal (lerp) para una transición fluida y natural
       currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
@@ -488,8 +488,9 @@ function TechStack() {
             />
             <text
               x={centerNode.x}
-              y={centerNode.y + 8}
+              y={centerNode.y}
               className="center-circle-text"
+              dominantBaseline="central"
             >
               {centerNode.label}
             </text>
