@@ -195,7 +195,7 @@ function TechStack() {
         iconUrl: githubWhiteIcon,
         x: 572,
         y: 240,
-        color: "#ffffff",
+        color: "var(--github-color)",
         desc: t("techstack.descriptions.github"),
       },
     },
@@ -212,14 +212,18 @@ function TechStack() {
 
     const tech = techItems[hoveredIndex];
     if (hoveredSubnode && tech.subnode) {
+      const color = tech.subnode.color;
+      const isVar = color.startsWith("var");
+      const bg = isVar ? `color-mix(in srgb, ${color} 12.5%, transparent)` : `${color}20`;
+      const textColor = (color === "#ffffff" || color === "var(--github-color)") ? "var(--text-color)" : color;
       return (
         <div className="tech-detail-active">
           <span 
             className="tech-detail-badge" 
             style={{ 
-              backgroundColor: `${tech.subnode.color}20`,
-              color: tech.subnode.color === "#ffffff" ? "var(--text-color)" : tech.subnode.color,
-              borderColor: tech.subnode.color
+              backgroundColor: bg,
+              color: textColor,
+              borderColor: color
             }}
           >
             {tech.subnode.name === "GitHub" ? t("techstack.types.platform") : t("techstack.types.framework")} {tech.subnode.name}
