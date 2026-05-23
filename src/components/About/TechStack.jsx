@@ -6,7 +6,7 @@ import githubWhiteIcon from "@/assets/icons/github-white.svg";
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
- * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre el nodo central VB.
+ * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -211,7 +211,7 @@ function TechStack() {
 
     let subnode = null;
     if (item.subnode) {
-      const subRadius = 65; // Distancia ampliada del nodo padre al subnodo
+      const subRadius = 65; // Distancia del nodo padre al subnodo
       const subX = Math.round(x + subRadius * Math.cos(angle));
       const subY = Math.round(y + subRadius * Math.sin(angle));
       subnode = {
@@ -359,7 +359,7 @@ function TechStack() {
                     }}
                   >
                     {/* Círculo invisible de impacto para el subnodo */}
-                    <circle cx={sub.x} cy={sub.y} r="28" fill="rgba(0,0,0,0)" />
+                    <circle cx={sub.x} cy={sub.y} r="30" fill="rgba(0,0,0,0)" />
 
                     {/* Línea de conexión de subnodo a padre */}
                     <line
@@ -381,7 +381,7 @@ function TechStack() {
                       <circle
                         cx={sub.x}
                         cy={sub.y}
-                        r="28"
+                        r="30"
                         className={`tech-node-glow ${isSubnodeHovered ? "active" : ""}`}
                         style={{
                           fill: "transparent",
@@ -391,11 +391,11 @@ function TechStack() {
                         }}
                       />
                       
-                      {/* Círculo base (satélite, r=24) */}
+                      {/* Círculo base (satélite, r=26) */}
                       <circle
                         cx={sub.x}
                         cy={sub.y}
-                        r="24"
+                        r="26"
                         className={`tech-node-circle framework-node ${isSubnodeHovered ? "highlighted" : ""}`}
                         style={{
                           stroke: isSubnodeHovered ? sub.color : "var(--card-border)",
@@ -406,10 +406,10 @@ function TechStack() {
                       {/* Icono del subnodo */}
                       <image
                         href={sub.iconUrl}
-                        x={sub.x - 13}
-                        y={sub.y - 13}
-                        width="26"
-                        height="26"
+                        x={sub.x - 14}
+                        y={sub.y - 14}
+                        width="28"
+                        height="28"
                         className={`${isSubnodeHovered ? "colored" : ""} tech-icon-${sub.name.toLowerCase()}`}
                       />
                     </g>
@@ -431,7 +431,7 @@ function TechStack() {
                   <circle
                     cx={tech.x}
                     cy={tech.y}
-                    r="35"
+                    r="38"
                     fill="rgba(0,0,0,0)"
                   />
 
@@ -441,7 +441,7 @@ function TechStack() {
                     <circle
                       cx={tech.x}
                       cy={tech.y}
-                      r="35"
+                      r="38"
                       className={`tech-node-glow ${isHovered ? "active" : ""}`}
                       style={{
                         fill: "transparent",
@@ -455,7 +455,7 @@ function TechStack() {
                     <circle
                       cx={tech.x}
                       cy={tech.y}
-                      r="24"
+                      r="32"
                       className={`tech-node-circle ${isHovered ? "highlighted" : ""}`}
                       style={{
                         stroke: isHovered ? tech.color : "var(--card-border)",
@@ -466,10 +466,10 @@ function TechStack() {
                     {/* Icono de la tecnología */}
                     <image
                       href={tech.iconUrl}
-                      x={tech.x - 17}
-                      y={tech.y - 17}
-                      width="34"
-                      height="34"
+                      x={tech.x - 18}
+                      y={tech.y - 18}
+                      width="36"
+                      height="36"
                       className={`${isHovered ? "colored" : ""} tech-icon-${tech.name.toLowerCase()}`}
                     />
                   </g>
@@ -483,12 +483,12 @@ function TechStack() {
             <circle
               cx={centerNode.x}
               cy={centerNode.y}
-              r="34"
+              r="36"
               className="center-circle"
             />
             <text
               x={centerNode.x}
-              y={centerNode.y + 7}
+              y={centerNode.y + 8}
               className="center-circle-text"
             >
               {centerNode.label}
