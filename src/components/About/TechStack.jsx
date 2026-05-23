@@ -180,6 +180,15 @@ function TechStack() {
       y: 198,
       color: "#2496ED",
       desc: t("techstack.descriptions.docker"),
+      subnode: {
+        name: "Nginx",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
+        x: 526,
+        y: 163,
+        color: "#009639",
+        desc: t("techstack.descriptions.nginx"),
+      },
     },
     {
       name: "Git",
@@ -226,7 +235,12 @@ function TechStack() {
               borderColor: color
             }}
           >
-            {tech.subnode.name === "GitHub" ? t("techstack.types.platform") : t("techstack.types.framework")} {tech.subnode.name}
+            {tech.subnode.name === "GitHub" 
+              ? t("techstack.types.platform") 
+              : tech.subnode.name === "Nginx"
+                ? t("techstack.types.tool")
+                : t("techstack.types.framework")
+            } {tech.subnode.name}
           </span>
           <p className="tech-detail-desc">{tech.subnode.desc}</p>
         </div>

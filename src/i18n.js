@@ -64,6 +64,7 @@ const resources = {
           postgresql: "Gestión de bases de datos relacionales, transacciones ACID y consultas SQL complejas.",
           mongodb: "Almacenamiento NoSQL documental con esquemas flexibles y alta disponibilidad.",
           docker: "Contenedores virtuales para asegurar la paridad de entornos de desarrollo y producción.",
+          nginx: "Servidor web de alto rendimiento y proxy inverso para la orquestación de tráfico y despliegue.",
           git: "Sistema de control de versiones distribuido local para el desarrollo ágil.",
           github: "Plataforma de alojamiento en la nube para el control de versiones y trabajo en equipo."
         }
@@ -212,6 +213,7 @@ const resources = {
           postgresql: "Relational database management, ACID transactions, and complex SQL queries.",
           mongodb: "Document-based NoSQL storage with flexible schemas and high availability.",
           docker: "Virtual containers to ensure environment parity between development and production.",
+          nginx: "High-performance web server and reverse proxy for traffic orchestration and deployment.",
           git: "Local distributed version control system for agile development.",
           github: "Cloud hosting platform for version control and teamwork."
         }
