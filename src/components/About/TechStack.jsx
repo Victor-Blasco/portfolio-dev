@@ -6,7 +6,7 @@ import githubWhiteIcon from "@/assets/icons/github-white.svg";
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
- * como un sistema solar. Cuenta con desaceleración progresiva y suave al acercar el cursor.
+ * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -14,7 +14,6 @@ function TechStack() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
-  const [isCanvasHovered, setIsCanvasHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
   
   const currentSpeedRef = useRef(0.25); // Velocidad base (grados por frame)
@@ -33,9 +32,8 @@ function TechStack() {
   useEffect(() => {
     let animationFrameId;
     const updateRotation = () => {
-      // Si el cursor está en el lienzo, la velocidad objetivo es 0 (se para de forma progresiva).
-      // Si no, vuelve a acelerar de forma progresiva hasta la velocidad base de 0.25.
-      const targetSpeed = isCanvasHovered ? 0 : 0.25;
+      // Ralentizar solo cuando se está haciendo hover sobre un nodo específico
+      const targetSpeed = hoveredIndex !== null ? 0 : 0.25;
       
       // Interpolación lineal (lerp) para una transición fluida y natural
       currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
@@ -46,7 +44,7 @@ function TechStack() {
 
     animationFrameId = requestAnimationFrame(updateRotation);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isCanvasHovered]);
+  }, [hoveredIndex]);
 
   const handleMouseEnterParent = (index) => {
     if (closeTimeoutRef.current) {
@@ -294,9 +292,7 @@ function TechStack() {
 
       <div 
         className="tech-stack-canvas"
-        onMouseEnter={() => setIsCanvasHovered(true)}
         onMouseLeave={() => {
-          setIsCanvasHovered(false);
           setHoveredIndex(null);
           setHoveredSubnode(false);
         }}
@@ -363,7 +359,7 @@ function TechStack() {
                     }}
                   >
                     {/* Círculo invisible de impacto para el subnodo */}
-                    <circle cx={sub.x} cy={sub.y} r="24" fill="rgba(0,0,0,0)" />
+                    <circle cx={sub.x} cy={sub.y} r="28" fill="rgba(0,0,0,0)" />
 
                     {/* Línea de conexión de subnodo a padre */}
                     <line
@@ -385,7 +381,7 @@ function TechStack() {
                       <circle
                         cx={sub.x}
                         cy={sub.y}
-                        r="24"
+                        r="28"
                         className={`tech-node-glow ${isSubnodeHovered ? "active" : ""}`}
                         style={{
                           fill: "transparent",
@@ -395,11 +391,11 @@ function TechStack() {
                         }}
                       />
                       
-                      {/* Círculo base (satélite, r=20) */}
+                      {/* Círculo base (satélite, r=24) */}
                       <circle
                         cx={sub.x}
                         cy={sub.y}
-                        r="20"
+                        r="24"
                         className={`tech-node-circle framework-node ${isSubnodeHovered ? "highlighted" : ""}`}
                         style={{
                           stroke: isSubnodeHovered ? sub.color : "var(--card-border)",
@@ -410,10 +406,10 @@ function TechStack() {
                       {/* Icono del subnodo */}
                       <image
                         href={sub.iconUrl}
-                        x={sub.x - 11}
-                        y={sub.y - 11}
-                        width="22"
-                        height="22"
+                        x={sub.x - 13}
+                        y={sub.y - 13}
+                        width="26"
+                        height="26"
                         className={`${isSubnodeHovered ? "colored" : ""} tech-icon-${sub.name.toLowerCase()}`}
                       />
                     </g>
@@ -435,7 +431,7 @@ function TechStack() {
                   <circle
                     cx={tech.x}
                     cy={tech.y}
-                    r="28"
+                    r="35"
                     fill="rgba(0,0,0,0)"
                   />
 
@@ -445,7 +441,7 @@ function TechStack() {
                     <circle
                       cx={tech.x}
                       cy={tech.y}
-                      r="28"
+                      r="35"
                       className={`tech-node-glow ${isHovered ? "active" : ""}`}
                       style={{
                         fill: "transparent",
@@ -459,7 +455,7 @@ function TechStack() {
                     <circle
                       cx={tech.x}
                       cy={tech.y}
-                      r="24"
+                      r="30"
                       className={`tech-node-circle ${isHovered ? "highlighted" : ""}`}
                       style={{
                         stroke: isHovered ? tech.color : "var(--card-border)",
@@ -470,10 +466,10 @@ function TechStack() {
                     {/* Icono de la tecnología */}
                     <image
                       href={tech.iconUrl}
-                      x={tech.x - 14}
-                      y={tech.y - 14}
-                      width="28"
-                      height="28"
+                      x={tech.x - 17}
+                      y={tech.y - 17}
+                      width="34"
+                      height="34"
                       className={`${isHovered ? "colored" : ""} tech-icon-${tech.name.toLowerCase()}`}
                     />
                   </g>
@@ -487,12 +483,12 @@ function TechStack() {
             <circle
               cx={centerNode.x}
               cy={centerNode.y}
-              r="28"
+              r="34"
               className="center-circle"
             />
             <text
               x={centerNode.x}
-              y={centerNode.y + 6}
+              y={centerNode.y + 7}
               className="center-circle-text"
             >
               {centerNode.label}
