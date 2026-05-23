@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
  */
 export function useIntersectionObserver(options = {}) {
   const elementRef = useRef(null);
+  const { threshold = 0.1, root = null, rootMargin = '0px' } = options;
 
   useEffect(() => {
     const node = elementRef.current;
@@ -18,8 +19,9 @@ export function useIntersectionObserver(options = {}) {
         observer.unobserve(entry.target);
       }
     }, {
-      threshold: 0.1,
-      ...options
+      threshold,
+      root,
+      rootMargin
     });
 
     if (node) {
@@ -31,7 +33,7 @@ export function useIntersectionObserver(options = {}) {
         observer.unobserve(node);
       }
     };
-  }, [options]);
+  }, [threshold, root, rootMargin]);
 
   return elementRef;
 }
