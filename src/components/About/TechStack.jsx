@@ -6,7 +6,7 @@ import githubWhiteIcon from "@/assets/icons/github-white.svg";
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
- * como un sistema solar. Cuenta con pausa al hacer hover y efectos de trazado de líneas.
+ * como un sistema solar. Cuenta con desaceleración progresiva y suave al acercar el cursor.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -14,6 +14,10 @@ function TechStack() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
+  const [isCanvasHovered, setIsCanvasHovered] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  
+  const currentSpeedRef = useRef(0.25); // Velocidad base (grados por frame)
   const closeTimeoutRef = useRef(null);
 
   // Limpiar el timeout al desmontar
@@ -24,6 +28,25 @@ function TechStack() {
       }
     };
   }, []);
+
+  // Animación progresiva de órbita y desaceleración suave
+  useEffect(() => {
+    let animationFrameId;
+    const updateRotation = () => {
+      // Si el cursor está en el lienzo, la velocidad objetivo es 0 (se para de forma progresiva).
+      // Si no, vuelve a acelerar de forma progresiva hasta la velocidad base de 0.25.
+      const targetSpeed = isCanvasHovered ? 0 : 0.25;
+      
+      // Interpolación lineal (lerp) para una transición fluida y natural
+      currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
+      
+      setRotation(prev => (prev + currentSpeedRef.current) % 360);
+      animationFrameId = requestAnimationFrame(updateRotation);
+    };
+
+    animationFrameId = requestAnimationFrame(updateRotation);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isCanvasHovered]);
 
   const handleMouseEnterParent = (index) => {
     if (closeTimeoutRef.current) {
@@ -61,8 +84,8 @@ function TechStack() {
     }, 300);
   };
 
-  const centerNode = { x: 300, y: 190, label: "VB" };
-  const radius = 130;
+  const centerNode = { x: 300, y: 225, label: "VB" };
+  const radius = 150;
 
   // Base raw tech items data
   const rawTechItems = [
@@ -190,7 +213,7 @@ function TechStack() {
 
     let subnode = null;
     if (item.subnode) {
-      const subRadius = 55; // Distancia del nodo padre al subnodo
+      const subRadius = 50; // Distancia del nodo padre al subnodo
       const subX = Math.round(x + subRadius * Math.cos(angle));
       const subY = Math.round(y + subRadius * Math.sin(angle));
       subnode = {
@@ -269,18 +292,26 @@ function TechStack() {
         {t("techstack.subtitle")}
       </p>
 
-      <div className="tech-stack-canvas">
-        <svg viewBox="0 0 600 380" className="tech-stack-svg">
+      <div 
+        className="tech-stack-canvas"
+        onMouseEnter={() => setIsCanvasHovered(true)}
+        onMouseLeave={() => {
+          setIsCanvasHovered(false);
+          setHoveredIndex(null);
+          setHoveredSubnode(false);
+        }}
+      >
+        <svg viewBox="0 0 600 450" className="tech-stack-svg">
           {/* Definiciones para filtros de sombra y glows */}
           <defs>
-            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="380">
+            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="450">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="380">
+            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="450">
               <feGaussianBlur stdDeviation="5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
@@ -297,7 +328,13 @@ function TechStack() {
             const sub = tech.subnode;
 
             return (
-              <g key={`orbit-system-${index}`} className="orbit-group">
+              <g 
+                key={`orbit-system-${index}`} 
+                style={{ 
+                  transform: `rotate(${rotation}deg)`, 
+                  transformOrigin: `${centerNode.x}px ${centerNode.y}px` 
+                }}
+              >
                 {/* Línea de conexión láser al centro */}
                 <line
                   x1={centerNode.x}
@@ -343,7 +380,7 @@ function TechStack() {
                     />
 
                     {/* Elementos visuales del subnodo con contra-órbita y transform origin específico */}
-                    <g className="counter-orbit" style={{ transformOrigin: `${sub.x}px ${sub.y}px` }}>
+                    <g style={{ transform: `rotate(${-rotation}deg)`, transformOrigin: `${sub.x}px ${sub.y}px` }}>
                       {/* Círculo exterior (glow de hover) */}
                       <circle
                         cx={sub.x}
@@ -403,7 +440,7 @@ function TechStack() {
                   />
 
                   {/* Elementos del nodo principal con contra-órbita y transform origin específico */}
-                  <g className="counter-orbit" style={{ transformOrigin: `${tech.x}px ${tech.y}px` }}>
+                  <g style={{ transform: `rotate(${-rotation}deg)`, transformOrigin: `${tech.x}px ${tech.y}px` }}>
                     {/* Círculo exterior (glow de hover) */}
                     <circle
                       cx={tech.x}
