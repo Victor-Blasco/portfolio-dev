@@ -14,7 +14,6 @@ function TechStack() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
-  const [isCenterHovered, setIsCenterHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
   
   const currentSpeedRef = useRef(0.25); // Velocidad base (grados por frame)
@@ -33,8 +32,8 @@ function TechStack() {
   useEffect(() => {
     let animationFrameId;
     const updateRotation = () => {
-      // Ralentizar solo cuando se está haciendo hover sobre el nodo central VB
-      const targetSpeed = isCenterHovered ? 0 : 0.25;
+      // Ralentizar solo cuando se está haciendo hover sobre un nodo específico
+      const targetSpeed = hoveredIndex !== null ? 0 : 0.25;
       
       // Interpolación lineal (lerp) para una transición fluida y natural
       currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
@@ -45,7 +44,7 @@ function TechStack() {
 
     animationFrameId = requestAnimationFrame(updateRotation);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isCenterHovered]);
+  }, [hoveredIndex]);
 
   const handleMouseEnterParent = (index) => {
     if (closeTimeoutRef.current) {
@@ -479,13 +478,8 @@ function TechStack() {
             );
           })}
 
-          {/* Nodo central (VB) - Estático con disparadores de desaceleración */}
-          <g 
-            className="center-node-group"
-            onMouseEnter={() => setIsCenterHovered(true)}
-            onMouseLeave={() => setIsCenterHovered(false)}
-            style={{ cursor: "pointer" }}
-          >
+          {/* Nodo central (VB) - Estático */}
+          <g className="center-node-group">
             <circle
               cx={centerNode.x}
               cy={centerNode.y}
