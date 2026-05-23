@@ -6,7 +6,7 @@ import githubWhiteIcon from "@/assets/icons/github-white.svg";
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
- * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo.
+ * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre el nodo central VB.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -14,6 +14,7 @@ function TechStack() {
   const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
+  const [isCenterHovered, setIsCenterHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
   
   const currentSpeedRef = useRef(0.25); // Velocidad base (grados por frame)
@@ -32,8 +33,8 @@ function TechStack() {
   useEffect(() => {
     let animationFrameId;
     const updateRotation = () => {
-      // Ralentizar solo cuando se está haciendo hover sobre un nodo específico
-      const targetSpeed = hoveredIndex !== null ? 0 : 0.25;
+      // Ralentizar solo cuando se está haciendo hover sobre el nodo central VB
+      const targetSpeed = isCenterHovered ? 0 : 0.25;
       
       // Interpolación lineal (lerp) para una transición fluida y natural
       currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
@@ -44,7 +45,7 @@ function TechStack() {
 
     animationFrameId = requestAnimationFrame(updateRotation);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hoveredIndex]);
+  }, [isCenterHovered]);
 
   const handleMouseEnterParent = (index) => {
     if (closeTimeoutRef.current) {
@@ -82,7 +83,7 @@ function TechStack() {
     }, 300);
   };
 
-  const centerNode = { x: 300, y: 225, label: "VB" };
+  const centerNode = { x: 300, y: 240, label: "VB" };
   const radius = 150;
 
   // Base raw tech items data
@@ -211,7 +212,7 @@ function TechStack() {
 
     let subnode = null;
     if (item.subnode) {
-      const subRadius = 50; // Distancia del nodo padre al subnodo
+      const subRadius = 65; // Distancia ampliada del nodo padre al subnodo
       const subX = Math.round(x + subRadius * Math.cos(angle));
       const subY = Math.round(y + subRadius * Math.sin(angle));
       subnode = {
@@ -297,17 +298,17 @@ function TechStack() {
           setHoveredSubnode(false);
         }}
       >
-        <svg viewBox="0 0 600 450" className="tech-stack-svg">
+        <svg viewBox="0 0 600 480" className="tech-stack-svg">
           {/* Definiciones para filtros de sombra y glows */}
           <defs>
-            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="450">
+            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="480">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="450">
+            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="480">
               <feGaussianBlur stdDeviation="5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
@@ -455,7 +456,7 @@ function TechStack() {
                     <circle
                       cx={tech.x}
                       cy={tech.y}
-                      r="30"
+                      r="24"
                       className={`tech-node-circle ${isHovered ? "highlighted" : ""}`}
                       style={{
                         stroke: isHovered ? tech.color : "var(--card-border)",
@@ -478,8 +479,13 @@ function TechStack() {
             );
           })}
 
-          {/* Nodo central (VB) - Estático */}
-          <g className="center-node-group">
+          {/* Nodo central (VB) - Estático con disparadores de desaceleración */}
+          <g 
+            className="center-node-group"
+            onMouseEnter={() => setIsCenterHovered(true)}
+            onMouseLeave={() => setIsCenterHovered(false)}
+            style={{ cursor: "pointer" }}
+          >
             <circle
               cx={centerNode.x}
               cy={centerNode.y}
