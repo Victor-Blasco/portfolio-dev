@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import Icon from "../Icon/Icon";
 import "./Header.css";
 import avatar from "@/assets/avatar.webp";
-import cv from "@/assets/CV Victor Blasco.pdf"; 
+import cvEs from "@/assets/CV Victor Blasco ES.pdf";
+import cvEn from "@/assets/CV Victor Blasco EN.pdf";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 /**
@@ -13,7 +14,10 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
  */
 function Header() {
   const sectionRef = useIntersectionObserver();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Seleccionar la versión del CV en español o inglés según el idioma activo
+  const cv = i18n.language.startsWith("en") ? cvEn : cvEs;
 
   return (
     <header className="header section-card glass-panel" id="header" ref={sectionRef}>
