@@ -82,7 +82,7 @@ function TechStack() {
     }, 300);
   };
 
-  const centerNode = { x: 300, y: 240, label: "VB" };
+  const centerNode = { x: 300, y: 260, label: "VB" };
   const radius = 150;
 
   // Base raw tech items data
@@ -211,7 +211,7 @@ function TechStack() {
 
     let subnode = null;
     if (item.subnode) {
-      const subRadius = 65; // Distancia del nodo padre al subnodo
+      const subRadius = 80; // Distancia del nodo padre al subnodo (incrementada para mayor separación)
       const subX = Math.round(x + subRadius * Math.cos(angle));
       const subY = Math.round(y + subRadius * Math.sin(angle));
       subnode = {
@@ -297,17 +297,17 @@ function TechStack() {
           setHoveredSubnode(false);
         }}
       >
-        <svg viewBox="0 0 600 480" className="tech-stack-svg">
+        <svg viewBox="0 0 600 520" className="tech-stack-svg">
           {/* Definiciones para filtros de sombra y glows */}
           <defs>
-            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="480">
+            <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="520">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="480">
+            <filter id="glow-node" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="520">
               <feGaussianBlur stdDeviation="5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
