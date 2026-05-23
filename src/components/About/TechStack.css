@@ -38,15 +38,21 @@
   overflow: visible;
 }
 
-/* Connection curves */
+/* Connection lines (laser draw effect) */
 .connection-line {
   fill: none;
   stroke-width: 1.5;
-  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  transition: stroke-dashoffset 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .connection-line.active {
-  stroke-width: 3.5;
+  stroke-dashoffset: 0;
+  opacity: 0.85;
+  stroke-width: 3;
   filter: url(#glow-line);
 }
 
@@ -158,4 +164,39 @@ html:not(.dark-mode) .tech-stack-svg image.tech-icon-github {
 
 html:not(.dark-mode) .tech-stack-svg image.tech-icon-github.colored {
   filter: grayscale(0%) opacity(100%) invert(1);
+}
+
+/* Animations for Solar System Orbit */
+.orbit-group {
+  transform-origin: 300px 190px;
+  animation: orbit 32s linear infinite;
+}
+
+.counter-orbit {
+  transform-origin: center;
+  animation: counter-orbit 32s linear infinite;
+}
+
+/* Pause orbiting when hover on the canvas */
+.tech-stack-canvas:hover .orbit-group,
+.tech-stack-canvas:hover .counter-orbit {
+  animation-play-state: paused;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }

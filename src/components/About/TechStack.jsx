@@ -5,9 +5,8 @@ import githubWhiteIcon from "@/assets/icons/github-white.svg";
 
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
- * Dibuja un abanico de conexiones SVG a nodos de tecnologías,
- * desplegando subnodos satélites (frameworks/plataformas) con animaciones de distancia optimizada.
- * Cuenta con un buffer de retardo de 300ms en el cierre para facilitar la transición del ratón a los subnodos.
+ * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
+ * como un sistema solar. Cuenta con pausa al hacer hover y efectos de trazado de líneas.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -62,16 +61,16 @@ function TechStack() {
     }, 300);
   };
 
-  const centerNode = { x: 300, y: 340, label: "VB" };
+  const centerNode = { x: 300, y: 190, label: "VB" };
+  const radius = 130;
 
-  const techItems = [
+  // Base raw tech items data
+  const rawTechItems = [
     {
       name: "HTML5",
       type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-      x: 78,
-      y: 280,
       color: "#E34F26",
       desc: t("techstack.descriptions.html"),
     },
@@ -80,16 +79,12 @@ function TechStack() {
       type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-      x: 107,
-      y: 215,
       color: "#1572B6",
       desc: t("techstack.descriptions.css"),
       subnode: {
         name: "Tailwind",
         iconUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-        x: 57,
-        y: 182,
         color: "#38B2AC",
         desc: t("techstack.descriptions.tailwind")
       }
@@ -99,16 +94,12 @@ function TechStack() {
       type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-      x: 155,
-      y: 161,
       color: "#F7DF1E",
       desc: t("techstack.descriptions.javascript"),
       subnode: {
         name: "React",
         iconUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-        x: 117,
-        y: 114,
         color: "#61DAFB",
         desc: t("techstack.descriptions.react"),
       },
@@ -118,16 +109,12 @@ function TechStack() {
       type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-      x: 218,
-      y: 125,
       color: "#3776AB",
       desc: t("techstack.descriptions.python"),
       subnode: {
         name: "Django",
         iconUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-        x: 197,
-        y: 69,
         color: "#44B78B",
         desc: t("techstack.descriptions.django"),
       },
@@ -137,16 +124,12 @@ function TechStack() {
       type: t("techstack.types.language"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-      x: 290,
-      y: 110,
       color: "#F89820",
       desc: t("techstack.descriptions.java"),
       subnode: {
         name: "Spring Boot",
         iconUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-        x: 287,
-        y: 50,
         color: "#6DB33F",
         desc: t("techstack.descriptions.spring"),
       },
@@ -156,8 +139,6 @@ function TechStack() {
       type: t("techstack.types.database"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-      x: 363,
-      y: 119,
       color: "#336791",
       desc: t("techstack.descriptions.postgresql"),
     },
@@ -166,8 +147,6 @@ function TechStack() {
       type: t("techstack.types.database"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-      x: 429,
-      y: 149,
       color: "#47A248",
       desc: t("techstack.descriptions.mongodb"),
     },
@@ -176,16 +155,12 @@ function TechStack() {
       type: t("techstack.types.tool"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-      x: 481,
-      y: 198,
       color: "#2496ED",
       desc: t("techstack.descriptions.docker"),
       subnode: {
         name: "Nginx",
         iconUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
-        x: 526,
-        y: 163,
         color: "#009639",
         desc: t("techstack.descriptions.nginx"),
       },
@@ -195,20 +170,43 @@ function TechStack() {
       type: t("techstack.types.tool"),
       iconUrl:
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-      x: 516,
-      y: 261,
       color: "#F05032",
       desc: t("techstack.descriptions.git"),
       subnode: {
         name: "GitHub",
         iconUrl: githubWhiteIcon,
-        x: 572,
-        y: 240,
         color: "var(--github-color)",
         desc: t("techstack.descriptions.github"),
       },
     },
   ];
+
+  // Calcular las posiciones en círculo y la orientación exterior de subnodos
+  const techItems = rawTechItems.map((item, index) => {
+    // Distribuir equiespaciadamente y empezar desde arriba (-90deg o -PI/2)
+    const angle = (index * 2 * Math.PI) / rawTechItems.length - Math.PI / 2;
+    const x = Math.round(centerNode.x + radius * Math.cos(angle));
+    const y = Math.round(centerNode.y + radius * Math.sin(angle));
+
+    let subnode = null;
+    if (item.subnode) {
+      const subRadius = 55; // Distancia del nodo padre al subnodo
+      const subX = Math.round(x + subRadius * Math.cos(angle));
+      const subY = Math.round(y + subRadius * Math.sin(angle));
+      subnode = {
+        ...item.subnode,
+        x: subX,
+        y: subY,
+      };
+    }
+
+    return {
+      ...item,
+      x,
+      y,
+      subnode,
+    };
+  });
 
   const getDetailContent = () => {
     if (hoveredIndex === null) {
@@ -291,179 +289,178 @@ function TechStack() {
             </filter>
           </defs>
 
-          {/* Líneas de conexión curvas a los nodos principales */}
+          {/* Sistema Solar con tecnologías orbitando */}
           {techItems.map((tech, index) => {
             const isHovered = hoveredIndex === index;
-            const pathData = `M ${centerNode.x} ${centerNode.y} Q 300 210 ${tech.x} ${tech.y}`;
-
-            return (
-              <path
-                key={`line-${index}`}
-                d={pathData}
-                className={`connection-line ${isHovered ? "active" : ""}`}
-                style={{
-                  "--tech-color": tech.color,
-                  stroke: isHovered ? tech.color : "var(--card-border)",
-                  opacity: hoveredIndex !== null && !isHovered ? 0.35 : 0.7
-                }}
-              />
-            );
-          })}
-
-          {/* Líneas secundarias y Nodos satélites (Frameworks) */}
-          {techItems.map((tech, index) => {
-            if (!tech.subnode) return null;
             const isSubnodeActive = hoveredIndex === index;
             const isSubnodeHovered = hoveredIndex === index && hoveredSubnode;
             const sub = tech.subnode;
 
             return (
-              <g
-                key={`sub-${index}`}
-                className={`subnode-group ${isSubnodeActive ? "active" : ""}`}
-                onMouseEnter={() => handleMouseEnterSubnode(index)}
-                onMouseLeave={handleMouseLeaveSubnode}
-                style={{
-                  cursor: "pointer",
-                  opacity: isSubnodeActive ? 1 : 0,
-                  pointerEvents: isSubnodeActive ? "auto" : "none",
-                  transform: isSubnodeActive ? "scale(1)" : "scale(0.5)",
-                  transformOrigin: `${tech.x}px ${tech.y}px`,
-                  transition: "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
-                }}
-              >
-                {/* Círculo invisible de impacto para el subnodo */}
-                <circle cx={sub.x} cy={sub.y} r="24" fill="rgba(0,0,0,0)" />
-
-                {/* Línea de conexión de subnodo a padre */}
+              <g key={`orbit-system-${index}`} className="orbit-group">
+                {/* Línea de conexión láser al centro */}
                 <line
-                  x1={tech.x}
-                  y1={tech.y}
-                  x2={sub.x}
-                  y2={sub.y}
-                  stroke={isSubnodeActive ? sub.color : "var(--card-border)"}
-                  strokeWidth="2.5"
-                  strokeDasharray="4,4"
+                  x1={centerNode.x}
+                  y1={centerNode.y}
+                  x2={tech.x}
+                  y2={tech.y}
+                  className={`connection-line ${isHovered ? "active" : ""}`}
                   style={{
-                    transition: "stroke 0.3s ease"
-                  }}
-                />
-
-                {/* Círculo exterior (glow de hover) */}
-                <circle
-                  cx={sub.x}
-                  cy={sub.y}
-                  r="24"
-                  className={`tech-node-glow ${isSubnodeHovered ? "active" : ""}`}
-                  style={{
-                    fill: "transparent",
-                    stroke: sub.color,
-                    opacity: isSubnodeHovered ? 0.8 : 0,
-                    filter: isSubnodeHovered ? "url(#glow-node)" : "none"
-                  }}
-                />
-                
-                {/* Círculo base (satélite, r=20 en vez de 24) */}
-                <circle
-                  cx={sub.x}
-                  cy={sub.y}
-                  r="20"
-                  className={`tech-node-circle framework-node ${isSubnodeHovered ? "highlighted" : ""}`}
-                  style={{
-                    stroke: isSubnodeHovered ? sub.color : "var(--card-border)",
-                    fill: isSubnodeHovered ? "var(--bg-color)" : "var(--card-bg)"
-                  }}
-                />
-
-                {/* Icono del subnodo */}
-                <image
-                  href={sub.iconUrl}
-                  x={sub.x - 11}
-                  y={sub.y - 11}
-                  width="22"
-                  height="22"
-                  className={`${isSubnodeHovered ? "colored" : ""} tech-icon-${sub.name.toLowerCase()}`}
-                />
-              </g>
-            );
-          })}
-
-          {/* Nodo central (VB) */}
-          <circle
-            cx={centerNode.x}
-            cy={centerNode.y}
-            r="28"
-            className="center-circle"
-          />
-          <text
-            x={centerNode.x}
-            y={centerNode.y + 6}
-            className="center-circle-text"
-          >
-            {centerNode.label}
-          </text>
-
-          {/* Nodos principales de tecnología */}
-          {techItems.map((tech, index) => {
-            const isHovered = hoveredIndex === index;
-            return (
-              <g
-                key={`node-${index}`}
-                className={`tech-node-group ${isHovered ? "active" : ""}`}
-                onMouseEnter={() => handleMouseEnterParent(index)}
-                onMouseLeave={handleMouseLeaveParent}
-                style={{ 
-                  cursor: "pointer",
-                  opacity: hoveredIndex !== null && !isHovered ? 0.35 : 1,
-                  transition: "opacity 0.3s ease"
-                }}
-              >
-                {/* Círculo invisible de impacto para evitar parpadeos */}
-                <circle
-                  cx={tech.x}
-                  cy={tech.y}
-                  r="28"
-                  fill="rgba(0,0,0,0)"
-                />
-
-                {/* Círculo exterior (glow de hover) */}
-                <circle
-                  cx={tech.x}
-                  cy={tech.y}
-                  r="28"
-                  className={`tech-node-glow ${isHovered ? "active" : ""}`}
-                  style={{
-                    fill: "transparent",
                     stroke: tech.color,
-                    opacity: isHovered ? 0.8 : 0,
-                    filter: isHovered ? "url(#glow-node)" : "none"
-                  }}
-                />
-                
-                {/* Círculo base */}
-                <circle
-                  cx={tech.x}
-                  cy={tech.y}
-                  r="24"
-                  className={`tech-node-circle ${isHovered ? "highlighted" : ""}`}
-                  style={{
-                    stroke: isHovered ? tech.color : "var(--card-border)",
-                    fill: isHovered ? "var(--bg-color)" : "var(--card-bg)"
                   }}
                 />
 
-                {/* Icono de la tecnología */}
-                <image
-                  href={tech.iconUrl}
-                  x={tech.x - 14}
-                  y={tech.y - 14}
-                  width="28"
-                  height="28"
-                  className={`${isHovered ? "colored" : ""} tech-icon-${tech.name.toLowerCase()}`}
-                />
+                {/* Subnodo satélite (Framework/Herramienta) si existe */}
+                {sub && (
+                  <g
+                    className={`subnode-group ${isSubnodeActive ? "active" : ""}`}
+                    onMouseEnter={() => handleMouseEnterSubnode(index)}
+                    onMouseLeave={handleMouseLeaveSubnode}
+                    style={{
+                      cursor: "pointer",
+                      opacity: isSubnodeActive ? 1 : 0,
+                      pointerEvents: isSubnodeActive ? "auto" : "none",
+                      transform: isSubnodeActive ? "scale(1)" : "scale(0.5)",
+                      transformOrigin: `${tech.x}px ${tech.y}px`,
+                      transition: "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
+                    }}
+                  >
+                    {/* Círculo invisible de impacto para el subnodo */}
+                    <circle cx={sub.x} cy={sub.y} r="24" fill="rgba(0,0,0,0)" />
+
+                    {/* Línea de conexión de subnodo a padre */}
+                    <line
+                      x1={tech.x}
+                      y1={tech.y}
+                      x2={sub.x}
+                      y2={sub.y}
+                      stroke={isSubnodeActive ? sub.color : "var(--card-border)"}
+                      strokeWidth="2.5"
+                      strokeDasharray="4,4"
+                      style={{
+                        transition: "stroke 0.3s ease"
+                      }}
+                    />
+
+                    {/* Elementos visuales del subnodo con contra-órbita y transform origin específico */}
+                    <g className="counter-orbit" style={{ transformOrigin: `${sub.x}px ${sub.y}px` }}>
+                      {/* Círculo exterior (glow de hover) */}
+                      <circle
+                        cx={sub.x}
+                        cy={sub.y}
+                        r="24"
+                        className={`tech-node-glow ${isSubnodeHovered ? "active" : ""}`}
+                        style={{
+                          fill: "transparent",
+                          stroke: sub.color,
+                          opacity: isSubnodeHovered ? 0.8 : 0,
+                          filter: isSubnodeHovered ? "url(#glow-node)" : "none"
+                        }}
+                      />
+                      
+                      {/* Círculo base (satélite, r=20) */}
+                      <circle
+                        cx={sub.x}
+                        cy={sub.y}
+                        r="20"
+                        className={`tech-node-circle framework-node ${isSubnodeHovered ? "highlighted" : ""}`}
+                        style={{
+                          stroke: isSubnodeHovered ? sub.color : "var(--card-border)",
+                          fill: isSubnodeHovered ? "var(--bg-color)" : "var(--card-bg)"
+                        }}
+                      />
+
+                      {/* Icono del subnodo */}
+                      <image
+                        href={sub.iconUrl}
+                        x={sub.x - 11}
+                        y={sub.y - 11}
+                        width="22"
+                        height="22"
+                        className={`${isSubnodeHovered ? "colored" : ""} tech-icon-${sub.name.toLowerCase()}`}
+                      />
+                    </g>
+                  </g>
+                )}
+
+                {/* Nodo principal de tecnología */}
+                <g
+                  className={`tech-node-group ${isHovered ? "active" : ""}`}
+                  onMouseEnter={() => handleMouseEnterParent(index)}
+                  onMouseLeave={handleMouseLeaveParent}
+                  style={{ 
+                    cursor: "pointer",
+                    opacity: hoveredIndex !== null && !isHovered ? 0.35 : 1,
+                    transition: "opacity 0.3s ease"
+                  }}
+                >
+                  {/* Círculo invisible de impacto para evitar parpadeos */}
+                  <circle
+                    cx={tech.x}
+                    cy={tech.y}
+                    r="28"
+                    fill="rgba(0,0,0,0)"
+                  />
+
+                  {/* Elementos del nodo principal con contra-órbita y transform origin específico */}
+                  <g className="counter-orbit" style={{ transformOrigin: `${tech.x}px ${tech.y}px` }}>
+                    {/* Círculo exterior (glow de hover) */}
+                    <circle
+                      cx={tech.x}
+                      cy={tech.y}
+                      r="28"
+                      className={`tech-node-glow ${isHovered ? "active" : ""}`}
+                      style={{
+                        fill: "transparent",
+                        stroke: tech.color,
+                        opacity: isHovered ? 0.8 : 0,
+                        filter: isHovered ? "url(#glow-node)" : "none"
+                      }}
+                    />
+                    
+                    {/* Círculo base */}
+                    <circle
+                      cx={tech.x}
+                      cy={tech.y}
+                      r="24"
+                      className={`tech-node-circle ${isHovered ? "highlighted" : ""}`}
+                      style={{
+                        stroke: isHovered ? tech.color : "var(--card-border)",
+                        fill: isHovered ? "var(--bg-color)" : "var(--card-bg)"
+                      }}
+                    />
+
+                    {/* Icono de la tecnología */}
+                    <image
+                      href={tech.iconUrl}
+                      x={tech.x - 14}
+                      y={tech.y - 14}
+                      width="28"
+                      height="28"
+                      className={`${isHovered ? "colored" : ""} tech-icon-${tech.name.toLowerCase()}`}
+                    />
+                  </g>
+                </g>
               </g>
             );
           })}
+
+          {/* Nodo central (VB) - Estático */}
+          <g className="center-node-group">
+            <circle
+              cx={centerNode.x}
+              cy={centerNode.y}
+              r="28"
+              className="center-circle"
+            />
+            <text
+              x={centerNode.x}
+              y={centerNode.y + 6}
+              className="center-circle-text"
+            >
+              {centerNode.label}
+            </text>
+          </g>
         </svg>
 
         {/* Panel de detalles dinámico */}
