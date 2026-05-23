@@ -3,7 +3,7 @@
 
 .app-container {
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 4rem 2rem;
   min-height: 100vh;
   max-width: 1200px;
 }
@@ -13,15 +13,17 @@
 .section-card {
   min-height: 200px;
   contain: layout paint;
-  padding: 2rem;
+  padding: 3rem;
   background: var(--card-bg);
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: var(--glass-shadow);
-  margin: 2rem 0;
+  margin: 3rem 0;
   border: 1px solid var(--card-border);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
+  position: relative;
+  overflow: hidden;
 }
 
 .section-card.visible {
@@ -32,19 +34,56 @@
 h1, h2, h3 {
   margin: 0 auto;
   color: var(--text-color);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-family: 'Outfit', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.section-card:hover h2::after {
+  width: 60px;
 }
 
 /* Adaptación para displays más pequeños */
 
 @media (max-width: 768px) {
   .app-container {
-    padding: 1rem 0.5rem;
+    padding: 2rem 1rem;
   }
-  section {
-    margin-bottom: 1.5rem;
+  .section-card {
+    padding: 2rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 16px;
+  }
+  h1 {
+    font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
   }
 }
 
@@ -53,18 +92,24 @@ h1, h2, h3 {
 :root {
   --bg-color: #f8fafc;
   --text-color: #0f172a;
-  --section-bg: rgba(255, 255, 255, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(226, 232, 240, 0.8);
+  --text-secondary: #475569;
+  --section-bg: rgba(248, 250, 252, 0.6);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(241, 245, 249, 0.6) 100%);
+  --card-border: rgba(226, 232, 240, 0.7);
   --accent: #2563eb;
+  --accent-secondary: #7c3aed;
+  --glow-blue: rgba(37, 99, 235, 0.08);
+  --glow-violet: rgba(124, 58, 237, 0.08);
   --input-bg: rgba(255, 255, 255, 0.9);
   --input-text: #0f172a;
   --button-bg: #0f172a;
   --button-text: #f8fafc;
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  --mesh-bg: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
-             radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-             radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(37, 99, 235, 0.08) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(124, 58, 237, 0.08) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(37, 99, 235, 0.06) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.05) 0px, transparent 40%);
 }
 
 /* Variables de color para modo oscuro */
@@ -72,18 +117,50 @@ h1, h2, h3 {
 :root.dark-mode {
   --bg-color: #09090b;
   --text-color: #f8fafc;
-  --section-bg: rgba(24, 24, 27, 0.6);
-  --card-bg: rgba(39, 39, 42, 0.6);
-  --card-border: rgba(63, 63, 70, 0.5);
+  --text-secondary: #a1a1aa;
+  --section-bg: rgba(24, 24, 27, 0.4);
+  --card-bg: rgba(18, 18, 21, 0.6);
+  --card-bg-gradient: linear-gradient(135deg, rgba(20, 20, 23, 0.8) 0%, rgba(28, 28, 32, 0.5) 100%);
+  --card-border: rgba(63, 63, 70, 0.4);
   --accent: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --glow-blue: rgba(59, 130, 246, 0.18);
+  --glow-violet: rgba(139, 92, 246, 0.18);
   --input-bg: rgba(24, 24, 27, 0.8);
   --input-text: #f8fafc;
   --button-bg: #f8fafc;
   --button-text: #09090b;
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  --mesh-bg: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.3) 0px, transparent 50%),
-             radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.3) 0px, transparent 50%),
-             radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.2) 0px, transparent 50%);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(59, 130, 246, 0.15) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(139, 92, 246, 0.18) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.1) 0px, transparent 40%);
+}
+
+/* Animaciones */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Clases utilitarias (Glassmorphism) */
@@ -100,8 +177,8 @@ body, html, #root {
   background-image: var(--mesh-bg);
   background-attachment: fixed;
   color: var(--text-color);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  transition: all 0.2s ease;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
   scroll-behavior: smooth;
   font-display: swap;
 }

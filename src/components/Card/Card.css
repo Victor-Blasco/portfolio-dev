@@ -3,25 +3,26 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--card-bg);
+  background: var(--card-bg-gradient);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 300px; 
-  margin-bottom: 1rem; 
-  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+  border-radius: 16px;
+  padding: 1.25rem 1.6rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .card:hover {
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 20px var(--glow-blue);
+  transform: translateY(-6px);
   border-color: var(--accent);
 }
 
 .card h3 {
   margin: 0;
-  font-size: 1.25rem;
-  min-height: 3.2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .card h4 {
@@ -53,8 +54,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-bottom: 1.25rem;
-  min-height: 170px; /* Incrementado para dar más espacio y hacer la imagen más grande */
+  margin-bottom: 0.5rem;
 }
 
 /* Animaciones y estados para descripción e imagen */

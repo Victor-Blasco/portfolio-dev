@@ -1,7 +1,276 @@
 /* Experience.css */
 
-.exp-list {
+.experience-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0.5rem auto 2.5rem auto;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* Controles de Filtrado */
+.timeline-filters-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+  width: 100%;
+}
+
+.timeline-filters {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  background: var(--card-bg-gradient);
+  border: 1px solid var(--card-border);
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.6rem;
+  border-radius: 20px;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: var(--text-color);
+  color: var(--section-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Para el tema oscuro, la pastilla activa queda mejor de color acentuado */
+[data-theme="dark"] .filter-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+/* Contenedor del Timeline */
+.timeline-container {
+  position: relative;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Línea Vertical Central */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent) 0%,
+    var(--accent-secondary) 50%,
+    var(--accent) 100%
+  );
+  transform: translateX(-50%);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* Ítems del Timeline */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  margin-bottom: 2.5rem;
+  z-index: 2;
+  box-sizing: border-box;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  max-height: 500px;
+  transform: scale(1);
+}
+
+.timeline-item.left-item {
+  left: 0;
+  padding-right: 3rem;
+  text-align: right;
+}
+
+.timeline-item.right-item {
+  left: 50%;
+  padding-left: 3rem;
+  text-align: left;
+}
+
+/* Nodos Temporales (Badges) */
+.timeline-badge {
+  position: absolute;
+  top: 1.8rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  background: var(--section-bg);
+  border: 2px solid var(--card-border);
+  color: var(--text-color);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* Asignar colores por tipo en reposo */
+.timeline-item.work {
+  --badge-glow: var(--glow-blue);
+  --badge-color: var(--accent);
+}
+
+.timeline-item.education {
+  --badge-glow: var(--glow-violet);
+  --badge-color: var(--accent-secondary);
+}
+
+.timeline-item.work .timeline-badge {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.timeline-item.education .timeline-badge {
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+}
+
+.timeline-item.left-item .timeline-badge {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.timeline-item.right-item .timeline-badge {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+  
+/* Iconos de Timeline */
+.timeline-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Efectos Hover e Iluminaciones Sincronizadas */
+.timeline-item.left-item:hover .timeline-badge,
+.timeline-item.left-item .timeline-badge.pulse-active {
+  transform: translate(50%, -50%) scale(1.18);
+  background: var(--badge-color);
+  color: #ffffff !important;
+  border-color: var(--badge-color);
+  box-shadow: 0 0 20px var(--badge-glow);
+}
+
+.timeline-item.right-item:hover .timeline-badge,
+.timeline-item.right-item .timeline-badge.pulse-active {
+  transform: translate(-50%, -50%) scale(1.18);
+  background: var(--badge-color);
+  color: #ffffff !important;
+  border-color: var(--badge-color);
+  box-shadow: 0 0 20px var(--badge-glow);
+}
+
+/* Ajustes especiales en las tarjetas en hover */
+.timeline-item .card {
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-item:hover .card {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08), 0 0 25px var(--badge-glow);
+  border-color: var(--badge-color);
+}
+
+/* Transiciones para el Filtrado Dinámico */
+.timeline-item.filtered-out {
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transform: scale(0.92) translateY(20px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Ajustes de alineación interna del contenido */
+.timeline-card-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Diseño Responsive */
+@media (max-width: 768px) {
+  .experience-subtitle {
+    margin-bottom: 2rem;
+  }
+
+  .timeline-filters-container {
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-line {
+    left: 20px;
+    transform: none;
+  }
+
+  .timeline-item {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item.left-item {
+    left: 0;
+    padding-right: 0;
+    padding-left: 3.5rem;
+    text-align: left;
+  }
+
+  .timeline-item.right-item {
+    left: 0;
+    padding-left: 3.5rem;
+    text-align: left;
+  }
+
+  .timeline-badge {
+    left: 20px;
+    right: auto !important;
+    top: 1.8rem;
+  }
+
+  .timeline-item.left-item .timeline-badge {
+    transform: translate(-50%, -50%);
+  }
+  
+  .timeline-item.left-item:hover .timeline-badge,
+  .timeline-item.left-item .timeline-badge.pulse-active {
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+
+  .timeline-item.right-item .timeline-badge {
+    transform: translate(-50%, -50%);
+  }
 }

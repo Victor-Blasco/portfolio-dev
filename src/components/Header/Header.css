@@ -1,36 +1,202 @@
 /* Header.css */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
 .header {
+  position: relative;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 5rem 2rem 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 4rem; /* Spacer for fixed navbar */
 }
+
+/* Background spotlight glow */
+.hero-glow-spot {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--glow-blue) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  z-index: 1;
+}
+
+.avatar-wrapper {
+  position: relative;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-wrapper:hover {
+  transform: scale(1.05);
+}
+
 .avatar {
-  width: 160px;
-  border-radius: 25%;
-  margin-bottom: 1rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 15px rgba(37, 99, 235, 0.2);
-  border: 4px solid var(--section-bg);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-color);
+  margin: 0;
+  display: block;
 }
-.avatar:hover {
-  transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25), 0 0 30px rgba(37, 99, 235, 0.4);
+
+.avatar-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  filter: blur(15px);
+  opacity: 0.35;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* Handwriting chat bubble */
+.avatar-bubble {
+  position: absolute;
+  top: -10px;
+  right: -130px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 0.4rem 1rem;
+  border-radius: 16px 16px 16px 0;
+  box-shadow: var(--glass-shadow);
+  transform-origin: bottom left;
+  animation: float 5s ease-in-out infinite;
+  backdrop-filter: blur(12px);
+}
+
+.avatar-bubble span {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  white-space: nowrap;
+}
+
+/* Typography styles */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-eyebrow {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+
+.hero-headline {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+  margin: 0 0 1rem 0;
+}
+
+.highlight-text {
+  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  position: relative;
+  font-weight: 800;
+}
+
+.highlight-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.hero-subheadline {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0 0 1.5rem 0;
+}
+
+.hero-role {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 .header-links {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
   align-items: center;
-
 }
 
-.header h1{
-  margin: 0.5rem 0;
-  color: var(--text-color);
+/* Responsiveness */
+@media (max-width: 768px) {
+  .header {
+    padding: 3.5rem 1.5rem 3rem 1.5rem;
+    margin-top: 5rem;
+  }
+  
+  .hero-headline {
+    font-size: 2.2rem;
+  }
+  
+  .avatar-bubble {
+    top: -45px;
+    right: 50%;
+    transform: translateX(50%);
+    border-radius: 16px 16px 0 16px;
+    animation: float-mobile 5s ease-in-out infinite;
+  }
+  
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
 }
-.header h2{
-  margin: 0.5rem 0;
-  color: var(--accent);
+
+@keyframes float-mobile {
+  0%, 100% {
+    transform: translateX(50%) translateY(0px);
+  }
+  50% {
+    transform: translateX(50%) translateY(-6px);
+  }
 }

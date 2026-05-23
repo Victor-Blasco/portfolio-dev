@@ -1,7 +1,218 @@
 /* Projects.css */
 
-.projects-list {
+.projects-section {
+  overflow: visible !important; /* Allow glowing spots to expand */
+}
+
+.projects-grid-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.project-row.reversed {
+  direction: rtl;
+}
+
+.project-row.reversed > * {
+  direction: ltr; /* Reset text direction */
+}
+
+/* Info side styles */
+.project-info-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.project-tag {
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.project-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+}
+
+.project-duration {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.project-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+}
+
+.project-tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tech-tag {
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+}
+
+.project-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Visual side styles */
+.project-visual-side {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Large blur glow background */
+.visual-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  background: radial-gradient(circle, var(--glow-color, var(--glow-blue)) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.project-image-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--card-border);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+  aspect-ratio: 16 / 10;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-image-frame:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Code Editor mockup styles */
+.mock-code-editor {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: #18181c; /* Slate dark editor background */
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  font-family: 'Consolas', 'Courier New', Courier, monospace;
+  overflow: hidden;
+  text-align: left;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.editor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.editor-dot.red { background-color: #ff5f56; }
+.editor-dot.yellow { background-color: #ffbd2e; }
+.editor-dot.green { background-color: #27c93f; }
+
+.editor-filename {
+  color: #8a8a93;
+  font-size: 0.75rem;
+  margin-left: 1rem;
+  font-weight: 500;
+}
+
+.editor-code {
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+  color: #e3e3e6;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  background: transparent;
+}
+
+/* Simple syntax highlighting */
+.editor-code .keyword { color: #ff79c6; }
+.editor-code .function { color: #50fa7b; }
+.editor-code .tag { color: #8be9fd; }
+.editor-code .attr { color: #ffb86c; }
+.editor-code .string { color: #f1fa8c; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .project-row, .project-row.reversed {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .projects-grid-list {
+    gap: 4rem;
+  }
+  
+  .project-info-side {
+    order: 1;
+  }
+  
+  .project-visual-side {
+    order: 2;
+  }
 }

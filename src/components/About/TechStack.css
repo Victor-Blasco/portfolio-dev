@@ -1,0 +1,161 @@
+/* TechStack.css */
+
+.tech-stack-container {
+  margin: 3rem auto 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.tech-stack-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.tech-stack-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tech-stack-canvas {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tech-stack-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Connection curves */
+.connection-line {
+  fill: none;
+  stroke-width: 1.5;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.connection-line.active {
+  stroke-width: 3.5;
+  filter: url(#glow-line);
+}
+
+/* Center circle VB */
+.center-circle {
+  fill: var(--text-color);
+  stroke: var(--card-border);
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.center-circle-text {
+  font-weight: 800;
+  font-size: 1rem;
+  fill: var(--bg-color);
+  text-anchor: middle;
+  letter-spacing: -0.05em;
+}
+
+/* Tech nodes */
+.tech-node-circle {
+  stroke-width: 1.5;
+  transition: stroke 0.3s ease, fill 0.3s ease, r 0.3s ease;
+}
+
+.framework-node {
+  stroke-dasharray: 4 2;
+}
+
+.tech-node-glow {
+  stroke-width: 2.5;
+  transition: opacity 0.3s ease;
+}
+
+/* Image grayscale hover filters */
+.tech-stack-svg image {
+  filter: grayscale(100%) opacity(55%);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.tech-stack-svg image.colored {
+  filter: grayscale(0%) opacity(100%);
+}
+
+/* Detail panel */
+.tech-details-panel {
+  margin-top: 1.5rem;
+  width: 100%;
+  min-height: 90px;
+  padding: 1.2rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--section-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: var(--glass-shadow);
+}
+
+.tech-detail-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tech-detail-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1px solid;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tech-detail-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tech-detail-placeholder {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .tech-details-panel {
+    padding: 0.8rem 1rem;
+    min-height: 80px;
+  }
+  .tech-detail-desc {
+    font-size: 0.85rem;
+  }
+}
+
+/* Soporte de GitHub para modo claro (invertir icono blanco a negro) */
+html:not(.dark-mode) .tech-stack-svg image.tech-icon-github {
+  filter: grayscale(100%) opacity(55%) invert(1);
+}
+
+html:not(.dark-mode) .tech-stack-svg image.tech-icon-github.colored {
+  filter: grayscale(0%) opacity(100%) invert(1);
+}
