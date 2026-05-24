@@ -1,6 +1,13 @@
-import { Suspense, useEffect, useState } from "react";
-import './App.css'
-import { lazy } from "react";
+import { Suspense, useEffect, useState, lazy } from "react";
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import About from "./components/About";
+import './App.css';
+
+const Projects = lazy(() => import("./components/Projects"));
+const Experience = lazy(() => import("./components/Experience"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
 
 // Función para obtener el modo inicial
 const getInitialMode = () => {
@@ -14,16 +21,6 @@ const getInitialMode = () => {
 // Aplicar modo oscuro antes del primer render
 const darkModeInitial = getInitialMode();
 document.documentElement.classList.toggle("dark-mode", darkModeInitial);
-
-import Header from './components/Header'
-import About from './components/About'
-import Navbar from "./components/Navbar";
-
-
-const Projects = lazy(() => import("./components/Projects"));
-const Experience = lazy(() => import("./components/Experience"));
-const Contact = lazy(() => import("./components/Contact"));
-const Footer = lazy(() => import("./components/Footer"));
 
 
 function App() {
