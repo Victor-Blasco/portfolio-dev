@@ -4,13 +4,29 @@ import "./Experience.css";
 import Card from "@/components/Card/Card";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
+// Importar logos de empresas/universidades (placeholders)
+import pamesaLogo from "@/assets/logos/pamesa.png";
+import milanoLogo from "@/assets/logos/unimi.png";
+import ecoporcelanicoLogo from "@/assets/logos/ecoporcelanico.png";
+import wandegarLogo from "@/assets/logos/wandegar.jpg";
+import ujiLogo from "@/assets/logos/uji.png";
+
 /**
  * Icono de maletín vectorizado para hitos laborales.
- * 
+ *
  * @returns {JSX.Element} Icono SVG.
  */
 const BriefcaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="timeline-icon">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="timeline-icon"
+  >
     <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
   </svg>
@@ -18,11 +34,20 @@ const BriefcaseIcon = () => (
 
 /**
  * Icono de birrete vectorizado para hitos académicos.
- * 
+ *
  * @returns {JSX.Element} Icono SVG.
  */
 const GraduationCapIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="timeline-icon">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="timeline-icon"
+  >
     <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
     <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
   </svg>
@@ -49,7 +74,8 @@ function Experience() {
       title: t("experience.titles.pamesa"),
       institution: t("experience.institutions.pamesa"),
       period: t("experience.periods.pamesa"),
-      description: t("experience.descriptions.pamesa")
+      description: t("experience.descriptions.pamesa"),
+      logo: pamesaLogo,
     },
     {
       id: "milano",
@@ -57,7 +83,10 @@ function Experience() {
       title: t("experience.titles.milano"),
       institution: t("experience.institutions.milano"),
       period: t("experience.periods.milano"),
-      description: t("experience.descriptions.milano")
+      description: t("experience.descriptions.milano"),
+      logo: milanoLogo,
+      logoBg: "#ffffff",
+      logoStyle: { padding: "0px" },
     },
     {
       id: "ecoporcelanico",
@@ -65,15 +94,19 @@ function Experience() {
       title: t("experience.titles.ecoporcelanico"),
       institution: t("experience.institutions.ecoporcelanico"),
       period: t("experience.periods.ecoporcelanico"),
-      description: t("experience.descriptions.ecoporcelanico")
+      description: t("experience.descriptions.ecoporcelanico"),
+      logo: ecoporcelanicoLogo,
+      logoBg: "#ffffff",
     },
     {
-      id: "wandregar",
+      id: "wandegar",
       type: "work",
-      title: t("experience.titles.wandregar"),
-      institution: t("experience.institutions.wandregar"),
-      period: t("experience.periods.wandregar"),
-      description: t("experience.descriptions.wandregar")
+      title: t("experience.titles.wandegar"),
+      institution: t("experience.institutions.wandegar"),
+      period: t("experience.periods.wandegar"),
+      description: t("experience.descriptions.wandegar"),
+      logo: wandegarLogo,
+      logoBg: "#ffffff",
     },
     {
       id: "uji",
@@ -81,16 +114,15 @@ function Experience() {
       title: t("experience.titles.uji"),
       institution: t("experience.institutions.uji"),
       period: t("experience.periods.uji"),
-      description: t("experience.descriptions.uji")
-    }
+      description: t("experience.descriptions.uji"),
+      logo: ujiLogo,
+    },
   ];
 
   return (
     <section className="section-card" id="experience" ref={sectionRef}>
       <h2>{t("experience.title")}</h2>
-      <p className="experience-subtitle">
-        {t("experience.subtitle")}
-      </p>
+      <p className="experience-subtitle">{t("experience.subtitle")}</p>
 
       {/* Controles de Filtrado */}
       <div className="timeline-filters-container">
@@ -137,8 +169,14 @@ function Experience() {
               onMouseLeave={() => setHoveredId(null)}
             >
               {/* Nodo de Timeline */}
-              <div className={`timeline-badge ${hoveredId === item.id ? "pulse-active" : ""}`}>
-                {item.type === "work" ? <BriefcaseIcon /> : <GraduationCapIcon />}
+              <div
+                className={`timeline-badge ${hoveredId === item.id ? "pulse-active" : ""}`}
+              >
+                {item.type === "work" ? (
+                  <BriefcaseIcon />
+                ) : (
+                  <GraduationCapIcon />
+                )}
               </div>
 
               {/* Tarjeta del Timeline */}
@@ -147,6 +185,9 @@ function Experience() {
                   title={`${item.title} | ${item.institution}`}
                   subtitle={item.period}
                   description={item.description}
+                  logo={item.logo}
+                  logoBg={item.logoBg}
+                  logoStyle={item.logoStyle}
                 />
               </div>
             </div>
