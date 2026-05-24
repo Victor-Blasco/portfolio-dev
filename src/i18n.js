@@ -121,22 +121,23 @@ const resources = {
         },
         captions: {
           gustome: {
-            main: "Dashboard principal de Gustomé para la administración y visualización de cartas.",
-            details:
-              "Vista interactiva de la carta digital con filtros avanzados de alérgenos y preferencias.",
+            landing: "Página de inicio (landing page) de la plataforma Gustomé.",
+            dashboard: "Panel de administración del restaurante para gestionar cartas y pedidos.",
+            agregar_plato: "Formulario interactivo para añadir y editar platos en la carta digital.",
+            pedidos_restaurante: "Panel de gestión de pedidos activos en tiempo real para el restaurante.",
+            pedidos_cliente_movil: "Vista móvil de cliente para realizar pedidos directamente desde la mesa.",
           },
           tfg: {
-            main: "Panel de visualización general (BI) con KPIs de ciberseguridad corporativa.",
-            alerts:
-              "Vista de alertas detalladas de ciberseguridad y monitorización de amenazas en tiempo real.",
+            login: "Pantalla de inicio de sesión segura de la plataforma BI.",
+            ejecutivo: "Panel ejecutivo con KPIs globales de ciberseguridad corporativa.",
+            operativo: "Panel operativo con monitorización de amenazas y alertas en tiempo real.",
           },
           mormas: {
-            main: "Página de inicio de MoRMaS para la gestión y visualización de carreras de montaña.",
-            results:
-              "Tabla de resultados de la carrera con tiempos de paso, estado y descarga de certificados.",
+            promotor: "Panel de administración de MoRMaS para promotores y creadores de carreras de montaña.",
+            competiciones: "Vista de gestión de competiciones y visualización de corredores inscritos.",
           },
           marketpulse: {
-            main: "Dashboard interactivo con gráficos financieros, cálculo de volatilidad e históricos.",
+            main: "Dashboard interactivo con gráficos financieros, cálculo de volatilidad e históricos bursátiles.",
           },
         },
       },
@@ -319,22 +320,23 @@ const resources = {
         },
         captions: {
           gustome: {
-            main: "Main Gustomé dashboard for menu administration and visualization.",
-            details:
-              "Interactive digital menu view with advanced allergen and dietary preference filters.",
+            landing: "Landing page of the Gustomé platform.",
+            dashboard: "Restaurant administration dashboard to manage menus and orders.",
+            agregar_plato: "Interactive form to add and edit dishes in the digital menu.",
+            pedidos_restaurante: "Real-time active orders management panel for the restaurant.",
+            pedidos_cliente_movil: "Customer mobile view for placing orders directly from the table.",
           },
           tfg: {
-            main: "General Business Intelligence (BI) dashboard with corporate cybersecurity KPIs.",
-            alerts:
-              "Detailed cybersecurity alerts view and real-time threat monitoring.",
+            login: "Secure login screen of the BI platform.",
+            ejecutivo: "Executive dashboard with global corporate cybersecurity KPIs.",
+            operativo: "Operational dashboard with real-time threat and alert monitoring.",
           },
           mormas: {
-            main: "MoRMaS home page for mountain race management and viewing.",
-            results:
-              "Race results table with checkpoint split times, runner status, and certificate downloads.",
+            promotor: "MoRMaS administration panel for mountain race promoters and creators.",
+            competiciones: "Competitions management view and registered runners list.",
           },
           marketpulse: {
-            main: "Interactive dashboard with financial charts, volatility calculation, and historical data.",
+            main: "Interactive dashboard with financial charts, volatility calculation, and historical stock data.",
           },
         },
       },

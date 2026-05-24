@@ -6,14 +6,73 @@ import Icon from "../Icon/Icon";
 import ProjectCarousel from "./ProjectCarousel";
 import ImageLightbox from "./ImageLightbox";
 
-// Importar imágenes de proyectos
-import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
-import tfgCybersecurityAlerts from "@/assets/projects/tfg_cybersecurity_alerts.png";
-import mormasImage from "@/assets/projects/mormas_dashboard.png";
-import mormasResultsTable from "@/assets/projects/mormas_results_table.png";
-import marketPulseImage from "@/assets/projects/market_pulse_dashboard.png";
-import gustomeImage from "@/assets/projects/gustome.png";
-import gustomeMenuDetails from "@/assets/projects/gustome_menu_details.png";
+// Carga dinámica de imágenes de proyectos organizada por carpetas
+const gustomeGlob = import.meta.glob("../../assets/projects/gustome/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+const tfgGlob = import.meta.glob("../../assets/projects/tfg/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+const mormasGlob = import.meta.glob("../../assets/projects/mormas/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+const marketpulseGlob = import.meta.glob("../../assets/projects/marketpulse/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+const portfolioGlob = import.meta.glob("../../assets/projects/portfolio/*.{png,jpg,jpeg,svg,webp}", { eager: true });
+
+/**
+ * Mapea las imágenes cargadas dinámicamente mediante glob a la estructura esperada por el carrusel,
+ * asignando las traducciones correctas según el nombre del archivo o un fallback limpio.
+ * 
+ * @param {Object} globObj - El objeto retornado por import.meta.glob.
+ * @param {string} projectKey - Identificador del proyecto para mapear descripciones.
+ * @param {Function} t - Función de traducción de i18next.
+ * @returns {Array<{src: string, caption: string}>} Lista de imágenes formateada.
+ */
+const getProjectImages = (globObj, projectKey, t) => {
+  return Object.keys(globObj).map((path) => {
+    const src = globObj[path].default || globObj[path];
+    const filename = path.split("/").pop().toLowerCase();
+    let caption = "";
+
+    if (projectKey === "gustome") {
+      if (filename.includes("landing")) {
+        caption = t("projects.captions.gustome.landing");
+      } else if (filename.includes("agregar_plato")) {
+        caption = t("projects.captions.gustome.agregar_plato");
+      } else if (filename.includes("pedidos_restaurante")) {
+        caption = t("projects.captions.gustome.pedidos_restaurante");
+      } else if (filename.includes("pedidos_cliente_movil")) {
+        caption = t("projects.captions.gustome.pedidos_cliente_movil");
+      } else if (filename.includes("dashboard")) {
+        caption = t("projects.captions.gustome.dashboard");
+      } else {
+        caption = t("projects.captions.gustome.landing");
+      }
+    } else if (projectKey === "tfg") {
+      if (filename.includes("login")) {
+        caption = t("projects.captions.tfg.login");
+      } else if (filename.includes("ejecutivo")) {
+        caption = t("projects.captions.tfg.ejecutivo");
+      } else if (filename.includes("operativo")) {
+        caption = t("projects.captions.tfg.operativo");
+      } else {
+        caption = t("projects.captions.tfg.ejecutivo");
+      }
+    } else if (projectKey === "mormas") {
+      if (filename.includes("promotor")) {
+        caption = t("projects.captions.mormas.promotor");
+      } else if (filename.includes("competiciones")) {
+        caption = t("projects.captions.mormas.competiciones");
+      } else {
+        caption = t("projects.captions.mormas.promotor");
+      }
+    } else if (projectKey === "marketpulse") {
+      caption = t("projects.captions.marketpulse.main");
+    } else {
+      // Fallback: Convierte 'nombre_archivo.png' a 'Nombre archivo'
+      const cleanName = filename
+        .replace(/\.[^/.]+$/, "")
+        .replace(/[_-]/g, " ");
+      caption = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+    }
+
+    return { src, caption };
+  });
+};
 
 /**
  * Componente que muestra la lista de proyectos destacados.
@@ -63,10 +122,7 @@ function Projects() {
       subtitle: t("projects.periods.gustome"),
       description: t("projects.descriptions.gustome"),
       tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore"],
-      images: [
-        { src: gustomeImage, caption: t("projects.captions.gustome.main") },
-        { src: gustomeMenuDetails, caption: t("projects.captions.gustome.details") }
-      ],
+      images: getProjectImages(gustomeGlob, "gustome", t),
       references: [
         {
           label: "GitHub",
@@ -80,10 +136,7 @@ function Projects() {
       subtitle: t("projects.periods.tfg"),
       description: t("projects.descriptions.tfg"),
       tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Tailwind CSS", "Docker"],
-      images: [
-        { src: tfgImage, caption: t("projects.captions.tfg.main") },
-        { src: tfgCybersecurityAlerts, caption: t("projects.captions.tfg.alerts") }
-      ],
+      images: getProjectImages(tfgGlob, "tfg", t),
       references: [
         {
           label: "GitHub",
@@ -97,10 +150,7 @@ function Projects() {
       subtitle: t("projects.periods.mormas"),
       description: t("projects.descriptions.mormas"),
       tech: ["Java (Spring Boot)", "HTML/CSS", "PostgreSQL"],
-      images: [
-        { src: mormasImage, caption: t("projects.captions.mormas.main") },
-        { src: mormasResultsTable, caption: t("projects.captions.mormas.results") }
-      ],
+      images: getProjectImages(mormasGlob, "mormas", t),
       references: [
         {
           label: "GitHub",
@@ -114,9 +164,7 @@ function Projects() {
       subtitle: t("projects.periods.marketpulse"),
       description: t("projects.descriptions.marketpulse"),
       tech: ["Python (Pandas, NumPy)", "Streamlit", "Yahoo Finance API"],
-      images: [
-        { src: marketPulseImage, caption: t("projects.captions.marketpulse.main") }
-      ],
+      images: getProjectImages(marketpulseGlob, "marketpulse", t),
       references: [
         {
           label: "GitHub",
@@ -129,7 +177,7 @@ function Projects() {
       subtitle: t("projects.periods.portfolio"),
       description: t("projects.descriptions.portfolio"),
       tech: ["JavaScript (React)", "CSS Vanilla", "Vite"],
-      images: [],
+      images: getProjectImages(portfolioGlob, "portfolio", t),
       references: [
         {
           label: "GitHub",
