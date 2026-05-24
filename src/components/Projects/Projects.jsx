@@ -1,17 +1,24 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Projects.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import Icon from "../Icon/Icon";
+import ProjectCarousel from "./ProjectCarousel";
+import ImageLightbox from "./ImageLightbox";
 
 // Importar imágenes de proyectos
 import tfgImage from "@/assets/projects/tfg_bi_dashboard.png";
+import tfgCybersecurityAlerts from "@/assets/projects/tfg_cybersecurity_alerts.png";
 import mormasImage from "@/assets/projects/mormas_dashboard.png";
+import mormasResultsTable from "@/assets/projects/mormas_results_table.png";
 import marketPulseImage from "@/assets/projects/market_pulse_dashboard.png";
 import gustomeImage from "@/assets/projects/gustome.png";
+import gustomeMenuDetails from "@/assets/projects/gustome_menu_details.png";
 
 /**
  * Componente que muestra la lista de proyectos destacados.
- * Renderiza tarjetas con detalles, tecnologías y enlaces a repositorios o demos.
+ * Renderiza tarjetas con detalles, tecnologías, enlaces a repositorios o demos,
+ * y un carrusel de capturas de pantalla interactivo con visor ampliado.
  * 
  * @returns {JSX.Element} La sección de proyectos.
  */
@@ -19,13 +26,47 @@ function Projects() {
   const sectionRef = useIntersectionObserver();
   const { t } = useTranslation();
 
+  // Estado para controlar la visualización de la imagen en grande (Lightbox)
+  const [lightbox, setLightbox] = useState({
+    isOpen: false,
+    images: [],
+    initialIndex: 0,
+    title: ""
+  });
+
+  /**
+   * Abre el lightbox a pantalla completa con las imágenes del proyecto.
+   * 
+   * @param {Array<{src: string, caption: string}>} images - Lista de imágenes del proyecto.
+   * @param {number} index - Índice de la imagen inicial seleccionada.
+   * @param {string} title - Título del proyecto.
+   */
+  const openLightbox = (images, index, title) => {
+    setLightbox({
+      isOpen: true,
+      images,
+      initialIndex: index,
+      title
+    });
+  };
+
+  /**
+   * Cierra el lightbox a pantalla completa.
+   */
+  const closeLightbox = () => {
+    setLightbox((prev) => ({ ...prev, isOpen: false }));
+  };
+
   const projectsData = [
     {
       title: t("projects.titles.gustome"),
       subtitle: t("projects.periods.gustome"),
       description: t("projects.descriptions.gustome"),
       tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore"],
-      image: gustomeImage,
+      images: [
+        { src: gustomeImage, caption: t("projects.captions.gustome.main") },
+        { src: gustomeMenuDetails, caption: t("projects.captions.gustome.details") }
+      ],
       references: [
         {
           label: "GitHub",
@@ -39,7 +80,10 @@ function Projects() {
       subtitle: t("projects.periods.tfg"),
       description: t("projects.descriptions.tfg"),
       tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Tailwind CSS", "Docker"],
-      image: tfgImage,
+      images: [
+        { src: tfgImage, caption: t("projects.captions.tfg.main") },
+        { src: tfgCybersecurityAlerts, caption: t("projects.captions.tfg.alerts") }
+      ],
       references: [
         {
           label: "GitHub",
@@ -53,7 +97,10 @@ function Projects() {
       subtitle: t("projects.periods.mormas"),
       description: t("projects.descriptions.mormas"),
       tech: ["Java (Spring Boot)", "HTML/CSS", "PostgreSQL"],
-      image: mormasImage,
+      images: [
+        { src: mormasImage, caption: t("projects.captions.mormas.main") },
+        { src: mormasResultsTable, caption: t("projects.captions.mormas.results") }
+      ],
       references: [
         {
           label: "GitHub",
@@ -67,7 +114,9 @@ function Projects() {
       subtitle: t("projects.periods.marketpulse"),
       description: t("projects.descriptions.marketpulse"),
       tech: ["Python (Pandas, NumPy)", "Streamlit", "Yahoo Finance API"],
-      image: marketPulseImage,
+      images: [
+        { src: marketPulseImage, caption: t("projects.captions.marketpulse.main") }
+      ],
       references: [
         {
           label: "GitHub",
@@ -80,7 +129,7 @@ function Projects() {
       subtitle: t("projects.periods.portfolio"),
       description: t("projects.descriptions.portfolio"),
       tech: ["JavaScript (React)", "CSS Vanilla", "Vite"],
-      image: null,
+      images: [],
       references: [
         {
           label: "GitHub",
@@ -135,10 +184,12 @@ function Projects() {
               {/* Lado B: Visualización */}
               <div className="project-visual-side">
                 <div className="visual-glow" style={{ "--glow-color": isEven ? "var(--glow-blue)" : "var(--glow-violet)" }}></div>
-                {project.image ? (
-                  <div className="project-image-frame">
-                    <img src={project.image} alt={project.title} className="project-img" loading="lazy" />
-                  </div>
+                {project.images && project.images.length > 0 ? (
+                  <ProjectCarousel 
+                    images={project.images} 
+                    title={project.title} 
+                    onImageClick={(imgIndex) => openLightbox(project.images, imgIndex, project.title)} 
+                  />
                 ) : (
                   <div className="mock-code-editor">
                     <div className="editor-header">
@@ -167,6 +218,16 @@ function Projects() {
           );
         })}
       </div>
+
+      {/* Lightbox a pantalla completa */}
+      {lightbox.isOpen && (
+        <ImageLightbox
+          images={lightbox.images}
+          currentIndex={lightbox.initialIndex}
+          title={lightbox.title}
+          onClose={closeLightbox}
+        />
+      )}
     </section>
   );
 }
