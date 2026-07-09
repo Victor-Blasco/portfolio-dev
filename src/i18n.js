@@ -167,7 +167,7 @@ const resources = {
           milano: "Septiembre 2025 - Enero 2026",
           ecoporcelanico: "Julio-Agosto 2025",
           wandegar: "Julio-Agosto 2024",
-          uji: "2022 - presente",
+          uji: "Septiembre 2022 - Junio 2026",
         },
         descriptions: {
           pamesa:
@@ -366,7 +366,7 @@ const resources = {
           milano: "September 2025 - January 2026",
           ecoporcelanico: "July-August 2025",
           wandegar: "July-August 2024",
-          uji: "2022 - present",
+          uji: "September 2022 - June 2026",
         },
         descriptions: {
           pamesa:
