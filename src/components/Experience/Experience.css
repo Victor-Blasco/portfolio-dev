@@ -230,6 +230,8 @@
 
   .timeline-filters-container {
     margin-bottom: 2.5rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
 
   .timeline-container {
@@ -238,7 +240,7 @@
 
   .timeline-line {
     left: 16px;
-    transform: none;
+    transform: translateX(-50%);
   }
 
   .timeline-item {
@@ -246,42 +248,45 @@
     margin-bottom: 2rem;
   }
 
-  .timeline-item.left-item {
-    left: 0;
-    padding-right: 0;
-    padding-left: 2.5rem;
-    text-align: left;
-  }
-
+  .timeline-item.left-item,
   .timeline-item.right-item {
     left: 0;
     padding-left: 2.5rem;
+    padding-right: 0;
     text-align: left;
   }
 
   .timeline-badge {
-    left: 16px;
-    right: auto !important;
     top: 1.8rem;
     width: 38px;
     height: 38px;
   }
 
-  .timeline-item.left-item .timeline-badge {
+  .timeline-item.left-item .timeline-badge,
+  .timeline-item.right-item .timeline-badge {
+    left: calc(16px - 0.75rem);
+    right: auto;
     transform: translate(-50%, -50%);
   }
   
   .timeline-item.left-item:hover .timeline-badge,
-  .timeline-item.left-item .timeline-badge.pulse-active {
-    transform: translate(-50%, -50%) scale(1.18);
-  }
-
-  .timeline-item.right-item .timeline-badge {
-    transform: translate(-50%, -50%);
-  }
-
+  .timeline-item.left-item .timeline-badge.pulse-active,
   .timeline-item.right-item:hover .timeline-badge,
   .timeline-item.right-item .timeline-badge.pulse-active {
     transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-filters {
+    gap: 0.25rem;
+    padding: 0.3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }
