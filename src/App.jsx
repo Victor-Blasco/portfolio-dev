@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import About from "./components/About";
+import { Analytics } from "@vercel/analytics/react"
 import './App.css';
 
 const Projects = lazy(() => import("./components/Projects"));
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <Analytics />
       <Navbar darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
       <Header />
       <main>
