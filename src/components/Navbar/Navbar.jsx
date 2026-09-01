@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Navbar.css'
 import Icon from '../Icon/Icon'
 
 /**
  * Componente de navegación superior (Navbar).
- * Proporciona enlaces a las diferentes secciones, selector de idioma y el toggle de modo oscuro.
+ * Proporciona enlaces a las diferentes secciones con indicador de sección activa (ScrollSpy),
+ * selector de idioma y el toggle de modo oscuro.
  * 
  * @param {Object} props - Propiedades del componente.
  * @param {boolean} props.darkMode - Indica si el modo oscuro está activo.
@@ -14,6 +15,7 @@ import Icon from '../Icon/Icon'
  */
 function Navbar({ darkMode, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { t, i18n } = useTranslation();
 
   const toggleMenu = () => {
@@ -24,6 +26,39 @@ function Navbar({ darkMode, onToggleTheme }) {
     i18n.changeLanguage(lng);
   };
 
+  // ScrollSpy: Detectar qué sección está activa según la posición del scroll
+  useEffect(() => {
+    const sections = ["about", "projects", "experience", "contact"];
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 180; // Offset para la barra fija
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(sectionId);
+            return;
+          }
+        }
+      }
+
+      // Si está en el tope de la página
+      if (window.scrollY < 250) {
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Ejecutar al montar
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <nav className="glass-panel">
       <div className="nav-logo">
@@ -31,10 +66,34 @@ function Navbar({ darkMode, onToggleTheme }) {
       </div>
 
       <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <a href="#about" onClick={() => setIsMenuOpen(false)}>{t("navbar.about")}</a>
-        <a href="#projects" onClick={() => setIsMenuOpen(false)}>{t("navbar.projects")}</a>
-        <a href="#experience" onClick={() => setIsMenuOpen(false)}>{t("navbar.experience")}</a>
-        <a href="#contact" onClick={() => setIsMenuOpen(false)}>{t("navbar.contact")}</a>
+        <a 
+          href="#about" 
+          className={activeSection === "about" ? "active" : ""}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {t("navbar.about")}
+        </a>
+        <a 
+          href="#projects" 
+          className={activeSection === "projects" ? "active" : ""}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {t("navbar.projects")}
+        </a>
+        <a 
+          href="#experience" 
+          className={activeSection === "experience" ? "active" : ""}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {t("navbar.experience")}
+        </a>
+        <a 
+          href="#contact" 
+          className={activeSection === "contact" ? "active" : ""}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {t("navbar.contact")}
+        </a>
       </div>
 
       <div className="nav-actions">

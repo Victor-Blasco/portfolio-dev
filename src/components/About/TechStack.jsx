@@ -1,12 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import "./TechStack.css";
-import githubWhiteIcon from "@/assets/icons/github-white.svg";
+import { CENTER_NODE, getTechItems } from "./techStackData";
+import TechDetailPanel from "./TechDetailPanel";
 
 /**
  * Componente interactivo que muestra una red del stack tecnológico.
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
- * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo.
+ * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo,
+ * soporte para accesibilidad con teclado y detección de prefers-reduced-motion.
  * 
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
@@ -15,9 +17,18 @@ function TechStack() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSubnode, setHoveredSubnode] = useState(false);
   const [rotation, setRotation] = useState(0);
-  
-  const currentSpeedRef = useRef(0.18); // Velocidad base (grados por frame, reducida para órbita más lenta)
+
+  // Detectar si el usuario prefiere movimiento reducido
+  const prefersReducedMotion = typeof window !== "undefined" && 
+    window.matchMedia && 
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const baseSpeed = prefersReducedMotion ? 0 : 0.18;
+  const currentSpeedRef = useRef(baseSpeed);
   const closeTimeoutRef = useRef(null);
+
+  // Calcular las posiciones de las tecnologías memorizadas según el idioma
+  const techItems = useMemo(() => getTechItems(t), [t]);
 
   // Limpiar el timeout al desmontar
   useEffect(() => {
@@ -28,105 +39,53 @@ function TechStack() {
     };
   }, []);
 
-  // Animación progresiva de órbita y desaceleración suave
+  // Animación progresiva de órbita y desaceleración suave (LERP)
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     let animationFrameId;
     const updateRotation = () => {
-      // Ralentizar solo cuando se está haciendo hover sobre un nodo específico
       const targetSpeed = hoveredIndex !== null ? 0 : 0.18;
-      
-      // Interpolación lineal (lerp) para una transición fluida y natural
       currentSpeedRef.current += (targetSpeed - currentSpeedRef.current) * 0.045;
-      
-      setRotation(prev => (prev + currentSpeedRef.current) % 360);
+      setRotation((prev) => (prev + currentSpeedRef.current) % 360);
       animationFrameId = requestAnimationFrame(updateRotation);
     };
 
     animationFrameId = requestAnimationFrame(updateRotation);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hoveredIndex]);
+  }, [hoveredIndex, prefersReducedMotion]);
 
-  /**
-   * Obtiene la etiqueta del tipo de tecnología correspondiente a un subnodo satélite.
-   *
-   * @param {string} subnodeName - Nombre del subnodo (ej. 'GitHub', 'Nginx', 'React').
-   * @returns {string} Etiqueta traducida del tipo de herramienta o plataforma.
-   */
-  const getSubnodeType = (subnodeName) => {
-    if (subnodeName === "GitHub") {
-      return t("techstack.types.platform");
-    }
-    if (subnodeName === "Nginx") {
-      return t("techstack.types.tool");
-    }
-    return t("techstack.types.framework");
-  };
-
-  /**
-   * Maneja la entrada del cursor del ratón sobre un nodo principal.
-   *
-   * @param {number} index - Índice del nodo de tecnología.
-   */
   const handleMouseEnterParent = (index) => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setHoveredIndex(index);
     setHoveredSubnode(false);
   };
 
-  /**
-   * Maneja la salida del cursor del ratón de un nodo principal,
-   * programando un retraso de 300 ms antes de deseleccionar para permitir interactuar con el subnodo.
-   */
   const handleMouseLeaveParent = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
-    closeTimeoutRef.current = setTimeout(() => {
-      setHoveredIndex(null);
-      setHoveredSubnode(false);
-    }, 300); // 300ms de gracia para mover el ratón al subnodo
-  };
-
-  /**
-   * Maneja la entrada del cursor del ratón sobre un subnodo satélite.
-   *
-   * @param {number} index - Índice del nodo padre asociado.
-   */
-  const handleMouseEnterSubnode = (index) => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
-    setHoveredIndex(index);
-    setHoveredSubnode(true);
-  };
-
-  /**
-   * Maneja la salida del cursor del ratón de un subnodo satélite.
-   */
-  const handleMouseLeaveSubnode = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     closeTimeoutRef.current = setTimeout(() => {
       setHoveredIndex(null);
       setHoveredSubnode(false);
     }, 300);
   };
 
-  /**
-   * Maneja la interacción por click o tap en un nodo principal del stack.
-   * Alterna la selección si ya estaba seleccionado, o lo activa si no lo estaba.
-   *
-   * @param {React.MouseEvent} e - Evento disparador del click o tap.
-   * @param {number} index - Índice del nodo de tecnología seleccionado.
-   */
+  const handleMouseEnterSubnode = (index) => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setHoveredIndex(index);
+    setHoveredSubnode(true);
+  };
+
+  const handleMouseLeaveSubnode = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    closeTimeoutRef.current = setTimeout(() => {
+      setHoveredIndex(null);
+      setHoveredSubnode(false);
+    }, 300);
+  };
+
   const handleNodeClick = (e, index) => {
     e.stopPropagation();
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     if (hoveredIndex === index) {
       setHoveredIndex(null);
       setHoveredSubnode(false);
@@ -136,50 +95,19 @@ function TechStack() {
     }
   };
 
-  /**
-   * Maneja la interacción por click o tap en un subnodo satélite.
-   * Activa los detalles del subnodo y detiene la propagación para no deseleccionar el nodo padre.
-   *
-   * @param {React.MouseEvent} e - Evento disparador del click o tap.
-   * @param {number} index - Índice del nodo principal asociado.
-   */
   const handleSubnodeClick = (e, index) => {
     e.stopPropagation();
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setHoveredIndex(index);
     setHoveredSubnode(true);
   };
 
-  /**
-   * Maneja el click o tap en el lienzo exterior para deseleccionar cualquier nodo si se pulsa fuera.
-   */
   const handleCanvasClick = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setHoveredIndex(null);
     setHoveredSubnode(false);
   };
 
-  /**
-   * Maneja la salida del puntero del ratón de todo el contenedor del lienzo.
-   */
-  const handleCanvasMouseLeave = () => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-    }
-    setHoveredIndex(null);
-    setHoveredSubnode(false);
-  };
-
-  /**
-   * Maneja eventos de teclado (Enter, Espacio y Escape) en los nodos principales para accesibilidad.
-   *
-   * @param {React.KeyboardEvent} e - Evento de teclado.
-   * @param {number} index - Índice del nodo de tecnología.
-   */
   const handleNodeKeyDown = (e, index) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -190,12 +118,6 @@ function TechStack() {
     }
   };
 
-  /**
-   * Maneja eventos de teclado (Enter, Espacio y Escape) en los subnodos satélites para accesibilidad.
-   *
-   * @param {React.KeyboardEvent} e - Evento de teclado.
-   * @param {number} index - Índice del nodo principal de tecnología.
-   */
   const handleSubnodeKeyDown = (e, index) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -206,216 +128,17 @@ function TechStack() {
     }
   };
 
-  const centerNode = { x: 300, y: 260, label: "VB" };
-  const radius = 150;
-
-  // Base raw tech items data
-  const rawTechItems = [
-    {
-      name: "HTML5",
-      type: t("techstack.types.language"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-      color: "#E34F26",
-      desc: t("techstack.descriptions.html"),
-    },
-    {
-      name: "CSS3",
-      type: t("techstack.types.language"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-      color: "#1572B6",
-      desc: t("techstack.descriptions.css"),
-      subnode: {
-        name: "Tailwind",
-        iconUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-        color: "#38B2AC",
-        desc: t("techstack.descriptions.tailwind")
-      }
-    },
-    {
-      name: "JavaScript",
-      type: t("techstack.types.language"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-      color: "#F7DF1E",
-      desc: t("techstack.descriptions.javascript"),
-      subnode: {
-        name: "React",
-        iconUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-        color: "#61DAFB",
-        desc: t("techstack.descriptions.react"),
-      },
-    },
-    {
-      name: "Python",
-      type: t("techstack.types.language"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-      color: "#3776AB",
-      desc: t("techstack.descriptions.python"),
-      subnode: {
-        name: "Django",
-        iconUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-        color: "#44B78B",
-        desc: t("techstack.descriptions.django"),
-      },
-    },
-    {
-      name: "Java",
-      type: t("techstack.types.language"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-      color: "#F89820",
-      desc: t("techstack.descriptions.java"),
-      subnode: {
-        name: "Spring Boot",
-        iconUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-        color: "#6DB33F",
-        desc: t("techstack.descriptions.spring"),
-      },
-    },
-    {
-      name: "PostgreSQL",
-      type: t("techstack.types.database"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-      color: "#336791",
-      desc: t("techstack.descriptions.postgresql"),
-    },
-    {
-      name: "MongoDB",
-      type: t("techstack.types.database"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-      color: "#47A248",
-      desc: t("techstack.descriptions.mongodb"),
-    },
-    {
-      name: "Docker",
-      type: t("techstack.types.tool"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-      color: "#2496ED",
-      desc: t("techstack.descriptions.docker"),
-      subnode: {
-        name: "Nginx",
-        iconUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
-        color: "#009639",
-        desc: t("techstack.descriptions.nginx"),
-      },
-    },
-    {
-      name: "Git",
-      type: t("techstack.types.tool"),
-      iconUrl:
-        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-      color: "#F05032",
-      desc: t("techstack.descriptions.git"),
-      subnode: {
-        name: "GitHub",
-        iconUrl: githubWhiteIcon,
-        color: "var(--github-color)",
-        desc: t("techstack.descriptions.github"),
-      },
-    },
-  ];
-
-  // Calcular las posiciones en círculo y la orientación exterior de subnodos
-  const techItems = rawTechItems.map((item, index) => {
-    // Distribuir equiespaciadamente y empezar desde arriba (-90deg o -PI/2)
-    const angle = (index * 2 * Math.PI) / rawTechItems.length - Math.PI / 2;
-    const x = Math.round(centerNode.x + radius * Math.cos(angle));
-    const y = Math.round(centerNode.y + radius * Math.sin(angle));
-
-    let subnode = null;
-    if (item.subnode) {
-      const subRadius = 80; // Distancia del nodo padre al subnodo (incrementada para mayor separación)
-      const subX = Math.round(x + subRadius * Math.cos(angle));
-      const subY = Math.round(y + subRadius * Math.sin(angle));
-      subnode = {
-        ...item.subnode,
-        x: subX,
-        y: subY,
-      };
-    }
-
-    return {
-      ...item,
-      x,
-      y,
-      subnode,
-    };
-  });
-
-  const getDetailContent = () => {
-    if (hoveredIndex === null) {
-      return (
-        <p className="tech-detail-placeholder">
-          {t("techstack.placeholder")}
-        </p>
-      );
-    }
-
-    const tech = techItems[hoveredIndex];
-    if (hoveredSubnode && tech.subnode) {
-      const color = tech.subnode.color;
-      const isVar = color.startsWith("var");
-      const bg = isVar ? `color-mix(in srgb, ${color} 12.5%, transparent)` : `${color}20`;
-      const textColor = (color === "#ffffff" || color === "var(--github-color)") ? "var(--text-color)" : color;
-      return (
-        <div className="tech-detail-active">
-          <span 
-            className="tech-detail-badge" 
-            style={{ 
-              backgroundColor: bg,
-              color: textColor,
-              borderColor: color
-            }}
-          >
-            {getSubnodeType(tech.subnode.name)} {tech.subnode.name}
-          </span>
-          <p className="tech-detail-desc">{tech.subnode.desc}</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="tech-detail-active">
-        <span 
-          className="tech-detail-badge" 
-          style={{ 
-            backgroundColor: `${tech.color}20`,
-            color: tech.color,
-            borderColor: tech.color
-          }}
-        >
-          {tech.type} {tech.name}
-        </span>
-        <p className="tech-detail-desc">{tech.desc}</p>
-      </div>
-    );
-  };
-
   return (
     <div className="tech-stack-container">
       <h3 className="tech-stack-title">{t("techstack.title")}</h3>
-      <p className="tech-stack-subtitle">
-        {t("techstack.subtitle")}
-      </p>
+      <p className="tech-stack-subtitle">{t("techstack.subtitle")}</p>
 
       <div 
         className="tech-stack-canvas"
         onClick={handleCanvasClick}
-        onMouseLeave={handleCanvasMouseLeave}
+        onMouseLeave={handleCanvasClick}
       >
         <svg viewBox="0 0 600 520" className="tech-stack-svg">
-          {/* Definiciones para filtros de sombra y glows */}
           <defs>
             <filter id="glow-line" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="520">
               <feGaussianBlur stdDeviation="3" result="blur" />
@@ -445,28 +168,26 @@ function TechStack() {
                 key={`orbit-system-${index}`} 
                 style={{ 
                   transform: `rotate(${rotation}deg)`, 
-                  transformOrigin: `${centerNode.x}px ${centerNode.y}px` 
+                  transformOrigin: `${CENTER_NODE.x}px ${CENTER_NODE.y}px` 
                 }}
               >
-                {/* Línea de conexión láser al centro */}
+                {/* Línea de conexión al centro */}
                 <line
-                  x1={centerNode.x}
-                  y1={centerNode.y}
+                  x1={CENTER_NODE.x}
+                  y1={CENTER_NODE.y}
                   x2={tech.x}
                   y2={tech.y}
                   className={`connection-line ${isHovered ? "active" : ""}`}
-                  style={{
-                    stroke: tech.color,
-                  }}
+                  style={{ stroke: tech.color }}
                 />
 
-                {/* Subnodo satélite (Framework/Herramienta) si existe */}
+                {/* Subnodo satélite (Framework / Herramienta) */}
                 {sub && (
                   <g
                     className={`subnode-group ${isSubnodeActive ? "active" : ""}`}
                     role="button"
                     tabIndex={isSubnodeActive ? 0 : -1}
-                    aria-label={`${sub.name}, ${getSubnodeType(sub.name)}`}
+                    aria-label={sub.name}
                     aria-pressed={isSubnodeHovered}
                     aria-hidden={!isSubnodeActive}
                     onClick={(e) => handleSubnodeClick(e, index)}
@@ -482,10 +203,7 @@ function TechStack() {
                       transition: "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
                     }}
                   >
-                    {/* Círculo invisible de impacto para el subnodo */}
                     <circle cx={sub.x} cy={sub.y} r="30" fill="rgba(0,0,0,0)" />
-
-                    {/* Línea de conexión de subnodo a padre */}
                     <line
                       x1={tech.x}
                       y1={tech.y}
@@ -494,14 +212,9 @@ function TechStack() {
                       stroke={isSubnodeActive ? sub.color : "var(--card-border)"}
                       strokeWidth="2.5"
                       strokeDasharray="4,4"
-                      style={{
-                        transition: "stroke 0.3s ease"
-                      }}
+                      style={{ transition: "stroke 0.3s ease" }}
                     />
-
-                    {/* Elementos visuales del subnodo con contra-órbita y transform origin específico */}
                     <g style={{ transform: `rotate(${-rotation}deg)`, transformOrigin: `${sub.x}px ${sub.y}px` }}>
-                      {/* Círculo exterior (glow de hover) */}
                       <circle
                         cx={sub.x}
                         cy={sub.y}
@@ -514,8 +227,6 @@ function TechStack() {
                           filter: isSubnodeHovered ? "url(#glow-node)" : "none"
                         }}
                       />
-                      
-                      {/* Círculo base (satélite, r=26) */}
                       <circle
                         cx={sub.x}
                         cy={sub.y}
@@ -526,8 +237,6 @@ function TechStack() {
                           fill: isSubnodeHovered ? "var(--bg-color)" : "var(--card-bg)"
                         }}
                       />
-
-                      {/* Icono del subnodo */}
                       <image
                         href={sub.iconUrl}
                         x={sub.x - 14}
@@ -559,17 +268,8 @@ function TechStack() {
                     transition: "opacity 0.3s ease"
                   }}
                 >
-                  {/* Círculo invisible de impacto para evitar parpadeos */}
-                  <circle
-                    cx={tech.x}
-                    cy={tech.y}
-                    r="38"
-                    fill="rgba(0,0,0,0)"
-                  />
-
-                  {/* Elementos del nodo principal con contra-órbita y transform origin específico */}
+                  <circle cx={tech.x} cy={tech.y} r="38" fill="rgba(0,0,0,0)" />
                   <g style={{ transform: `rotate(${-rotation}deg)`, transformOrigin: `${tech.x}px ${tech.y}px` }}>
-                    {/* Círculo exterior (glow de hover) */}
                     <circle
                       cx={tech.x}
                       cy={tech.y}
@@ -582,8 +282,6 @@ function TechStack() {
                         filter: isHovered ? "url(#glow-node)" : "none"
                       }}
                     />
-                    
-                    {/* Círculo base */}
                     <circle
                       cx={tech.x}
                       cy={tech.y}
@@ -594,8 +292,6 @@ function TechStack() {
                         fill: isHovered ? "var(--bg-color)" : "var(--card-bg)"
                       }}
                     />
-
-                    {/* Icono de la tecnología */}
                     <image
                       href={tech.iconUrl}
                       x={tech.x - 18}
@@ -610,32 +306,22 @@ function TechStack() {
             );
           })}
 
-          {/* Nodo central (VB) - Estático */}
+          {/* Nodo central (VB) */}
           <g className="center-node-group">
-            <circle
-              cx={centerNode.x}
-              cy={centerNode.y}
-              r="36"
-              className="center-circle"
-            />
-            <text
-              x={centerNode.x}
-              y={centerNode.y}
-              className="center-circle-text"
-              dominantBaseline="central"
-            >
-              {centerNode.label}
+            <circle cx={CENTER_NODE.x} cy={CENTER_NODE.y} r="36" className="center-circle" />
+            <text x={CENTER_NODE.x} y={CENTER_NODE.y} className="center-circle-text" dominantBaseline="central">
+              {CENTER_NODE.label}
             </text>
           </g>
         </svg>
 
         {/* Panel de detalles dinámico */}
-        <div 
-          className="tech-details-panel glass-panel"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {getDetailContent()}
-        </div>
+        <TechDetailPanel 
+          techItems={techItems} 
+          hoveredIndex={hoveredIndex} 
+          hoveredSubnode={hoveredSubnode} 
+          t={t} 
+        />
       </div>
     </div>
   );

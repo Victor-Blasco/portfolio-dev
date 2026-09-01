@@ -13,9 +13,32 @@ const mormasGlob = import.meta.glob("../../assets/projects/mormas/*.{png,jpg,jpe
 const marketpulseGlob = import.meta.glob("../../assets/projects/marketpulse/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const portfolioGlob = import.meta.glob("../../assets/projects/portfolio/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 
+// Mapa declarativo de subtítulos para imágenes de proyectos
+const PROJECT_CAPTION_MAP = {
+  gustome: {
+    landing: "projects.captions.gustome.landing",
+    agregar_plato: "projects.captions.gustome.agregar_plato",
+    pedidos_restaurante: "projects.captions.gustome.pedidos_restaurante",
+    pedidos_cliente_movil: "projects.captions.gustome.pedidos_cliente_movil",
+    dashboard: "projects.captions.gustome.dashboard",
+  },
+  tfg: {
+    login: "projects.captions.tfg.login",
+    ejecutivo: "projects.captions.tfg.ejecutivo",
+    operativo: "projects.captions.tfg.operativo",
+  },
+  mormas: {
+    promotor: "projects.captions.mormas.promotor",
+    competiciones: "projects.captions.mormas.competiciones",
+  },
+  marketpulse: {
+    dashboard: "projects.captions.marketpulse.main",
+  },
+};
+
 /**
  * Mapea las imágenes cargadas dinámicamente mediante glob a la estructura esperada por el carrusel,
- * asignando las traducciones correctas según el nombre del archivo o un fallback limpio.
+ * asignando las traducciones correctas según el mapa declarativo o un fallback limpio.
  * 
  * @param {Object} globObj - El objeto retornado por import.meta.glob.
  * @param {string} projectKey - Identificador del proyecto para mapear descripciones.
@@ -23,47 +46,15 @@ const portfolioGlob = import.meta.glob("../../assets/projects/portfolio/*.{png,j
  * @returns {Array<{src: string, caption: string}>} Lista de imágenes formateada.
  */
 const getProjectImages = (globObj, projectKey, t) => {
+  const captions = PROJECT_CAPTION_MAP[projectKey] || {};
+
   return Object.keys(globObj).map((path) => {
     const src = globObj[path].default || globObj[path];
     const filename = path.split("/").pop().toLowerCase();
-    let caption = "";
-
-    if (projectKey === "gustome") {
-      if (filename.includes("landing")) {
-        caption = t("projects.captions.gustome.landing");
-      } else if (filename.includes("agregar_plato")) {
-        caption = t("projects.captions.gustome.agregar_plato");
-      } else if (filename.includes("pedidos_restaurante")) {
-        caption = t("projects.captions.gustome.pedidos_restaurante");
-      } else if (filename.includes("pedidos_cliente_movil")) {
-        caption = t("projects.captions.gustome.pedidos_cliente_movil");
-      } else if (filename.includes("dashboard")) {
-        caption = t("projects.captions.gustome.dashboard");
-      } else {
-        caption = t("projects.captions.gustome.landing");
-      }
-    } else if (projectKey === "tfg") {
-      if (filename.includes("login")) {
-        caption = t("projects.captions.tfg.login");
-      } else if (filename.includes("ejecutivo")) {
-        caption = t("projects.captions.tfg.ejecutivo");
-      } else if (filename.includes("operativo")) {
-        caption = t("projects.captions.tfg.operativo");
-      } else {
-        caption = t("projects.captions.tfg.ejecutivo");
-      }
-    } else if (projectKey === "mormas") {
-      if (filename.includes("promotor")) {
-        caption = t("projects.captions.mormas.promotor");
-      } else if (filename.includes("competiciones")) {
-        caption = t("projects.captions.mormas.competiciones");
-      } else {
-        caption = t("projects.captions.mormas.promotor");
-      }
-    } else if (projectKey === "marketpulse") {
-      caption = t("projects.captions.marketpulse.main");
-    } else {
-      // Fallback: Convierte 'nombre_archivo.png' a 'Nombre archivo'
+    const matchedKey = Object.keys(captions).find((key) => filename.includes(key));
+    
+    let caption = matchedKey ? t(captions[matchedKey]) : "";
+    if (!caption) {
       const cleanName = filename
         .replace(/\.[^/.]+$/, "")
         .replace(/[_-]/g, " ");

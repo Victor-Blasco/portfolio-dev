@@ -192,6 +192,11 @@ const resources = {
         form_message: "Mensaje",
         form_message_placeholder: "Tu mensaje",
         form_submit: "Enviar Mensaje",
+        form_sending: "Enviando...",
+        form_success_title: "¡Mensaje enviado con éxito!",
+        form_success_desc: "Gracias por contactar. He recibido tu mensaje y te responderé lo antes posible.",
+        form_send_another: "Enviar otro mensaje",
+        form_error: "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o escríbeme directamente por email.",
       },
       footer: {
         copyright:
@@ -391,6 +396,11 @@ const resources = {
         form_message: "Message",
         form_message_placeholder: "Your message",
         form_submit: "Send Message",
+        form_sending: "Sending...",
+        form_success_title: "Message sent successfully!",
+        form_success_desc: "Thanks for reaching out! I have received your message and will get back to you as soon as possible.",
+        form_send_another: "Send another message",
+        form_error: "There was an error sending your message. Please try again or write to me directly via email.",
       },
       footer: {
         copyright: "© {{year}} Victor Blasco García. All rights reserved.",

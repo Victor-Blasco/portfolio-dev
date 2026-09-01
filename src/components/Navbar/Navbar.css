@@ -73,12 +73,14 @@ nav {
   border-radius: 2px;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   opacity: 1;
   color: var(--accent);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 
@@ -243,6 +245,11 @@ nav {
     width: 100%;
     display: block;
     text-align: center;
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
+    font-weight: 700;
   }
   
   .nav-links a::after {
