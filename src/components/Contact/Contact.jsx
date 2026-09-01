@@ -19,7 +19,8 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
+    _gotcha: ""
   });
 
   /**
@@ -39,6 +40,14 @@ function Contact() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Si el campo trampa tiene contenido, es un bot: simular éxito y descartar sin consumir cuota
+    if (formData._gotcha) {
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "", _gotcha: "" });
+      return;
+    }
+
     setStatus("submitting");
 
     try {
@@ -48,12 +57,17 @@ function Contact() {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _gotcha: formData._gotcha
+        })
       });
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "", _gotcha: "" });
       } else {
         setStatus("error");
       }
@@ -125,6 +139,18 @@ function Contact() {
             onSubmit={handleSubmit}
             aria-label="Formulario de contacto"
           >
+            {/* Campo trampa antispam (Honeypot para bots) */}
+            <input
+              type="text"
+              name="_gotcha"
+              value={formData._gotcha}
+              onChange={handleChange}
+              tabIndex="-1"
+              autoComplete="off"
+              style={{ display: "none" }}
+              aria-hidden="true"
+            />
+
             {status === "error" && (
               <div className="form-error-alert" role="alert" aria-live="assertive">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
