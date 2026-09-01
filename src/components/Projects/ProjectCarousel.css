@@ -3,6 +3,9 @@
 .project-image-frame {
   cursor: pointer;
   display: block;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .carousel-slides {
