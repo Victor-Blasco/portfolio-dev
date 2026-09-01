@@ -46,6 +46,27 @@ function TechStack() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [hoveredIndex]);
 
+  /**
+   * Obtiene la etiqueta del tipo de tecnología correspondiente a un subnodo satélite.
+   *
+   * @param {string} subnodeName - Nombre del subnodo (ej. 'GitHub', 'Nginx', 'React').
+   * @returns {string} Etiqueta traducida del tipo de herramienta o plataforma.
+   */
+  const getSubnodeType = (subnodeName) => {
+    if (subnodeName === "GitHub") {
+      return t("techstack.types.platform");
+    }
+    if (subnodeName === "Nginx") {
+      return t("techstack.types.tool");
+    }
+    return t("techstack.types.framework");
+  };
+
+  /**
+   * Maneja la entrada del cursor del ratón sobre un nodo principal.
+   *
+   * @param {number} index - Índice del nodo de tecnología.
+   */
   const handleMouseEnterParent = (index) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -54,6 +75,10 @@ function TechStack() {
     setHoveredSubnode(false);
   };
 
+  /**
+   * Maneja la salida del cursor del ratón de un nodo principal,
+   * programando un retraso de 300 ms antes de deseleccionar para permitir interactuar con el subnodo.
+   */
   const handleMouseLeaveParent = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -64,6 +89,11 @@ function TechStack() {
     }, 300); // 300ms de gracia para mover el ratón al subnodo
   };
 
+  /**
+   * Maneja la entrada del cursor del ratón sobre un subnodo satélite.
+   *
+   * @param {number} index - Índice del nodo padre asociado.
+   */
   const handleMouseEnterSubnode = (index) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -72,6 +102,9 @@ function TechStack() {
     setHoveredSubnode(true);
   };
 
+  /**
+   * Maneja la salida del cursor del ratón de un subnodo satélite.
+   */
   const handleMouseLeaveSubnode = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -80,6 +113,97 @@ function TechStack() {
       setHoveredIndex(null);
       setHoveredSubnode(false);
     }, 300);
+  };
+
+  /**
+   * Maneja la interacción por click o tap en un nodo principal del stack.
+   * Alterna la selección si ya estaba seleccionado, o lo activa si no lo estaba.
+   *
+   * @param {React.MouseEvent} e - Evento disparador del click o tap.
+   * @param {number} index - Índice del nodo de tecnología seleccionado.
+   */
+  const handleNodeClick = (e, index) => {
+    e.stopPropagation();
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    if (hoveredIndex === index) {
+      setHoveredIndex(null);
+      setHoveredSubnode(false);
+    } else {
+      setHoveredIndex(index);
+      setHoveredSubnode(false);
+    }
+  };
+
+  /**
+   * Maneja la interacción por click o tap en un subnodo satélite.
+   * Activa los detalles del subnodo y detiene la propagación para no deseleccionar el nodo padre.
+   *
+   * @param {React.MouseEvent} e - Evento disparador del click o tap.
+   * @param {number} index - Índice del nodo principal asociado.
+   */
+  const handleSubnodeClick = (e, index) => {
+    e.stopPropagation();
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    setHoveredIndex(index);
+    setHoveredSubnode(true);
+  };
+
+  /**
+   * Maneja el click o tap en el lienzo exterior para deseleccionar cualquier nodo si se pulsa fuera.
+   */
+  const handleCanvasClick = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    setHoveredIndex(null);
+    setHoveredSubnode(false);
+  };
+
+  /**
+   * Maneja la salida del puntero del ratón de todo el contenedor del lienzo.
+   */
+  const handleCanvasMouseLeave = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    setHoveredIndex(null);
+    setHoveredSubnode(false);
+  };
+
+  /**
+   * Maneja eventos de teclado (Enter, Espacio y Escape) en los nodos principales para accesibilidad.
+   *
+   * @param {React.KeyboardEvent} e - Evento de teclado.
+   * @param {number} index - Índice del nodo de tecnología.
+   */
+  const handleNodeKeyDown = (e, index) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleNodeClick(e, index);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      handleCanvasClick();
+    }
+  };
+
+  /**
+   * Maneja eventos de teclado (Enter, Espacio y Escape) en los subnodos satélites para accesibilidad.
+   *
+   * @param {React.KeyboardEvent} e - Evento de teclado.
+   * @param {number} index - Índice del nodo principal de tecnología.
+   */
+  const handleSubnodeKeyDown = (e, index) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleSubnodeClick(e, index);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      handleCanvasClick();
+    }
   };
 
   const centerNode = { x: 300, y: 260, label: "VB" };
@@ -254,12 +378,7 @@ function TechStack() {
               borderColor: color
             }}
           >
-            {tech.subnode.name === "GitHub" 
-              ? t("techstack.types.platform") 
-              : tech.subnode.name === "Nginx"
-                ? t("techstack.types.tool")
-                : t("techstack.types.framework")
-            } {tech.subnode.name}
+            {getSubnodeType(tech.subnode.name)} {tech.subnode.name}
           </span>
           <p className="tech-detail-desc">{tech.subnode.desc}</p>
         </div>
@@ -292,10 +411,8 @@ function TechStack() {
 
       <div 
         className="tech-stack-canvas"
-        onMouseLeave={() => {
-          setHoveredIndex(null);
-          setHoveredSubnode(false);
-        }}
+        onClick={handleCanvasClick}
+        onMouseLeave={handleCanvasMouseLeave}
       >
         <svg viewBox="0 0 600 520" className="tech-stack-svg">
           {/* Definiciones para filtros de sombra y glows */}
@@ -347,6 +464,13 @@ function TechStack() {
                 {sub && (
                   <g
                     className={`subnode-group ${isSubnodeActive ? "active" : ""}`}
+                    role="button"
+                    tabIndex={isSubnodeActive ? 0 : -1}
+                    aria-label={`${sub.name}, ${getSubnodeType(sub.name)}`}
+                    aria-pressed={isSubnodeHovered}
+                    aria-hidden={!isSubnodeActive}
+                    onClick={(e) => handleSubnodeClick(e, index)}
+                    onKeyDown={(e) => handleSubnodeKeyDown(e, index)}
                     onMouseEnter={() => handleMouseEnterSubnode(index)}
                     onMouseLeave={handleMouseLeaveSubnode}
                     style={{
@@ -419,6 +543,14 @@ function TechStack() {
                 {/* Nodo principal de tecnología */}
                 <g
                   className={`tech-node-group ${isHovered ? "active" : ""}`}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${tech.name}, ${tech.type}`}
+                  aria-pressed={isHovered}
+                  aria-haspopup={tech.subnode ? "true" : undefined}
+                  aria-expanded={tech.subnode ? isHovered : undefined}
+                  onClick={(e) => handleNodeClick(e, index)}
+                  onKeyDown={(e) => handleNodeKeyDown(e, index)}
                   onMouseEnter={() => handleMouseEnterParent(index)}
                   onMouseLeave={handleMouseLeaveParent}
                   style={{ 
@@ -498,7 +630,10 @@ function TechStack() {
         </svg>
 
         {/* Panel de detalles dinámico */}
-        <div className="tech-details-panel glass-panel">
+        <div 
+          className="tech-details-panel glass-panel"
+          onClick={(e) => e.stopPropagation()}
+        >
           {getDetailContent()}
         </div>
       </div>
