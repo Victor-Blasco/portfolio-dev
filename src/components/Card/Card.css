@@ -1,4 +1,4 @@
-/*Card.css*/
+/* Card.css */
 
 .card {
   display: flex;
@@ -31,11 +31,10 @@
   font-weight: bold;
 }
 
-/* Cabecera de la tarjeta para alinear título y botón del ojo */
+/* Cabecera de la tarjeta para alinear logotipo y títulos */
 .card-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center; /* Alinear verticalmente con el logo */
+  align-items: center;
   gap: 1rem;
   width: 100%;
   margin-bottom: 1rem;
@@ -70,135 +69,11 @@
   flex-direction: column;
 }
 
-/* Contenedor principal de alternancia de contenido */
-.card-content-container {
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-/* Animaciones y estados para descripción e imagen */
+/* Descripción de la experiencia */
 .card-description {
   margin: 0;
-  flex-grow: 1;
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  visibility: visible;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
-}
-
-.card-description.visible {
-  position: relative;
-}
-
-.card-description.hidden {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  transform: translateY(-10px) scale(0.97);
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.card-image-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  visibility: visible;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
-  overflow: hidden;
-  border-radius: 6px;
-}
-
-.card-image-container.visible {
-  position: relative;
-}
-
-.card-image-container.hidden {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  transform: translateY(10px) scale(0.97);
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* Estilo para la imagen del proyecto */
-.card-image {
-  width: 100%;
-  aspect-ratio: 3 / 2; /* Cambiado a 3/2 para que sea más grande */
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  display: block;
-  cursor: zoom-in;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-image:hover {
-  transform: scale(1.03);
-  filter: brightness(1.05);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Botón glassmorphic circular con el icono del ojo */
-.card-toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  padding: 0;
-  background: var(--section-bg);
-  border: 1px solid var(--card-border);
+  line-height: 1.5;
   color: var(--text-color);
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              background-color 0.3s ease, 
-              border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              color 0.3s ease;
-}
-
-.card-toggle-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  background-color: var(--card-border);
-  border-color: var(--accent);
-  box-shadow: var(--glass-shadow);
-  color: var(--accent);
-}
-
-.card-toggle-btn:active {
-  transform: translateY(0) scale(0.95);
-}
-
-.card-toggle-btn svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2.2;
-}
-
-.tech {
-  color: var(--accent);
-  font-weight: bold;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
 }
 
 /* Ajustes adaptables para tarjetas en dispositivos móviles */
@@ -217,4 +92,5 @@
     height: 48px; /* Un poco más pequeño en móviles para ahorrar espacio vertical */
   }
 }
+
 
