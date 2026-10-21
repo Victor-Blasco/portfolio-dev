@@ -4,6 +4,7 @@ import "./Header.css";
 import cvEs from "@/assets/CV Victor Blasco ES.pdf";
 import cvEn from "@/assets/CV Victor Blasco EN.pdf";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { trackEvent } from "@/utils/analytics";
 
 /**
  * Componente principal de cabecera (Header).
@@ -62,6 +63,12 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="social-link primary"
+          onClick={() =>
+            trackEvent("download_cv", {
+              location: "hero",
+              language: i18n.language ? i18n.language.slice(0, 2) : "es",
+            })
+          }
         >
           <Icon name="curriculum" className="curriculum" />
           {t("header.download_cv")}
@@ -71,6 +78,7 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="social-link"
+          onClick={() => trackEvent("click_social_link", { network: "github", location: "hero" })}
         >
           <Icon name="github" className="github" />
           GitHub
@@ -80,11 +88,16 @@ function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="social-link"
+          onClick={() => trackEvent("click_social_link", { network: "linkedin", location: "hero" })}
         >
           <Icon name="linkedin" className="linkedin" />
           LinkedIn
         </a>
-        <a href="mailto:victorblascogar@gmail.com" className="social-link">
+        <a
+          href="mailto:victorblascogar@gmail.com"
+          className="social-link"
+          onClick={() => trackEvent("click_social_link", { network: "email", location: "hero" })}
+        >
           <Icon name="email" className="email" />
           Email
         </a>

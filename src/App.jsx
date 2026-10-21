@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import About from "./components/About";
 import { Analytics } from "@vercel/analytics/react";
+import { initUtmTracking } from "./utils/analytics";
 import "./App.css";
 
 const Projects = lazy(() => import("./components/Projects"));
@@ -33,6 +34,11 @@ document.documentElement.classList.toggle("dark-mode", darkModeInitial);
 function App() {
   const { i18n } = useTranslation();
   const [darkMode, setDarkMode] = useState(darkModeInitial);
+
+  // Inicializar rastreo de atribución UTM en la primera carga
+  useEffect(() => {
+    initUtmTracking();
+  }, []);
 
   // Sincronizar reactivamente el atributo 'lang' del elemento <html> con el idioma activo
   useEffect(() => {

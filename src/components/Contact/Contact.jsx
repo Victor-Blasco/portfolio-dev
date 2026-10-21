@@ -3,6 +3,7 @@ import "./Contact.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon/Icon";
+import { trackEvent } from "@/utils/analytics";
 
 /**
  * Componente de contacto.
@@ -49,6 +50,7 @@ function Contact() {
     }
 
     setStatus("submitting");
+    trackEvent("submit_contact_form", { status: "attempt" });
 
     try {
       const response = await fetch("https://formspree.io/f/mgodvygp", {
@@ -67,12 +69,15 @@ function Contact() {
 
       if (response.ok) {
         setStatus("success");
+        trackEvent("submit_contact_form", { status: "success" });
         setFormData({ name: "", email: "", message: "", _gotcha: "" });
       } else {
         setStatus("error");
+        trackEvent("submit_contact_form", { status: "error" });
       }
     } catch {
       setStatus("error");
+      trackEvent("submit_contact_form", { status: "error" });
     }
   };
 
@@ -128,6 +133,12 @@ function Contact() {
                 target={channel.external ? "_blank" : undefined}
                 rel={channel.external ? "noopener noreferrer" : undefined}
                 className="contact-card-link"
+                onClick={() =>
+                  trackEvent("click_contact_channel", {
+                    channel: channel.label,
+                    value: channel.value,
+                  })
+                }
               >
                 <div className="contact-card-icon">
                   <Icon name={channel.icon} className="contact-icon" />

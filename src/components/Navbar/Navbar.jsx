@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import './Navbar.css'
-import Icon from '../Icon/Icon'
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import "./Navbar.css";
+import Icon from "../Icon/Icon";
+import { trackEvent } from "@/utils/analytics";
 
 /**
  * Componente de navegación superior (Navbar).
  * Proporciona enlaces a las diferentes secciones con indicador de sección activa (ScrollSpy),
- * selector de idioma y el toggle de modo oscuro.
- * 
+ * selector de idioma y el toggle de modo oscuro con telemetría de interacción.
+ *
  * @param {Object} props - Propiedades del componente.
  * @param {boolean} props.darkMode - Indica si el modo oscuro está activo.
  * @param {Function} props.onToggleTheme - Función para alternar el tema.
@@ -23,7 +24,14 @@ function Navbar({ darkMode, onToggleTheme }) {
   };
 
   const changeLanguage = (lng) => {
+    trackEvent("change_language", { target_lang: lng });
     i18n.changeLanguage(lng);
+  };
+
+  const handleToggleTheme = () => {
+    const nextTheme = !darkMode ? "dark" : "light";
+    trackEvent("toggle_theme", { target_theme: nextTheme });
+    onToggleTheme();
   };
 
   // ScrollSpy: Detectar qué sección está activa según la posición del scroll
@@ -65,30 +73,30 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a href="#root" onClick={() => setIsMenuOpen(false)}>VB</a>
       </div>
 
-      <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <a 
-          href="#about" 
+      <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
+        <a
+          href="#about"
           className={activeSection === "about" ? "active" : ""}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.about")}
         </a>
-        <a 
-          href="#projects" 
+        <a
+          href="#projects"
           className={activeSection === "projects" ? "active" : ""}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.projects")}
         </a>
-        <a 
-          href="#experience" 
+        <a
+          href="#experience"
           className={activeSection === "experience" ? "active" : ""}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.experience")}
         </a>
-        <a 
-          href="#contact" 
+        <a
+          href="#contact"
           className={activeSection === "contact" ? "active" : ""}
           onClick={() => setIsMenuOpen(false)}
         >
@@ -99,11 +107,11 @@ function Navbar({ darkMode, onToggleTheme }) {
       <div className="nav-actions">
         {/* Selector de Idioma Premium */}
         <div className="lang-switch-capsule glass-panel">
-          <div 
-            className="lang-slider" 
-            style={{ 
-              transform: i18n.language.startsWith("en") ? "translateX(100%)" : "translateX(0%)" 
-            }} 
+          <div
+            className="lang-slider"
+            style={{
+              transform: i18n.language.startsWith("en") ? "translateX(100%)" : "translateX(0%)"
+            }}
           />
           <button
             className={`lang-btn ${i18n.language.startsWith("es") ? "active" : ""}`}
@@ -125,13 +133,13 @@ function Navbar({ darkMode, onToggleTheme }) {
 
         <button
           className="mode-toggle"
-          onClick={onToggleTheme}
+          onClick={handleToggleTheme}
           aria-label="Cambiar modo claro/oscuro"
         >
           {darkMode ? <Icon name="darkMode" /> : <Icon name="lightMode"/>}
         </button>
 
-        <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu} aria-label="Menu">
+        <button className={`hamburger ${isMenuOpen ? "active" : ""}`} onClick={toggleMenu} aria-label="Menu">
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -141,4 +149,4 @@ function Navbar({ darkMode, onToggleTheme }) {
   );
 }
 
-export default Navbar
+export default Navbar;

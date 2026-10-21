@@ -6,6 +6,7 @@ import Icon from "../Icon/Icon";
 import ProjectCarousel from "./ProjectCarousel";
 import ImageLightbox from "./ImageLightbox";
 import ArchitectureModal from "./ArchitectureModal";
+import { trackEvent } from "@/utils/analytics";
 
 // Carga dinámica de imágenes de proyectos organizada por carpetas
 const gustomeGlob = import.meta.glob("../../assets/projects/gustome/*.{png,jpg,jpeg,svg,webp}", { eager: true });
@@ -122,6 +123,7 @@ function Projects() {
    * @param {string} title - Título del proyecto.
    */
   const openLightbox = (images, index, title) => {
+    trackEvent("open_project_lightbox", { project: title, image_index: index });
     setLightbox({
       isOpen: true,
       images,
@@ -240,13 +242,17 @@ function Projects() {
                           key={rIdx}
                           type="button"
                           className="social-link"
-                          onClick={() =>
+                          onClick={() => {
+                            trackEvent("open_architecture_modal", {
+                              project: ref.archKey || "tfg",
+                              title: project.title,
+                            });
                             setArchModalState({
                               isOpen: true,
                               key: ref.archKey || "tfg",
                               title: project.title,
-                            })
-                          }
+                            });
+                          }}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                             <rect x="3" y="3" width="7" height="7" rx="1"></rect>
@@ -270,7 +276,19 @@ function Projects() {
                       );
                     }
                     return (
-                      <a key={rIdx} href={ref.url} target="_blank" rel="noopener noreferrer" className="social-link github-link">
+                      <a
+                        key={rIdx}
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link github-link"
+                        onClick={() =>
+                          trackEvent("click_project_link", {
+                            project: project.title,
+                            url: ref.url,
+                          })
+                        }
+                      >
                         <Icon name="github" className="github" />
                         {t("projects.view_on_github")}
                       </a>

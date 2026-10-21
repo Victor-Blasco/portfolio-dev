@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import "./Experience.css";
 import Card from "@/components/Card/Card";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { trackEvent } from "@/utils/analytics";
 
 // Importar logos de empresas/universidades
 import pamesaLogo from "@/assets/logos/pamesa.png";
@@ -64,6 +65,11 @@ function Experience() {
   const sectionRef = useIntersectionObserver();
   const { t } = useTranslation();
   const [filter, setFilter] = useState("all");
+
+  const handleFilterChange = (selectedFilter) => {
+    setFilter(selectedFilter);
+    trackEvent("filter_timeline", { filter: selectedFilter });
+  };
   const [hoveredId, setHoveredId] = useState(null);
 
   // Datos cronológicos de traducción dinámica
@@ -125,21 +131,21 @@ function Experience() {
         <div className="timeline-filters glass-panel">
           <button
             className={`filter-btn ${filter === "all" ? "active" : ""}`}
-            onClick={() => setFilter("all")}
+            onClick={() => handleFilterChange("all")}
             type="button"
           >
             {t("experience.filter_all")}
           </button>
           <button
             className={`filter-btn ${filter === "work" ? "active" : ""}`}
-            onClick={() => setFilter("work")}
+            onClick={() => handleFilterChange("work")}
             type="button"
           >
             {t("experience.filter_work")}
           </button>
           <button
             className={`filter-btn ${filter === "education" ? "active" : ""}`}
-            onClick={() => setFilter("education")}
+            onClick={() => handleFilterChange("education")}
             type="button"
           >
             {t("experience.filter_education")}
