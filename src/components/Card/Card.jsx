@@ -2,19 +2,20 @@ import "./Card.css";
 
 /**
  * Componente de tarjeta para representar experiencias profesionales y formativas.
- * Presenta de forma estructurada el título del puesto o titulación, subtítulo temporal,
- * descripción de las responsabilidades o logros, y el logotipo de la entidad correspondiente.
+ * Presenta de forma estructurada el título del puesto o titulación, nombre de la entidad,
+ * período temporal en formato badge, descripción de las responsabilidades y el logotipo.
  *
  * @param {Object} props - Propiedades del componente.
- * @param {string} props.title - Título principal de la tarjeta.
- * @param {string} [props.subtitle] - Subtítulo complementario (ej. período temporal).
+ * @param {string} props.title - Título del puesto o titulación.
+ * @param {string} [props.institution] - Nombre de la empresa o institución académica.
+ * @param {string} [props.subtitle] - Período temporal del hito.
  * @param {string} props.description - Texto descriptivo del hito o experiencia.
  * @param {string} [props.logo] - Ruta o URL del logotipo de la empresa o institución.
  * @param {string} [props.logoBg] - Color de fondo inline opcional para el contenedor del logotipo.
  * @param {Object} [props.logoStyle] - Estilos CSS inline adicionales para el contenedor del logotipo.
  * @returns {JSX.Element} Componente visual de la tarjeta de experiencia.
  */
-function Card({ title, subtitle, description, logo, logoBg, logoStyle }) {
+function Card({ title, institution, subtitle, description, logo, logoBg, logoStyle }) {
   return (
     <div className="card glass-panel">
       <div className={`card-header ${logo ? "has-logo" : ""}`}>
@@ -22,16 +23,25 @@ function Card({ title, subtitle, description, logo, logoBg, logoStyle }) {
           <div
             className="card-logo-container"
             style={{
-              background: logoBg || undefined,
+              background: logoBg || "#ffffff",
               ...logoStyle,
             }}
           >
-            <img src={logo} alt={title} className="card-logo" />
+            <img
+              src={logo}
+              alt={institution || title}
+              className="card-logo"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         )}
         <div className="card-title-group">
-          <h3>{title}</h3>
-          {subtitle && <h4>{subtitle}</h4>}
+          <div className="card-top-meta">
+            <h3 className="card-role">{title}</h3>
+            {subtitle && <span className="card-period-badge">{subtitle}</span>}
+          </div>
+          {institution && <h4 className="card-institution">{institution}</h4>}
         </div>
       </div>
 
@@ -40,4 +50,4 @@ function Card({ title, subtitle, description, logo, logoBg, logoStyle }) {
   );
 }
 
-export default Card;
+export default Card;

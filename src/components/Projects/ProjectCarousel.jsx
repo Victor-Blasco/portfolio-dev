@@ -2,14 +2,14 @@ import { useState, useRef } from "react";
 import "./ProjectCarousel.css";
 
 /**
- * Componente que gestiona el carrusel de imágenes de un proyecto.
- * Muestra flechas de navegación e indicadores de punto si hay múltiples imágenes.
+ * Componente que gestiona el carrusel de imágenes de un proyecto dentro de un marco de ventana.
+ * Muestra flechas de navegación, indicadores de punto si hay múltiples imágenes y un indicador de zoom.
  * Soporta gestos táctiles (swipe hacia la izquierda o derecha) para cambiar de diapositiva.
  * Al hacer click o tap sin arrastre en la imagen, abre el visor a pantalla completa (Lightbox).
- * 
+ *
  * @param {Object} props - Propiedades del componente.
  * @param {Array<{src: string, caption: string}>} props.images - Lista de imágenes con sus descripciones.
- * @param {string} props.title - Título del proyecto para propósitos de accesibilidad.
+ * @param {string} props.title - Título del proyecto para propósitos de accesibilidad y barra superior.
  * @param {Function} props.onImageClick - Callback invocado al hacer click en una imagen, recibe el índice activo.
  * @returns {JSX.Element|null} El carrusel de imágenes del proyecto.
  */
@@ -31,7 +31,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
   /**
    * Cambia a la siguiente imagen de manera cíclica.
-   * 
+   *
    * @param {Event} [e] - Evento opcional para detener propagación.
    */
   const handleNext = (e) => {
@@ -41,7 +41,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
   /**
    * Cambia a la imagen anterior de manera cíclica.
-   * 
+   *
    * @param {Event} [e] - Evento opcional para detener propagación.
    */
   const handlePrev = (e) => {
@@ -51,7 +51,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
   /**
    * Cambia la imagen seleccionada por su índice (dots).
-   * 
+   *
    * @param {Event} e - Evento de click.
    * @param {number} index - Índice de la imagen destino.
    */
@@ -62,7 +62,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
   /**
    * Inicia el registro de coordenadas táctiles.
-   * 
+   *
    * @param {React.TouchEvent} e - Evento táctil.
    */
   const handleTouchStart = (e) => {
@@ -75,7 +75,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
   /**
    * Registra el desplazamiento táctil para detectar intención de swipe horizontal.
-   * 
+   *
    * @param {React.TouchEvent} e - Evento táctil.
    */
   const handleTouchMove = (e) => {
@@ -101,18 +101,15 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
     const diffX = touchStartX.current - touchEndX.current;
     const diffY = touchStartY.current - touchEndY.current;
-    const minSwipeDistance = 40; // Umbral mínimo en píxeles
+    const minSwipeDistance = 40;
 
     if (Math.abs(diffX) > minSwipeDistance && Math.abs(diffX) > Math.abs(diffY)) {
       if (diffX > 0) {
-        // Deslizar hacia la izquierda -> avanzar
         handleNext();
       } else {
-        // Deslizar hacia la derecha -> retroceder
         handlePrev();
       }
 
-      // Prevenir que el evento click posterior abra accidentalmente el lightbox
       setTimeout(() => {
         isSwiping.current = false;
       }, 80);
@@ -132,77 +129,114 @@ function ProjectCarousel({ images, title, onImageClick }) {
   };
 
   return (
-    <div 
-      className="project-image-frame" 
+    <div
+      className="project-image-frame"
       onClick={handleFrameClick}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Contenedor de las diapositivas */}
-      <div 
-        className="carousel-slides" 
-        style={{ 
-          width: `${images.length * 100}%`,
-          transform: `translateX(-${(currentIndex * 100) / images.length}%)` 
-        }}
-      >
-        {images.map((img, index) => (
-          <div 
-            key={index} 
-            className="carousel-slide"
-            style={{ width: `${100 / images.length}%` }}
-          >
-            <img 
-              src={img.src} 
-              alt={`${title} - ${img.caption || index}`} 
-              className="project-img" 
-              loading="lazy" 
-            />
-          </div>
-        ))}
+      {/* Barra superior estilo ventana / navegador */}
+      <div className="browser-mockup-header" aria-hidden="true">
+        <div className="browser-dots">
+          <span className="browser-dot red"></span>
+          <span className="browser-dot yellow"></span>
+          <span className="browser-dot green"></span>
+        </div>
+        <span className="browser-title-bar">{title.split(" - ")[0]}</span>
+        <div className="browser-zoom-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </div>
       </div>
 
-      {/* Flechas de navegación (solo si hay múltiples imágenes) */}
-      {hasMultipleImages && (
-        <>
-          <button 
-            className="carousel-arrow prev" 
-            onClick={handlePrev} 
-            aria-label="Imagen anterior"
-            type="button"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <button 
-            className="carousel-arrow next" 
-            onClick={handleNext} 
-            aria-label="Siguiente imagen"
-            type="button"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
-        </>
-      )}
-
-      {/* Indicadores en puntos (solo si hay múltiples imágenes) */}
-      {hasMultipleImages && (
-        <div className="carousel-dots">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
-              onClick={(e) => handleDotClick(e, index)}
-              aria-label={`Ir a imagen ${index + 1}`}
-              type="button"
-            />
-          ))}
+      {/* Área de visualización de capturas */}
+      <div className="carousel-viewport">
+        <div
+          className="carousel-slides"
+          style={{
+            width: `${images.length * 100}%`,
+            transform: `translateX(-${(currentIndex * 100) / images.length}%)`
+          }}
+        >
+          {images.map((img, index) => {
+            const isPortrait = Boolean(img.isPortrait);
+            return (
+              <div
+                key={index}
+                className={`carousel-slide ${isPortrait ? "portrait-slide" : ""}`}
+                style={{
+                  width: `${100 / images.length}%`,
+                  flex: `0 0 ${100 / images.length}%`
+                }}
+              >
+                <img
+                  src={img.src}
+                  alt={`${title} - ${img.caption || index}`}
+                  className={`project-img ${isPortrait ? "portrait-img" : ""}`}
+                  fetchPriority="low"
+                  decoding="async"
+                />
+              </div>
+            );
+          })}
         </div>
-      )}
+
+        {/* Badge flotante de ampliación */}
+        <div className="zoom-hint-badge" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </div>
+
+        {/* Flechas de navegación (solo si hay múltiples imágenes) */}
+        {hasMultipleImages && (
+          <>
+            <button
+              className="carousel-arrow prev"
+              onClick={handlePrev}
+              aria-label="Imagen anterior"
+              type="button"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button
+              className="carousel-arrow next"
+              onClick={handleNext}
+              aria-label="Siguiente imagen"
+              type="button"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </>
+        )}
+
+        {/* Indicadores en puntos (solo si hay múltiples imágenes) */}
+        {hasMultipleImages && (
+          <div className="carousel-dots">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
+                onClick={(e) => handleDotClick(e, index)}
+                aria-label={`Ir a imagen ${index + 1}`}
+                type="button"
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

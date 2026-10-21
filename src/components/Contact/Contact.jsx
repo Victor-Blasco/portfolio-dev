@@ -6,15 +6,15 @@ import Icon from "../Icon/Icon";
 
 /**
  * Componente de contacto.
- * Proporciona vías de contacto directo y un formulario con envío asíncrono,
+ * Proporciona tarjetas interactivas de contacto directo y un formulario con envío asíncrono,
  * control de estados de carga, feedback visual de éxito y alertas de error.
- * 
+ *
  * @returns {JSX.Element} La sección de contacto.
  */
 function Contact() {
   const sectionRef = useIntersectionObserver();
   const { t } = useTranslation();
-  
+
   const [status, setStatus] = useState("idle"); // 'idle' | 'submitting' | 'success' | 'error'
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +25,7 @@ function Contact() {
 
   /**
    * Maneja el cambio en los campos de entrada del formulario.
-   * 
+   *
    * @param {React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>} e - Evento de cambio.
    */
   const handleChange = (e) => {
@@ -35,7 +35,7 @@ function Contact() {
 
   /**
    * Maneja el envío asíncrono del formulario a Formspree vía API JSON.
-   * 
+   *
    * @param {React.FormEvent<HTMLFormElement>} e - Evento de envío del formulario.
    */
   const handleSubmit = async (e) => {
@@ -83,6 +83,30 @@ function Contact() {
     setStatus("idle");
   };
 
+  const contactChannels = [
+    {
+      icon: "email",
+      label: "Email",
+      value: "victorblascogar@gmail.com",
+      href: "mailto:victorblascogar@gmail.com",
+      external: false,
+    },
+    {
+      icon: "linkedin",
+      label: "LinkedIn",
+      value: "linkedin.com/in/victor-blasco-garcia",
+      href: "https://linkedin.com/in/victor-blasco-garcia",
+      external: true,
+    },
+    {
+      icon: "github",
+      label: "GitHub",
+      value: "github.com/Victor-Blasco",
+      href: "https://github.com/Victor-Blasco",
+      external: true,
+    },
+  ];
+
   return (
     <section
       className="section-card contact-section"
@@ -97,26 +121,38 @@ function Contact() {
           <h3>{t("contact.headline")}</h3>
           <p>{t("contact.text")}</p>
           <div className="contact-links">
-            <a href="mailto:victorblascogar@gmail.com" className="contact-link">
-              <Icon name="email" className="contact-icon" />{" "}
-              victorblascogar@gmail.com
-            </a>
-            <a
-              href="https://linkedin.com/in/victor-blasco-garcia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-link"
-            >
-              <Icon name="linkedin" className="contact-icon" /> LinkedIn
-            </a>
-            <a
-              href="https://github.com/Victor-Blasco"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-link"
-            >
-              <Icon name="github" className="contact-icon" /> GitHub
-            </a>
+            {contactChannels.map((channel) => (
+              <a
+                key={channel.label}
+                href={channel.href}
+                target={channel.external ? "_blank" : undefined}
+                rel={channel.external ? "noopener noreferrer" : undefined}
+                className="contact-card-link"
+              >
+                <div className="contact-card-icon">
+                  <Icon name={channel.icon} className="contact-icon" />
+                </div>
+                <div className="contact-card-text">
+                  <span className="contact-card-label">{channel.label}</span>
+                  <span className="contact-card-value">{channel.value}</span>
+                </div>
+                <svg
+                  className="contact-card-arrow"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            ))}
           </div>
         </div>
 

@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
-import TechStack from "./TechStack";
 import "./About.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
+const TechStack = lazy(() => import("./TechStack"));
+
 /**
  * Componente que renderiza un icono SVG según su nombre identificador.
- * 
+ *
  * @param {Object} props - Propiedades del componente.
- * @param {string} props.name - Nombre del icono ('team', 'rocket', 'puzzle', 'sync').
+ * @param {string} props.name - Nombre del icono ('team', 'rocket', 'lightbulb', 'sync').
  * @returns {JSX.Element|null} El icono SVG.
  */
 function SkillIcon({ name }) {
@@ -46,8 +48,8 @@ function SkillIcon({ name }) {
 
 /**
  * Componente sobre mí (About).
- * Presenta un resumen personal, red interactiva de tecnologías, soft skills e idiomas con barras de progreso.
- * 
+ * Presenta un resumen personal, red interactiva de tecnologías, soft skills e idiomas en tarjetas compactas.
+ *
  * @returns {JSX.Element} La sección sobre mí.
  */
 function About() {
@@ -55,33 +57,33 @@ function About() {
   const { t } = useTranslation();
 
   const softSkills = [
-    { 
-      name: t("about.skill_teamwork_title"), 
+    {
+      name: t("about.skill_teamwork_title"),
       desc: t("about.skill_teamwork_desc"),
       icon: "team"
     },
-    { 
-      name: t("about.skill_proactivity_title"), 
+    {
+      name: t("about.skill_proactivity_title"),
       desc: t("about.skill_proactivity_desc"),
       icon: "rocket"
     },
-    { 
-      name: t("about.skill_problem_solving_title"), 
+    {
+      name: t("about.skill_problem_solving_title"),
       desc: t("about.skill_problem_solving_desc"),
       icon: "lightbulb"
     },
-    { 
-      name: t("about.skill_adaptation_title"), 
+    {
+      name: t("about.skill_adaptation_title"),
       desc: t("about.skill_adaptation_desc"),
       icon: "sync"
     },
   ];
 
   const languages = [
-    { name: t("about.lang_spanish"), level: t("about.level_native"), percentage: 100 },
-    { name: t("about.lang_valencian"), level: t("about.level_advanced_c1"), percentage: 85 },
-    { name: t("about.lang_english"), level: t("about.level_advanced_c1"), percentage: 85 },
-    { name: t("about.lang_italian"), level: t("about.level_intermediate_b1"), percentage: 55 },
+    { name: t("about.lang_spanish"), level: t("about.level_native"), tier: "native" },
+    { name: t("about.lang_valencian"), level: t("about.level_advanced_c1"), tier: "advanced" },
+    { name: t("about.lang_english"), level: t("about.level_advanced_c1"), tier: "advanced" },
+    { name: t("about.lang_italian"), level: t("about.level_intermediate_b1"), tier: "intermediate" },
   ];
 
   return (
@@ -90,10 +92,12 @@ function About() {
       <p className="about-text">
         {t("about.text")}
       </p>
-      
+
       <div className="about-grid">
         <div className="about-tech-col">
-          <TechStack />
+          <Suspense fallback={<div className="tech-stack-container" style={{ minHeight: "480px" }} aria-hidden="true" />}>
+            <TechStack />
+          </Suspense>
         </div>
         <div className="about-skills-col">
           <div className="soft-skills-container">
@@ -112,22 +116,16 @@ function About() {
               ))}
             </ul>
           </div>
- 
+
           <div className="languages-container">
             <h3>{t("about.languages_title")}</h3>
             <ul className="languages-list-premium">
               {languages.map((lang, index) => (
                 <li key={index} className="language-item-premium">
-                  <div className="language-info">
-                    <span className="language-name">{lang.name}</span>
-                    <span className="language-level">{lang.level}</span>
-                  </div>
-                  <div className="progress-bar-container">
-                    <div 
-                      className="progress-bar-fill" 
-                      style={{ width: `${lang.percentage}%` }}
-                    />
-                  </div>
+                  <span className="language-name">{lang.name}</span>
+                  <span className={`language-level-badge ${lang.tier}`}>
+                    {lang.level}
+                  </span>
                 </li>
               ))}
             </ul>

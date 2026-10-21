@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import "./TechStack.css";
-import { CENTER_NODE, getTechItems } from "./techStackData";
+import { CENTER_NODE, ORBIT_RADIUS, getTechItems } from "./techStackData";
 import TechDetailPanel from "./TechDetailPanel";
 
 /**
@@ -9,7 +9,7 @@ import TechDetailPanel from "./TechDetailPanel";
  * Muestra el logo VB en el centro y las tecnologías orbitando a su alrededor
  * como un sistema solar. Cuenta con desaceleración progresiva y suave al pasar sobre un nodo,
  * soporte para accesibilidad con teclado y detección de prefers-reduced-motion.
- * 
+ *
  * @returns {JSX.Element} El componente de red de habilidades renderizado.
  */
 function TechStack() {
@@ -19,8 +19,8 @@ function TechStack() {
   const [rotation, setRotation] = useState(0);
 
   // Detectar si el usuario prefiere movimiento reducido
-  const prefersReducedMotion = typeof window !== "undefined" && 
-    window.matchMedia && 
+  const prefersReducedMotion = typeof window !== "undefined" &&
+    window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const baseSpeed = prefersReducedMotion ? 0 : 0.18;
@@ -133,7 +133,7 @@ function TechStack() {
       <h3 className="tech-stack-title">{t("techstack.title")}</h3>
       <p className="tech-stack-subtitle">{t("techstack.subtitle")}</p>
 
-      <div 
+      <div
         className="tech-stack-canvas"
         onClick={handleCanvasClick}
         onMouseLeave={handleCanvasClick}
@@ -156,6 +156,14 @@ function TechStack() {
             </filter>
           </defs>
 
+          {/* Anillo guía orbital sutil */}
+          <circle
+            cx={CENTER_NODE.x}
+            cy={CENTER_NODE.y}
+            r={ORBIT_RADIUS}
+            className="orbit-ring"
+          />
+
           {/* Sistema Solar con tecnologías orbitando */}
           {techItems.map((tech, index) => {
             const isHovered = hoveredIndex === index;
@@ -164,11 +172,11 @@ function TechStack() {
             const sub = tech.subnode;
 
             return (
-              <g 
-                key={`orbit-system-${index}`} 
-                style={{ 
-                  transform: `rotate(${rotation}deg)`, 
-                  transformOrigin: `${CENTER_NODE.x}px ${CENTER_NODE.y}px` 
+              <g
+                key={`orbit-system-${index}`}
+                style={{
+                  transform: `rotate(${rotation}deg)`,
+                  transformOrigin: `${CENTER_NODE.x}px ${CENTER_NODE.y}px`
                 }}
               >
                 {/* Línea de conexión al centro */}
@@ -262,7 +270,7 @@ function TechStack() {
                   onKeyDown={(e) => handleNodeKeyDown(e, index)}
                   onMouseEnter={() => handleMouseEnterParent(index)}
                   onMouseLeave={handleMouseLeaveParent}
-                  style={{ 
+                  style={{
                     cursor: "pointer",
                     opacity: hoveredIndex !== null && !isHovered ? 0.35 : 1,
                     transition: "opacity 0.3s ease"
@@ -316,11 +324,11 @@ function TechStack() {
         </svg>
 
         {/* Panel de detalles dinámico */}
-        <TechDetailPanel 
-          techItems={techItems} 
-          hoveredIndex={hoveredIndex} 
-          hoveredSubnode={hoveredSubnode} 
-          t={t} 
+        <TechDetailPanel
+          techItems={techItems}
+          hoveredIndex={hoveredIndex}
+          hoveredSubnode={hoveredSubnode}
+          t={t}
         />
       </div>
     </div>

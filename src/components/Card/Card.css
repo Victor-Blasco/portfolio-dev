@@ -6,80 +6,110 @@
   background: var(--card-bg-gradient);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  padding: 1.25rem 1.6rem;
+  padding: 1.4rem 1.65rem;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: var(--glass-shadow), var(--surface-highlight);
   transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .card:hover {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 20px var(--glow-blue);
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--accent);
-}
-
-.card h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.card h4 {
-  margin-top: 0.25rem;
-  margin-bottom: 0;
-  font-weight: bold;
 }
 
 /* Cabecera de la tarjeta para alinear logotipo y títulos */
 .card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .card-logo-container {
-  height: 56px; /* Altura fija para mantener consistencia visual */
-  width: auto; /* Ancho adaptable según la relación de aspecto del logo */
-  border-radius: 8px;
+  height: 52px;
+  width: 52px;
+  border-radius: 12px;
   overflow: hidden;
-  background: var(--input-bg);
+  background: #ffffff;
   border: 1px solid var(--card-border);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 5px;
   box-sizing: border-box;
 }
 
 .card-logo {
-  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
+  height: auto;
   object-fit: contain;
-  margin: 0 !important; /* Reset del margen general */
+  margin: 0 !important;
 }
 
 .card-title-group {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.card-top-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-role {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+.card-institution {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.card-period-badge {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 /* Descripción de la experiencia */
 .card-description {
   margin: 0;
-  line-height: 1.5;
-  color: var(--text-color);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 /* Ajustes adaptables para tarjetas en dispositivos móviles */
 @media (max-width: 576px) {
   .card {
-    padding: 1rem 1.15rem;
+    padding: 1.15rem 1.25rem;
   }
 
   .card-header.has-logo {
@@ -89,8 +119,7 @@
   }
 
   .card-logo-container {
-    height: 48px; /* Un poco más pequeño en móviles para ahorrar espacio vertical */
+    height: 46px;
+    width: 46px;
   }
 }
-
-

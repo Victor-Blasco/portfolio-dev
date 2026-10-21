@@ -1,0 +1,302 @@
+/* ArchitectureModal.css */
+
+.arch-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  animation: fadeIn 0.25s ease;
+}
+
+.arch-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-color);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 2.25rem;
+  box-sizing: border-box;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), var(--surface-highlight);
+}
+
+.arch-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.arch-modal-close:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  transform: scale(1.06);
+}
+
+.arch-modal-header {
+  margin-bottom: 1.75rem;
+  padding-right: 3.5rem;
+}
+
+.arch-modal-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: var(--glow-blue);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.arch-modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+}
+
+.arch-modal-confidential {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.arch-modal-confidential svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.arch-docker-label svg {
+  flex-shrink: 0;
+}
+
+.arch-section {
+  margin-top: 1.5rem;
+}
+
+.arch-section-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin: 0 0 0.85rem 0;
+}
+
+.arch-docker-boundary {
+  border: 1px dashed var(--accent);
+  background: var(--card-bg-gradient);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.arch-docker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.arch-flow-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.arch-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1 1 0;
+  min-width: 110px;
+}
+
+.arch-node {
+  flex: 1;
+  min-width: 0;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.85rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.arch-node.node-type-broker {
+  border-color: var(--accent-secondary);
+  background: var(--glow-violet);
+}
+
+.arch-node.node-type-web {
+  border-color: var(--accent);
+  background: var(--glow-blue);
+}
+
+.arch-node.node-type-db {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.arch-node.node-type-etl {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.arch-node-step {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.arch-node-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.25;
+}
+
+.arch-node-sub {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.arch-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+  padding: 0 2px;
+}
+
+.arch-decisions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.arch-decision-item {
+  background: var(--card-bg-gradient);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.15rem;
+}
+
+.arch-decision-item h5 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 0.4rem 0;
+}
+
+.arch-decision-item p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .arch-flow-grid {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .arch-flow-item {
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .arch-node {
+    width: 100%;
+    padding: 0.85rem 1rem;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+    padding: 0.2rem 0;
+  }
+
+  .arch-decisions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .arch-modal-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .arch-modal-close {
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .arch-modal-header {
+    padding-right: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .arch-modal-title {
+    font-size: 1.25rem;
+  }
+
+  .arch-modal-badge {
+    font-size: 0.65rem;
+    padding: 0.16rem 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .arch-modal-card {
+    padding: 1.25rem 0.9rem;
+    width: min(94vw, 880px);
+  }
+}

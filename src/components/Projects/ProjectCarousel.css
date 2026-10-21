@@ -2,10 +2,78 @@
 
 .project-image-frame {
   cursor: pointer;
-  display: block;
+  display: flex;
+  flex-direction: column;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
+  background: var(--card-bg);
+  min-width: 0;
+}
+
+.browser-mockup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  background: var(--input-bg);
+  border-bottom: 1px solid var(--card-border);
+  min-width: 0;
+}
+
+.browser-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.browser-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.browser-dot.red { background-color: #ff5f56; }
+.browser-dot.yellow { background-color: #ffbd2e; }
+.browser-dot.green { background-color: #27c93f; }
+
+.browser-title-bar {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--section-bg);
+  border: 1px solid var(--card-border);
+  padding: 0.15rem 0.75rem;
+  border-radius: 6px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.browser-zoom-icon {
+  color: var(--text-secondary);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.project-image-frame:hover .browser-zoom-icon {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
 }
 
 .carousel-slides {
@@ -16,8 +84,15 @@
 
 .carousel-slide {
   height: 100%;
-  flex-shrink: 0;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.carousel-slide.portrait-slide {
+  background: radial-gradient(circle at center, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
 }
 
 .carousel-slide .project-img {
@@ -25,8 +100,52 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  margin: 0; /* Reset general img margin from App.css */
-  pointer-events: none; /* Prevents dragging interference */
+  margin: 0;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-slide .project-img.portrait-img {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 85%;
+  max-height: 88%;
+  border-radius: 12px;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.project-image-frame:hover .carousel-slide .project-img {
+  transform: scale(1.015);
+}
+
+/* Badge flotante de zoom */
+.zoom-hint-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.68);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.project-image-frame:hover .zoom-hint-badge {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Flechas de navegación */
@@ -34,13 +153,13 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%) scale(0.9);
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.6); /* Slate dark glassmorphism for contrast in light/dark themes */
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -68,7 +187,7 @@
   background: var(--accent);
   border-color: var(--accent);
   color: #ffffff;
-  transform: translateY(-50%) scale(1.1) !important;
+  transform: translateY(-50%) scale(1.08) !important;
 }
 
 /* Indicadores de diapositivas (Dots) */
@@ -81,18 +200,18 @@
   gap: 8px;
   z-index: 10;
   padding: 6px 10px;
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .carousel-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.45);
   border: none;
   cursor: pointer;
   padding: 0;
@@ -106,5 +225,5 @@
 }
 
 .carousel-dot:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
 }

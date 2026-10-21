@@ -24,7 +24,7 @@ const resources = {
       },
       about: {
         title: "Sobre mí",
-        text: "Graduado en Ingeniería Informática por la Universitat Jaume I, especializado en el desarrollo de software completo (frontend y backend). Me considero una persona proactiva y orientada a la resolución de problemas técnicos, con gran facilidad para adaptarme a nuevas tecnologías y metodologías de trabajo en equipo. Busco aportar valor en proyectos de desarrollo con arquitecturas robustas y buenas prácticas.",
+        text: "Graduado en Ingeniería Informática por la Universitat Jaume I. Combino el desarrollo Full-Stack en ecosistemas empresariales (Java/Spring Boot y Python/Django) con arquitecturas de datos, pipelines ETL y monitorización de ciberseguridad. Mi enfoque se centra en construir software escalable, desacoplado y mantenible desde el esquema de base de datos hasta la interfaz.",
         languages_title: "Idiomas",
         lang_spanish: "Castellano",
         lang_valencian: "Valenciano",
@@ -34,18 +34,18 @@ const resources = {
         level_advanced_c1: "Avanzado (C1)",
         level_intermediate_b1: "Intermedio (B1)",
         soft_skills_title: "Soft Skills",
-        skill_teamwork_title: "Trabajo en equipo",
+        skill_teamwork_title: "Código mantenible y colaborativo",
         skill_teamwork_desc:
-          "Colaboración activa y comunicación fluida en equipos de trabajo multidisciplinares.",
-        skill_proactivity_title: "Proactividad e iniciativa",
+          "Diseño de APIs limpias, documentación clara y uso de flujos de control de versiones pensados para que otros desarrolladores puedan escalar el proyecto sin fricción.",
+        skill_proactivity_title: "Visión de producto (End-to-End)",
         skill_proactivity_desc:
-          "Búsqueda constante de mejoras, proponer ideas y aprender nuevas tecnologías de forma autónoma.",
-        skill_problem_solving_title: "Resolución de problemas",
+          "Capacidad para transformar un requisito de negocio desde el diseño del esquema en base de datos y pipelines asíncronos hasta una interfaz rápida e intuitiva.",
+        skill_problem_solving_title: "Pragmatismo y arquitectura sólida",
         skill_problem_solving_desc:
-          "Enfoque analítico para diagnosticar fallos y encontrar soluciones de forma eficaz.",
-        skill_adaptation_title: "Adaptación al cambio",
+          "Elección de herramientas justificadas por el caso de uso (colas asíncronas con Celery/Redis, modelos relacionales o NoSQL) priorizando la estabilidad y el rendimiento.",
+        skill_adaptation_title: "Autonomía en entornos internacionales",
         skill_adaptation_desc:
-          "Flexibilidad para integrarme rápidamente en dinámicas de equipo y entornos tecnológicos diversos.",
+          "Rápida curva de aprendizaje demostrada trabajando con distintos stacks (Java, Python, React) y adaptándome a metodologías académicas y técnicas en el extranjero (Erasmus+ en Milán).",
       },
       techstack: {
         title: "Mi Stack de Tecnologías",
@@ -94,6 +94,201 @@ const resources = {
         featured_tag: "Proyecto Destacado",
         private_repo: "Repositorio Privado",
         view_on_github: "Ver en GitHub",
+        view_architecture: "Ver Arquitectura",
+        architectures: {
+          tfg: {
+            badge: "Caso de Estudio • Arquitectura BI",
+            title: "Plataforma BI de Ciberseguridad (TFG)",
+            confidential_note: "Código fuente privado bajo acuerdo de confidencialidad corporativa con Pamesa Grupo Empresarial.",
+            flow_title: "Flujo de Datos y Pipeline de Procesamiento",
+            infra_label: "Infraestructura Contenerizada (Docker & Docker Compose con Healthchecks)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Fuentes de Seguridad",
+                sub: "Cortex XDR, Proofpoint, Endpoint Central (APIs REST / CSV)",
+                type: "source"
+              },
+              {
+                step: "02",
+                title: "Pipeline ETL Python",
+                sub: "Extracción, Normalización de Fechas y Validación con contracts.py",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "Broker Celery + Redis",
+                sub: "Orquestación Asíncrona de Ingestas y Tareas en Background",
+                type: "broker"
+              },
+              {
+                step: "04",
+                title: "Persistencia PostgreSQL",
+                sub: "Modelo Relacional Normalizado (3FN) con Snapshots Históricos",
+                type: "db"
+              },
+              {
+                step: "05",
+                title: "Backend Django (SOLID)",
+                sub: "Modelos managed=False, DTOs, Context Builders y RBAC",
+                type: "web"
+              },
+              {
+                step: "06",
+                title: "Nginx + Gunicorn",
+                sub: "Proxy Inverso, Servido de Estáticos y Servidor WSGI",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Decisiones de Ingeniería",
+            decisions: [
+              {
+                title: "Ingesta Asíncrona Desacoplada",
+                desc: "Las tareas pesadas de extracción y cálculo de KPIs se delegan a workers independientes de Celery respaldados por Redis, evitando bloquear el hilo de peticiones del servidor web."
+              },
+              {
+                title: "Modelo Relacional Normalizado (3FN)",
+                desc: "Esquema físico en PostgreSQL con integridad referencial estricta, restricciones CHECK y snapshots periódicos para trazabilidad histórica sin datos huérfanos."
+              },
+              {
+                title: "Arquitectura Django desacoplada (SOLID)",
+                desc: "Uso de modelos ORM no gestionados (managed = False) para no delegar el DDL a Django, complementado con capas de Servicios, Schemas/DTOs y Context Builders."
+              },
+              {
+                title: "Despliegue Aislado Multi-Contenedor",
+                desc: "Nginx aísla los servicios internos gestionando estáticos y SSL; Gunicorn maneja procesos paralelos de Python; orquestación con Docker Compose y healthchecks."
+              }
+            ]
+          },
+          gustome: {
+            badge: "Caso de Estudio • Arquitectura Serverless",
+            title: "Gustomé - Gestión Inteligente de Cartas",
+            confidential_note: "Arquitectura Cloud-Native orientada a eventos con persistencia NoSQL reactiva en Google Cloud.",
+            flow_title: "Flujo de Datos Bidireccional y Serverless",
+            infra_label: "Ecosistema Serverless & Hosting Continuo (Google Firebase Cloud Platform)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Cliente React + Vite",
+                sub: "SPA Reactiva, Context API (AuthContext) y Componentes Modulares",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Firebase Auth",
+                sub: "Gestión de Sesión, Google OAuth & Email/Password (UID único)",
+                type: "source"
+              },
+              {
+                step: "03",
+                title: "Cloud Firestore (NoSQL)",
+                sub: "Sincronización en Tiempo Real con Listeners Reactivos (onSnapshot)",
+                type: "db"
+              },
+              {
+                step: "04",
+                title: "Firestore Security Rules",
+                sub: "Control de Acceso Declarativo y Aislamiento Privacy-First por Rol",
+                type: "infra"
+              },
+              {
+                step: "05",
+                title: "Servicios Externos",
+                sub: "Stripe (Pagos), Cloudinary (Media) y OpenAI (OCR de Cartas Físicas)",
+                type: "etl"
+              },
+              {
+                step: "06",
+                title: "CI/CD & Firebase Hosting",
+                sub: "Pipeline automatizado con GitHub Actions para despliegue continuo",
+                type: "broker"
+              }
+            ],
+            decisions_title: "Decisiones de Ingeniería",
+            decisions: [
+              {
+                title: "Sincronización Reactiva en Tiempo Real",
+                desc: "Los listeners onSnapshot de Firestore sincronizan comandas entre mesa y cocina de inmediato, eliminando la necesidad de servidores WebSocket dedicados o polling."
+              },
+              {
+                title: "Estructura NoSQL y Desnormalización Estratégica",
+                desc: "Diseño por colecciones (platos, ingredientes, comandas, adn_culinario) con desnormalización selectiva (ej. restaurantName) para minimizar lecturas y costes de Firestore."
+              },
+              {
+                title: "Seguridad y Autorización Declarativa",
+                desc: "Reglas de Firestore (firestore.rules) a nivel de base de datos que validan permisos y roles (client vs restaurant) sin intermediación de un backend tradicional."
+              },
+              {
+                title: "Digitalización Asistida por IA (OCR)",
+                desc: "Integración con API de OpenAI para procesar cartas físicas fotografiadas y mapear automáticamente nombres, precios, ingredientes y alérgenos normalizados."
+              }
+            ]
+          },
+          mormas: {
+            badge: "Caso de Estudio • Arquitectura Spring MVC",
+            title: "Mountain Race Management System (MoRMaS)",
+            confidential_note: "Sistema de Información Corporativo con Arquitectura en Capas y Control Transaccional en Java.",
+            flow_title: "Flujo de Control MVC y Persistencia",
+            infra_label: "Contenedor de Aplicación Empresarial (Spring Boot Embedded Tomcat Engine)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Vistas Thymeleaf",
+                sub: "Plantillas HTML5 Dinámicas, Bootstrap Responsive y Validación en Cliente",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Controladores Spring MVC",
+                sub: "Rutas HTTP (@Controller), Inyección de Dependencias y Control de Sesión",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "Capa de Dominio (Model)",
+                sub: "Entidades de Negocio (Carrera, Competicion, Inscripcion, Voluntario)",
+                type: "source"
+              },
+              {
+                step: "04",
+                title: "Capa DAO con JdbcTemplate",
+                sub: "Operaciones CRUD, RowMapper específicos y Gestión de Excepciones",
+                type: "broker"
+              },
+              {
+                step: "05",
+                title: "PostgreSQL Relacional",
+                sub: "Modelo Físico Normalizado, Restricciones CASCADE / RESTRICT y CHECK",
+                type: "db"
+              },
+              {
+                step: "06",
+                title: "Servicios de Negocio",
+                sub: "Control RBAC (Promotor / Atleta / Voluntario), Generación de PDFs y Cronos",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Decisiones de Ingeniería",
+            decisions: [
+              {
+                title: "Separación Estricta de Responsabilidades (MVC)",
+                desc: "Arquitectura desacoplada en paquetes model, dao y controller, aislando la lógica de negocio de la presentación y garantizando mantenibilidad."
+              },
+              {
+                title: "Persistencia Eficiente con JdbcTemplate",
+                desc: "Control explícito de consultas SQL y mapeo directo a POJOs con RowMapper dedicados, previniendo sobrecargas de ORM y manejando excepciones de Spring."
+              },
+              {
+                title: "Integridad Referencial Firme en Base de Datos",
+                desc: "Modelo relacional en PostgreSQL con claves foráneas protegidas, tablas intermedias para relaciones N:M (Aportacion, Ofrece, Asignan) y restricciones de borrado."
+              },
+              {
+                title: "Control de Acceso basado en Roles (RBAC)",
+                desc: "Gestión de perfiles diferenciados (Promotor, Atleta, Voluntario) con validadores de sesión en controlador para blindar la operativa de cada rol."
+              }
+            ]
+          }
+        },
         titles: {
           gustome: "Gustomé - Gestión Inteligente de Cartas",
           tfg: "Plataforma BI de Ciberseguridad (TFG)",
@@ -110,10 +305,10 @@ const resources = {
         },
         descriptions: {
           gustome:
-            "Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos por alérgenos y preferencias dietéticas en tiempo real.",
-          tfg: "Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Incluye un pipeline ETL automatizado, orquestación asíncrona con Celery/Redis y dashboards interactivos en tiempo real.",
+            "Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos multicriterio por alérgenos y preferencias dietéticas con sincronización en tiempo real.",
+          tfg: "Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Destaca por el desacoplamiento de la ingesta pesada de datos mediante un pipeline ETL y colas asíncronas (Celery/Redis) para evitar bloqueos y garantizar tiempos de carga inmediatos en los dashboards directivos.",
           mormas:
-            "Aplicación web corporativa para la gestión integral de carreras de montaña. Incluye control de inscripciones, publicación de resultados en tiempo real, perfiles diferenciados para promotores y corredores, envíos de correo automáticos y exportación de justificantes en PDF.",
+            "Aplicación web corporativa para la gestión integral de carreras de montaña. Resuelve la gestión transaccional de inscripciones, seguridad y control de acceso basado en roles (RBAC entre promotores y corredores), notificaciones automáticas y generación dinámica de justificantes PDF en servidor sin penalizar el rendimiento.",
           marketpulse:
             "Aplicación interactiva de análisis bursátil en tiempo real. Consume APIs de Yahoo Finance para graficar históricos y calcular métricas estadísticas clave como la volatilidad y el valor en riesgo (VaR).",
           portfolio:
@@ -175,9 +370,9 @@ const resources = {
           milano:
             "Cursé asignaturas de máster en Computer Science y Data Science for Economics, aprendiendo NoSQL (MongoDB), Business Intelligence y Data Science, y fortaleciendo mi adaptabilidad a entornos internacionales.",
           ecoporcelanico:
-            "Participación activa en el proceso de producción junto a un equipo, desarrollando habilidades de colaboración, comunicación y resolución de problemas.",
+            "Trabajo en entorno industrial de alta exigencia con objetivos diarios de producción estrictos. Reforcé la disciplina operativa, la coordinación bajo presión en turnos continuos y la resolución ágil de incidencias en línea mientras cursaba el grado.",
           wandegar:
-            "Colaboración en el equipo para optimizar la eficiencia de la producción, asumiendo diferentes tareas y responsabilidades donde reforcé mi proactividad y capacidad de adaptación.",
+            "Ejecución de procesos de fabricación estandarizados bajo métricas de calidad y tiempos de entrega ajustados. Consolidé la precisión operativa, la organización del flujo de trabajo en equipo y el cumplimiento riguroso de plazos.",
           uji: "Durante el grado adquirí una base sólida en programación, estructuras de datos, algoritmos, bases de datos, redes y desarrollo web, fortaleciendo habilidades colaborativas en entornos de desarrollo.",
         },
       },
@@ -229,7 +424,7 @@ const resources = {
       },
       about: {
         title: "About me",
-        text: "Computer Engineering graduate from Universitat Jaume I, specialized in full-stack software development. I consider myself proactive and oriented towards solving technical problems, with a great ability to adapt to new technologies and teamwork methodologies. I am looking to bring value to development projects with robust architectures and best practices.",
+        text: "Computer Engineering graduate from Universitat Jaume I. I combine Full-Stack development in enterprise ecosystems (Java/Spring Boot and Python/Django) with data architectures, ETL pipelines, and cybersecurity monitoring. My focus is on building scalable, decoupled, and maintainable software from the database schema to the user interface.",
         languages_title: "Languages",
         lang_spanish: "Spanish",
         lang_valencian: "Valencian",
@@ -239,18 +434,18 @@ const resources = {
         level_advanced_c1: "Advanced (C1)",
         level_intermediate_b1: "Intermediate (B1)",
         soft_skills_title: "Soft Skills",
-        skill_teamwork_title: "Teamwork",
+        skill_teamwork_title: "Maintainable & Collaborative Code",
         skill_teamwork_desc:
-          "Active collaboration and fluid communication in multidisciplinary teams.",
-        skill_proactivity_title: "Proactivity & Initiative",
+          "Designing clean APIs, clear documentation, and version control workflows structured so other developers can scale the project without friction.",
+        skill_proactivity_title: "Product Vision (End-to-End)",
         skill_proactivity_desc:
-          "Constant search for improvements, proposing ideas, and learning new technologies autonomously.",
-        skill_problem_solving_title: "Problem Solving",
+          "Ability to transform a business requirement from database schema design and asynchronous pipelines all the way to a fast, intuitive interface.",
+        skill_problem_solving_title: "Pragmatism & Solid Architecture",
         skill_problem_solving_desc:
-          "Analytical approach to diagnose issues and find effective solutions.",
-        skill_adaptation_title: "Adaptability",
+          "Selecting tools justified by the use case (asynchronous queues with Celery/Redis, relational or NoSQL models) prioritizing stability and performance.",
+        skill_adaptation_title: "Autonomy in International Environments",
         skill_adaptation_desc:
-          "Flexibility to integrate quickly into team dynamics and diverse technological environments.",
+          "Fast learning curve demonstrated across multiple stacks (Java, Python, React) and adapting to academic and technical methodologies abroad (Erasmus+ in Milan).",
       },
       techstack: {
         title: "My Tech Stack",
@@ -298,6 +493,201 @@ const resources = {
         featured_tag: "Featured Project",
         private_repo: "Private Repository",
         view_on_github: "View on GitHub",
+        view_architecture: "View Architecture",
+        architectures: {
+          tfg: {
+            badge: "Case Study • BI Architecture",
+            title: "Cybersecurity BI Platform (TFG)",
+            confidential_note: "Private source code under corporate non-disclosure agreement with Pamesa Grupo Empresarial.",
+            flow_title: "Data Flow & Processing Pipeline",
+            infra_label: "Containerized Infrastructure (Docker & Docker Compose with Healthchecks)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Security Sources",
+                sub: "Cortex XDR, Proofpoint, Endpoint Central (REST APIs / CSV)",
+                type: "source"
+              },
+              {
+                step: "02",
+                title: "Python ETL Pipeline",
+                sub: "Extraction, Date Normalization & Validation via contracts.py",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "Celery + Redis Broker",
+                sub: "Asynchronous Ingestion Orchestration & Background Tasks",
+                type: "broker"
+              },
+              {
+                step: "04",
+                title: "PostgreSQL Persistence",
+                sub: "Normalized Relational Schema (3NF) with Historical Snapshots",
+                type: "db"
+              },
+              {
+                step: "05",
+                title: "Django Backend (SOLID)",
+                sub: "managed=False ORM Models, DTOs, Context Builders & RBAC",
+                type: "web"
+              },
+              {
+                step: "06",
+                title: "Nginx + Gunicorn",
+                sub: "Reverse Proxy, Static Files Caching & WSGI App Server",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Engineering Decisions",
+            decisions: [
+              {
+                title: "Decoupled Asynchronous Ingestion",
+                desc: "Heavy extraction and KPI calculations are offloaded to independent Celery workers backed by Redis, preventing web server request thread starvation."
+              },
+              {
+                title: "Normalized Relational Modeling (3NF)",
+                desc: "PostgreSQL schema with strict referential integrity, CHECK constraints, and periodic snapshots for historical auditability without orphaned records."
+              },
+              {
+                title: "Decoupled Django Architecture (SOLID)",
+                desc: "Unmanaged ORM models (managed = False) decouple physical DDL from Django, structured into Services, Schemas/DTOs, and Context Builders."
+              },
+              {
+                title: "Isolated Multi-Container Deployment",
+                desc: "Nginx manages SSL/static assets and proxies dynamic traffic to Gunicorn; services orchestrated with Docker Compose and healthchecks."
+              }
+            ]
+          },
+          gustome: {
+            badge: "Case Study • Serverless Architecture",
+            title: "Gustomé - Intelligent Menu Management",
+            confidential_note: "Cloud-Native event-driven architecture with reactive NoSQL persistence on Google Cloud.",
+            flow_title: "Bidirectional Serverless Data Flow",
+            infra_label: "Serverless Ecosystem & Continuous Hosting (Google Firebase Cloud Platform)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "React + Vite Client",
+                sub: "Reactive SPA, Context API (AuthContext) & Modular Components",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Firebase Auth",
+                sub: "Session Management, Google OAuth & Email/Password (Unique UID)",
+                type: "source"
+              },
+              {
+                step: "03",
+                title: "Cloud Firestore (NoSQL)",
+                sub: "Real-time Synchronization via Reactive Listeners (onSnapshot)",
+                type: "db"
+              },
+              {
+                step: "04",
+                title: "Firestore Security Rules",
+                sub: "Declarative Access Control & Privacy-First Isolation by Role",
+                type: "infra"
+              },
+              {
+                step: "05",
+                title: "External Services",
+                sub: "Stripe (Payments), Cloudinary (Media) & OpenAI (Menu OCR)",
+                type: "etl"
+              },
+              {
+                step: "06",
+                title: "CI/CD & Firebase Hosting",
+                sub: "Automated GitHub Actions pipeline for continuous cloud deployment",
+                type: "broker"
+              }
+            ],
+            decisions_title: "Engineering Decisions",
+            decisions: [
+              {
+                title: "Real-Time Reactive Synchronization",
+                desc: "Firestore onSnapshot listeners synchronize orders between diner table and kitchen immediately, eliminating dedicated WebSocket servers and polling."
+              },
+              {
+                title: "NoSQL Schema & Strategic Denormalization",
+                desc: "Collections (dishes, ingredients, orders, culinary_dna) designed with selective denormalization (e.g. restaurantName) to minimize reads and Firestore costs."
+              },
+              {
+                title: "Declarative Privacy-First Authorization",
+                desc: "Database-level Firestore rules (firestore.rules) validate permissions and roles (client vs restaurant) without traditional backend overhead."
+              },
+              {
+                title: "AI-Assisted Digitalization (OCR)",
+                desc: "OpenAI API integration to parse photographed paper menus and automatically map names, prices, ingredients, and normalized allergens."
+              }
+            ]
+          },
+          mormas: {
+            badge: "Case Study • Spring MVC Architecture",
+            title: "Mountain Race Management System (MoRMaS)",
+            confidential_note: "Enterprise Layered Information System with Transactional Control in Java & Spring Boot.",
+            flow_title: "MVC Control Flow & Data Persistence",
+            infra_label: "Enterprise Application Container (Spring Boot Embedded Tomcat Engine)",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Thymeleaf Views",
+                sub: "Dynamic HTML5 Templates, Responsive Bootstrap & Client-Side Validation",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Spring MVC Controllers",
+                sub: "HTTP Routing (@Controller), Dependency Injection & Session Tracking",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "Domain Layer (Model)",
+                sub: "Business Entities (Race, Competition, Registration, Volunteer)",
+                type: "source"
+              },
+              {
+                step: "04",
+                title: "DAO Layer with JdbcTemplate",
+                sub: "Typed SQL Queries, Custom RowMappers & Exception Handling",
+                type: "broker"
+              },
+              {
+                step: "05",
+                title: "Relational PostgreSQL",
+                sub: "Normalized Physical Schema, ON DELETE CASCADE/RESTRICT & CHECK Constraints",
+                type: "db"
+              },
+              {
+                step: "06",
+                title: "Business Services",
+                sub: "RBAC (Promoter / Runner / Volunteer), Dynamic PDF Export & Timing",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Engineering Decisions",
+            decisions: [
+              {
+                title: "Strict Separation of Concerns (MVC)",
+                desc: "Modular structure across model, dao, and controller packages, decoupling business logic from web presentation and ensuring maintainability."
+              },
+              {
+                title: "Efficient Persistence with JdbcTemplate",
+                desc: "Explicit SQL query control and direct POJO mapping with dedicated RowMappers, avoiding heavy ORM overhead and handling Spring data exceptions."
+              },
+              {
+                title: "Firm Referential Integrity in Database",
+                desc: "PostgreSQL relational schema with protected foreign keys, junction tables for N:M relationships (Aportacion, Ofrece, Asignan), and delete restrictions."
+              },
+              {
+                title: "Role-Based Access Control (RBAC)",
+                desc: "Distinct user profiles (Promoter, Athlete, Volunteer) with controller-level session validation to shield role-specific operations."
+              }
+            ]
+          }
+        },
         titles: {
           gustome: "Gustomé - Intelligent Menu Management",
           tfg: "Cybersecurity BI Platform (TFG)",
@@ -314,10 +704,10 @@ const resources = {
         },
         descriptions: {
           gustome:
-            "Digital platform for restaurant menu digitalization and management. Allows customizing the diner experience with real-time interactive filters for allergens and dietary preferences.",
-          tfg: "End-to-end Business Intelligence platform for corporate cybersecurity KPI monitoring. Includes an automated ETL pipeline, asynchronous orchestration with Celery/Redis, and real-time interactive dashboards.",
+            "Digital platform for restaurant menu digitalization and management. Allows customizing the diner experience with real-time interactive multi-criteria filters for allergens and dietary preferences.",
+          tfg: "End-to-end Business Intelligence platform for corporate cybersecurity KPI monitoring. Features decoupled heavy data ingestion via an automated ETL pipeline and asynchronous queues (Celery/Redis) to prevent blocking and guarantee instant load times on executive dashboards.",
           mormas:
-            "Corporate web application for comprehensive mountain race management. Includes registration control, real-time results publication, role-based profiles for promoters and runners, automated email sends, and PDF voucher export.",
+            "Corporate web application for comprehensive mountain race management. Solves transactional registration concurrency, role-based access control (RBAC between promoters and runners), automated email notifications, and server-side dynamic PDF voucher generation without performance penalties.",
           marketpulse:
             "Interactive real-time stock market analysis application. Consumes Yahoo Finance APIs to plot historical data and calculate key statistical metrics like volatility and Value at Risk (VaR).",
           portfolio:
@@ -379,9 +769,9 @@ const resources = {
           milano:
             "Took master's courses in Computer Science and Data Science for Economics, learning NoSQL (MongoDB), Business Intelligence, and Data Science, and strengthening my adaptability in international environments.",
           ecoporcelanico:
-            "Active participation in the production process within a team, developing collaboration, communication, and problem-solving skills.",
+            "Worked in a high-demand industrial environment with strict daily production targets. Reinforced operational discipline, team coordination under pressure across continuous shifts, and rapid incident resolution while pursuing my engineering degree.",
           wandegar:
-            "Collaboration within the team to optimize production efficiency, taking on different tasks and responsibilities, which reinforced my proactivity and adaptability.",
+            "Executed standardized manufacturing processes under tight quality metrics and delivery deadlines. Consolidated operational precision, team workflow organization, and strict deadline compliance.",
           uji: "During the degree, I acquired a solid foundation in programming, data structures, algorithms, databases, networking, and web development, strengthening collaborative skills in development environments.",
         },
       },

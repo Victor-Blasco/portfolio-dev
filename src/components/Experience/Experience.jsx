@@ -4,7 +4,7 @@ import "./Experience.css";
 import Card from "@/components/Card/Card";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-// Importar logos de empresas/universidades (placeholders)
+// Importar logos de empresas/universidades
 import pamesaLogo from "@/assets/logos/pamesa.png";
 import milanoLogo from "@/assets/logos/unimi.png";
 import ecoporcelanicoLogo from "@/assets/logos/ecoporcelanico.png";
@@ -85,8 +85,6 @@ function Experience() {
       period: t("experience.periods.milano"),
       description: t("experience.descriptions.milano"),
       logo: milanoLogo,
-      logoBg: "#ffffff",
-      logoStyle: { padding: "0px" },
     },
     {
       id: "ecoporcelanico",
@@ -96,7 +94,6 @@ function Experience() {
       period: t("experience.periods.ecoporcelanico"),
       description: t("experience.descriptions.ecoporcelanico"),
       logo: ecoporcelanicoLogo,
-      logoBg: "#ffffff",
     },
     {
       id: "wandegar",
@@ -106,7 +103,6 @@ function Experience() {
       period: t("experience.periods.wandegar"),
       description: t("experience.descriptions.wandegar"),
       logo: wandegarLogo,
-      logoBg: "#ffffff",
     },
     {
       id: "uji",
@@ -182,12 +178,11 @@ function Experience() {
               {/* Tarjeta del Timeline */}
               <div className="timeline-card-wrapper">
                 <Card
-                  title={`${item.title} | ${item.institution}`}
+                  title={item.title}
+                  institution={item.institution}
                   subtitle={item.period}
                   description={item.description}
                   logo={item.logo}
-                  logoBg={item.logoBg}
-                  logoStyle={item.logoStyle}
                 />
               </div>
             </div>
