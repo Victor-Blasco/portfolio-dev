@@ -7,7 +7,8 @@ const UTM_STORAGE_KEY = "portfolio_utm_params";
 
 /**
  * Extrae y almacena los parámetros UTM de la URL actual en sessionStorage.
- * Si detecta parámetros UTM en una nueva visita, emite automáticamente un evento 'campaign_visit'.
+ * Si detecta parámetros UTM en una nueva visita, emite automáticamente un evento 'campaign_visit'
+ * tanto hacia Vercel Analytics como hacia Google Analytics 4 (gtag).
  */
 export const initUtmTracking = () => {
   if (typeof window === "undefined") return;
@@ -28,7 +29,14 @@ export const initUtmTracking = () => {
 
     if (hasUtm) {
       sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(currentUtm));
+      
+      // Enviar a Vercel Analytics
       track("campaign_visit", currentUtm);
+
+      // Enviar a Google Analytics 4
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "campaign_visit", currentUtm);
+      }
     }
   } catch {
     // Falla de forma silenciosa para garantizar la robustez del renderizado
@@ -51,8 +59,8 @@ export const getStoredUtm = () => {
 };
 
 /**
- * Envía un evento analítico personalizado a Vercel Analytics enriquecido
- * con los datos de campaña UTM almacenados en la sesión.
+ * Envía un evento analítico personalizado enriquecido con datos UTM
+ * tanto a Google Analytics 4 (gtag) como a Vercel Analytics.
  *
  * @param {string} eventName - Identificador del evento (ej: 'download_cv', 'open_architecture_modal').
  * @param {Object} [properties={}] - Datos complementarios del evento.
@@ -60,10 +68,18 @@ export const getStoredUtm = () => {
 export const trackEvent = (eventName, properties = {}) => {
   try {
     const utmData = getStoredUtm();
-    track(eventName, {
+    const eventPayload = {
       ...properties,
       ...utmData,
-    });
+    };
+
+    // 1. Enviar a Vercel Analytics
+    track(eventName, eventPayload);
+
+    // 2. Enviar a Google Analytics 4
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", eventName, eventPayload);
+    }
   } catch {
     // Falla de forma silenciosa
   }
