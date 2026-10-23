@@ -83,7 +83,6 @@ function Experience() {
       period: t("experience.periods.cyberark"),
       description: t("experience.descriptions.cyberark"),
       logo: nttdataLogo,
-      logoBg: "#001946",
     },
     {
       id: "pamesa",
