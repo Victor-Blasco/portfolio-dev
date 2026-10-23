@@ -367,21 +367,9 @@ const resources = {
           wandegar: "Julio-Agosto 2024",
           uji: "Septiembre 2022 - Junio 2026",
         },
-        tags: {
-          cyberark: [
-            "CyberArk PAM",
-            "Vault · PVWA · CPM · PSM",
-            "Safes & Master Policy",
-            "Rotación de credenciales",
-            "Grabación de sesiones",
-            "Alta disponibilidad & DR",
-            "LDAPS · SMTP · SIEM",
-            "Troubleshooting",
-          ],
-        },
         descriptions: {
           cyberark:
-            "Bootcamp intensivo de cuatro semanas sobre CyberArk Privileged Access Management. Desplegué y administré una solución PAM self-hosted completa (Vault, PVWA, CPM, PSM y PSMP) en un laboratorio de siete servidores: integración LDAP, Safes con mínimo privilegio, Master Policy y Platforms, rotación de credenciales, hardening, balanceo de carga, alta disponibilidad y recuperación ante desastres. Resolví incidencias reales (LDAPS, plugins Unix, rotación de credenciales, restauración de Safes) diagnosticando por capas a partir de logs y evidencias, y documenté todo en una base de conocimiento propia de más de 60 notas. Actualmente preparo las certificaciones CyberArk Defender y Sentry.",
+            "Bootcamp intensivo de CyberArk Privileged Access Management (PAM) impartido por NTT DATA. Trabajé en la administración e instalación de una solución PAM self-hosted (Vault, PVWA, CPM, PSM) en un entorno de laboratorio de 7 servidores. Gestioné políticas de mínimo privilegio, integración con LDAP, rotación automática de credenciales y aislamiento de sesiones privilegiadas. Diagnostiqué y resolví incidencias reales mediante análisis metódico de logs y evidencias bajo estándares de hardening y alta disponibilidad. Actualmente preparando las certificaciones Defender y Sentry.",
           pamesa:
             "Desarrollo integral de una plataforma BI para monitorización de KPIs de ciberseguridad. Implementé un pipeline ETL en Python, modelos en PostgreSQL y dashboards con Django y Tailwind CSS, utilizando Celery/Redis para orquestación asíncrona y Docker para el despliegue.",
           milano:
@@ -783,21 +771,9 @@ const resources = {
           wandegar: "July-August 2024",
           uji: "September 2022 - June 2026",
         },
-        tags: {
-          cyberark: [
-            "CyberArk PAM",
-            "Vault · PVWA · CPM · PSM",
-            "Safes & Master Policy",
-            "Credential Rotation",
-            "Session Recording",
-            "High Availability & DR",
-            "LDAPS · SMTP · SIEM",
-            "Troubleshooting",
-          ],
-        },
         descriptions: {
           cyberark:
-            "Four-week intensive bootcamp on CyberArk Privileged Access Management. I deployed and administered a complete self-hosted PAM solution (Vault, PVWA, CPM, PSM and PSMP) across a seven-server virtual lab: LDAP integration, least-privilege Safes, Master Policy and Platforms, credential rotation, hardening, load balancing, high availability and disaster recovery. I solved real production incidents (LDAPS, Unix plugins, credential rotation, Safe restoration) through layered troubleshooting based on logs and evidence, documenting everything in a 60+ note knowledge base. Currently preparing for the CyberArk Defender and Sentry certifications.",
+            "Intensive CyberArk Privileged Access Management (PAM) bootcamp delivered by NTT DATA. I worked on the administration and deployment of a complete self-hosted PAM solution (Vault, PVWA, CPM, PSM) across a 7-server virtual lab. Managed least-privilege Safes, LDAP integration, automated credential rotation, and privileged session isolation. Resolved real-world incidents through methodical log and evidence analysis under hardening and high availability standards. Currently preparing for the Defender and Sentry certifications.",
           pamesa:
             "Full development of a BI platform for cybersecurity KPI monitoring. Implemented an ETL pipeline in Python, models in PostgreSQL, and dashboards with Django and Tailwind CSS, using Celery/Redis for asynchronous orchestration and Docker for deployment.",
           milano:

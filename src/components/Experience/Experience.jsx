@@ -82,7 +82,6 @@ function Experience() {
       institution: t("experience.institutions.cyberark"),
       period: t("experience.periods.cyberark"),
       description: t("experience.descriptions.cyberark"),
-      tags: t("experience.tags.cyberark", { returnObjects: true }),
       logo: nttdataLogo,
       logoBg: "#001946",
     },
@@ -200,7 +199,6 @@ function Experience() {
                   institution={item.institution}
                   subtitle={item.period}
                   description={item.description}
-                  tags={item.tags}
                   logo={item.logo}
                   logoBg={item.logoBg}
                 />
