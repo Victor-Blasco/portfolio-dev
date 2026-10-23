@@ -344,6 +344,7 @@ const resources = {
         filter_work: "Experiencia",
         filter_education: "Educación",
         titles: {
+          cyberark: "Bootcamp CyberArk PAM",
           pamesa: "Ingeniero de Software (Prácticas)",
           milano: "Estancia Erasmus+",
           ecoporcelanico: "Operario de producción",
@@ -351,6 +352,7 @@ const resources = {
           uji: "Grado en Ingeniería Informática",
         },
         institutions: {
+          cyberark: "NTT DATA · Formación híbrida",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
           ecoporcelanico: "ECO PORCELÁNICO S.L.U.",
@@ -358,13 +360,28 @@ const resources = {
           uji: "Universitat Jaume I",
         },
         periods: {
+          cyberark: "Septiembre 2026 - Octubre 2026",
           pamesa: "Febrero 2026 - Mayo 2026",
           milano: "Septiembre 2025 - Enero 2026",
           ecoporcelanico: "Julio-Agosto 2025",
           wandegar: "Julio-Agosto 2024",
           uji: "Septiembre 2022 - Junio 2026",
         },
+        tags: {
+          cyberark: [
+            "CyberArk PAM",
+            "Vault · PVWA · CPM · PSM",
+            "Safes & Master Policy",
+            "Rotación de credenciales",
+            "Grabación de sesiones",
+            "Alta disponibilidad & DR",
+            "LDAPS · SMTP · SIEM",
+            "Troubleshooting",
+          ],
+        },
         descriptions: {
+          cyberark:
+            "Bootcamp intensivo de cuatro semanas sobre CyberArk Privileged Access Management. Desplegué y administré una solución PAM self-hosted completa (Vault, PVWA, CPM, PSM y PSMP) en un laboratorio de siete servidores: integración LDAP, Safes con mínimo privilegio, Master Policy y Platforms, rotación de credenciales, hardening, balanceo de carga, alta disponibilidad y recuperación ante desastres. Resolví incidencias reales (LDAPS, plugins Unix, rotación de credenciales, restauración de Safes) diagnosticando por capas a partir de logs y evidencias, y documenté todo en una base de conocimiento propia de más de 60 notas. Actualmente preparo las certificaciones CyberArk Defender y Sentry.",
           pamesa:
             "Desarrollo integral de una plataforma BI para monitorización de KPIs de ciberseguridad. Implementé un pipeline ETL en Python, modelos en PostgreSQL y dashboards con Django y Tailwind CSS, utilizando Celery/Redis para orquestación asíncrona y Docker para el despliegue.",
           milano:
@@ -743,6 +760,7 @@ const resources = {
         filter_work: "Experience",
         filter_education: "Education",
         titles: {
+          cyberark: "CyberArk PAM Bootcamp",
           pamesa: "Software Engineer (Internship)",
           milano: "Erasmus+ Stay",
           ecoporcelanico: "Production Operator",
@@ -750,6 +768,7 @@ const resources = {
           uji: "Bachelor's Degree in Computer Engineering",
         },
         institutions: {
+          cyberark: "NTT DATA · Hybrid training",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
           ecoporcelanico: "ECO PORCELÁNICO S.L.U.",
@@ -757,13 +776,28 @@ const resources = {
           uji: "Universitat Jaume I",
         },
         periods: {
+          cyberark: "September 2026 - October 2026",
           pamesa: "February 2026 - May 2026",
           milano: "September 2025 - January 2026",
           ecoporcelanico: "July-August 2025",
           wandegar: "July-August 2024",
           uji: "September 2022 - June 2026",
         },
+        tags: {
+          cyberark: [
+            "CyberArk PAM",
+            "Vault · PVWA · CPM · PSM",
+            "Safes & Master Policy",
+            "Credential Rotation",
+            "Session Recording",
+            "High Availability & DR",
+            "LDAPS · SMTP · SIEM",
+            "Troubleshooting",
+          ],
+        },
         descriptions: {
+          cyberark:
+            "Four-week intensive bootcamp on CyberArk Privileged Access Management. I deployed and administered a complete self-hosted PAM solution (Vault, PVWA, CPM, PSM and PSMP) across a seven-server virtual lab: LDAP integration, least-privilege Safes, Master Policy and Platforms, credential rotation, hardening, load balancing, high availability and disaster recovery. I solved real production incidents (LDAPS, Unix plugins, credential rotation, Safe restoration) through layered troubleshooting based on logs and evidence, documenting everything in a 60+ note knowledge base. Currently preparing for the CyberArk Defender and Sentry certifications.",
           pamesa:
             "Full development of a BI platform for cybersecurity KPI monitoring. Implemented an ETL pipeline in Python, models in PostgreSQL, and dashboards with Django and Tailwind CSS, using Celery/Redis for asynchronous orchestration and Docker for deployment.",
           milano:

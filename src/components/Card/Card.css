@@ -106,6 +106,34 @@
   color: var(--text-secondary);
 }
 
+/* Etiquetas de competencias y tecnologías clave */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.95rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .card-tag {
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
 /* Ajustes adaptables para tarjetas en dispositivos móviles */
 @media (max-width: 576px) {
   .card {

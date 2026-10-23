@@ -5,7 +5,7 @@
 ## Información Principal
 - [Sobre mí](/#about): Perfil profesional, propuesta de valor técnica y stack tecnológico.
 - [Proyectos](/#projects): Casos de estudio y arquitectura de software (Gustomé, Plataforma BI Ciberseguridad TFG, MoRMaS, Market Pulse).
-- [Trayectoria](/#experience): Experiencia profesional y formación en Ingeniería Informática (Universidad Jaume I & Università degli Studi di Milano).
+- [Trayectoria](/#experience): Experiencia profesional y formación (Bootcamp CyberArk PAM en NTT DATA, Universidad Jaume I & Università degli Studi di Milano).
 - [Contacto](/#contact): Formulario y vías de contacto directo.
 
 ## Enlaces Externos

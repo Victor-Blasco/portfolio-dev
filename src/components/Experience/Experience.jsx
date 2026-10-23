@@ -6,6 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { trackEvent } from "@/utils/analytics";
 
 // Importar logos de empresas/universidades
+import nttdataLogo from "@/assets/logos/nttdata.png";
 import pamesaLogo from "@/assets/logos/pamesa.png";
 import milanoLogo from "@/assets/logos/unimi.png";
 import ecoporcelanicoLogo from "@/assets/logos/ecoporcelanico.png";
@@ -74,6 +75,17 @@ function Experience() {
 
   // Datos cronológicos de traducción dinámica
   const timelineData = [
+    {
+      id: "cyberark",
+      type: "education",
+      title: t("experience.titles.cyberark"),
+      institution: t("experience.institutions.cyberark"),
+      period: t("experience.periods.cyberark"),
+      description: t("experience.descriptions.cyberark"),
+      tags: t("experience.tags.cyberark", { returnObjects: true }),
+      logo: nttdataLogo,
+      logoBg: "#001946",
+    },
     {
       id: "pamesa",
       type: "work",
@@ -188,7 +200,9 @@ function Experience() {
                   institution={item.institution}
                   subtitle={item.period}
                   description={item.description}
+                  tags={item.tags}
                   logo={item.logo}
+                  logoBg={item.logoBg}
                 />
               </div>
             </div>
