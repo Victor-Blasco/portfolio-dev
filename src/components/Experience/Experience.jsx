@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { trackEvent } from "@/utils/analytics";
 
 // Importar logos de empresas/universidades
-import nttdataLogo from "@/assets/logos/nttdata.png";
+import nttdataLogo from "@/assets/logos/nttdata.svg";
 import pamesaLogo from "@/assets/logos/pamesa.png";
 import milanoLogo from "@/assets/logos/unimi.png";
 import ujiLogo from "@/assets/logos/uji.png";
