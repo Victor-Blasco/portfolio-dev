@@ -189,68 +189,6 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 20px var(--glow-blue);
 }
 
-/* Code Editor mockup styles */
-.mock-code-editor {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 100%;
-  background: #18181c;
-  border-radius: 14px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
-  font-family: 'Consolas', 'Courier New', Courier, monospace;
-  overflow: hidden;
-  text-align: left;
-  aspect-ratio: 16 / 10;
-  display: flex;
-  flex-direction: column;
-}
-
-.editor-header {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.6rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.editor-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-}
-
-.editor-dot.red { background-color: #ff5f56; }
-.editor-dot.yellow { background-color: #ffbd2e; }
-.editor-dot.green { background-color: #27c93f; }
-
-.editor-filename {
-  color: #8a8a93;
-  font-size: 0.75rem;
-  margin-left: 0.75rem;
-  font-weight: 500;
-}
-
-.editor-code {
-  padding: 1.25rem 1.5rem;
-  margin: 0;
-  color: #e3e3e6;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  flex-grow: 1;
-  background: transparent;
-  overflow-x: auto;
-}
-
-/* Simple syntax highlighting */
-.editor-code .keyword { color: #ff79c6; }
-.editor-code .function { color: #50fa7b; }
-.editor-code .tag { color: #8be9fd; }
-.editor-code .attr { color: #ffb86c; }
-.editor-code .string { color: #f1fa8c; }
-
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .project-row, .project-row.reversed {
@@ -273,12 +211,5 @@
 
   .project-visual-side {
     order: 2;
-  }
-}
-
-@media (max-width: 480px) {
-  .editor-code {
-    padding: 0.9rem 1rem;
-    font-size: 0.74rem;
   }
 }

@@ -1,0 +1,114 @@
+/* SkillsGrid.css */
+
+.skills-grid-section {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.skills-grid-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 1.25rem 0;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.55rem;
+}
+
+.skills-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+  width: 100%;
+}
+
+.skill-category-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.2rem 1.3rem;
+  border-radius: 14px;
+  background: var(--card-bg-gradient);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--surface-highlight);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px -8px var(--glow-blue), var(--surface-highlight);
+}
+
+.skill-category-card.featured {
+  border-color: var(--accent-secondary);
+  background: linear-gradient(135deg, var(--glow-violet) 0%, transparent 75%), var(--card-bg-gradient);
+}
+
+.skill-category-card.featured:hover {
+  border-color: var(--accent);
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.skill-category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.skill-category-card.featured .skill-category-icon {
+  color: var(--accent-secondary);
+}
+
+.skill-category-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
+}
+
+.skill-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.28rem 0.68rem;
+  border-radius: 8px;
+  line-height: 1.35;
+}
+
+@media (max-width: 960px) {
+  .skills-categories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 580px) {
+  .skills-categories-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -12,21 +12,19 @@ const resources = {
         contact: "Contacto",
       },
       header: {
-        greeting: "¡Hola! Soy Victor Blasco 👋",
-        role: "Ingeniero de Software",
-        headline:
-          'Construyendo software de <br />extremo a <span class="highlight-text">extremo.</span>',
+        greeting: "Disponible para nuevas oportunidades",
+        role: "Backend Software Engineer",
         subheadline:
-          "Diseñando interfaces intuitivas y arquitecturas backend sólidas.",
-        role_description:
-          "Ingeniero de Software especializado en desarrollo fullstack, centrado en crear soluciones escalables, eficientes y con un diseño de interfaz cuidado.",
+          "Java/Spring Boot · Python/Django · PostgreSQL — con foco en seguridad (CyberArk PAM)",
+        location:
+          "Castellón, España · Remoto / Híbrido / Abierto a reubicación",
         download_cv: "Descargar CV",
         copy_email: "Copiar email",
         email_copied: "¡Copiado!",
       },
       about: {
         title: "Sobre mí",
-        text: "Graduado en Ingeniería Informática por la Universitat Jaume I. Combino el desarrollo Full-Stack en ecosistemas empresariales (Java/Spring Boot y Python/Django) con arquitecturas de datos, pipelines ETL y monitorización de ciberseguridad. Mi enfoque se centra en construir software escalable, desacoplado y mantenible desde el esquema de base de datos hasta la interfaz.",
+        text: "Ingeniero Informático por la Universitat Jaume I, orientado a backend. Desarrollo con Java/Spring Boot y Python/Django sobre PostgreSQL, construyo pipelines ETL con procesamiento asíncrono (Celery/Redis) y despliego con Docker y Nginx. En mis prácticas en Pamesa diseñé en solitario una plataforma de KPIs de ciberseguridad que integra Cortex XDR, Proofpoint y Endpoint Central, y he completado el bootcamp de CyberArk PAM de NTT DATA. Busco un rol de backend donde la seguridad forme parte del diseño, no sea un añadido.",
         languages_title: "Idiomas",
         lang_spanish: "Castellano",
         lang_valencian: "Valenciano",
@@ -47,62 +45,40 @@ const resources = {
           "Elección de herramientas justificadas por el caso de uso (colas asíncronas con Celery/Redis, modelos relacionales o NoSQL) priorizando la estabilidad y el rendimiento.",
         skill_adaptation_title: "Autonomía en entornos internacionales",
         skill_adaptation_desc:
-          "Rápida curva de aprendizaje demostrada trabajando con distintos stacks (Java, Python, React) y adaptándome a metodologías académicas y técnicas en el extranjero (Erasmus+ en Milán).",
+          "Erasmus+ en Milán cursando asignaturas de máster en inglés, y proyectos en tres stacks distintos (Java, Python, React) en equipos de distinta composición.",
       },
-      techstack: {
-        title: "Mi Stack de Tecnologías",
-        subtitle:
-          "Desplaza el cursor sobre los lenguajes principales para desplegar sus frameworks de soporte.",
-        placeholder:
-          "Pasa el cursor sobre un nodo para explorar mis tecnologías y ver sus dependencias o frameworks",
-        types: {
-          language: "[Lenguaje]",
-          framework: "[Framework]",
-          database: "[Base de Datos]",
-          tool: "[Herramienta]",
-          platform: "[Plataforma]",
+      skills: {
+        title: "Stack técnico",
+        categories: {
+          backend: "Backend",
+          data: "Datos",
+          devops: "Infraestructura y DevOps",
+          security: "Seguridad",
+          testing: "Testing",
+          frontend: "Frontend",
         },
-        descriptions: {
-          html: "Maquetado web estructurado y semántico según estándares modernos de la W3C.",
-          css: "Diseño visual, layouts flexibles (Grid/Flexbox) y animaciones responsivas.",
-          tailwind:
-            "Framework CSS utilitario para maquetación ágil de interfaces mediante clases predefinidas y configurables.",
-          javascript:
-            "Programación de lógica frontend interactiva y asincronía en el navegador.",
-          react:
-            "Librería SPA para construir componentes reactivos, Hooks y renderizado ágil.",
-          python:
-            "Desarrollo backend rápido, scripts de análisis de datos y automatización.",
-          django:
-            "Framework de desarrollo rápido de APIs, ORM integrado y gestión segura de datos.",
-          java: "Programación orientada a objetos robusta con tipado fuerte y alto rendimiento.",
-          spring:
-            "Framework empresarial para microservicios y APIs REST autoconfiguradas.",
-          postgresql:
-            "Gestión de bases de datos relacionales, transacciones ACID y consultas SQL complejas.",
-          mongodb:
-            "Almacenamiento NoSQL documental con esquemas flexibles y alta disponibilidad.",
-          docker:
-            "Contenedores virtuales para asegurar la paridad de entornos de desarrollo y producción.",
-          nginx:
-            "Servidor web de alto rendimiento y proxy inverso para la orquestación de tráfico y despliegue.",
-          git: "Sistema de control de versiones distribuido local para el desarrollo ágil.",
-          github:
-            "Plataforma de alojamiento en la nube para el control de versiones y trabajo en equipo.",
+        items: {
+          least_privilege: "Mínimo privilegio",
+          credential_rotation: "Rotación de credenciales",
         },
       },
       projects: {
         title: "Proyectos",
-        featured_tag: "Proyecto Destacado",
         private_repo: "Repositorio Privado",
         view_on_github: "Ver en GitHub",
         view_architecture: "Ver Arquitectura",
         previews_title: "Vista Previa de la Interfaz",
         zoom_preview: "Ampliar captura",
+        tags: {
+          tfg: "Prácticas en empresa",
+          gustome: "Proyecto en equipo",
+          mormas: "Proyecto en equipo",
+          marketpulse: "Proyecto personal",
+        },
         roles: {
-          gustome: "Rol: Tech Lead & Full-Stack Architect",
-          tfg: "Rol: Autor Único • Software Engineer",
-          mormas: "Rol: Tech Lead & Full-Stack Developer",
+          tfg: "Rol: Autor único · Software Engineer Intern",
+          gustome: "Rol: Lead Developer · Contribuidor principal",
+          mormas: "Rol: Lead Developer · Contribuidor principal",
         },
         architectures: {
           tfg: {
@@ -172,7 +148,7 @@ const resources = {
           },
           gustome: {
             badge: "Caso de Estudio • Arquitectura Serverless",
-            role_badge: "Tech Lead & Full-Stack Architect (Contribuidor #1)",
+            role_badge: "Lead Developer (Contribuidor #1)",
             title: "Gustomé - Gestión Inteligente de Cartas",
             confidential_note: "Arquitectura Cloud-Native orientada a eventos con persistencia NoSQL reactiva en Google Cloud.",
             flow_title: "Flujo de Datos Bidireccional y Serverless",
@@ -236,7 +212,7 @@ const resources = {
             ],
             contributions_title: "Mi Contribución Clave (Rol Principal)",
             contributions: [
-              "Privacidad y ADN Culinario (B2C): Cifrado local AES (crypto-js) en localStorage para datos de alergias/dietas y telemetría anónima agregada.",
+              "Privacidad y ADN Culinario (B2C): perfil de alergias y dietas almacenado solo en el dispositivo del usuario y telemetría anónima agregada.",
               "Business Intelligence (B2B): Dashboard analítico con KPIs, predicción de demanda/mermas a 7 días y tabla interactiva de Ingeniería de Menú.",
               "Branding, Media y Flujos Core: Personalización dinámica de marca por restaurante, subida a Firebase Storage, autenticación B2B e historial de pedidos.",
               "Arquitectura y Calidad: Definición de estándares del repositorio, Context Engineering, refactorización modular y revisión de Pull Requests."
@@ -244,7 +220,7 @@ const resources = {
           },
           mormas: {
             badge: "Caso de Estudio • Arquitectura Spring MVC",
-            role_badge: "Tech Lead & Full-Stack Developer (Contribuidor #1)",
+            role_badge: "Lead Developer (Contribuidor #1)",
             title: "Mountain Race Management System (MoRMaS)",
             confidential_note: "Sistema de Información Corporativo con Arquitectura en Capas y Control Transaccional en Java.",
             flow_title: "Flujo de Control MVC y Persistencia",
@@ -320,25 +296,21 @@ const resources = {
           tfg: "Plataforma BI de Ciberseguridad (TFG)",
           mormas: "Mountain Race Management System (MoRMaS)",
           marketpulse: "Market Pulse - Análisis Financiero & Dashboard",
-          portfolio: "Portfolio Web Personal",
         },
         periods: {
           gustome: "Septiembre 2025 - Mayo 2026",
           tfg: "Febrero 2026 - Mayo 2026",
           mormas: "Septiembre 2024 - Mayo 2025",
           marketpulse: "Octubre 2025 - Diciembre 2025",
-          portfolio: "2025 - 2026",
         },
         descriptions: {
+          tfg: "Plataforma BI que centraliza en un panel ejecutivo y otro operativo los KPIs de 3 plataformas de seguridad corporativa (Cortex XDR, Proofpoint y Endpoint Central). Pipeline ETL en Python con validación por contratos, ingesta asíncrona con Celery/Redis para no bloquear las peticiones web, modelo PostgreSQL normalizado (3FN) con snapshots históricos y control de acceso por roles. Desplegada con Docker Compose, Nginx y Gunicorn.",
           gustome:
-            "Plataforma digital para la digitalización y gestión de menús en restaurantes. Permite personalizar la experiencia del comensal mediante filtros interactivos multicriterio por alérgenos y preferencias dietéticas con sincronización en tiempo real.",
-          tfg: "Plataforma de Business Intelligence end-to-end para la monitorización de KPIs de ciberseguridad corporativa. Destaca por el desacoplamiento de la ingesta pesada de datos mediante un pipeline ETL y colas asíncronas (Celery/Redis) para evitar bloqueos y garantizar tiempos de carga inmediatos en los dashboards directivos.",
+            "Plataforma de cartas digitales para restaurantes: filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con la API de OpenAI. Autorización por rol a nivel de datos con Firestore Security Rules y despliegue continuo con GitHub Actions.",
           mormas:
-            "Aplicación web corporativa para la gestión integral de carreras de montaña. Resuelve la gestión transaccional de inscripciones, seguridad y control de acceso basado en roles (RBAC entre promotores y corredores), notificaciones automáticas y generación dinámica de justificantes PDF en servidor sin penalizar el rendimiento.",
+            "Aplicación web en Java/Spring Boot para gestionar carreras de montaña: inscripciones, autenticación con control de acceso para 3 roles (promotor, atleta y voluntario), confirmaciones por email y justificantes PDF generados en servidor. Arquitectura por capas (Controller · DAO con JdbcTemplate · PostgreSQL) con la integridad referencial garantizada en base de datos.",
           marketpulse:
-            "Aplicación interactiva de análisis bursátil en tiempo real. Consume APIs de Yahoo Finance para graficar históricos y calcular métricas estadísticas clave como la volatilidad y el valor en riesgo (VaR).",
-          portfolio:
-            "Página web personal diseñada con enfoque premium en UI/UX para mostrar mi trayectoria profesional y académica. Cuenta con optimización móvil, soporte de modo oscuro automático y componentes interactivos como redes SVG.",
+            "Paquete Python de análisis financiero que descarga históricos de Yahoo Finance en una única llamada por lote y calcula rentabilidades diarias, volatilidad y matrices de correlación entre sectores. La lógica está separada de la presentación (Streamlit y Jupyter) y cubierta con tests unitarios y de integración en pytest.",
         },
         captions: {
           gustome: {
@@ -371,40 +343,35 @@ const resources = {
         filter_education: "Educación",
         titles: {
           cyberark: "Bootcamp CyberArk PAM",
-          pamesa: "Ingeniero de Software (Prácticas)",
+          pamesa: "Software Engineer (Prácticas)",
           milano: "Estancia Erasmus+",
-          ecoporcelanico: "Operario de producción",
-          wandegar: "Operario de producción",
+          industria: "Operario de producción (empleos de verano)",
           uji: "Grado en Ingeniería Informática",
         },
         institutions: {
           cyberark: "NTT DATA · Formación híbrida",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
-          ecoporcelanico: "ECO PORCELÁNICO S.L.U.",
-          wandegar: "WANDEGAR 2001 S.L.U.",
+          industria: "Eco Porcelánico · Wandegar 2001",
           uji: "Universitat Jaume I",
         },
         periods: {
           cyberark: "Septiembre 2026 - Octubre 2026",
           pamesa: "Febrero 2026 - Mayo 2026",
           milano: "Septiembre 2025 - Enero 2026",
-          ecoporcelanico: "Julio-Agosto 2025",
-          wandegar: "Julio-Agosto 2024",
+          industria: "Veranos 2024 y 2025",
           uji: "Septiembre 2022 - Junio 2026",
         },
         descriptions: {
           cyberark:
-            "Bootcamp intensivo de CyberArk Privileged Access Management (PAM) impartido por NTT DATA. Trabajé en la administración e instalación de una solución PAM self-hosted (Vault, PVWA, CPM, PSM) en un entorno de laboratorio de 7 servidores. Gestioné políticas de mínimo privilegio, integración con LDAP, rotación automática de credenciales y aislamiento de sesiones privilegiadas. Diagnostiqué y resolví incidencias reales mediante análisis metódico de logs y evidencias bajo estándares de hardening y alta disponibilidad. Actualmente preparando las certificaciones Defender y Sentry.",
+            "Desplegué y administré una solución CyberArk PAM self-hosted (Vault, PVWA, CPM, PSM) en un laboratorio de 7 servidores: Safes con mínimo privilegio, integración con LDAP, rotación automática de credenciales y aislamiento de sesiones privilegiadas. Diagnostiqué incidencias mediante análisis de logs con criterios de hardening y alta disponibilidad. Preparando las certificaciones CyberArk Defender y Sentry.",
           pamesa:
-            "Desarrollo integral de una plataforma BI para monitorización de KPIs de ciberseguridad. Implementé un pipeline ETL en Python, modelos en PostgreSQL y dashboards con Django y Tailwind CSS, utilizando Celery/Redis para orquestación asíncrona y Docker para el despliegue.",
+            "Diseñé y desarrollé en solitario una plataforma BI de KPIs de ciberseguridad que integra 3 fuentes (Cortex XDR, Proofpoint y Endpoint Central). Construí el pipeline ETL en Python con validación por contratos, el modelo PostgreSQL (3FN) y los dashboards ejecutivo y operativo en Django, delegando la ingesta en workers Celery/Redis y desplegando con Docker Compose, Nginx y Gunicorn.",
           milano:
-            "Cursé asignaturas de máster en Computer Science y Data Science for Economics, aprendiendo NoSQL (MongoDB), Business Intelligence y Data Science, y fortaleciendo mi adaptabilidad a entornos internacionales.",
-          ecoporcelanico:
-            "Trabajo en entorno industrial de alta exigencia con objetivos diarios de producción estrictos. Reforcé la disciplina operativa, la coordinación bajo presión en turnos continuos y la resolución ágil de incidencias en línea mientras cursaba el grado.",
-          wandegar:
-            "Ejecución de procesos de fabricación estandarizados bajo métricas de calidad y tiempos de entrega ajustados. Consolidé la precisión operativa, la organización del flujo de trabajo en equipo y el cumplimiento riguroso de plazos.",
-          uji: "Durante el grado adquirí una base sólida en programación, estructuras de datos, algoritmos, bases de datos, redes y desarrollo web, fortaleciendo habilidades colaborativas en entornos de desarrollo.",
+            "Asignaturas de máster en Computer Science y Data Science for Economics impartidas en inglés: bases de datos NoSQL (MongoDB), Business Intelligence y Data Science.",
+          industria:
+            "Trabajo a turnos con objetivos de producción diarios, compaginado con el grado.",
+          uji: "Programación, estructuras de datos y algoritmos, bases de datos, redes y desarrollo web. TFG: plataforma BI de ciberseguridad desarrollada durante las prácticas en Pamesa.",
         },
       },
       contact: {
@@ -430,7 +397,7 @@ const resources = {
         copyright:
           "© {{year}} Victor Blasco García. Todos los derechos reservados.",
         design_by: "Diseñado & Desarrollado por Victor Blasco",
-        role: "Ingeniería Informática | Desarrollo de Software",
+        role: "Ingeniería Informática | Backend & Seguridad",
         home: "Inicio",
         back_to_top: "Volver arriba",
       },
@@ -445,21 +412,19 @@ const resources = {
         contact: "Contact",
       },
       header: {
-        greeting: "Hi! I'm Victor Blasco 👋",
-        role: "Software Engineer",
-        headline:
-          'Building software <br />end to <span class="highlight-text">end.</span>',
+        greeting: "Open to new opportunities",
+        role: "Backend Software Engineer",
         subheadline:
-          "Designing intuitive interfaces and solid backend architectures.",
-        role_description:
-          "Software Engineer specializing in fullstack development, focused on creating scalable, efficient solutions with a carefully crafted user interface.",
+          "Java/Spring Boot · Python/Django · PostgreSQL — security-focused (CyberArk PAM)",
+        location:
+          "Castellón, Spain · Remote / Hybrid / Open to relocation",
         download_cv: "Download CV",
         copy_email: "Copy email",
         email_copied: "Copied!",
       },
       about: {
         title: "About me",
-        text: "Computer Engineering graduate from Universitat Jaume I. I combine Full-Stack development in enterprise ecosystems (Java/Spring Boot and Python/Django) with data architectures, ETL pipelines, and cybersecurity monitoring. My focus is on building scalable, decoupled, and maintainable software from the database schema to the user interface.",
+        text: "Computer Engineering graduate (Universitat Jaume I) focused on backend. I build with Java/Spring Boot and Python/Django on PostgreSQL, design ETL pipelines with asynchronous processing (Celery/Redis), and deploy with Docker and Nginx. During my internship at Pamesa I single-handedly built a cybersecurity KPI platform integrating Cortex XDR, Proofpoint and Endpoint Central, and I've completed NTT DATA's CyberArk PAM bootcamp. I'm looking for a backend role where security is part of the design, not an afterthought.",
         languages_title: "Languages",
         lang_spanish: "Spanish",
         lang_valencian: "Valencian",
@@ -480,61 +445,40 @@ const resources = {
           "Selecting tools justified by the use case (asynchronous queues with Celery/Redis, relational or NoSQL models) prioritizing stability and performance.",
         skill_adaptation_title: "Autonomy in International Environments",
         skill_adaptation_desc:
-          "Fast learning curve demonstrated across multiple stacks (Java, Python, React) and adapting to academic and technical methodologies abroad (Erasmus+ in Milan).",
+          "Erasmus+ in Milan taking master's courses taught in English, and projects across three different stacks (Java, Python, React) in varying team setups.",
       },
-      techstack: {
-        title: "My Tech Stack",
-        subtitle:
-          "Hover over main languages to display their supporting frameworks.",
-        placeholder:
-          "Hover over a node to explore my technologies and see their dependencies or frameworks",
-        types: {
-          language: "[Language]",
-          framework: "[Framework]",
-          database: "[Database]",
-          tool: "[Tool]",
-          platform: "[Platform]",
+      skills: {
+        title: "Tech stack",
+        categories: {
+          backend: "Backend",
+          data: "Data",
+          devops: "Infrastructure & DevOps",
+          security: "Security",
+          testing: "Testing",
+          frontend: "Frontend",
         },
-        descriptions: {
-          html: "Structured and semantic web layout according to modern W3C standards.",
-          css: "Visual design, flexible layouts (Grid/Flexbox), and responsive animations.",
-          tailwind:
-            "Utility-first CSS framework for rapid interface layout using predefined and configurable classes.",
-          javascript:
-            "Programming interactive frontend logic and asynchronous behavior in the browser.",
-          react:
-            "SPA library to build reactive components, Hooks, and fast rendering.",
-          python:
-            "Fast backend development, data analysis scripts, and automation.",
-          django:
-            "Rapid development framework for APIs, integrated ORM, and secure data management.",
-          java: "Robust object-oriented programming with strong typing and high performance.",
-          spring:
-            "Enterprise framework for self-configured microservices and REST APIs.",
-          postgresql:
-            "Relational database management, ACID transactions, and complex SQL queries.",
-          mongodb:
-            "Document-based NoSQL storage with flexible schemas and high availability.",
-          docker:
-            "Virtual containers to ensure environment parity between development and production.",
-          nginx:
-            "High-performance web server and reverse proxy for traffic orchestration and deployment.",
-          git: "Local distributed version control system for agile development.",
-          github: "Cloud hosting platform for version control and teamwork.",
+        items: {
+          least_privilege: "Least privilege",
+          credential_rotation: "Credential rotation",
         },
       },
       projects: {
         title: "Projects",
-        featured_tag: "Featured Project",
         private_repo: "Private Repository",
         view_on_github: "View on GitHub",
         view_architecture: "View Architecture",
         previews_title: "Interface Preview",
         zoom_preview: "Enlarge screenshot",
+        tags: {
+          tfg: "Industry internship",
+          gustome: "Team project",
+          mormas: "Team project",
+          marketpulse: "Personal project",
+        },
         roles: {
-          gustome: "Role: Tech Lead & Full-Stack Architect",
-          tfg: "Role: Sole Author • Software Engineer",
-          mormas: "Role: Tech Lead & Full-Stack Developer",
+          tfg: "Role: Sole author · Software Engineer Intern",
+          gustome: "Role: Lead Developer · Main contributor",
+          mormas: "Role: Lead Developer · Main contributor",
         },
         architectures: {
           tfg: {
@@ -604,7 +548,7 @@ const resources = {
           },
           gustome: {
             badge: "Case Study • Serverless Architecture",
-            role_badge: "Tech Lead & Full-Stack Architect (#1 Contributor)",
+            role_badge: "Lead Developer (#1 Contributor)",
             title: "Gustomé - Intelligent Menu Management",
             confidential_note: "Cloud-Native event-driven architecture with reactive NoSQL persistence on Google Cloud.",
             flow_title: "Bidirectional Serverless Data Flow",
@@ -668,7 +612,7 @@ const resources = {
             ],
             contributions_title: "My Key Contributions (Lead Role)",
             contributions: [
-              "Privacy & Culinary DNA (B2C): Local AES encryption (crypto-js) in localStorage for allergy/diet data and anonymized aggregated telemetry.",
+              "Privacy & Culinary DNA (B2C): allergy and dietary profile stored locally on the user's device, plus anonymized aggregated telemetry.",
               "Business Intelligence (B2B): Analytics dashboard with KPIs, 7-day demand/waste forecasting, and interactive Menu Engineering table.",
               "Branding, Media & Core Flows: Dynamic brand customization per restaurant, Firebase Storage uploads, B2B authentication, and order history.",
               "Architecture & Quality: Repository standards definition, Context Engineering, modular refactoring, and team Pull Request reviews."
@@ -676,7 +620,7 @@ const resources = {
           },
           mormas: {
             badge: "Case Study • Spring MVC Architecture",
-            role_badge: "Tech Lead & Full-Stack Developer (#1 Contributor)",
+            role_badge: "Lead Developer (#1 Contributor)",
             title: "Mountain Race Management System (MoRMaS)",
             confidential_note: "Enterprise Layered Information System with Transactional Control in Java & Spring Boot.",
             flow_title: "MVC Control Flow & Data Persistence",
@@ -752,25 +696,21 @@ const resources = {
           tfg: "Cybersecurity BI Platform (TFG)",
           mormas: "Mountain Race Management System (MoRMaS)",
           marketpulse: "Market Pulse - Financial Analysis & Dashboard",
-          portfolio: "Personal Web Portfolio",
         },
         periods: {
           gustome: "September 2025 - May 2026",
           tfg: "February 2026 - May 2026",
           mormas: "September 2024 - May 2025",
           marketpulse: "October 2025 - December 2025",
-          portfolio: "2025 - 2026",
         },
         descriptions: {
+          tfg: "BI platform that centralizes KPIs from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) into executive and operational dashboards. Python ETL pipeline with contract validation, asynchronous ingestion via Celery/Redis to keep web requests non-blocking, normalized PostgreSQL schema (3NF) with historical snapshots, and role-based access control. Deployed with Docker Compose, Nginx, and Gunicorn.",
           gustome:
-            "Digital platform for restaurant menu digitalization and management. Allows customizing the diner experience with real-time interactive multi-criteria filters for allergens and dietary preferences.",
-          tfg: "End-to-end Business Intelligence platform for corporate cybersecurity KPI monitoring. Features decoupled heavy data ingestion via an automated ETL pipeline and asynchronous queues (Celery/Redis) to prevent blocking and guarantee instant load times on executive dashboards.",
+            "Digital menu platform for restaurants: allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OCR with the OpenAI API. Data-level role authorization with Firestore Security Rules and continuous deployment via GitHub Actions.",
           mormas:
-            "Corporate web application for comprehensive mountain race management. Solves transactional registration concurrency, role-based access control (RBAC between promoters and runners), automated email notifications, and server-side dynamic PDF voucher generation without performance penalties.",
+            "Java/Spring Boot web application for mountain race management: registrations, authentication with role-based access control across 3 roles (promoter, athlete, and volunteer), email confirmations, and server-side PDF receipt generation. Layered architecture (Controller · JdbcTemplate DAO · PostgreSQL) with referential integrity enforced at the database level.",
           marketpulse:
-            "Interactive real-time stock market analysis application. Consumes Yahoo Finance APIs to plot historical data and calculate key statistical metrics like volatility and Value at Risk (VaR).",
-          portfolio:
-            "Personal website designed with a premium UI/UX focus to showcase my professional and academic career. Features mobile optimization, automatic dark mode support, and interactive components like SVG networks.",
+            "Python financial analysis package that batch-downloads historical series from Yahoo Finance in a single call and computes daily returns, volatility, and cross-sector correlation matrices. Core logic is decoupled from presentation (Streamlit and Jupyter) and covered with unit and integration tests in pytest.",
         },
         captions: {
           gustome: {
@@ -803,40 +743,35 @@ const resources = {
         filter_education: "Education",
         titles: {
           cyberark: "CyberArk PAM Bootcamp",
-          pamesa: "Software Engineer (Internship)",
+          pamesa: "Software Engineer Intern",
           milano: "Erasmus+ Stay",
-          ecoporcelanico: "Production Operator",
-          wandegar: "Production Operator",
+          industria: "Production Operator (summer jobs)",
           uji: "Bachelor's Degree in Computer Engineering",
         },
         institutions: {
           cyberark: "NTT DATA · Hybrid training",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
-          ecoporcelanico: "ECO PORCELÁNICO S.L.U.",
-          wandegar: "WANDEGAR 2001 S.L.U.",
+          industria: "Eco Porcelánico · Wandegar 2001",
           uji: "Universitat Jaume I",
         },
         periods: {
           cyberark: "September 2026 - October 2026",
           pamesa: "February 2026 - May 2026",
           milano: "September 2025 - January 2026",
-          ecoporcelanico: "July-August 2025",
-          wandegar: "July-August 2024",
+          industria: "Summers 2024 & 2025",
           uji: "September 2022 - June 2026",
         },
         descriptions: {
           cyberark:
-            "Intensive CyberArk Privileged Access Management (PAM) bootcamp delivered by NTT DATA. I worked on the administration and deployment of a complete self-hosted PAM solution (Vault, PVWA, CPM, PSM) across a 7-server virtual lab. Managed least-privilege Safes, LDAP integration, automated credential rotation, and privileged session isolation. Resolved real-world incidents through methodical log and evidence analysis under hardening and high availability standards. Currently preparing for the Defender and Sentry certifications.",
+            "Deployed and administered a self-hosted CyberArk PAM solution (Vault, PVWA, CPM, PSM) across a 7-server lab: least-privilege Safes, LDAP integration, automated credential rotation, and privileged session isolation. Diagnosed incidents through log analysis under hardening and high-availability standards. Currently preparing for the CyberArk Defender and Sentry certifications.",
           pamesa:
-            "Full development of a BI platform for cybersecurity KPI monitoring. Implemented an ETL pipeline in Python, models in PostgreSQL, and dashboards with Django and Tailwind CSS, using Celery/Redis for asynchronous orchestration and Docker for deployment.",
+            "Single-handedly designed and built a cybersecurity KPI BI platform integrating 3 sources (Cortex XDR, Proofpoint, and Endpoint Central). Built the Python ETL pipeline with contract validation, the 3NF PostgreSQL schema, and the executive and operational dashboards in Django, offloading ingestion to Celery/Redis workers and deploying with Docker Compose, Nginx, and Gunicorn.",
           milano:
-            "Took master's courses in Computer Science and Data Science for Economics, learning NoSQL (MongoDB), Business Intelligence, and Data Science, and strengthening my adaptability in international environments.",
-          ecoporcelanico:
-            "Worked in a high-demand industrial environment with strict daily production targets. Reinforced operational discipline, team coordination under pressure across continuous shifts, and rapid incident resolution while pursuing my engineering degree.",
-          wandegar:
-            "Executed standardized manufacturing processes under tight quality metrics and delivery deadlines. Consolidated operational precision, team workflow organization, and strict deadline compliance.",
-          uji: "During the degree, I acquired a solid foundation in programming, data structures, algorithms, databases, networking, and web development, strengthening collaborative skills in development environments.",
+            "Master's courses in Computer Science and Data Science for Economics taught in English: NoSQL databases (MongoDB), Business Intelligence, and Data Science.",
+          industria:
+            "Shift work with daily production targets, balanced alongside my engineering degree.",
+          uji: "Programming, data structures and algorithms, databases, computer networks, and web development. BSc Thesis: cybersecurity BI platform built during my internship at Pamesa.",
         },
       },
       contact: {
@@ -861,7 +796,7 @@ const resources = {
       footer: {
         copyright: "© {{year}} Victor Blasco García. All rights reserved.",
         design_by: "Designed & Developed by Victor Blasco",
-        role: "Computer Engineering | Software Development",
+        role: "Computer Engineering | Backend & Security",
         home: "Home",
         back_to_top: "Back to top",
       },

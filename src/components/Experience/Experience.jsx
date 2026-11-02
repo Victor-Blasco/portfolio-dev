@@ -9,8 +9,6 @@ import { trackEvent } from "@/utils/analytics";
 import nttdataLogo from "@/assets/logos/nttdata.png";
 import pamesaLogo from "@/assets/logos/pamesa.png";
 import milanoLogo from "@/assets/logos/unimi.png";
-import ecoporcelanicoLogo from "@/assets/logos/ecoporcelanico.png";
-import wandegarLogo from "@/assets/logos/wandegar.jpg";
 import ujiLogo from "@/assets/logos/uji.png";
 
 /**
@@ -103,22 +101,12 @@ function Experience() {
       logo: milanoLogo,
     },
     {
-      id: "ecoporcelanico",
+      id: "industria",
       type: "work",
-      title: t("experience.titles.ecoporcelanico"),
-      institution: t("experience.institutions.ecoporcelanico"),
-      period: t("experience.periods.ecoporcelanico"),
-      description: t("experience.descriptions.ecoporcelanico"),
-      logo: ecoporcelanicoLogo,
-    },
-    {
-      id: "wandegar",
-      type: "work",
-      title: t("experience.titles.wandegar"),
-      institution: t("experience.institutions.wandegar"),
-      period: t("experience.periods.wandegar"),
-      description: t("experience.descriptions.wandegar"),
-      logo: wandegarLogo,
+      title: t("experience.titles.industria"),
+      institution: t("experience.institutions.industria"),
+      period: t("experience.periods.industria"),
+      description: t("experience.descriptions.industria"),
     },
     {
       id: "uji",

@@ -24,8 +24,8 @@
   top: -150px;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;
-  height: 500px;
+  width: min(500px, 100%);
+  height: min(500px, 100vw);
   background: radial-gradient(circle, var(--glow-blue) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -175,12 +175,21 @@
   margin: 0 0 1rem 0;
 }
 
-.hero-role {
-  max-width: 600px;
+.hero-location {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  max-width: 640px;
   margin: 0 auto;
-  font-size: 1.02rem;
-  line-height: 1.65;
+  font-size: 0.96rem;
+  line-height: 1.5;
   color: var(--text-secondary);
+}
+
+.hero-location svg {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 
 .header-links {

@@ -1,51 +1,48 @@
-# Portfolio Web | Victor Blasco
+# Portfolio Web · Víctor Blasco
 
-¡Hola! Soy Victor Blasco, un desarrollador Full Stack Junior. Este es el repositorio de mi página web personal, donde muestro mi experiencia, proyectos y habilidades.
+Portfolio profesional de **Víctor Blasco**, Backend Software Engineer orientado a **Java/Spring Boot**, **Python/Django**, **PostgreSQL**, **Docker** y seguridad (**CyberArk PAM**).
 
----
-
-### **Funcionalidades**
-- **Diseño Responsivo:** Se adapta a diferentes dispositivos (móvil, tablet y escritorio).
-- **Modo Oscuro:** Incluye una funcionalidad para cambiar el tema de la página.
-- **Navegación Intuitiva:** Enlaces internos que permiten una navegación fluida entre las secciones.
+🌐 **Producción:** [https://victorblasco.vercel.app](https://victorblasco.vercel.app)
 
 ---
 
-### **Tecnologías Utilizadas**
-* **Frontend:**
-    * **React:** Librería de JavaScript para construir la interfaz de usuario.
-    * **HTML5:** Estructura semántica de la página.
-    * **CSS3:** Estilos y animaciones con un diseño limpio y moderno.
+## Qué incluye
+
+- **Posicionamiento y resumen técnico:** presentación directa del perfil, ubicación/disponibilidad y stack agrupado por áreas (`Backend`, `Datos`, `Infraestructura y DevOps`, `Seguridad`, `Testing` y `Frontend`).
+- **Casos de estudio de arquitectura:** modales interactivos con diagramas de flujo de datos y decisiones de ingeniería para los proyectos principales (*Plataforma BI de Ciberseguridad en Pamesa*, *Gustomé* y *MoRMaS*), además de *Market Pulse*.
+- **Trayectoria filtrable:** línea temporal cronológica con filtros por experiencia profesional y formación académica.
+- **Internacionalización (ES / EN):** cambio de idioma en caliente con `i18next` y descarga de CV adaptada al idioma activo.
+- **Tema claro / oscuro:** variables CSS semánticas sincronizadas con `prefers-color-scheme` y persistencia en `localStorage`.
 
 ---
 
-### **Cómo Ejecutar el Proyecto Localmente**
-Sigue estos pasos para clonar el repositorio y ejecutar el proyecto en tu máquina.
+## Stack del repositorio
 
-1.  Clona el repositorio:
-    ```bash
-    git clone https://github.com/Victor-Blasco/portfolio-dev.git
-    ```
-
-2.  Navega al directorio del proyecto:
-    ```bash
-    cd portfolio-dev
-    ```
-
-3.  Instala las dependencias:
-    ```bash
-    npm install
-    ```
-
-4.  Ejecuta la aplicación en modo de desarrollo:
-    ```bash
-    npm run dev
-    ```
-    El proyecto se abrirá en tu navegador en `http://localhost:5173`.
+- **React 19** + **Vite 7**
+- **i18next** + **react-i18next**
+- **CSS modular con variables de tema** (sin dependencias de UI pesadas)
+- **Carga diferida (`React.lazy` + `Suspense`)** para secciones bajo el pliegue
 
 ---
 
-### **Contacto**
-- **LinkedIn:** [https://linkedin.com/in/victor-blasco-garcia](https://linkedin.com/in/victor-blasco-garcia)
-- **Email:** victorblascogar@gmail.com
-- **GitHub:** [https://github.com/Victor-Blasco](https://github.com/Victor-Blasco)
+## Desarrollo local
+
+```bash
+# 1. Instalar dependencias
+npm install
+
+# 2. Levantar servidor de desarrollo (http://localhost:5173)
+npm run dev
+
+# 3. Verificar linter y empaquetado de producción
+npm run lint
+npm run build
+```
+
+---
+
+## Contacto
+
+- **LinkedIn:** [linkedin.com/in/victor-blasco-garcia](https://linkedin.com/in/victor-blasco-garcia)
+- **GitHub:** [github.com/Victor-Blasco](https://github.com/Victor-Blasco)
+- **Email:** [victorblascogar@gmail.com](mailto:victorblascogar@gmail.com)

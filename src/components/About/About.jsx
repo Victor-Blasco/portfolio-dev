@@ -1,9 +1,7 @@
-import { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "./About.css";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-
-const TechStack = lazy(() => import("./TechStack"));
+import SkillsGrid from "./SkillsGrid";
 
 /**
  * Componente que renderiza un icono SVG según su nombre identificador.
@@ -93,43 +91,38 @@ function About() {
         {t("about.text")}
       </p>
 
-      <div className="about-grid">
-        <div className="about-tech-col">
-          <Suspense fallback={<div className="tech-stack-container" style={{ minHeight: "480px" }} aria-hidden="true" />}>
-            <TechStack />
-          </Suspense>
-        </div>
-        <div className="about-skills-col">
-          <div className="soft-skills-container">
-            <h3>{t("about.soft_skills_title")}</h3>
-            <ul className="skills-list-premium">
-              {softSkills.map((skill, index) => (
-                <li key={index} className="skill-item-premium">
-                  <div className="skill-icon-wrapper">
-                    <SkillIcon name={skill.icon} />
-                  </div>
-                  <div className="skill-text-wrapper">
-                    <h4 className="skill-name-premium">{skill.name}</h4>
-                    <p className="skill-desc-premium">{skill.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <SkillsGrid />
 
-          <div className="languages-container">
-            <h3>{t("about.languages_title")}</h3>
-            <ul className="languages-list-premium">
-              {languages.map((lang, index) => (
-                <li key={index} className="language-item-premium">
-                  <span className="language-name">{lang.name}</span>
-                  <span className={`language-level-badge ${lang.tier}`}>
-                    {lang.level}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="about-grid">
+        <div className="soft-skills-container">
+          <h3>{t("about.soft_skills_title")}</h3>
+          <ul className="skills-list-premium">
+            {softSkills.map((skill, index) => (
+              <li key={index} className="skill-item-premium">
+                <div className="skill-icon-wrapper">
+                  <SkillIcon name={skill.icon} />
+                </div>
+                <div className="skill-text-wrapper">
+                  <h4 className="skill-name-premium">{skill.name}</h4>
+                  <p className="skill-desc-premium">{skill.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="languages-container">
+          <h3>{t("about.languages_title")}</h3>
+          <ul className="languages-list-premium">
+            {languages.map((lang, index) => (
+              <li key={index} className="language-item-premium">
+                <span className="language-name">{lang.name}</span>
+                <span className={`language-level-badge ${lang.tier}`}>
+                  {lang.level}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

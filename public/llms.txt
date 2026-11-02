@@ -1,11 +1,11 @@
-# Victor Blasco - Portfolio Web & Software Engineer
+# Víctor Blasco - Backend Software Engineer
 
-> Portfolio profesional de Victor Blasco, Ingeniero de Software y Desarrollador Full-Stack especializado en Java/Spring Boot, Python/Django, React y Ciberseguridad.
+> Portfolio profesional de Víctor Blasco, Backend Software Engineer especializado en Java/Spring Boot, Python/Django, PostgreSQL, Docker y seguridad (CyberArk PAM).
 
 ## Información Principal
-- [Sobre mí](/#about): Perfil profesional, propuesta de valor técnica y stack tecnológico.
-- [Proyectos](/#projects): Casos de estudio y arquitectura de software (Gustomé, Plataforma BI Ciberseguridad TFG, MoRMaS, Market Pulse).
-- [Trayectoria](/#experience): Experiencia profesional y formación (Bootcamp CyberArk PAM en NTT DATA, Universidad Jaume I & Università degli Studi di Milano).
+- [Sobre mí](/#about): Perfil profesional, stack técnico categorizado (Backend, Datos, Infraestructura/DevOps, Seguridad, Testing, Frontend) e idiomas.
+- [Proyectos](/#projects): Casos de estudio y arquitectura de software (Plataforma BI de Ciberseguridad en Pamesa, Gustomé, MoRMaS, Market Pulse).
+- [Trayectoria](/#experience): Experiencia profesional y formación (Prácticas en Pamesa Grupo Empresarial, Bootcamp CyberArk PAM en NTT DATA, Universitat Jaume I & Università degli Studi di Milano).
 - [Contacto](/#contact): Formulario y vías de contacto directo.
 
 ## Enlaces Externos

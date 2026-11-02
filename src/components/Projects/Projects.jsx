@@ -13,7 +13,6 @@ const gustomeGlob = import.meta.glob("../../assets/projects/gustome/*.{png,jpg,j
 const tfgGlob = import.meta.glob("../../assets/projects/tfg/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const mormasGlob = import.meta.glob("../../assets/projects/mormas/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const marketpulseGlob = import.meta.glob("../../assets/projects/marketpulse/*.{png,jpg,jpeg,svg,webp}", { eager: true });
-const portfolioGlob = import.meta.glob("../../assets/projects/portfolio/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 
 // Mapa declarativo de subtítulos para imágenes de proyectos
 const PROJECT_CAPTION_MAP = {
@@ -98,7 +97,7 @@ const getProjectImages = (globObj, projectKey, t) => {
 
 /**
  * Componente que muestra la lista de proyectos destacados.
- * Renderiza tarjetas con detalles, tecnologías, enlaces a repositorios o demos,
+ * Renderiza tarjetas con detalles, tecnologías, enlaces a repositorios o casos de estudio,
  * y un carrusel de capturas de pantalla interactivo con visor ampliado.
  *
  * @returns {JSX.Element} La sección de proyectos.
@@ -148,28 +147,13 @@ function Projects() {
 
   const projectsData = [
     {
-      key: "gustome",
-      title: t("projects.titles.gustome"),
-      subtitle: t("projects.periods.gustome"),
-      role: t("projects.roles.gustome"),
-      description: t("projects.descriptions.gustome"),
-      tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore"],
-      images: getProjectImages(gustomeGlob, "gustome", t),
-      references: [
-        {
-          label: "Architecture",
-          hasArchitectureModal: true,
-          archKey: "gustome",
-        },
-      ],
-    },
-    {
       key: "tfg",
+      tag: t("projects.tags.tfg"),
       title: t("projects.titles.tfg"),
       subtitle: t("projects.periods.tfg"),
       role: t("projects.roles.tfg"),
       description: t("projects.descriptions.tfg"),
-      tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Tailwind CSS", "Docker"],
+      tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Docker", "Nginx"],
       images: getProjectImages(tfgGlob, "tfg", t),
       references: [
         {
@@ -180,12 +164,30 @@ function Projects() {
       ],
     },
     {
+      key: "gustome",
+      tag: t("projects.tags.gustome"),
+      title: t("projects.titles.gustome"),
+      subtitle: t("projects.periods.gustome"),
+      role: t("projects.roles.gustome"),
+      description: t("projects.descriptions.gustome"),
+      tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore", "OpenAI API", "GitHub Actions"],
+      images: getProjectImages(gustomeGlob, "gustome", t),
+      references: [
+        {
+          label: "Architecture",
+          hasArchitectureModal: true,
+          archKey: "gustome",
+        },
+      ],
+    },
+    {
       key: "mormas",
+      tag: t("projects.tags.mormas"),
       title: t("projects.titles.mormas"),
       subtitle: t("projects.periods.mormas"),
       role: t("projects.roles.mormas"),
       description: t("projects.descriptions.mormas"),
-      tech: ["Java (Spring Boot)", "HTML/CSS", "PostgreSQL"],
+      tech: ["Java (Spring Boot)", "Thymeleaf", "PostgreSQL", "JdbcTemplate"],
       images: getProjectImages(mormasGlob, "mormas", t),
       references: [
         {
@@ -197,29 +199,16 @@ function Projects() {
     },
     {
       key: "marketpulse",
+      tag: t("projects.tags.marketpulse"),
       title: t("projects.titles.marketpulse"),
       subtitle: t("projects.periods.marketpulse"),
       description: t("projects.descriptions.marketpulse"),
-      tech: ["Python (Pandas, NumPy)", "Streamlit", "Yahoo Finance API"],
+      tech: ["Python", "Pandas / NumPy", "pytest", "Streamlit"],
       images: getProjectImages(marketpulseGlob, "marketpulse", t),
       references: [
         {
           label: "GitHub",
           url: "https://github.com/Victor-Blasco/market-pulse-project",
-        },
-      ],
-    },
-    {
-      key: "portfolio",
-      title: t("projects.titles.portfolio"),
-      subtitle: t("projects.periods.portfolio"),
-      description: t("projects.descriptions.portfolio"),
-      tech: ["JavaScript (React)", "CSS Vanilla", "Vite"],
-      images: getProjectImages(portfolioGlob, "portfolio", t),
-      references: [
-        {
-          label: "GitHub",
-          url: "https://github.com/Victor-Blasco/portfolio-dev",
         },
       ],
     },
@@ -250,11 +239,11 @@ function Projects() {
           const isEven = index % 2 === 0;
 
           return (
-            <div key={index} className={`project-row ${isEven ? "normal" : "reversed"}`}>
+            <div key={project.key} className={`project-row ${isEven ? "normal" : "reversed"}`}>
               {/* Lado A: Información */}
               <div className="project-info-side">
                 <div className="project-meta-header">
-                  <span className="project-tag">{t("projects.featured_tag")}</span>
+                  <span className="project-tag">{project.tag}</span>
                   <span className="project-duration">{project.subtitle}</span>
                 </div>
                 <h3 className="project-title">{project.title}</h3>
@@ -341,35 +330,11 @@ function Projects() {
               {/* Lado B: Visualización */}
               <div className="project-visual-side">
                 <div className="visual-glow" style={{ "--glow-color": isEven ? "var(--glow-blue)" : "var(--glow-violet)" }}></div>
-                {project.images && project.images.length > 0 ? (
-                  <ProjectCarousel
-                    images={project.images}
-                    title={project.title}
-                    onImageClick={(imgIndex) => openLightbox(project.images, imgIndex, project.title)}
-                  />
-                ) : (
-                  <div className="mock-code-editor">
-                    <div className="editor-header">
-                      <span className="editor-dot red"></span>
-                      <span className="editor-dot yellow"></span>
-                      <span className="editor-dot green"></span>
-                      <span className="editor-filename">Portfolio.jsx</span>
-                    </div>
-                    <pre className="editor-code">
-                      <code>
-                        <span className="keyword">const</span> <span className="function">Portfolio</span> = () =&gt; &#123;<br />
-                        &nbsp;&nbsp;<span className="keyword">return</span> (<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="tag">div</span> <span className="attr">className</span>=<span className="string">"premium-ui"</span>&gt;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="tag">Navbar</span> /&gt;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="tag">TechStack</span> /&gt;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="tag">Projects</span> /&gt;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span className="tag">div</span>&gt;<br />
-                        &nbsp;&nbsp;);<br />
-                        &#125;;
-                      </code>
-                    </pre>
-                  </div>
-                )}
+                <ProjectCarousel
+                  images={project.images}
+                  title={project.title}
+                  onImageClick={(imgIndex) => openLightbox(project.images, imgIndex, project.title)}
+                />
               </div>
             </div>
           );
