@@ -4,7 +4,11 @@
 
 ## Información Principal
 - [Sobre mí](/#about): Perfil profesional, stack técnico categorizado (Backend, Datos, Infraestructura/DevOps, Seguridad, Testing, Frontend) e idiomas.
-- [Proyectos](/#projects): Casos de estudio y arquitectura de software (Plataforma BI de Ciberseguridad en Pamesa, Gustomé, MoRMaS, Market Pulse).
+- [Proyectos](/#projects):
+  - **Plataforma BI de Ciberseguridad (TFG - Pamesa Grupo Empresarial):** Cruce de Cortex XDR, Proofpoint y Endpoint Central para detección de Shadow IT y score de riesgo por equipo; ETL en Python optimizado (reducción del tiempo de obtención y procesado de datos de ~1 min a ~25 s) con contratos y auditoría de ingestas, Celery/Redis, PostgreSQL con trazabilidad histórica, Clean Architecture en Django documentada con ADRs, CI en GitHub Actions (pytest) y despliegue en 5 contenedores Docker.
+  - **Gustomé:** Plataforma SaaS multi-tenant (planes Free, Basic, Pro) en React y Firebase/Firestore con comandas en tiempo real (onSnapshot), optimización de lecturas y OCR con OpenAI normalizado frente a un catálogo maestro de ingredientes y alérgenos.
+  - **MoRMaS:** Sistema de gestión de carreras de montaña en Java/Spring Boot, JdbcTemplate y Thymeleaf sobre un esquema PostgreSQL de 14 tablas con borrado lógico (soft delete) y puntuación de usabilidad SUS de 87,5/100.
+  - **Market Pulse:** Paquete Python de análisis financiero con Pandas/NumPy, tests en pytest y visualización en Streamlit.
 - [Trayectoria](/#experience): Experiencia profesional y formación (Prácticas en Pamesa Grupo Empresarial, Bootcamp CyberArk PAM en NTT DATA, Universitat Jaume I & Università degli Studi di Milano).
 - [Contacto](/#contact): Formulario y vías de contacto directo.
 

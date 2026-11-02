@@ -153,7 +153,7 @@ function Projects() {
       subtitle: t("projects.periods.tfg"),
       role: t("projects.roles.tfg"),
       description: t("projects.descriptions.tfg"),
-      tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Docker", "Nginx"],
+      tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Docker", "Nginx", "GitHub Actions"],
       images: getProjectImages(tfgGlob, "tfg", t),
       references: [
         {

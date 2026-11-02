@@ -87,7 +87,7 @@ const resources = {
             title: "Plataforma BI de Ciberseguridad (TFG)",
             confidential_note: "Código fuente privado bajo acuerdo de confidencialidad corporativa con Pamesa Grupo Empresarial.",
             flow_title: "Flujo de Datos y Pipeline de Procesamiento",
-            infra_label: "Infraestructura Contenerizada (Docker & Docker Compose con Healthchecks)",
+            infra_label: "Infraestructura en 5 Contenedores (Docker Compose con Healthchecks + CI en GitHub Actions)",
             flow_nodes: [
               {
                 step: "01",
@@ -98,7 +98,7 @@ const resources = {
               {
                 step: "02",
                 title: "Pipeline ETL Python",
-                sub: "Extracción, Normalización de Fechas y Validación con contracts.py",
+                sub: "Extracción, Contratos de Datos (contracts.py) y Auditoría de Ejecución",
                 type: "etl"
               },
               {
@@ -110,40 +110,47 @@ const resources = {
               {
                 step: "04",
                 title: "Persistencia PostgreSQL",
-                sub: "Modelo Relacional Normalizado (3FN) con Snapshots Históricos",
+                sub: "Trazabilidad Histórica por Snapshots y Registro de Auditorías",
                 type: "db"
               },
               {
                 step: "05",
-                title: "Backend Django (SOLID)",
-                sub: "Modelos managed=False, DTOs, Context Builders y RBAC",
+                title: "Backend Django (Clean Arch)",
+                sub: "Services, DTOs, Context Builders, Use Cases y Control RBAC",
                 type: "web"
               },
               {
                 step: "06",
-                title: "Nginx + Gunicorn",
-                sub: "Proxy Inverso, Servido de Estáticos y Servidor WSGI",
+                title: "Nginx + Gunicorn + CI",
+                sub: "Proxy Inverso, Servidor WSGI y Pipeline de Tests (pytest)",
                 type: "infra"
               }
             ],
             decisions_title: "Decisiones de Ingeniería",
             decisions: [
               {
-                title: "Ingesta Asíncrona Desacoplada",
-                desc: "Las tareas pesadas de extracción y cálculo de KPIs se delegan a workers independientes de Celery respaldados por Redis, evitando bloquear el hilo de peticiones del servidor web."
+                title: "Detección de Shadow IT y Score de Riesgo",
+                desc: "Cruce automático entre alertas de Cortex XDR y el inventario de Endpoint Central para identificar dispositivos no gestionados, junto al cálculo de un score de riesgo ponderado por equipo (estado de BitLocker, permisos de administrador local y actividad de antivirus)."
               },
               {
-                title: "Modelo Relacional Normalizado (3FN)",
-                desc: "Esquema físico en PostgreSQL con integridad referencial estricta, restricciones CHECK y snapshots periódicos para trazabilidad histórica sin datos huérfanos."
+                title: "Trazabilidad de Datos y Auditoría de Ingestas",
+                desc: "Persistencia de snapshots periódicos para conservar la evolución temporal de los activos y registro de auditoría en cada ejecución del pipeline ETL (estado de la importación, volumen de registros procesados y trazas de error)."
               },
               {
-                title: "Arquitectura Django desacoplada (SOLID)",
-                desc: "Uso de modelos ORM no gestionados (managed = False) para no delegar el DDL a Django, complementado con capas de Servicios, Schemas/DTOs y Context Builders."
+                title: "Clean Architecture, Contratos y ADRs",
+                desc: "Estructuración en capas (Services, Schemas/DTOs, Context Builders y Use Cases) con modelos desacoplados (managed = False), contratos de validación en contracts.py y decisiones técnicas documentadas mediante Architecture Decision Records (ADRs)."
               },
               {
-                title: "Despliegue Aislado Multi-Contenedor",
-                desc: "Nginx aísla los servicios internos gestionando estáticos y SSL; Gunicorn maneja procesos paralelos de Python; orquestación con Docker Compose y healthchecks."
+                title: "Despliegue en 5 Contenedores y CI con GitHub Actions",
+                desc: "Orquestación aislada con Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis y worker Celery) gobernada por healthchecks, respaldada por integración continua en GitHub Actions que ejecuta pytest y la suite de Django en cada entrega."
               }
+            ],
+            contributions_title: "Alcance Técnico e Impacto (Autor Único)",
+            contributions: [
+              "Correlación Multi-Fuente (Shadow IT): Identificación de alertas generadas por equipos fuera del inventario corporativo y análisis de amenazas de correo en Proofpoint con enriquecimiento geográfico por IP.",
+              "Ingesta Asíncrona y Optimización (~1 min a ~25 s): Procesamiento en segundo plano con Celery y Redis sin bloquear el servidor web, reduciendo el tiempo de obtención y procesado de datos de ~1 min a ~25 s con auditoría completa de cada ciclo.",
+              "Calidad de Software y ADRs: Batería de tests unitarios y de integración (pytest + Django tests) para el pipeline ETL y el control de acceso (RBAC), manteniendo registro documental en ADRs.",
+              "Puesta en Producción y Seguridad: Configuración de cabeceras de seguridad en Nginx, aislamiento de secretos por entorno y automatización de copias de seguridad."
             ]
           },
           gustome: {
@@ -181,7 +188,7 @@ const resources = {
               {
                 step: "05",
                 title: "Servicios Externos",
-                sub: "Stripe (Pagos), Cloudinary (Media) y OpenAI (OCR de Cartas Físicas)",
+                sub: "Stripe (Suscripciones), Cloudinary (Media) y OpenAI (OCR de Cartas)",
                 type: "etl"
               },
               {
@@ -198,16 +205,16 @@ const resources = {
                 desc: "Los listeners onSnapshot de Firestore sincronizan comandas entre mesa y cocina de inmediato, eliminando la necesidad de servidores WebSocket dedicados o polling."
               },
               {
-                title: "Estructura NoSQL y Desnormalización Estratégica",
-                desc: "Diseño por colecciones (platos, ingredientes, comandas, adn_culinario) con desnormalización selectiva (ej. restaurantName) para minimizar lecturas y costes de Firestore."
+                title: "Modelo SaaS Multi-Tenant y Optimización de Lecturas",
+                desc: "Control de funcionalidades por nivel de suscripción (Free, Basic y Pro) y desnormalización pensada para consultar el historial de pedidos en una sola lectura, reduciendo costes en Firestore."
               },
               {
                 title: "Seguridad y Autorización Declarativa",
                 desc: "Reglas de Firestore (firestore.rules) a nivel de base de datos que validan permisos y roles (client vs restaurant) sin intermediación de un backend tradicional."
               },
               {
-                title: "Digitalización Asistida por IA (OCR)",
-                desc: "Integración con API de OpenAI para procesar cartas físicas fotografiadas y mapear automáticamente nombres, precios, ingredientes y alérgenos normalizados."
+                title: "Digitalización OCR con Catálogo Maestro",
+                desc: "Integración con la API de OpenAI para procesar cartas físicas fotografiadas, normalizando los ingredientes y alérgenos detectados frente a un catálogo maestro para evitar duplicados."
               }
             ],
             contributions_title: "Mi Contribución Clave (Rol Principal)",
@@ -252,8 +259,8 @@ const resources = {
               },
               {
                 step: "05",
-                title: "PostgreSQL Relacional",
-                sub: "Modelo Físico Normalizado, Restricciones CASCADE / RESTRICT y CHECK",
+                title: "PostgreSQL (14 Tablas)",
+                sub: "Modelo Relacional Normalizado, Borrado Lógico (Soft Delete) y CHECK",
                 type: "db"
               },
               {
@@ -274,20 +281,20 @@ const resources = {
                 desc: "Control explícito de consultas SQL y mapeo directo a POJOs con RowMapper dedicados, previniendo sobrecargas de ORM y manejando excepciones de Spring."
               },
               {
-                title: "Integridad Referencial Firme en Base de Datos",
-                desc: "Modelo relacional en PostgreSQL con claves foráneas protegidas, tablas intermedias para relaciones N:M (Aportacion, Ofrece, Asignan) y restricciones de borrado."
+                title: "Esquema de 14 Tablas y Borrado Lógico (Soft Delete)",
+                desc: "Modelo relacional en PostgreSQL con 14 tablas, claves compuestas e implementación de borrado lógico (soft delete) para dar de baja registros sin perder el histórico de competiciones pasadas."
               },
               {
-                title: "Control de Acceso basado en Roles (RBAC)",
-                desc: "Gestión de perfiles diferenciados (Promotor, Atleta, Voluntario) con validadores de sesión en controlador para blindar la operativa de cada rol."
+                title: "Control de Acceso por Roles y Usabilidad Validada",
+                desc: "Gestión de perfiles diferenciados (Promotor, Atleta, Voluntario) con validadores de sesión y flujos de inscripción evaluados mediante pruebas de usabilidad (87,5/100 en la escala SUS)."
               }
             ],
             contributions_title: "Mi Contribución Clave (Rol Principal)",
             contributions: [
-              "Arquitectura Base y SQL: Configuración inicial de Spring Boot, captura global de excepciones (@ControllerAdvice) y diseño del esquema PostgreSQL.",
+              "Arquitectura Base y SQL: Configuración inicial de Spring Boot, captura global de excepciones (@ControllerAdvice) y diseño del esquema PostgreSQL de 14 tablas.",
               "Autenticación y Sesiones RBAC: Implementación integral de login, control de sesiones y áreas personales para Promotores, Atletas y Clubes.",
-              "Módulos Core y Notificaciones: CRUD de participantes y clubes, validadores de negocio, pasarela de inscripción y confirmación por correo (EmailService).",
-              "Integración y UI/UX: Plantillas base Thymeleaf, filtros de búsqueda/ordenación y coordinación técnica de ramas y merges del equipo."
+              "Módulos Core y Notificaciones: CRUD de participantes y clubes, borrado lógico para conservar la trazabilidad histórica, pasarela de inscripción y confirmación por correo (EmailService).",
+              "Integración y Usabilidad (SUS 87,5/100): Plantillas base Thymeleaf, filtros de búsqueda, coordinación técnica de ramas y validación con usuarios obteniendo calificación excelente (87,5/100 SUS)."
             ]
           }
         },
@@ -304,11 +311,11 @@ const resources = {
           marketpulse: "Octubre 2025 - Diciembre 2025",
         },
         descriptions: {
-          tfg: "Plataforma BI que centraliza en un panel ejecutivo y otro operativo los KPIs de 3 plataformas de seguridad corporativa (Cortex XDR, Proofpoint y Endpoint Central). Pipeline ETL en Python con validación por contratos, ingesta asíncrona con Celery/Redis para no bloquear las peticiones web, modelo PostgreSQL normalizado (3FN) con snapshots históricos y control de acceso por roles. Desplegada con Docker Compose, Nginx y Gunicorn.",
+          tfg: "Plataforma BI que cruza telemetría de 3 herramientas corporativas (Cortex XDR, Proofpoint y Endpoint Central) para detectar activos no inventariados (Shadow IT), calcular riesgo por equipo (BitLocker, administradores locales) y analizar amenazas de correo. Pipeline ETL en Python optimizado (reduciendo la obtención y procesado de datos de ~1 min a ~25 s) con validación por contratos, auditoría de ejecuciones e ingesta asíncrona con Celery/Redis. Desplegada en 5 contenedores Docker con CI en GitHub Actions (pytest).",
           gustome:
-            "Plataforma de cartas digitales para restaurantes: filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con la API de OpenAI. Autorización por rol a nivel de datos con Firestore Security Rules y despliegue continuo con GitHub Actions.",
+            "Plataforma SaaS de cartas digitales con planes por suscripción (Free, Basic y Pro): filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con OpenAI normalizado contra un catálogo maestro de ingredientes. Autorización por rol con Firestore Security Rules y CI/CD con GitHub Actions.",
           mormas:
-            "Aplicación web en Java/Spring Boot para gestionar carreras de montaña: inscripciones, autenticación con control de acceso para 3 roles (promotor, atleta y voluntario), confirmaciones por email y justificantes PDF generados en servidor. Arquitectura por capas (Controller · DAO con JdbcTemplate · PostgreSQL) con la integridad referencial garantizada en base de datos.",
+            "Aplicación web en Java/Spring Boot para gestionar carreras de montaña sobre un modelo relacional de 14 tablas en PostgreSQL: inscripciones, control de acceso para 3 roles (promotor, atleta y voluntario), borrado lógico (soft delete) para preservar el histórico de competiciones, confirmaciones por email y justificantes PDF. Validada mediante pruebas de usabilidad obteniendo un 87,5/100 en la escala SUS.",
           marketpulse:
             "Paquete Python de análisis financiero que descarga históricos de Yahoo Finance en una única llamada por lote y calcula rentabilidades diarias, volatilidad y matrices de correlación entre sectores. La lógica está separada de la presentación (Streamlit y Jupyter) y cubierta con tests unitarios y de integración en pytest.",
         },
@@ -366,7 +373,7 @@ const resources = {
           cyberark:
             "Desplegué y administré una solución CyberArk PAM self-hosted (Vault, PVWA, CPM, PSM) en un laboratorio de 7 servidores: Safes con mínimo privilegio, integración con LDAP, rotación automática de credenciales y aislamiento de sesiones privilegiadas. Diagnostiqué incidencias mediante análisis de logs con criterios de hardening y alta disponibilidad. Preparando las certificaciones CyberArk Defender y Sentry.",
           pamesa:
-            "Diseñé y desarrollé en solitario una plataforma BI de KPIs de ciberseguridad que integra 3 fuentes (Cortex XDR, Proofpoint y Endpoint Central). Construí el pipeline ETL en Python con validación por contratos, el modelo PostgreSQL (3FN) y los dashboards ejecutivo y operativo en Django, delegando la ingesta en workers Celery/Redis y desplegando con Docker Compose, Nginx y Gunicorn.",
+            "Diseñé y desarrollé en solitario una plataforma BI de ciberseguridad que cruza datos de Cortex XDR, Proofpoint y Endpoint Central para detectar dispositivos fuera de inventario (Shadow IT) y evaluar riesgo por endpoint. Construí y optimicé el pipeline ETL en Python reduciendo la obtención y procesado de datos de ~1 min a ~25 s, los dashboards en Django siguiendo Clean Architecture (documentada en ADRs) y el despliegue en 5 contenedores Docker con CI en GitHub Actions (pytest).",
           milano:
             "Asignaturas de máster en Computer Science y Data Science for Economics impartidas en inglés: bases de datos NoSQL (MongoDB), Business Intelligence y Data Science.",
           industria:
@@ -487,7 +494,7 @@ const resources = {
             title: "Cybersecurity BI Platform (TFG)",
             confidential_note: "Private source code under corporate non-disclosure agreement with Pamesa Grupo Empresarial.",
             flow_title: "Data Flow & Processing Pipeline",
-            infra_label: "Containerized Infrastructure (Docker & Docker Compose with Healthchecks)",
+            infra_label: "5-Container Infrastructure (Docker Compose with Healthchecks + GitHub Actions CI)",
             flow_nodes: [
               {
                 step: "01",
@@ -498,7 +505,7 @@ const resources = {
               {
                 step: "02",
                 title: "Python ETL Pipeline",
-                sub: "Extraction, Date Normalization & Validation via contracts.py",
+                sub: "Extraction, Data Contracts (contracts.py) & Execution Auditing",
                 type: "etl"
               },
               {
@@ -510,40 +517,47 @@ const resources = {
               {
                 step: "04",
                 title: "PostgreSQL Persistence",
-                sub: "Normalized Relational Schema (3NF) with Historical Snapshots",
+                sub: "Historical Snapshot Traceability & Audit Logging",
                 type: "db"
               },
               {
                 step: "05",
-                title: "Django Backend (SOLID)",
-                sub: "managed=False ORM Models, DTOs, Context Builders & RBAC",
+                title: "Django Backend (Clean Arch)",
+                sub: "Services, DTOs, Context Builders, Use Cases & RBAC Control",
                 type: "web"
               },
               {
                 step: "06",
-                title: "Nginx + Gunicorn",
-                sub: "Reverse Proxy, Static Files Caching & WSGI App Server",
+                title: "Nginx + Gunicorn + CI",
+                sub: "Reverse Proxy, WSGI Server & Automated Test Pipeline (pytest)",
                 type: "infra"
               }
             ],
             decisions_title: "Engineering Decisions",
             decisions: [
               {
-                title: "Decoupled Asynchronous Ingestion",
-                desc: "Heavy extraction and KPI calculations are offloaded to independent Celery workers backed by Redis, preventing web server request thread starvation."
+                title: "Shadow IT Detection & Endpoint Risk Scoring",
+                desc: "Automated cross-referencing between Cortex XDR alerts and Endpoint Central asset inventory to uncover unmanaged devices, paired with a weighted endpoint risk score (BitLocker status, local admin privileges, and antivirus activity)."
               },
               {
-                title: "Normalized Relational Modeling (3NF)",
-                desc: "PostgreSQL schema with strict referential integrity, CHECK constraints, and periodic snapshots for historical auditability without orphaned records."
+                title: "Data Traceability & Pipeline Audit Logging",
+                desc: "Periodic snapshots in PostgreSQL to preserve historical asset evolution, alongside comprehensive execution auditing for every ETL run (import status, processed row counts, and error traces)."
               },
               {
-                title: "Decoupled Django Architecture (SOLID)",
-                desc: "Unmanaged ORM models (managed = False) decouple physical DDL from Django, structured into Services, Schemas/DTOs, and Context Builders."
+                title: "Clean Architecture, Data Contracts & ADRs",
+                desc: "Layered architecture (Services, Schemas/DTOs, Context Builders, and Use Cases) with unmanaged ORM models (managed = False), validation contracts in contracts.py, and design decisions recorded via Architecture Decision Records (ADRs)."
               },
               {
-                title: "Isolated Multi-Container Deployment",
-                desc: "Nginx manages SSL/static assets and proxies dynamic traffic to Gunicorn; services orchestrated with Docker Compose and healthchecks."
+                title: "5-Container Deployment & GitHub Actions CI",
+                desc: "Isolated orchestration with Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis, and Celery worker) governed by healthchecks, backed by a GitHub Actions CI pipeline running pytest and Django test suites on every push."
               }
+            ],
+            contributions_title: "Technical Scope & Impact (Sole Author)",
+            contributions: [
+              "Multi-Source Correlation (Shadow IT): Automated identification of critical alerts triggered by uninventoried assets and Proofpoint email threat intelligence with IP geolocation enrichment.",
+              "Asynchronous Ingestion & Optimization (~1 min to ~25s): Background task offloading with Celery and Redis to prevent web thread blocking, cutting data extraction and processing time from ~1 min to ~25s with full audit logging.",
+              "Software Quality & ADRs: Unit and integration test coverage (pytest + Django tests) across the ETL pipeline and role-based access control (RBAC), documented through formal ADRs.",
+              "Production Hardening: Security HTTP headers in Nginx, environment-isolated secrets management, and automated database backup scripts."
             ]
           },
           gustome: {
@@ -581,7 +595,7 @@ const resources = {
               {
                 step: "05",
                 title: "External Services",
-                sub: "Stripe (Payments), Cloudinary (Media) & OpenAI (Menu OCR)",
+                sub: "Stripe (Subscriptions), Cloudinary (Media) & OpenAI (Menu OCR)",
                 type: "etl"
               },
               {
@@ -598,16 +612,16 @@ const resources = {
                 desc: "Firestore onSnapshot listeners synchronize orders between diner table and kitchen immediately, eliminating dedicated WebSocket servers and polling."
               },
               {
-                title: "NoSQL Schema & Strategic Denormalization",
-                desc: "Collections (dishes, ingredients, orders, culinary_dna) designed with selective denormalization (e.g. restaurantName) to minimize reads and Firestore costs."
+                title: "Multi-Tenant SaaS Tiers & Read Optimization",
+                desc: "Feature gating across subscription tiers (Free, Basic, and Pro) and selective denormalization designed to fetch customer order history in a single read, reducing Firestore billing costs."
               },
               {
                 title: "Declarative Privacy-First Authorization",
                 desc: "Database-level Firestore rules (firestore.rules) validate permissions and roles (client vs restaurant) without traditional backend overhead."
               },
               {
-                title: "AI-Assisted Digitalization (OCR)",
-                desc: "OpenAI API integration to parse photographed paper menus and automatically map names, prices, ingredients, and normalized allergens."
+                title: "AI OCR Normalized via Master Catalog",
+                desc: "OpenAI API integration to parse photographed paper menus, mapping extracted ingredients and allergens against a standardized master catalog to prevent duplicates."
               }
             ],
             contributions_title: "My Key Contributions (Lead Role)",
@@ -652,8 +666,8 @@ const resources = {
               },
               {
                 step: "05",
-                title: "Relational PostgreSQL",
-                sub: "Normalized Physical Schema, ON DELETE CASCADE/RESTRICT & CHECK Constraints",
+                title: "PostgreSQL (14 Tables)",
+                sub: "Normalized Relational Schema, Logical Soft Delete & CHECK Constraints",
                 type: "db"
               },
               {
@@ -674,20 +688,20 @@ const resources = {
                 desc: "Explicit SQL query control and direct POJO mapping with dedicated RowMappers, avoiding heavy ORM overhead and handling Spring data exceptions."
               },
               {
-                title: "Firm Referential Integrity in Database",
-                desc: "PostgreSQL relational schema with protected foreign keys, junction tables for N:M relationships (Aportacion, Ofrece, Asignan), and delete restrictions."
+                title: "14-Table Schema & Logical Soft Delete",
+                desc: "PostgreSQL relational model across 14 tables with composite keys and logical deactivation (soft delete) to retire records without losing historical competition data."
               },
               {
-                title: "Role-Based Access Control (RBAC)",
-                desc: "Distinct user profiles (Promoter, Athlete, Volunteer) with controller-level session validation to shield role-specific operations."
+                title: "Role-Based Access Control & Validated Usability",
+                desc: "Distinct user profiles (Promoter, Athlete, Volunteer) with controller-level session validation and registration flows validated through user testing (87.5/100 SUS score)."
               }
             ],
             contributions_title: "My Key Contributions (Lead Role)",
             contributions: [
-              "Core Architecture & SQL: Initial Spring Boot setup, global exception handling (@ControllerAdvice), and PostgreSQL relational schema design.",
+              "Core Architecture & SQL: Initial Spring Boot setup, global exception handling (@ControllerAdvice), and design of the 14-table PostgreSQL relational schema.",
               "Authentication & RBAC Sessions: End-to-end login, session tracking, and dedicated personal areas for Promoters, Athletes, and Clubs.",
-              "Core Modules & Notifications: Full CRUD for participants and clubs, business validators, registration checkout, and automated confirmation emails (EmailService).",
-              "Integration & UI/UX: Base Thymeleaf layout fragments, search/sort filters, and technical coordination of team branches and merges."
+              "Core Modules & Notifications: Full CRUD for participants and clubs, logical soft delete for historical data preservation, registration checkout, and confirmation emails (EmailService).",
+              "Integration & Usability (87.5/100 SUS): Base Thymeleaf layout fragments, search filters, branch coordination, and usability testing achieving an Grade-A 87.5/100 SUS score."
             ]
           }
         },
@@ -704,11 +718,11 @@ const resources = {
           marketpulse: "October 2025 - December 2025",
         },
         descriptions: {
-          tfg: "BI platform that centralizes KPIs from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) into executive and operational dashboards. Python ETL pipeline with contract validation, asynchronous ingestion via Celery/Redis to keep web requests non-blocking, normalized PostgreSQL schema (3NF) with historical snapshots, and role-based access control. Deployed with Docker Compose, Nginx, and Gunicorn.",
+          tfg: "BI platform that cross-references telemetry from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) to detect unmanaged assets (Shadow IT), compute endpoint risk scores (BitLocker, local admins), and analyze email threats. Optimized Python ETL pipeline (cutting data extraction and processing from ~1 min to ~25s) with data contracts, execution auditing, and asynchronous ingestion via Celery/Redis. Deployed across 5 Docker containers with GitHub Actions CI (pytest).",
           gustome:
-            "Digital menu platform for restaurants: allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OCR with the OpenAI API. Data-level role authorization with Firestore Security Rules and continuous deployment via GitHub Actions.",
+            "Multi-tenant SaaS digital menu platform with subscription tiers (Free, Basic, and Pro): allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OpenAI OCR normalized against a master ingredient catalog. Role-based Firestore Security Rules and GitHub Actions CI/CD.",
           mormas:
-            "Java/Spring Boot web application for mountain race management: registrations, authentication with role-based access control across 3 roles (promoter, athlete, and volunteer), email confirmations, and server-side PDF receipt generation. Layered architecture (Controller · JdbcTemplate DAO · PostgreSQL) with referential integrity enforced at the database level.",
+            "Java/Spring Boot web application for mountain race management built on a 14-table PostgreSQL relational schema: registrations, role-based access control across 3 roles (promoter, athlete, and volunteer), logical soft delete to preserve competition history, email confirmations, and PDF receipts. Validated through user testing with an 87.5/100 SUS usability score.",
           marketpulse:
             "Python financial analysis package that batch-downloads historical series from Yahoo Finance in a single call and computes daily returns, volatility, and cross-sector correlation matrices. Core logic is decoupled from presentation (Streamlit and Jupyter) and covered with unit and integration tests in pytest.",
         },
@@ -766,7 +780,7 @@ const resources = {
           cyberark:
             "Deployed and administered a self-hosted CyberArk PAM solution (Vault, PVWA, CPM, PSM) across a 7-server lab: least-privilege Safes, LDAP integration, automated credential rotation, and privileged session isolation. Diagnosed incidents through log analysis under hardening and high-availability standards. Currently preparing for the CyberArk Defender and Sentry certifications.",
           pamesa:
-            "Single-handedly designed and built a cybersecurity KPI BI platform integrating 3 sources (Cortex XDR, Proofpoint, and Endpoint Central). Built the Python ETL pipeline with contract validation, the 3NF PostgreSQL schema, and the executive and operational dashboards in Django, offloading ingestion to Celery/Redis workers and deploying with Docker Compose, Nginx, and Gunicorn.",
+            "Single-handedly designed and built a cybersecurity BI platform cross-referencing Cortex XDR, Proofpoint, and Endpoint Central to detect unmanaged devices (Shadow IT) and score endpoint risk. Built and optimized the Python ETL pipeline cutting data extraction and processing from ~1 min to ~25s, the Django dashboards following Clean Architecture (documented in ADRs), and the 5-container Docker deployment with GitHub Actions CI (pytest).",
           milano:
             "Master's courses in Computer Science and Data Science for Economics taught in English: NoSQL databases (MongoDB), Business Intelligence, and Data Science.",
           industria:
