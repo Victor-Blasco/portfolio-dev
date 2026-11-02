@@ -3,13 +3,13 @@
 .header {
   position: relative;
   text-align: center;
-  padding: 5rem 2rem 4rem 2rem;
+  padding: 5.5rem 0 4.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  margin-top: 4rem; /* Spacer for fixed navbar */
+  overflow: visible;
+  margin-top: 3.5rem; /* Spacer for fixed navbar */
 }
 
 /* El Header es above-the-fold: visible de inmediato para acelerar FCP y LCP sin esperar a la animación */
@@ -193,11 +193,35 @@
   align-items: center;
 }
 
+.email-action-group {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.email-action-group .email-main-link {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.email-action-group .email-copy-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+.email-action-group .email-copy-btn.copied {
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .header {
-    padding: 3rem 1.5rem 2.75rem 1.5rem;
-    margin-top: 4.5rem;
+    padding: 3rem 0 2.75rem 0;
+    margin-top: 4rem;
   }
 
   .avatar-container {

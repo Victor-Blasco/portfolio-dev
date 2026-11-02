@@ -3,12 +3,11 @@
 .footer {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 3rem 1.75rem;
-  margin-top: 3rem;
-  border-radius: 20px;
-  border: 1px solid var(--card-border);
-  background: var(--card-bg);
-  box-shadow: var(--glass-shadow), var(--surface-highlight);
+  padding: 3.5rem 0 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--card-border);
+  background: transparent;
+  box-shadow: none;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -158,7 +157,6 @@
 
 @media (max-width: 768px) {
   .footer {
-    padding: 2rem 1.5rem 1.5rem;
-    border-radius: 16px;
+    padding: 2.5rem 0 1.5rem;
   }
 }

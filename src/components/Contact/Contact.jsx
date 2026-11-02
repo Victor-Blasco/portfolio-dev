@@ -17,12 +17,32 @@ function Contact() {
   const { t } = useTranslation();
 
   const [status, setStatus] = useState("idle"); // 'idle' | 'submitting' | 'success' | 'error'
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
     _gotcha: ""
   });
+
+  /**
+   * Copia la dirección de email al portapapeles sin activar el enlace mailto padre.
+   *
+   * @param {React.MouseEvent<HTMLButtonElement>} e - Evento de clic.
+   * @param {string} emailValue - Correo electrónico a copiar.
+   */
+  const handleCopyEmail = async (e, emailValue) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(emailValue);
+      setCopiedEmail(true);
+      trackEvent("copy_email", { location: "contact_section" });
+      setTimeout(() => setCopiedEmail(false), 2400);
+    } catch {
+      window.location.href = `mailto:${emailValue}`;
+    }
+  };
 
   /**
    * Maneja el cambio en los campos de entrada del formulario.
@@ -147,6 +167,32 @@ function Contact() {
                   <span className="contact-card-label">{channel.label}</span>
                   <span className="contact-card-value">{channel.value}</span>
                 </div>
+                {channel.icon === "email" && (
+                  <button
+                    type="button"
+                    className={`contact-copy-btn ${copiedEmail ? "copied" : ""}`}
+                    onClick={(e) => handleCopyEmail(e, channel.value)}
+                    title={t("contact.copy_email")}
+                    aria-label={t("contact.copy_email")}
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>{t("contact.email_copied")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>{t("contact.copy_email")}</span>
+                      </>
+                    )}
+                  </button>
+                )}
                 <svg
                   className="contact-card-arrow"
                   width="18"

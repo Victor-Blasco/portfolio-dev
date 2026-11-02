@@ -10,19 +10,30 @@ import "./ArchitectureModal.css";
  *
  * @param {Object} props - Propiedades del componente.
  * @param {boolean} props.isOpen - Indica si el modal está abierto.
+ * @param {boolean} [props.isLightboxOpen=false] - Indica si el visor de imágenes a pantalla completa está abierto.
  * @param {Function} props.onClose - Función para cerrar el modal.
  * @param {string} [props.projectKey='tfg'] - Clave del proyecto ('tfg', 'gustome', 'mormas').
  * @param {string} [props.fallbackTitle=''] - Título de respaldo si no se encuentra en i18n.
+ * @param {Array<{src: string, caption: string, originalIndex: number}>} [props.previewImages=[]] - Capturas destacadas para mostrar en el modal.
+ * @param {Function} [props.onPreviewClick] - Callback invocado al hacer clic en una captura destacada.
  * @returns {React.ReactPortal|null} El modal renderizado o null si está cerrado.
  */
-function ArchitectureModal({ isOpen, onClose, projectKey = "tfg", fallbackTitle = "" }) {
+function ArchitectureModal({
+  isOpen,
+  isLightboxOpen = false,
+  onClose,
+  projectKey = "tfg",
+  fallbackTitle = "",
+  previewImages = [],
+  onPreviewClick,
+}) {
   const { t } = useTranslation();
 
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !isLightboxOpen) {
         onClose();
       }
     };
@@ -34,7 +45,7 @@ function ArchitectureModal({ isOpen, onClose, projectKey = "tfg", fallbackTitle 
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, isLightboxOpen, onClose]);
 
   if (!isOpen || !projectKey) {
     return null;
@@ -43,6 +54,7 @@ function ArchitectureModal({ isOpen, onClose, projectKey = "tfg", fallbackTitle 
   const archData = t(`projects.architectures.${projectKey}`, { returnObjects: true }) || {};
   const flowNodes = Array.isArray(archData.flow_nodes) ? archData.flow_nodes : [];
   const decisions = Array.isArray(archData.decisions) ? archData.decisions : [];
+  const contributions = Array.isArray(archData.contributions) ? archData.contributions : [];
   const title = archData.title || fallbackTitle;
 
   return createPortal(
@@ -61,7 +73,18 @@ function ArchitectureModal({ isOpen, onClose, projectKey = "tfg", fallbackTitle 
         </button>
 
         <div className="arch-modal-header">
-          <span className="arch-modal-badge">{archData.badge || t("projects.view_architecture")}</span>
+          <div className="arch-modal-badges-row">
+            <span className="arch-modal-badge">{archData.badge || t("projects.view_architecture")}</span>
+            {archData.role_badge && (
+              <span className="arch-role-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                {archData.role_badge}
+              </span>
+            )}
+          </div>
           <h3 id="arch-modal-title" className="arch-modal-title">{title}</h3>
           {archData.confidential_note && (
             <p className="arch-modal-confidential">
@@ -118,6 +141,57 @@ function ArchitectureModal({ isOpen, onClose, projectKey = "tfg", fallbackTitle 
                   <h5>{item.title}</h5>
                   <p>{item.desc}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Contribución clave en proyectos de equipo */}
+        {contributions.length > 0 && (
+          <div className="arch-section">
+            <h4 className="arch-section-heading">{archData.contributions_title}</h4>
+            <ul className="arch-contributions-list">
+              {contributions.map((point, idx) => (
+                <li key={idx} className="arch-contribution-item">
+                  <span className="arch-contribution-bullet" aria-hidden="true">✦</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Vista previa de la interfaz (capturas destacadas) */}
+        {previewImages.length > 0 && (
+          <div className="arch-section">
+            <h4 className="arch-section-heading">{t("projects.previews_title")}</h4>
+            <div className="arch-previews-grid">
+              {previewImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className="arch-preview-card"
+                  onClick={() => onPreviewClick && onPreviewClick(img.originalIndex)}
+                  aria-label={`${t("projects.zoom_preview")}: ${img.caption}`}
+                >
+                  <div className="arch-preview-img-wrapper">
+                    <img
+                      src={img.src}
+                      alt={img.caption}
+                      loading="lazy"
+                      className="arch-preview-img"
+                    />
+                    <span className="arch-preview-zoom-hint" aria-hidden="true">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                      </svg>
+                    </span>
+                  </div>
+                  <span className="arch-preview-caption">{img.caption}</span>
+                </button>
               ))}
             </div>
           </div>

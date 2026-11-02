@@ -48,7 +48,9 @@ function ImageLightbox({ images, currentIndex, onClose, title }) {
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      if (!document.querySelector(".arch-modal-overlay")) {
+        document.body.style.overflow = "";
+      }
     };
   }, [images.length, onClose]);
 

@@ -13,7 +13,7 @@ function Footer() {
   };
 
   return (
-    <footer className="footer glass-panel" ref={sectionRef}>
+    <footer className="footer" ref={sectionRef}>
       <div className="footer-content">
         <div className="footer-brand">
           <h3>Victor Blasco</h3>

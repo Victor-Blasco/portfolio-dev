@@ -45,6 +45,13 @@ const PROJECT_ORDER_MAP = {
   mormas: ["competiciones", "promotor"],
 };
 
+// Capturas destacadas que se muestran dentro del modal de arquitectura de cada proyecto
+const MODAL_PREVIEW_KEYS = {
+  gustome: ["dashboard", "pedidos_restaurante"],
+  tfg: ["ejecutivo", "operativo"],
+  mormas: ["competiciones", "promotor"],
+};
+
 /**
  * Mapea las imágenes cargadas dinámicamente mediante glob a la estructura esperada por el carrusel,
  * asignando las traducciones correctas según el mapa declarativo o un fallback limpio.
@@ -141,8 +148,10 @@ function Projects() {
 
   const projectsData = [
     {
+      key: "gustome",
       title: t("projects.titles.gustome"),
       subtitle: t("projects.periods.gustome"),
+      role: t("projects.roles.gustome"),
       description: t("projects.descriptions.gustome"),
       tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore"],
       images: getProjectImages(gustomeGlob, "gustome", t),
@@ -155,8 +164,10 @@ function Projects() {
       ],
     },
     {
+      key: "tfg",
       title: t("projects.titles.tfg"),
       subtitle: t("projects.periods.tfg"),
+      role: t("projects.roles.tfg"),
       description: t("projects.descriptions.tfg"),
       tech: ["Python (Django)", "PostgreSQL", "Celery/Redis", "Tailwind CSS", "Docker"],
       images: getProjectImages(tfgGlob, "tfg", t),
@@ -169,8 +180,10 @@ function Projects() {
       ],
     },
     {
+      key: "mormas",
       title: t("projects.titles.mormas"),
       subtitle: t("projects.periods.mormas"),
+      role: t("projects.roles.mormas"),
       description: t("projects.descriptions.mormas"),
       tech: ["Java (Spring Boot)", "HTML/CSS", "PostgreSQL"],
       images: getProjectImages(mormasGlob, "mormas", t),
@@ -183,6 +196,7 @@ function Projects() {
       ],
     },
     {
+      key: "marketpulse",
       title: t("projects.titles.marketpulse"),
       subtitle: t("projects.periods.marketpulse"),
       description: t("projects.descriptions.marketpulse"),
@@ -196,6 +210,7 @@ function Projects() {
       ],
     },
     {
+      key: "portfolio",
       title: t("projects.titles.portfolio"),
       subtitle: t("projects.periods.portfolio"),
       description: t("projects.descriptions.portfolio"),
@@ -209,6 +224,23 @@ function Projects() {
       ],
     },
   ];
+
+  // Obtener el proyecto activo para pasar sus capturas destacadas al modal de arquitectura
+  const activeModalProject = projectsData.find((p) => p.key === archModalState.key);
+  const activeModalPreviews = activeModalProject
+    ? (MODAL_PREVIEW_KEYS[archModalState.key] || [])
+        .map((previewKey) => {
+          const index = activeModalProject.images.findIndex((img) =>
+            img.filename.includes(previewKey)
+          );
+          if (index === -1) return null;
+          return {
+            ...activeModalProject.images[index],
+            originalIndex: index,
+          };
+        })
+        .filter(Boolean)
+    : [];
 
   return (
     <section className="section-card projects-section" id="projects" ref={sectionRef}>
@@ -226,6 +258,15 @@ function Projects() {
                   <span className="project-duration">{project.subtitle}</span>
                 </div>
                 <h3 className="project-title">{project.title}</h3>
+                {project.role && (
+                  <div className="project-role-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>{project.role}</span>
+                  </div>
+                )}
                 <p className="project-desc">{project.description}</p>
 
                 <div className="project-tech-tags">
@@ -348,8 +389,15 @@ function Projects() {
       {/* Modal de Arquitectura / Caso de Estudio */}
       <ArchitectureModal
         isOpen={archModalState.isOpen}
+        isLightboxOpen={lightbox.isOpen}
         projectKey={archModalState.key}
         fallbackTitle={archModalState.title}
+        previewImages={activeModalPreviews}
+        onPreviewClick={(originalIdx) => {
+          if (activeModalProject) {
+            openLightbox(activeModalProject.images, originalIdx, activeModalProject.title);
+          }
+        }}
         onClose={() => setArchModalState((prev) => ({ ...prev, isOpen: false }))}
       />
     </section>

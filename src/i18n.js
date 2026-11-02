@@ -21,6 +21,8 @@ const resources = {
         role_description:
           "Ingeniero de Software especializado en desarrollo fullstack, centrado en crear soluciones escalables, eficientes y con un diseño de interfaz cuidado.",
         download_cv: "Descargar CV",
+        copy_email: "Copiar email",
+        email_copied: "¡Copiado!",
       },
       about: {
         title: "Sobre mí",
@@ -95,9 +97,17 @@ const resources = {
         private_repo: "Repositorio Privado",
         view_on_github: "Ver en GitHub",
         view_architecture: "Ver Arquitectura",
+        previews_title: "Vista Previa de la Interfaz",
+        zoom_preview: "Ampliar captura",
+        roles: {
+          gustome: "Rol: Tech Lead & Full-Stack Architect",
+          tfg: "Rol: Autor Único • Software Engineer",
+          mormas: "Rol: Tech Lead & Full-Stack Developer",
+        },
         architectures: {
           tfg: {
             badge: "Caso de Estudio • Arquitectura BI",
+            role_badge: "Autor Único (Prácticas / TFG)",
             title: "Plataforma BI de Ciberseguridad (TFG)",
             confidential_note: "Código fuente privado bajo acuerdo de confidencialidad corporativa con Pamesa Grupo Empresarial.",
             flow_title: "Flujo de Datos y Pipeline de Procesamiento",
@@ -162,6 +172,7 @@ const resources = {
           },
           gustome: {
             badge: "Caso de Estudio • Arquitectura Serverless",
+            role_badge: "Tech Lead & Full-Stack Architect (Contribuidor #1)",
             title: "Gustomé - Gestión Inteligente de Cartas",
             confidential_note: "Arquitectura Cloud-Native orientada a eventos con persistencia NoSQL reactiva en Google Cloud.",
             flow_title: "Flujo de Datos Bidireccional y Serverless",
@@ -222,10 +233,18 @@ const resources = {
                 title: "Digitalización Asistida por IA (OCR)",
                 desc: "Integración con API de OpenAI para procesar cartas físicas fotografiadas y mapear automáticamente nombres, precios, ingredientes y alérgenos normalizados."
               }
+            ],
+            contributions_title: "Mi Contribución Clave (Rol Principal)",
+            contributions: [
+              "Privacidad y ADN Culinario (B2C): Cifrado local AES (crypto-js) en localStorage para datos de alergias/dietas y telemetría anónima agregada.",
+              "Business Intelligence (B2B): Dashboard analítico con KPIs, predicción de demanda/mermas a 7 días y tabla interactiva de Ingeniería de Menú.",
+              "Branding, Media y Flujos Core: Personalización dinámica de marca por restaurante, subida a Firebase Storage, autenticación B2B e historial de pedidos.",
+              "Arquitectura y Calidad: Definición de estándares del repositorio, Context Engineering, refactorización modular y revisión de Pull Requests."
             ]
           },
           mormas: {
             badge: "Caso de Estudio • Arquitectura Spring MVC",
+            role_badge: "Tech Lead & Full-Stack Developer (Contribuidor #1)",
             title: "Mountain Race Management System (MoRMaS)",
             confidential_note: "Sistema de Información Corporativo con Arquitectura en Capas y Control Transaccional en Java.",
             flow_title: "Flujo de Control MVC y Persistencia",
@@ -286,6 +305,13 @@ const resources = {
                 title: "Control de Acceso basado en Roles (RBAC)",
                 desc: "Gestión de perfiles diferenciados (Promotor, Atleta, Voluntario) con validadores de sesión en controlador para blindar la operativa de cada rol."
               }
+            ],
+            contributions_title: "Mi Contribución Clave (Rol Principal)",
+            contributions: [
+              "Arquitectura Base y SQL: Configuración inicial de Spring Boot, captura global de excepciones (@ControllerAdvice) y diseño del esquema PostgreSQL.",
+              "Autenticación y Sesiones RBAC: Implementación integral de login, control de sesiones y áreas personales para Promotores, Atletas y Clubes.",
+              "Módulos Core y Notificaciones: CRUD de participantes y clubes, validadores de negocio, pasarela de inscripción y confirmación por correo (EmailService).",
+              "Integración y UI/UX: Plantillas base Thymeleaf, filtros de búsqueda/ordenación y coordinación técnica de ramas y merges del equipo."
             ]
           }
         },
@@ -397,6 +423,8 @@ const resources = {
         form_success_desc: "Gracias por contactar. He recibido tu mensaje y te responderé lo antes posible.",
         form_send_another: "Enviar otro mensaje",
         form_error: "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o escríbeme directamente por email.",
+        copy_email: "Copiar",
+        email_copied: "¡Copiado!",
       },
       footer: {
         copyright:
@@ -426,6 +454,8 @@ const resources = {
         role_description:
           "Software Engineer specializing in fullstack development, focused on creating scalable, efficient solutions with a carefully crafted user interface.",
         download_cv: "Download CV",
+        copy_email: "Copy email",
+        email_copied: "Copied!",
       },
       about: {
         title: "About me",
@@ -499,9 +529,17 @@ const resources = {
         private_repo: "Private Repository",
         view_on_github: "View on GitHub",
         view_architecture: "View Architecture",
+        previews_title: "Interface Preview",
+        zoom_preview: "Enlarge screenshot",
+        roles: {
+          gustome: "Role: Tech Lead & Full-Stack Architect",
+          tfg: "Role: Sole Author • Software Engineer",
+          mormas: "Role: Tech Lead & Full-Stack Developer",
+        },
         architectures: {
           tfg: {
             badge: "Case Study • BI Architecture",
+            role_badge: "Sole Author (Internship / BSc Thesis)",
             title: "Cybersecurity BI Platform (TFG)",
             confidential_note: "Private source code under corporate non-disclosure agreement with Pamesa Grupo Empresarial.",
             flow_title: "Data Flow & Processing Pipeline",
@@ -566,6 +604,7 @@ const resources = {
           },
           gustome: {
             badge: "Case Study • Serverless Architecture",
+            role_badge: "Tech Lead & Full-Stack Architect (#1 Contributor)",
             title: "Gustomé - Intelligent Menu Management",
             confidential_note: "Cloud-Native event-driven architecture with reactive NoSQL persistence on Google Cloud.",
             flow_title: "Bidirectional Serverless Data Flow",
@@ -626,10 +665,18 @@ const resources = {
                 title: "AI-Assisted Digitalization (OCR)",
                 desc: "OpenAI API integration to parse photographed paper menus and automatically map names, prices, ingredients, and normalized allergens."
               }
+            ],
+            contributions_title: "My Key Contributions (Lead Role)",
+            contributions: [
+              "Privacy & Culinary DNA (B2C): Local AES encryption (crypto-js) in localStorage for allergy/diet data and anonymized aggregated telemetry.",
+              "Business Intelligence (B2B): Analytics dashboard with KPIs, 7-day demand/waste forecasting, and interactive Menu Engineering table.",
+              "Branding, Media & Core Flows: Dynamic brand customization per restaurant, Firebase Storage uploads, B2B authentication, and order history.",
+              "Architecture & Quality: Repository standards definition, Context Engineering, modular refactoring, and team Pull Request reviews."
             ]
           },
           mormas: {
             badge: "Case Study • Spring MVC Architecture",
+            role_badge: "Tech Lead & Full-Stack Developer (#1 Contributor)",
             title: "Mountain Race Management System (MoRMaS)",
             confidential_note: "Enterprise Layered Information System with Transactional Control in Java & Spring Boot.",
             flow_title: "MVC Control Flow & Data Persistence",
@@ -690,6 +737,13 @@ const resources = {
                 title: "Role-Based Access Control (RBAC)",
                 desc: "Distinct user profiles (Promoter, Athlete, Volunteer) with controller-level session validation to shield role-specific operations."
               }
+            ],
+            contributions_title: "My Key Contributions (Lead Role)",
+            contributions: [
+              "Core Architecture & SQL: Initial Spring Boot setup, global exception handling (@ControllerAdvice), and PostgreSQL relational schema design.",
+              "Authentication & RBAC Sessions: End-to-end login, session tracking, and dedicated personal areas for Promoters, Athletes, and Clubs.",
+              "Core Modules & Notifications: Full CRUD for participants and clubs, business validators, registration checkout, and automated confirmation emails (EmailService).",
+              "Integration & UI/UX: Base Thymeleaf layout fragments, search/sort filters, and technical coordination of team branches and merges."
             ]
           }
         },
@@ -801,6 +855,8 @@ const resources = {
         form_success_desc: "Thanks for reaching out! I have received your message and will get back to you as soon as possible.",
         form_send_another: "Send another message",
         form_error: "There was an error sending your message. Please try again or write to me directly via email.",
+        copy_email: "Copy",
+        email_copied: "Copied!",
       },
       footer: {
         copyright: "© {{year}} Victor Blasco García. All rights reserved.",

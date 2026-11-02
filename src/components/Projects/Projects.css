@@ -67,13 +67,32 @@
 .project-title {
   font-size: 1.75rem;
   font-weight: 800;
-  margin: 0 0 0.85rem 0;
+  margin: 0 0 0.65rem 0;
   line-height: 1.22;
   color: var(--text-color);
   letter-spacing: -0.025em;
   overflow-wrap: break-word;
   word-break: break-word;
   max-width: 100%;
+}
+
+.project-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-color);
+  background: var(--glow-violet);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  padding: 0.28rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.9rem;
+}
+
+.project-role-badge svg {
+  color: var(--accent-secondary);
+  flex-shrink: 0;
 }
 
 .project-desc {
