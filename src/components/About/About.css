@@ -27,15 +27,13 @@
   font-weight: 700;
   color: var(--text-color);
   margin: 0;
-  border-bottom: 1px solid var(--card-border);
-  padding-bottom: 0.55rem;
 }
 
 /* Cómo trabajo: lista editorial limpia */
 .skills-list-premium {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1.35rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -45,20 +43,18 @@
   display: flex;
   gap: 0.9rem;
   align-items: flex-start;
-  padding: 1rem 0;
+  padding: 0;
   border: none;
-  border-bottom: 1px solid var(--card-border);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
 .skill-item-premium:first-child {
-  padding-top: 0.25rem;
+  padding-top: 0;
 }
 
 .skill-item-premium:last-child {
-  border-bottom: none;
   padding-bottom: 0;
 }
 
@@ -96,11 +92,11 @@
   line-height: 1.5;
 }
 
-/* Idiomas: tabla limpia con divisores */
+/* Idiomas: tabla limpia sin rayas */
 .languages-list-premium {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0.95rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -111,16 +107,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.85rem 0;
+  padding: 0.15rem 0;
   border: none;
-  border-bottom: 1px solid var(--card-border);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
 .language-item-premium:last-child {
-  border-bottom: none;
   padding-bottom: 0;
 }
 
