@@ -17,7 +17,7 @@ export function getSkillCategories(t) {
       id: "data",
       icon: "database",
       title: t("skills.categories.data"),
-      items: ["PostgreSQL", "MongoDB", "Redis", "ETL", "Pandas / NumPy"],
+      items: ["SQL", "PostgreSQL", "MongoDB", "Redis", "ETL", "Pandas / NumPy"],
     },
     {
       id: "devops",
@@ -40,6 +40,7 @@ export function getSkillCategories(t) {
       title: t("skills.categories.security"),
       items: [
         "CyberArk PAM",
+        "LDAP",
         "RBAC",
         t("skills.items.least_privilege"),
         t("skills.items.credential_rotation"),
@@ -57,7 +58,7 @@ export function getSkillCategories(t) {
       id: "frontend",
       icon: "layout",
       title: t("skills.categories.frontend"),
-      items: ["React", "JavaScript", "Thymeleaf", "Tailwind CSS"],
+      items: ["React", "JavaScript", "TypeScript", "Thymeleaf", "Tailwind CSS"],
     },
   ];
 }

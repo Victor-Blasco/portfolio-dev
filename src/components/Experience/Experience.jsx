@@ -74,6 +74,15 @@ function Experience() {
   // Datos cronológicos de traducción dinámica
   const timelineData = [
     {
+      id: "master",
+      type: "education",
+      title: t("experience.titles.master"),
+      institution: t("experience.institutions.master"),
+      period: t("experience.periods.master"),
+      description: t("experience.descriptions.master"),
+      logo: ujiLogo,
+    },
+    {
       id: "cyberark",
       type: "education",
       title: t("experience.titles.cyberark"),

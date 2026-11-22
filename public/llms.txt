@@ -1,15 +1,15 @@
 # Víctor Blasco - Backend Software Engineer
 
-> Portfolio profesional de Víctor Blasco, Backend Software Engineer especializado en Java/Spring Boot, Python/Django, PostgreSQL, Docker y seguridad (CyberArk PAM).
+> Portfolio profesional de Víctor Blasco, Backend Software Engineer especializado en Java/Spring Boot, Python/Django, PostgreSQL, Docker y seguridad (CyberArk PAM, LDAP, RBAC). Estudiante del Máster Universitario en Sistemas Inteligentes en la Universitat Jaume I.
 
 ## Información Principal
-- [Sobre mí](/#about): Perfil profesional, stack técnico categorizado (Backend, Datos, Infraestructura/DevOps, Seguridad, Testing, Frontend) e idiomas.
+- [Sobre mí](/#about): Perfil profesional, stack técnico categorizado (Backend, Datos con SQL/PostgreSQL/MongoDB/Redis, Infraestructura/DevOps, Seguridad con CyberArk PAM/LDAP/RBAC, Testing, Frontend con React/TypeScript) e idiomas.
 - [Proyectos](/#projects):
-  - **Plataforma BI de Ciberseguridad (TFG - Pamesa Grupo Empresarial):** Cruce de Cortex XDR, Proofpoint y Endpoint Central para detección de Shadow IT y score de riesgo por equipo; ETL en Python optimizado (reducción del tiempo de obtención y procesado de datos de ~1 min a ~25 s) con contratos y auditoría de ingestas, Celery/Redis, PostgreSQL con trazabilidad histórica, Clean Architecture en Django documentada con ADRs, CI en GitHub Actions (pytest) y despliegue en 5 contenedores Docker.
-  - **Gustomé:** Plataforma SaaS multi-tenant (planes Free, Basic, Pro) en React y Firebase/Firestore con comandas en tiempo real (onSnapshot), optimización de lecturas y OCR con OpenAI normalizado frente a un catálogo maestro de ingredientes y alérgenos.
+  - **Plataforma BI de Ciberseguridad (TFG - Pamesa Grupo Empresarial):** Plataforma diseñada y desplegada end-to-end en coordinación con el equipo de IT. Cruce de Cortex XDR, Proofpoint y Endpoint Central para detección de Shadow IT y score de riesgo por equipo; ETL en Python optimizado paralelizando ingestas independientes con Celery y Redis sin bloqueo web (reducción del tiempo de ejecución de ~1 min a ~25 s, ~58%) con contratos y auditoría de ingestas, PostgreSQL con trazabilidad histórica, Clean Architecture en Django documentada con ADRs, CI en GitHub Actions (pytest) y despliegue en producción con Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis y Celery). Código privado bajo NDA.
+  - **Gustomé:** Plataforma SaaS multi-tenant (planes Free, Basic, Pro) con pasarela de pagos en Stripe, React y Firebase/Firestore, comandas en tiempo real (onSnapshot), optimización de lecturas, Firestore Security Rules (RBAC) y OCR con OpenAI normalizado frente a un catálogo maestro de ingredientes y alérgenos.
   - **MoRMaS:** Sistema de gestión de carreras de montaña en Java/Spring Boot, JdbcTemplate y Thymeleaf sobre un esquema PostgreSQL de 14 tablas con borrado lógico (soft delete) y puntuación de usabilidad SUS de 87,5/100.
   - **Market Pulse:** Paquete Python de análisis financiero con Pandas/NumPy, tests en pytest y visualización en Streamlit.
-- [Trayectoria](/#experience): Experiencia profesional y formación (Prácticas en Pamesa Grupo Empresarial, Bootcamp CyberArk PAM en NTT DATA, Universitat Jaume I & Università degli Studi di Milano).
+- [Trayectoria](/#experience): Experiencia profesional y formación (Máster Universitario en Sistemas Inteligentes en Universitat Jaume I, Bootcamp CyberArk PAM en NTT DATA, Prácticas en Pamesa Grupo Empresarial, Erasmus+ en Università degli Studi di Milano, Grado en Ingeniería Informática en Universitat Jaume I y empleos de verano en Pamesa (Eco Porcelánico) · WANDEGAR S.L.U.).
 - [Contacto](/#contact): Formulario y vías de contacto directo.
 
 ## Enlaces Externos

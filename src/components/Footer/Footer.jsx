@@ -16,7 +16,7 @@ function Footer() {
     <footer className="footer" ref={sectionRef}>
       <div className="footer-content">
         <div className="footer-brand">
-          <h3>Victor Blasco</h3>
+          <h3>Víctor Blasco</h3>
           <p>{t("footer.role")}</p>
           <div className="footer-socials">
             <a href="https://github.com/Victor-Blasco" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

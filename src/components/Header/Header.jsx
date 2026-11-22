@@ -45,7 +45,7 @@ function Header() {
         <div className="avatar-wrapper">
           <img
             src="/avatar.webp"
-            alt="Victor Blasco"
+            alt="Víctor Blasco"
             width="136"
             height="136"
             fetchPriority="high"

@@ -161,6 +161,10 @@ function Projects() {
           hasArchitectureModal: true,
           archKey: "tfg",
         },
+        {
+          label: "Private",
+          isPrivate: true,
+        },
       ],
     },
     {
@@ -170,7 +174,7 @@ function Projects() {
       subtitle: t("projects.periods.gustome"),
       role: t("projects.roles.gustome"),
       description: t("projects.descriptions.gustome"),
-      tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore", "OpenAI API", "GitHub Actions"],
+      tech: ["React (Vite)", "Firebase Auth", "Cloud Firestore", "Stripe", "OpenAI API", "GitHub Actions"],
       images: getProjectImages(gustomeGlob, "gustome", t),
       references: [
         {

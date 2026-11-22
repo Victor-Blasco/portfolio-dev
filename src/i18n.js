@@ -24,7 +24,7 @@ const resources = {
       },
       about: {
         title: "Sobre mí",
-        text: "Ingeniero Informático por la Universitat Jaume I, orientado a backend. Desarrollo con Java/Spring Boot y Python/Django sobre PostgreSQL, construyo pipelines ETL con procesamiento asíncrono (Celery/Redis) y despliego con Docker y Nginx. En mis prácticas en Pamesa diseñé en solitario una plataforma de KPIs de ciberseguridad que integra Cortex XDR, Proofpoint y Endpoint Central, y he completado el bootcamp de CyberArk PAM de NTT DATA. Busco un rol de backend donde la seguridad forme parte del diseño, no sea un añadido.",
+        text: "Ingeniero Informático por la Universitat Jaume I y estudiante del Máster Universitario en Sistemas Inteligentes, orientado a backend. Desarrollo con Java/Spring Boot y Python/Django sobre PostgreSQL, construyo pipelines ETL con procesamiento asíncrono (Celery/Redis) y despliego con Docker y Nginx. En mis prácticas en Pamesa diseñé y desplegué end-to-end (junto al equipo de IT) una plataforma de KPIs de ciberseguridad que integra Cortex XDR, Proofpoint y Endpoint Central, y he completado el bootcamp de CyberArk PAM de NTT DATA. Busco un rol de backend donde la seguridad forme parte del diseño, no sea un añadido.",
         languages_title: "Idiomas",
         lang_spanish: "Castellano",
         lang_valencian: "Valenciano",
@@ -33,7 +33,7 @@ const resources = {
         level_native: "Nativo",
         level_advanced_c1: "Avanzado (C1)",
         level_intermediate_b1: "Intermedio (B1)",
-        soft_skills_title: "Soft Skills",
+        soft_skills_title: "Cómo trabajo",
         skill_teamwork_title: "Código mantenible y colaborativo",
         skill_teamwork_desc:
           "Diseño de APIs limpias, documentación clara y uso de flujos de control de versiones pensados para que otros desarrolladores puedan escalar el proyecto sin fricción.",
@@ -64,7 +64,7 @@ const resources = {
       },
       projects: {
         title: "Proyectos",
-        private_repo: "Repositorio Privado",
+        private_repo: "Código privado (NDA)",
         view_on_github: "Ver en GitHub",
         view_architecture: "Ver Arquitectura",
         previews_title: "Vista Previa de la Interfaz",
@@ -76,18 +76,18 @@ const resources = {
           marketpulse: "Proyecto personal",
         },
         roles: {
-          tfg: "Rol: Autor único · Software Engineer Intern",
+          tfg: "Rol: End-to-End Owner · Software Engineer Intern",
           gustome: "Rol: Lead Developer · Contribuidor principal",
           mormas: "Rol: Lead Developer · Contribuidor principal",
         },
         architectures: {
           tfg: {
             badge: "Caso de Estudio • Arquitectura BI",
-            role_badge: "Autor Único (Prácticas / TFG)",
+            role_badge: "End-to-End Owner · Software Engineer Intern",
             title: "Plataforma BI de Ciberseguridad (TFG)",
             confidential_note: "Código fuente privado bajo acuerdo de confidencialidad corporativa con Pamesa Grupo Empresarial.",
             flow_title: "Flujo de Datos y Pipeline de Procesamiento",
-            infra_label: "Infraestructura en 5 Contenedores (Docker Compose con Healthchecks + CI en GitHub Actions)",
+            infra_label: "Infraestructura Contenerizada (Docker Compose con Healthchecks + CI en GitHub Actions)",
             flow_nodes: [
               {
                 step: "01",
@@ -141,14 +141,14 @@ const resources = {
                 desc: "Estructuración en capas (Services, Schemas/DTOs, Context Builders y Use Cases) con modelos desacoplados (managed = False), contratos de validación en contracts.py y decisiones técnicas documentadas mediante Architecture Decision Records (ADRs)."
               },
               {
-                title: "Despliegue en 5 Contenedores y CI con GitHub Actions",
+                title: "Despliegue con Docker Compose y CI en GitHub Actions",
                 desc: "Orquestación aislada con Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis y worker Celery) gobernada por healthchecks, respaldada por integración continua en GitHub Actions que ejecuta pytest y la suite de Django en cada entrega."
               }
             ],
-            contributions_title: "Alcance Técnico e Impacto (Autor Único)",
+            contributions_title: "Alcance Técnico e Impacto (End-to-End)",
             contributions: [
               "Correlación Multi-Fuente (Shadow IT): Identificación de alertas generadas por equipos fuera del inventario corporativo y análisis de amenazas de correo en Proofpoint con enriquecimiento geográfico por IP.",
-              "Ingesta Asíncrona y Optimización (~1 min a ~25 s): Procesamiento en segundo plano con Celery y Redis sin bloquear el servidor web, reduciendo el tiempo de obtención y procesado de datos de ~1 min a ~25 s con auditoría completa de cada ciclo.",
+              "Ingesta Asíncrona y Optimización (~1 min a ~25 s, ~58%): Paralelización de ingestas independientes en segundo plano con Celery y Redis sin bloquear el servidor web, reduciendo el tiempo de ejecución de ~1 min a ~25 s (~58%) con auditoría completa de cada ciclo.",
               "Calidad de Software y ADRs: Batería de tests unitarios y de integración (pytest + Django tests) para el pipeline ETL y el control de acceso (RBAC), manteniendo registro documental en ADRs.",
               "Puesta en Producción y Seguridad: Configuración de cabeceras de seguridad en Nginx, aislamiento de secretos por entorno y automatización de copias de seguridad."
             ]
@@ -311,9 +311,9 @@ const resources = {
           marketpulse: "Octubre 2025 - Diciembre 2025",
         },
         descriptions: {
-          tfg: "Plataforma BI que cruza telemetría de 3 herramientas corporativas (Cortex XDR, Proofpoint y Endpoint Central) para detectar activos no inventariados (Shadow IT), calcular riesgo por equipo (BitLocker, administradores locales) y analizar amenazas de correo. Pipeline ETL en Python optimizado (reduciendo la obtención y procesado de datos de ~1 min a ~25 s) con validación por contratos, auditoría de ejecuciones e ingesta asíncrona con Celery/Redis. Desplegada en 5 contenedores Docker con CI en GitHub Actions (pytest).",
+          tfg: "Plataforma BI diseñada y desplegada end-to-end (en coordinación con el equipo de IT) que cruza telemetría de 3 herramientas corporativas (Cortex XDR, Proofpoint y Endpoint Central) para detectar activos no inventariados (Shadow IT), calcular riesgo por equipo (BitLocker, administradores locales) y analizar amenazas de correo. Pipeline ETL en Python optimizado paralelizando ingestas independientes con Celery y Redis sin bloqueo web, reduciendo el tiempo de ejecución de ~1 min a ~25 s (~58%), con validación por contratos y auditoría histórica en PostgreSQL. Desplegada en producción con Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis y Celery) y CI en GitHub Actions (pytest).",
           gustome:
-            "Plataforma SaaS de cartas digitales con planes por suscripción (Free, Basic y Pro): filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con OpenAI normalizado contra un catálogo maestro de ingredientes. Autorización por rol con Firestore Security Rules y CI/CD con GitHub Actions.",
+            "Plataforma SaaS de cartas digitales con planes por suscripción (Free, Basic y Pro) y pasarela de pagos con Stripe: filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con OpenAI normalizado contra un catálogo maestro de ingredientes. Autorización por rol con Firestore Security Rules y CI/CD con GitHub Actions.",
           mormas:
             "Aplicación web en Java/Spring Boot para gestionar carreras de montaña sobre un modelo relacional de 14 tablas en PostgreSQL: inscripciones, control de acceso para 3 roles (promotor, atleta y voluntario), borrado lógico (soft delete) para preservar el histórico de competiciones, confirmaciones por email y justificantes PDF. Validada mediante pruebas de usabilidad obteniendo un 87,5/100 en la escala SUS.",
           marketpulse:
@@ -349,6 +349,7 @@ const resources = {
         filter_work: "Experiencia",
         filter_education: "Educación",
         titles: {
+          master: "Máster Universitario en Sistemas Inteligentes",
           cyberark: "Bootcamp CyberArk PAM",
           pamesa: "Software Engineer (Prácticas)",
           milano: "Estancia Erasmus+",
@@ -356,13 +357,15 @@ const resources = {
           uji: "Grado en Ingeniería Informática",
         },
         institutions: {
+          master: "Universitat Jaume I",
           cyberark: "NTT DATA · Formación híbrida",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
-          industria: "Eco Porcelánico · Wandegar 2001",
+          industria: "Pamesa (Eco Porcelánico) · WANDEGAR S.L.U.",
           uji: "Universitat Jaume I",
         },
         periods: {
+          master: "Septiembre 2026 - Actualidad",
           cyberark: "Septiembre 2026 - Octubre 2026",
           pamesa: "Febrero 2026 - Mayo 2026",
           milano: "Septiembre 2025 - Enero 2026",
@@ -370,10 +373,12 @@ const resources = {
           uji: "Septiembre 2022 - Junio 2026",
         },
         descriptions: {
+          master:
+            "Especialización en Big Data (Python, NumPy, Pandas), redes neuronales y sistemas ciberfísicos.",
           cyberark:
             "Desplegué y administré una solución CyberArk PAM self-hosted (Vault, PVWA, CPM, PSM) en un laboratorio de 7 servidores: Safes con mínimo privilegio, integración con LDAP, rotación automática de credenciales y aislamiento de sesiones privilegiadas. Diagnostiqué incidencias mediante análisis de logs con criterios de hardening y alta disponibilidad. Preparando las certificaciones CyberArk Defender y Sentry.",
           pamesa:
-            "Diseñé y desarrollé en solitario una plataforma BI de ciberseguridad que cruza datos de Cortex XDR, Proofpoint y Endpoint Central para detectar dispositivos fuera de inventario (Shadow IT) y evaluar riesgo por endpoint. Construí y optimicé el pipeline ETL en Python reduciendo la obtención y procesado de datos de ~1 min a ~25 s, los dashboards en Django siguiendo Clean Architecture (documentada en ADRs) y el despliegue en 5 contenedores Docker con CI en GitHub Actions (pytest).",
+            "Diseño, desarrollo y puesta en producción end-to-end (en coordinación con el equipo de IT) de una plataforma BI de ciberseguridad que cruza datos de Cortex XDR, Proofpoint y Endpoint Central para detectar dispositivos fuera de inventario (Shadow IT) y evaluar riesgo por endpoint. Optimicé el pipeline ETL en Python paralelizando ingestas independientes con Celery y Redis (reduciendo el tiempo de ejecución de ~1 min a ~25 s, ~58%), desarrollé el backend en Django siguiendo Clean Architecture (documentada en ADRs) y desplegué en producción con Docker Compose y CI en GitHub Actions (pytest).",
           milano:
             "Asignaturas de máster en Computer Science y Data Science for Economics impartidas en inglés: bases de datos NoSQL (MongoDB), Business Intelligence y Data Science.",
           industria:
@@ -402,8 +407,8 @@ const resources = {
       },
       footer: {
         copyright:
-          "© {{year}} Victor Blasco García. Todos los derechos reservados.",
-        design_by: "Diseñado & Desarrollado por Victor Blasco",
+          "© {{year}} Víctor Blasco García. Todos los derechos reservados.",
+        design_by: "Diseñado & Desarrollado por Víctor Blasco",
         role: "Ingeniería Informática | Backend & Seguridad",
         home: "Inicio",
         back_to_top: "Volver arriba",
@@ -431,7 +436,7 @@ const resources = {
       },
       about: {
         title: "About me",
-        text: "Computer Engineering graduate (Universitat Jaume I) focused on backend. I build with Java/Spring Boot and Python/Django on PostgreSQL, design ETL pipelines with asynchronous processing (Celery/Redis), and deploy with Docker and Nginx. During my internship at Pamesa I single-handedly built a cybersecurity KPI platform integrating Cortex XDR, Proofpoint and Endpoint Central, and I've completed NTT DATA's CyberArk PAM bootcamp. I'm looking for a backend role where security is part of the design, not an afterthought.",
+        text: "Computer Engineering graduate (Universitat Jaume I) currently pursuing an MSc in Intelligent Systems, focused on backend. I build with Java/Spring Boot and Python/Django on PostgreSQL, design ETL pipelines with asynchronous processing (Celery/Redis), and deploy with Docker and Nginx. During my internship at Pamesa I designed and deployed end-to-end (in coordination with the IT team) a cybersecurity KPI platform integrating Cortex XDR, Proofpoint, and Endpoint Central, and I've completed NTT DATA's CyberArk PAM bootcamp. I'm looking for a backend role where security is part of the design, not an afterthought.",
         languages_title: "Languages",
         lang_spanish: "Spanish",
         lang_valencian: "Valencian",
@@ -440,7 +445,7 @@ const resources = {
         level_native: "Native",
         level_advanced_c1: "Advanced (C1)",
         level_intermediate_b1: "Intermediate (B1)",
-        soft_skills_title: "Soft Skills",
+        soft_skills_title: "How I Work",
         skill_teamwork_title: "Maintainable & Collaborative Code",
         skill_teamwork_desc:
           "Designing clean APIs, clear documentation, and version control workflows structured so other developers can scale the project without friction.",
@@ -471,7 +476,7 @@ const resources = {
       },
       projects: {
         title: "Projects",
-        private_repo: "Private Repository",
+        private_repo: "Private code (NDA)",
         view_on_github: "View on GitHub",
         view_architecture: "View Architecture",
         previews_title: "Interface Preview",
@@ -483,18 +488,18 @@ const resources = {
           marketpulse: "Personal project",
         },
         roles: {
-          tfg: "Role: Sole author · Software Engineer Intern",
+          tfg: "Role: End-to-End Owner · Software Engineer Intern",
           gustome: "Role: Lead Developer · Main contributor",
           mormas: "Role: Lead Developer · Main contributor",
         },
         architectures: {
           tfg: {
             badge: "Case Study • BI Architecture",
-            role_badge: "Sole Author (Internship / BSc Thesis)",
+            role_badge: "End-to-End Owner · Software Engineer Intern",
             title: "Cybersecurity BI Platform (TFG)",
             confidential_note: "Private source code under corporate non-disclosure agreement with Pamesa Grupo Empresarial.",
             flow_title: "Data Flow & Processing Pipeline",
-            infra_label: "5-Container Infrastructure (Docker Compose with Healthchecks + GitHub Actions CI)",
+            infra_label: "Containerized Infrastructure (Docker Compose with Healthchecks + GitHub Actions CI)",
             flow_nodes: [
               {
                 step: "01",
@@ -548,14 +553,14 @@ const resources = {
                 desc: "Layered architecture (Services, Schemas/DTOs, Context Builders, and Use Cases) with unmanaged ORM models (managed = False), validation contracts in contracts.py, and design decisions recorded via Architecture Decision Records (ADRs)."
               },
               {
-                title: "5-Container Deployment & GitHub Actions CI",
+                title: "Docker Compose Deployment & GitHub Actions CI",
                 desc: "Isolated orchestration with Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis, and Celery worker) governed by healthchecks, backed by a GitHub Actions CI pipeline running pytest and Django test suites on every push."
               }
             ],
-            contributions_title: "Technical Scope & Impact (Sole Author)",
+            contributions_title: "Technical Scope & Impact (End-to-End)",
             contributions: [
               "Multi-Source Correlation (Shadow IT): Automated identification of critical alerts triggered by uninventoried assets and Proofpoint email threat intelligence with IP geolocation enrichment.",
-              "Asynchronous Ingestion & Optimization (~1 min to ~25s): Background task offloading with Celery and Redis to prevent web thread blocking, cutting data extraction and processing time from ~1 min to ~25s with full audit logging.",
+              "Asynchronous Ingestion & Optimization (~1 min to ~25 s, ~58%): Parallelized independent data ingestions in the background via Celery and Redis without blocking web threads, cutting execution time from ~1 min to ~25 s (~58%) with full audit logging.",
               "Software Quality & ADRs: Unit and integration test coverage (pytest + Django tests) across the ETL pipeline and role-based access control (RBAC), documented through formal ADRs.",
               "Production Hardening: Security HTTP headers in Nginx, environment-isolated secrets management, and automated database backup scripts."
             ]
@@ -718,9 +723,9 @@ const resources = {
           marketpulse: "October 2025 - December 2025",
         },
         descriptions: {
-          tfg: "BI platform that cross-references telemetry from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) to detect unmanaged assets (Shadow IT), compute endpoint risk scores (BitLocker, local admins), and analyze email threats. Optimized Python ETL pipeline (cutting data extraction and processing from ~1 min to ~25s) with data contracts, execution auditing, and asynchronous ingestion via Celery/Redis. Deployed across 5 Docker containers with GitHub Actions CI (pytest).",
+          tfg: "BI platform designed and deployed end-to-end (in coordination with the IT team) cross-referencing telemetry from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) to detect unmanaged assets (Shadow IT), compute endpoint risk scores (BitLocker, local admins), and analyze email threats. Optimized Python ETL pipeline parallelizing independent data ingestions via Celery and Redis without blocking web threads, cutting execution time from ~1 min to ~25 s (~58%), with validation contracts and historical auditing in PostgreSQL. Deployed to production with Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis, and Celery) and GitHub Actions CI (pytest).",
           gustome:
-            "Multi-tenant SaaS digital menu platform with subscription tiers (Free, Basic, and Pro): allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OpenAI OCR normalized against a master ingredient catalog. Role-based Firestore Security Rules and GitHub Actions CI/CD.",
+            "Multi-tenant SaaS digital menu platform with subscription tiers (Free, Basic, and Pro) and Stripe payment integration: allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OpenAI OCR normalized against a master ingredient catalog. Role-based Firestore Security Rules and GitHub Actions CI/CD.",
           mormas:
             "Java/Spring Boot web application for mountain race management built on a 14-table PostgreSQL relational schema: registrations, role-based access control across 3 roles (promoter, athlete, and volunteer), logical soft delete to preserve competition history, email confirmations, and PDF receipts. Validated through user testing with an 87.5/100 SUS usability score.",
           marketpulse:
@@ -756,6 +761,7 @@ const resources = {
         filter_work: "Experience",
         filter_education: "Education",
         titles: {
+          master: "MSc in Intelligent Systems",
           cyberark: "CyberArk PAM Bootcamp",
           pamesa: "Software Engineer Intern",
           milano: "Erasmus+ Stay",
@@ -763,13 +769,15 @@ const resources = {
           uji: "Bachelor's Degree in Computer Engineering",
         },
         institutions: {
+          master: "Universitat Jaume I",
           cyberark: "NTT DATA · Hybrid training",
           pamesa: "Pamesa Grupo Empresarial",
           milano: "Università degli Studi di Milano",
-          industria: "Eco Porcelánico · Wandegar 2001",
+          industria: "Pamesa (Eco Porcelánico) · WANDEGAR S.L.U.",
           uji: "Universitat Jaume I",
         },
         periods: {
+          master: "September 2026 - Present",
           cyberark: "September 2026 - October 2026",
           pamesa: "February 2026 - May 2026",
           milano: "September 2025 - January 2026",
@@ -777,10 +785,12 @@ const resources = {
           uji: "September 2022 - June 2026",
         },
         descriptions: {
+          master:
+            "Graduate coursework in Big Data (Python, NumPy, Pandas), Neural Networks, and Cyber-Physical Systems.",
           cyberark:
             "Deployed and administered a self-hosted CyberArk PAM solution (Vault, PVWA, CPM, PSM) across a 7-server lab: least-privilege Safes, LDAP integration, automated credential rotation, and privileged session isolation. Diagnosed incidents through log analysis under hardening and high-availability standards. Currently preparing for the CyberArk Defender and Sentry certifications.",
           pamesa:
-            "Single-handedly designed and built a cybersecurity BI platform cross-referencing Cortex XDR, Proofpoint, and Endpoint Central to detect unmanaged devices (Shadow IT) and score endpoint risk. Built and optimized the Python ETL pipeline cutting data extraction and processing from ~1 min to ~25s, the Django dashboards following Clean Architecture (documented in ADRs), and the 5-container Docker deployment with GitHub Actions CI (pytest).",
+            "Designed, built, and deployed end-to-end (in coordination with the IT team) a cybersecurity BI platform cross-referencing Cortex XDR, Proofpoint, and Endpoint Central to detect unmanaged devices (Shadow IT) and score endpoint risk. Optimized the Python ETL pipeline by parallelizing independent ingestions with Celery and Redis (cutting execution time from ~1 min to ~25 s, ~58%), built the Django backend following Clean Architecture (documented in ADRs), and deployed to production with Docker Compose and GitHub Actions CI (pytest).",
           milano:
             "Master's courses in Computer Science and Data Science for Economics taught in English: NoSQL databases (MongoDB), Business Intelligence, and Data Science.",
           industria:
@@ -808,8 +818,8 @@ const resources = {
         email_copied: "Copied!",
       },
       footer: {
-        copyright: "© {{year}} Victor Blasco García. All rights reserved.",
-        design_by: "Designed & Developed by Victor Blasco",
+        copyright: "© {{year}} Víctor Blasco García. All rights reserved.",
+        design_by: "Designed & Developed by Víctor Blasco",
         role: "Computer Engineering | Backend & Security",
         home: "Home",
         back_to_top: "Back to top",
