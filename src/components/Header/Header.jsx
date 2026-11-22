@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon/Icon";
 import "./Header.css";
-import cvEs from "@/assets/CV Victor Blasco ES.pdf";
-import cvEn from "@/assets/CV Victor Blasco EN.pdf";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { trackEvent } from "@/utils/analytics";
 
@@ -21,7 +19,9 @@ function Header() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Seleccionar la versión del CV en español o inglés según el idioma activo
-  const cv = i18n.language.startsWith("en") ? cvEn : cvEs;
+  const cv = i18n.language.startsWith("en")
+    ? "/CV Victor Blasco EN.pdf"
+    : "/CV Victor Blasco ES.pdf";
 
   /**
    * Copia el correo electrónico al portapapeles y muestra confirmación temporal.
