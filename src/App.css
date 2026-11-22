@@ -15,6 +15,7 @@
   background: transparent;
   border: none;
   box-shadow: none;
+  scroll-margin-top: 2.5rem;
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
   transform: translateY(40px);
@@ -47,8 +48,10 @@ main .section-card::before {
 .section-skeleton {
   min-height: 220px;
   margin: 3rem 0;
-  background: transparent;
-  opacity: 0.4;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  animation: pulse-slow 2.5s ease-in-out infinite;
 }
 
 h1, h2, h3, h4 {
@@ -77,15 +80,17 @@ h2::after {
   position: absolute;
   left: 0;
   bottom: -6px;
-  width: 40px;
+  width: 60px;
   height: 3px;
   background: var(--accent);
   border-radius: 2px;
-  transition: width 0.3s ease;
+  transform: scaleX(0.66);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .section-card:hover h2::after {
-  width: 60px;
+  transform: scaleX(1);
 }
 
 /* Adaptación para displays más pequeños */
@@ -114,22 +119,30 @@ h2::after {
   --text-secondary: #475569;
   --section-bg: rgba(248, 250, 252, 0.72);
   --card-bg: rgba(255, 255, 255, 0.78);
+  --modal-bg: #ffffff;
   --card-bg-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 245, 249, 0.75) 100%);
   --card-border: rgba(203, 213, 225, 0.75);
   --surface-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   --accent: #2563eb;
-  --accent-secondary: #7c3aed;
-  --glow-blue: rgba(37, 99, 235, 0.1);
-  --glow-violet: rgba(124, 58, 237, 0.1);
+  --accent-secondary: #4f46e5;
+  --glow-blue: rgba(37, 99, 235, 0.08);
+  --glow-violet: rgba(79, 70, 229, 0.08);
   --input-bg: rgba(255, 255, 255, 0.9);
+  --input-focus-bg: #ffffff;
   --input-text: #0f172a;
   --button-bg: #0f172a;
   --button-text: #f8fafc;
+  --color-success: #047857;
+  --color-success-bg: rgba(4, 120, 87, 0.1);
+  --color-success-border: rgba(4, 120, 87, 0.32);
+  --color-error: #b91c1c;
+  --color-error-bg: rgba(185, 28, 28, 0.08);
+  --color-error-border: rgba(185, 28, 28, 0.3);
   --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
-  --mesh-bg: radial-gradient(at 10% 15%, rgba(37, 99, 235, 0.07) 0px, transparent 40%),
-             radial-gradient(at 90% 30%, rgba(124, 58, 237, 0.07) 0px, transparent 45%),
-             radial-gradient(at 30% 70%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
-             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.04) 0px, transparent 40%);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(37, 99, 235, 0.05) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(79, 70, 229, 0.04) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.03) 0px, transparent 40%);
   --github-color: #0f172a;
 }
 
@@ -141,22 +154,30 @@ h2::after {
   --text-secondary: #a1a1aa;
   --section-bg: rgba(24, 24, 27, 0.55);
   --card-bg: rgba(18, 18, 21, 0.68);
+  --modal-bg: #131317;
   --card-bg-gradient: linear-gradient(135deg, rgba(24, 24, 28, 0.88) 0%, rgba(18, 18, 22, 0.65) 100%);
   --card-border: rgba(63, 63, 70, 0.55);
   --surface-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
   --accent: #3b82f6;
-  --accent-secondary: #8b5cf6;
-  --glow-blue: rgba(59, 130, 246, 0.18);
-  --glow-violet: rgba(139, 92, 246, 0.18);
+  --accent-secondary: #818cf8;
+  --glow-blue: rgba(59, 130, 246, 0.14);
+  --glow-violet: rgba(129, 140, 248, 0.14);
   --input-bg: rgba(24, 24, 27, 0.85);
+  --input-focus-bg: #1e1e24;
   --input-text: #f8fafc;
   --button-bg: #f8fafc;
   --button-text: #09090b;
+  --color-success: #34d399;
+  --color-success-bg: rgba(16, 185, 129, 0.14);
+  --color-success-border: rgba(52, 211, 153, 0.38);
+  --color-error: #f87171;
+  --color-error-bg: rgba(239, 68, 68, 0.14);
+  --color-error-border: rgba(248, 113, 113, 0.35);
   --glass-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45);
-  --mesh-bg: radial-gradient(at 10% 15%, rgba(59, 130, 246, 0.14) 0px, transparent 40%),
-             radial-gradient(at 90% 30%, rgba(139, 92, 246, 0.16) 0px, transparent 45%),
-             radial-gradient(at 30% 70%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.08) 0px, transparent 40%);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(59, 130, 246, 0.1) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(129, 140, 248, 0.09) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(59, 130, 246, 0.07) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.06) 0px, transparent 40%);
   --github-color: #ffffff;
 }
 
@@ -222,7 +243,11 @@ body, html, #root {
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, color 0.4s ease;
   scroll-behavior: smooth;
-  font-display: swap;
+}
+
+:where(a, button, input, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 a {
@@ -240,6 +265,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
+  min-height: 40px;
   background: var(--input-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
@@ -264,26 +290,32 @@ a:hover {
   color: var(--accent);
 }
 
+.social-link:active:not(.private-link) {
+  transform: translateY(0) scale(0.98);
+}
+
 .social-link.primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-  border-color: transparent;
+  background: var(--accent);
+  border-color: rgba(255, 255, 255, 0.16);
   color: #ffffff;
-  box-shadow: 0 4px 14px var(--glow-blue);
+  box-shadow: 0 4px 14px var(--glow-blue), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .social-link.primary:hover {
   color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.35);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   filter: brightness(1.06);
 }
 
 .social-link.private-link {
   cursor: default;
-  opacity: 0.75;
-  background-color: rgba(148, 163, 184, 0.08);
-  border: 1px dashed var(--card-border);
+  background-color: transparent;
+  border: none;
+  padding: 0.4rem 0.25rem;
   color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 500;
   font-style: normal;
   box-shadow: none;
 }
@@ -291,8 +323,8 @@ a:hover {
 .social-link.private-link:hover {
   transform: none;
   box-shadow: none;
-  border-color: var(--card-border);
-  background-color: rgba(148, 163, 184, 0.08);
+  border-color: transparent;
+  background-color: transparent;
   color: var(--text-secondary);
 }
 

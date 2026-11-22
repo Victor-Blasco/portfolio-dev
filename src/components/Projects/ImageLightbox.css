@@ -136,8 +136,9 @@
 .lightbox-counter {
   font-size: 0.8rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.1);
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
   padding: 3px 10px;
   border-radius: 12px;
   white-space: nowrap;
@@ -195,8 +196,8 @@
   .lightbox-close {
     top: 16px;
     right: 16px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .lightbox-caption {

@@ -147,25 +147,26 @@ function Contact() {
           <p>{t("contact.text")}</p>
           <div className="contact-links">
             {contactChannels.map((channel) => (
-              <a
-                key={channel.label}
-                href={channel.href}
-                target={channel.external ? "_blank" : undefined}
-                rel={channel.external ? "noopener noreferrer" : undefined}
-                className="contact-card-link"
-                onClick={() =>
-                  trackEvent("click_contact_channel", {
-                    channel: channel.label,
-                    value: channel.value,
-                  })
-                }
-              >
+              <div key={channel.label} className="contact-card-item">
                 <div className="contact-card-icon">
                   <Icon name={channel.icon} className="contact-icon" />
                 </div>
                 <div className="contact-card-text">
                   <span className="contact-card-label">{channel.label}</span>
-                  <span className="contact-card-value">{channel.value}</span>
+                  <a
+                    href={channel.href}
+                    target={channel.external ? "_blank" : undefined}
+                    rel={channel.external ? "noopener noreferrer" : undefined}
+                    className="contact-card-link"
+                    onClick={() =>
+                      trackEvent("click_contact_channel", {
+                        channel: channel.label,
+                        value: channel.value,
+                      })
+                    }
+                  >
+                    {channel.value}
+                  </a>
                 </div>
                 {channel.icon === "email" && (
                   <button
@@ -208,7 +209,7 @@ function Contact() {
                   <line x1="7" y1="17" x2="17" y2="7"></line>
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -230,7 +231,7 @@ function Contact() {
           <form
             className="contact-form glass-panel"
             onSubmit={handleSubmit}
-            aria-label="Formulario de contacto"
+            aria-label={t("contact.form_aria_label")}
           >
             {/* Campo trampa antispam (Honeypot para bots) */}
             <input
@@ -261,6 +262,8 @@ function Contact() {
                 id="contact-name"
                 type="text"
                 name="name"
+                autoComplete="name"
+                enterKeyHint="next"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder={t("contact.form_name_placeholder")}
@@ -275,6 +278,9 @@ function Contact() {
                 id="contact-email"
                 type="email"
                 name="email"
+                autoComplete="email"
+                inputMode="email"
+                enterKeyHint="next"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder={t("contact.form_email_placeholder")}
@@ -288,6 +294,7 @@ function Contact() {
               <textarea
                 id="contact-message"
                 name="message"
+                enterKeyHint="send"
                 value={formData.message}
                 onChange={handleChange}
                 placeholder={t("contact.form_message_placeholder")}

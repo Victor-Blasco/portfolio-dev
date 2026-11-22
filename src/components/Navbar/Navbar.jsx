@@ -73,7 +73,7 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a href="#root" onClick={() => setIsMenuOpen(false)}>VB</a>
       </div>
 
-      <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
+      <div id="primary-navigation" className={`nav-links ${isMenuOpen ? "active" : ""}`}>
         <a
           href="#about"
           className={activeSection === "about" ? "active" : ""}
@@ -116,7 +116,7 @@ function Navbar({ darkMode, onToggleTheme }) {
           <button
             className={`lang-btn ${i18n.language.startsWith("es") ? "active" : ""}`}
             onClick={() => changeLanguage("es")}
-            aria-label="Cambiar a Español"
+            aria-label={t("navbar.lang_es")}
             type="button"
           >
             ES
@@ -124,7 +124,7 @@ function Navbar({ darkMode, onToggleTheme }) {
           <button
             className={`lang-btn ${i18n.language.startsWith("en") ? "active" : ""}`}
             onClick={() => changeLanguage("en")}
-            aria-label="Change to English"
+            aria-label={t("navbar.lang_en")}
             type="button"
           >
             EN
@@ -132,14 +132,22 @@ function Navbar({ darkMode, onToggleTheme }) {
         </div>
 
         <button
+          type="button"
           className="mode-toggle"
           onClick={handleToggleTheme}
-          aria-label="Cambiar modo claro/oscuro"
+          aria-label={t("navbar.toggle_theme")}
         >
           {darkMode ? <Icon name="darkMode" /> : <Icon name="lightMode"/>}
         </button>
 
-        <button className={`hamburger ${isMenuOpen ? "active" : ""}`} onClick={toggleMenu} aria-label="Menu">
+        <button
+          type="button"
+          className={`hamburger ${isMenuOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+          aria-label={t("navbar.toggle_menu")}
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>

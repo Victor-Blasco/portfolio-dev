@@ -74,7 +74,7 @@ function SkillsGrid() {
         {categories.map((category) => (
           <article
             key={category.id}
-            className={`skill-category-card glass-panel ${category.featured ? "featured" : ""}`}
+            className={`skill-category-card ${category.featured ? "featured" : ""}`}
           >
             <header className="skill-category-header">
               <span className="skill-category-icon">

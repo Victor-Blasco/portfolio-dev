@@ -42,7 +42,7 @@
   position: relative;
   border-radius: 50%;
   padding: 3px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,9 +69,9 @@
   left: -5px;
   right: -5px;
   bottom: -5px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  background: var(--accent);
   filter: blur(16px);
-  opacity: 0.32;
+  opacity: 0.22;
   border-radius: 50%;
   z-index: -1;
   animation: pulse-slow 6s ease-in-out infinite;
@@ -146,9 +146,7 @@
 }
 
 .highlight-text {
-  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent);
   display: inline-block;
   position: relative;
   font-weight: 800;
@@ -161,9 +159,9 @@
   bottom: 4px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  background: var(--accent);
   border-radius: 1px;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .hero-subheadline {
@@ -221,9 +219,9 @@
 }
 
 .email-action-group .email-copy-btn.copied {
-  border-color: rgba(16, 185, 129, 0.45);
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--color-success-border);
+  color: var(--color-success);
+  background: var(--color-success-bg);
 }
 
 /* Responsiveness */

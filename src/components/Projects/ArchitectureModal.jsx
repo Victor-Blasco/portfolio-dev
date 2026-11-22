@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import "./ArchitectureModal.css";
 
+const FOCUSABLE_SELECTOR =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 /**
  * Modal interactivo que presenta el Caso de Estudio y Diagrama de Arquitectura
  * para los proyectos del portfolio (TFG, Gustomé, MoRMaS).
- * Se renderiza mediante un Portal de React y soporta cierre con tecla Escape.
+ * Se renderiza mediante un Portal de React, gestiona Focus Trap y restauración de foco.
  *
  * @param {Object} props - Propiedades del componente.
  * @param {boolean} props.isOpen - Indica si el modal está abierto.
@@ -28,23 +31,64 @@ function ArchitectureModal({
   onPreviewClick,
 }) {
   const { t } = useTranslation();
+  const modalRef = useRef(null);
+  const closeBtnRef = useRef(null);
 
+  // Bloqueo de scroll, foco inicial y restauración de foco al cerrar
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousFocus = document.activeElement;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = "";
+      if (previousFocus && typeof previousFocus.focus === "function") {
+        previousFocus.focus();
+      }
+    };
+  }, [isOpen]);
+
+  // Teclado: Escape y Focus Trap cuando el Lightbox no está superpuesto
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e) => {
-      if (e.key === "Escape" && !isLightboxOpen) {
+      if (isLightboxOpen) return;
+
+      if (e.key === "Escape") {
         onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = Array.from(
+          modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
+        ).filter((el) => el.getClientRects().length > 0);
+
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first || !modalRef.current.contains(document.activeElement)) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else if (document.activeElement === last || !modalRef.current.contains(document.activeElement)) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, isLightboxOpen, onClose]);
 
   if (!isOpen || !projectKey) {
@@ -59,12 +103,13 @@ function ArchitectureModal({
 
   return createPortal(
     <div className="arch-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="arch-modal-title">
-      <div className="arch-modal-card glass-panel" onClick={(e) => e.stopPropagation()}>
+      <div ref={modalRef} className="arch-modal-card glass-panel" onClick={(e) => e.stopPropagation()}>
         <button
+          ref={closeBtnRef}
           type="button"
           className="arch-modal-close"
           onClick={onClose}
-          aria-label="Cerrar modal de arquitectura"
+          aria-label={t("projects.close_architecture")}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>

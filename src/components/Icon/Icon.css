@@ -1,7 +1,4 @@
-.icon{
-    fill: currentColor;
-}
-.email{
-    fill: none;
-    stroke: currentColor;
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
 }

@@ -10,13 +10,6 @@
   width: 100%;
   box-sizing: border-box;
   box-shadow: var(--glass-shadow), var(--surface-highlight);
-  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-}
-
-.card:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 20px var(--glow-blue);
-  transform: translateY(-4px);
-  border-color: var(--accent);
 }
 
 /* Cabecera de la tarjeta para alinear logotipo y títulos */
@@ -83,16 +76,15 @@
   display: inline-flex;
   align-items: center;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
   color: var(--text-secondary);
-  background: var(--input-bg);
-  border: 1px solid var(--card-border);
-  padding: 0.2rem 0.65rem;
-  border-radius: 999px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
   white-space: nowrap;
-  width: fit-content;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 /* Descripción de la experiencia */
@@ -124,11 +116,6 @@
   padding: 0.25rem 0.65rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.card:hover .card-tag {
-  border-color: rgba(99, 102, 241, 0.25);
 }
 
 /* Ajustes adaptables para tarjetas en dispositivos móviles */

@@ -38,8 +38,8 @@ function Card({ title, institution, subtitle, description, tags, logo, logoBg, l
           </div>
         )}
         <div className="card-title-group">
-          <h3 className="card-role">{title}</h3>
           {subtitle && <span className="card-period-badge">{subtitle}</span>}
+          <h3 className="card-role">{title}</h3>
           {institution && <h4 className="card-institution">{institution}</h4>}
         </div>
       </div>

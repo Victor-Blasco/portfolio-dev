@@ -248,6 +248,7 @@ function Projects() {
               <div className="project-info-side">
                 <div className="project-meta-header">
                   <span className="project-tag">{project.tag}</span>
+                  <span className="project-meta-sep" aria-hidden="true">·</span>
                   <span className="project-duration">{project.subtitle}</span>
                 </div>
                 <h3 className="project-title">{project.title}</h3>

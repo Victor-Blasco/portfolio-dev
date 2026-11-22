@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import "./ProjectCarousel.css";
 
 /**
@@ -14,6 +15,7 @@ import "./ProjectCarousel.css";
  * @returns {JSX.Element|null} El carrusel de imágenes del proyecto.
  */
 function ProjectCarousel({ images, title, onImageClick }) {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Referencias para el seguimiento de gestos táctiles
@@ -128,10 +130,29 @@ function ProjectCarousel({ images, title, onImageClick }) {
     onImageClick(currentIndex);
   };
 
+  /**
+   * Permite abrir el lightbox con Enter o Espacio cuando el contenedor tiene el foco.
+   *
+   * @param {React.KeyboardEvent<HTMLDivElement>} e - Evento de teclado.
+   */
+  const handleFrameKeyDown = (e) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleFrameClick();
+    }
+  };
+
+  const shortTitle = title.split(" - ")[0];
+
   return (
     <div
       className="project-image-frame"
+      role="button"
+      tabIndex={0}
+      aria-label={t("projects.open_lightbox", { title: shortTitle })}
       onClick={handleFrameClick}
+      onKeyDown={handleFrameKeyDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -202,7 +223,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
             <button
               className="carousel-arrow prev"
               onClick={handlePrev}
-              aria-label="Imagen anterior"
+              aria-label={t("projects.prev_image")}
               type="button"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -212,7 +233,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
             <button
               className="carousel-arrow next"
               onClick={handleNext}
-              aria-label="Siguiente imagen"
+              aria-label={t("projects.next_image")}
               type="button"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -230,7 +251,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
                 key={index}
                 className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
                 onClick={(e) => handleDotClick(e, index)}
-                aria-label={`Ir a imagen ${index + 1}`}
+                aria-label={t("projects.go_to_image", { number: index + 1 })}
                 type="button"
               />
             ))}

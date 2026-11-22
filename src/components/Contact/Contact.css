@@ -47,7 +47,8 @@
   margin-top: 0.75rem;
 }
 
-.contact-card-link {
+.contact-card-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -57,15 +58,17 @@
   border: 1px solid var(--card-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), var(--surface-highlight);
   color: var(--text-color);
-  text-decoration: none;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.contact-card-link:hover {
-  text-decoration: none;
+.contact-card-item:hover {
   transform: translateY(-2px);
   border-color: var(--accent);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 0 12px var(--glow-blue);
+}
+
+.contact-card-item:active {
+  transform: scale(0.99);
 }
 
 .contact-card-icon {
@@ -103,13 +106,27 @@
   color: var(--text-secondary);
 }
 
-.contact-card-value {
+.contact-card-link {
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-color);
+  text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.contact-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 14px;
+}
+
+.contact-card-link:hover {
+  text-decoration: none;
+  color: var(--accent);
 }
 
 .contact-card-arrow {
@@ -119,27 +136,30 @@
   transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
 }
 
-.contact-card-link:hover .contact-card-arrow {
+.contact-card-item:hover .contact-card-arrow {
   transform: translate(2px, -2px);
   color: var(--accent);
   opacity: 1;
 }
 
 .contact-copy-btn {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  min-height: 38px;
   background: var(--input-bg);
   border: 1px solid var(--card-border);
   color: var(--text-secondary);
   font-family: inherit;
   font-size: 0.76rem;
   font-weight: 600;
-  padding: 0.32rem 0.65rem;
+  padding: 0.35rem 0.7rem;
   border-radius: 8px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
 }
 
 .contact-copy-btn:hover {
@@ -148,10 +168,14 @@
   background: var(--glow-blue);
 }
 
+.contact-copy-btn:active {
+  transform: scale(0.97);
+}
+
 .contact-copy-btn.copied {
-  border-color: rgba(16, 185, 129, 0.45);
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--color-success-border);
+  color: var(--color-success);
+  background: var(--color-success-bg);
 }
 
 .contact-form {
@@ -166,6 +190,13 @@
   background: var(--card-bg-gradient);
   border: 1px solid var(--card-border);
   box-shadow: var(--glass-shadow), var(--surface-highlight);
+}
+
+@media (max-width: 768px) {
+  .contact-copy-btn {
+    min-height: 44px;
+    padding: 0.45rem 0.8rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -197,7 +228,7 @@
   padding: 0.85rem 1.1rem;
   border: 1px solid var(--card-border);
   border-radius: 12px;
-  font-size: 0.94rem;
+  font-size: 1rem;
   background: var(--input-bg);
   color: var(--input-text);
   font-family: inherit;
@@ -215,7 +246,7 @@
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--accent);
-  background: var(--bg-color);
+  background: var(--input-focus-bg);
   box-shadow: 0 0 14px var(--glow-blue);
 }
 
@@ -226,18 +257,18 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  background: var(--accent);
   color: #ffffff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 0.85rem 2rem;
   border-radius: 12px;
   cursor: pointer;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.92rem;
   font-weight: 600;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, filter 0.2s ease;
   align-self: flex-start;
-  box-shadow: 0 4px 14px var(--glow-blue);
+  box-shadow: 0 4px 14px var(--glow-blue), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -245,12 +276,12 @@
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   filter: brightness(1.06);
 }
 
 .btn-primary:active:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-primary:disabled {
@@ -286,9 +317,9 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.85rem 1.1rem;
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
   border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -314,13 +345,13 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #10b981;
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 20px var(--color-success-bg);
 }
 
 .contact-form-success h3 {
