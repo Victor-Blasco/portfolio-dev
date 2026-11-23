@@ -170,7 +170,7 @@
   background: radial-gradient(circle, var(--glow-color, var(--glow-blue)) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.45;
+  opacity: 0.35;
 }
 
 .project-image-frame {

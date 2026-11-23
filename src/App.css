@@ -112,77 +112,85 @@ h2::after {
   }
 }
 
-/* Variables de color para modo claro (Zinc/Slate Premium) */
+/* Variables de color para modo claro (Slate + Teal) */
 
 :root {
   --bg-color: #f8fafc;
   --text-color: #0f172a;
   --text-secondary: #475569;
-  --section-bg: rgba(248, 250, 252, 0.72);
-  --card-bg: rgba(255, 255, 255, 0.78);
+  --section-bg: rgba(248, 250, 252, 0.78);
+  --card-bg: rgba(255, 255, 255, 0.85);
   --surface-tinted: rgba(15, 23, 42, 0.035);
   --modal-bg: #ffffff;
   --card-bg-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 245, 249, 0.75) 100%);
-  --card-border: rgba(203, 213, 225, 0.75);
+  --card-border: #e2e8f0;
   --surface-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-  --accent: #2563eb;
-  --accent-solid: #2563eb;
-  --accent-secondary: #4f46e5;
-  --glow-blue: rgba(37, 99, 235, 0.08);
-  --glow-violet: rgba(79, 70, 229, 0.08);
-  --input-bg: rgba(255, 255, 255, 0.9);
+  --accent: #0f766e;
+  --accent-solid: #0f766e;
+  --accent-solid-text: #ffffff;
+  --accent-secondary: #0369a1;
+  --glow-blue: rgba(13, 148, 136, 0.09);
+  --glow-violet: rgba(3, 105, 161, 0.08);
+  --accent-border: rgba(13, 148, 136, 0.24);
+  --accent-secondary-border: rgba(3, 105, 161, 0.24);
+  --accent-shadow: rgba(15, 118, 110, 0.28);
+  --input-bg: rgba(255, 255, 255, 0.92);
   --input-focus-bg: #ffffff;
   --input-text: #0f172a;
   --button-bg: #0f172a;
   --button-text: #f8fafc;
-  --color-success: #047857;
-  --color-success-bg: rgba(4, 120, 87, 0.1);
-  --color-success-border: rgba(4, 120, 87, 0.32);
+  --color-success: #15803d;
+  --color-success-bg: rgba(21, 128, 61, 0.1);
+  --color-success-border: rgba(21, 128, 61, 0.3);
   --color-error: #b91c1c;
   --color-error-bg: rgba(185, 28, 28, 0.08);
   --color-error-border: rgba(185, 28, 28, 0.3);
   --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
-  --mesh-bg: radial-gradient(at 10% 15%, rgba(37, 99, 235, 0.05) 0px, transparent 40%),
-             radial-gradient(at 90% 30%, rgba(79, 70, 229, 0.04) 0px, transparent 45%),
-             radial-gradient(at 30% 70%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
-             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.03) 0px, transparent 40%);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(13, 148, 136, 0.045) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(3, 105, 161, 0.035) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(13, 148, 136, 0.03) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.025) 0px, transparent 40%);
   --github-color: #0f172a;
 }
 
-/* Variables de color para modo oscuro */
+/* Variables de color para modo oscuro (Slate + Teal) */
 
 :root.dark-mode {
-  --bg-color: #09090b;
-  --text-color: #f8fafc;
-  --text-secondary: #a1a1aa;
-  --section-bg: rgba(18, 18, 22, 0.65);
-  --card-bg: rgba(20, 20, 25, 0.78);
-  --surface-tinted: rgba(255, 255, 255, 0.04);
-  --modal-bg: #18181d;
-  --card-bg-gradient: linear-gradient(135deg, rgba(22, 22, 27, 0.9) 0%, rgba(16, 16, 20, 0.72) 100%);
-  --card-border: rgba(63, 63, 70, 0.55);
+  --bg-color: #0b1120;
+  --text-color: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --section-bg: rgba(15, 23, 42, 0.72);
+  --card-bg: rgba(19, 28, 49, 0.82);
+  --surface-tinted: rgba(255, 255, 255, 0.045);
+  --modal-bg: #131c31;
+  --card-bg-gradient: linear-gradient(135deg, rgba(22, 33, 58, 0.9) 0%, rgba(15, 23, 42, 0.75) 100%);
+  --card-border: #1e293b;
   --surface-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-  --accent: #3b82f6;
-  --accent-solid: #2563eb;
-  --accent-secondary: #818cf8;
-  --glow-blue: rgba(59, 130, 246, 0.14);
-  --glow-violet: rgba(129, 140, 248, 0.14);
-  --input-bg: rgba(24, 24, 27, 0.85);
-  --input-focus-bg: #1e1e24;
-  --input-text: #f8fafc;
-  --button-bg: #f8fafc;
-  --button-text: #09090b;
-  --color-success: #34d399;
-  --color-success-bg: rgba(16, 185, 129, 0.14);
-  --color-success-border: rgba(52, 211, 153, 0.38);
+  --accent: #2dd4bf;
+  --accent-solid: #14b8a6;
+  --accent-solid-text: #042f2e;
+  --accent-secondary: #38bdf8;
+  --glow-blue: rgba(45, 212, 191, 0.12);
+  --glow-violet: rgba(56, 189, 248, 0.11);
+  --accent-border: rgba(45, 212, 191, 0.25);
+  --accent-secondary-border: rgba(56, 189, 248, 0.25);
+  --accent-shadow: rgba(20, 184, 166, 0.3);
+  --input-bg: rgba(19, 28, 49, 0.88);
+  --input-focus-bg: #1a2642;
+  --input-text: #f1f5f9;
+  --button-bg: #f1f5f9;
+  --button-text: #0b1120;
+  --color-success: #4ade80;
+  --color-success-bg: rgba(34, 197, 94, 0.14);
+  --color-success-border: rgba(74, 222, 128, 0.35);
   --color-error: #f87171;
   --color-error-bg: rgba(239, 68, 68, 0.14);
   --color-error-border: rgba(248, 113, 113, 0.35);
   --glass-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.45);
-  --mesh-bg: radial-gradient(at 10% 15%, rgba(59, 130, 246, 0.1) 0px, transparent 40%),
-             radial-gradient(at 90% 30%, rgba(129, 140, 248, 0.09) 0px, transparent 45%),
-             radial-gradient(at 30% 70%, rgba(59, 130, 246, 0.07) 0px, transparent 50%),
-             radial-gradient(at 80% 85%, rgba(16, 185, 129, 0.06) 0px, transparent 40%);
+  --mesh-bg: radial-gradient(at 10% 15%, rgba(45, 212, 191, 0.08) 0px, transparent 40%),
+             radial-gradient(at 90% 30%, rgba(56, 189, 248, 0.06) 0px, transparent 45%),
+             radial-gradient(at 30% 70%, rgba(45, 212, 191, 0.05) 0px, transparent 50%),
+             radial-gradient(at 80% 85%, rgba(34, 197, 94, 0.04) 0px, transparent 40%);
   --github-color: #ffffff;
 }
 
@@ -302,14 +310,14 @@ a:hover {
 .social-link.primary {
   background: var(--accent-solid);
   border-color: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
+  color: var(--accent-solid-text);
   box-shadow: 0 4px 14px var(--glow-blue), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .social-link.primary:hover {
-  color: #ffffff;
+  color: var(--accent-solid-text);
   border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 22px var(--accent-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   filter: brightness(1.06);
 }
 

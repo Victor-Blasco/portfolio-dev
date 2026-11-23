@@ -133,7 +133,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   background: var(--glow-blue);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid var(--accent-border);
 }
 
 .hero-headline {

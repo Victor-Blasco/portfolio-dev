@@ -59,8 +59,8 @@
 
 .dark-mode .filter-btn.active {
   background: var(--accent-solid);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  color: var(--accent-solid-text);
+  box-shadow: 0 4px 14px var(--accent-shadow);
 }
 
 /* Contenedor del Timeline */
