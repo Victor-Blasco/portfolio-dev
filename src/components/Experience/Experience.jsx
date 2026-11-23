@@ -22,7 +22,7 @@ const BriefcaseIcon = () => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2.2"
+    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="timeline-icon"
@@ -43,7 +43,7 @@ const GraduationCapIcon = () => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2.2"
+    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="timeline-icon"
@@ -139,6 +139,7 @@ function Experience() {
           <button
             className={`filter-btn ${filter === "all" ? "active" : ""}`}
             onClick={() => handleFilterChange("all")}
+            aria-pressed={filter === "all"}
             type="button"
           >
             {t("experience.filter_all")}
@@ -146,6 +147,7 @@ function Experience() {
           <button
             className={`filter-btn ${filter === "work" ? "active" : ""}`}
             onClick={() => handleFilterChange("work")}
+            aria-pressed={filter === "work"}
             type="button"
           >
             {t("experience.filter_work")}
@@ -153,6 +155,7 @@ function Experience() {
           <button
             className={`filter-btn ${filter === "education" ? "active" : ""}`}
             onClick={() => handleFilterChange("education")}
+            aria-pressed={filter === "education"}
             type="button"
           >
             {t("experience.filter_education")}
@@ -171,6 +174,7 @@ function Experience() {
           return (
             <div
               key={item.id}
+              aria-hidden={isFilteredOut}
               className={`timeline-item ${isLeft ? "left-item" : "right-item"} ${item.type} ${
                 isFilteredOut ? "filtered-out" : ""
               } ${hoveredId === item.id ? "hovered" : ""}`}

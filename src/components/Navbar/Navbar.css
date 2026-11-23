@@ -149,8 +149,8 @@ nav {
 }
 
 .dark-mode .lang-slider {
-  background: var(--accent);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+  background: var(--accent-solid);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
 }
 
 .lang-btn {
@@ -248,23 +248,23 @@ nav {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
-    max-height: 0;
     opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top center;
     visibility: hidden;
     pointer-events: none;
     overflow: hidden;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
-    padding: 0;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+    padding: 1rem 0;
     gap: 0;
     box-shadow: var(--glass-shadow);
   }
 
   .nav-links.active {
-    max-height: 300px;
     opacity: 1;
+    transform: translateY(0) scale(1);
     visibility: visible;
     pointer-events: auto;
-    padding: 1rem 0;
   }
 
   .nav-links a {

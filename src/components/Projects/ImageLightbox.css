@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 2rem max(2rem, env(safe-area-inset-bottom));
   box-sizing: border-box;
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -168,7 +168,7 @@
 /* Responsividad para móviles */
 @media (max-width: 768px) {
   .lightbox-overlay {
-    padding: 1rem;
+    padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
   }
 
   .lightbox-content {

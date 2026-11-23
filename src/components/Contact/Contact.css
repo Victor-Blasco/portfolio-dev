@@ -52,8 +52,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.9rem 1.15rem;
-  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
   background: var(--card-bg-gradient);
   border: 1px solid var(--card-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), var(--surface-highlight);
@@ -74,7 +74,7 @@
 .contact-card-icon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--input-bg);
   border: 1px solid var(--card-border);
   display: flex;
@@ -240,6 +240,7 @@
 .contact-form textarea {
   resize: vertical;
   min-height: 125px;
+  max-height: 280px;
 }
 
 .contact-form input:focus,
@@ -257,7 +258,7 @@
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 0.85rem 2rem;

@@ -166,7 +166,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
         </div>
         <span className="browser-title-bar">{title.split(" - ")[0]}</span>
         <div className="browser-zoom-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 3 21 3 21 9"></polyline>
             <polyline points="9 21 3 21 3 15"></polyline>
             <line x1="21" y1="3" x2="14" y2="10"></line>
@@ -209,7 +209,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
 
         {/* Badge flotante de ampliación */}
         <div className="zoom-hint-badge" aria-hidden="true">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             <line x1="11" y1="8" x2="11" y2="14"></line>
@@ -252,6 +252,7 @@ function ProjectCarousel({ images, title, onImageClick }) {
                 className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
                 onClick={(e) => handleDotClick(e, index)}
                 aria-label={t("projects.go_to_image", { number: index + 1 })}
+                aria-current={index === currentIndex ? "true" : undefined}
                 type="button"
               />
             ))}

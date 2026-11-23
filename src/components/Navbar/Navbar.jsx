@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./Navbar.css";
 import Icon from "../Icon/Icon";
@@ -17,7 +17,33 @@ import { trackEvent } from "@/utils/analytics";
 function Navbar({ darkMode, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const navRef = useRef(null);
   const { t, i18n } = useTranslation();
+
+  // Cerrar el menú móvil al pulsar Escape o tocar fuera de la barra de navegación
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handlePointerDown = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -68,7 +94,7 @@ function Navbar({ darkMode, onToggleTheme }) {
   }, []);
 
   return (
-    <nav className="glass-panel">
+    <nav ref={navRef} className="glass-panel">
       <div className="nav-logo">
         <a href="#root" onClick={() => setIsMenuOpen(false)}>VB</a>
       </div>
@@ -77,6 +103,7 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a
           href="#about"
           className={activeSection === "about" ? "active" : ""}
+          aria-current={activeSection === "about" ? "location" : undefined}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.about")}
@@ -84,6 +111,7 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a
           href="#projects"
           className={activeSection === "projects" ? "active" : ""}
+          aria-current={activeSection === "projects" ? "location" : undefined}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.projects")}
@@ -91,6 +119,7 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a
           href="#experience"
           className={activeSection === "experience" ? "active" : ""}
+          aria-current={activeSection === "experience" ? "location" : undefined}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.experience")}
@@ -98,6 +127,7 @@ function Navbar({ darkMode, onToggleTheme }) {
         <a
           href="#contact"
           className={activeSection === "contact" ? "active" : ""}
+          aria-current={activeSection === "contact" ? "location" : undefined}
           onClick={() => setIsMenuOpen(false)}
         >
           {t("navbar.contact")}
@@ -117,6 +147,7 @@ function Navbar({ darkMode, onToggleTheme }) {
             className={`lang-btn ${i18n.language.startsWith("es") ? "active" : ""}`}
             onClick={() => changeLanguage("es")}
             aria-label={t("navbar.lang_es")}
+            aria-pressed={i18n.language.startsWith("es")}
             type="button"
           >
             ES
@@ -125,6 +156,7 @@ function Navbar({ darkMode, onToggleTheme }) {
             className={`lang-btn ${i18n.language.startsWith("en") ? "active" : ""}`}
             onClick={() => changeLanguage("en")}
             aria-label={t("navbar.lang_en")}
+            aria-pressed={i18n.language.startsWith("en")}
             type="button"
           >
             EN

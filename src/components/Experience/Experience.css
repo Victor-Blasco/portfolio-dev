@@ -58,9 +58,9 @@
 }
 
 .dark-mode .filter-btn.active {
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
 /* Contenedor del Timeline */
@@ -97,13 +97,12 @@
   margin-bottom: 2.5rem;
   z-index: 2;
   box-sizing: border-box;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 1;
-  max-height: 900px;
+  max-height: 420px;
   transform: scale(1);
 }
 
@@ -219,6 +218,10 @@
 
 /* Diseño Responsive para tablets e iPads (vertical) */
 @media (max-width: 880px) {
+  .filter-btn {
+    min-height: 44px;
+  }
+
   .experience-subtitle {
     margin-bottom: 2rem;
   }
