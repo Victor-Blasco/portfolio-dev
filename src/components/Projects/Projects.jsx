@@ -9,6 +9,7 @@ import ArchitectureModal from "./ArchitectureModal";
 import { trackEvent } from "@/utils/analytics";
 
 // Carga dinámica de imágenes de proyectos organizada por carpetas
+const rackmarkGlob = import.meta.glob("../../assets/projects/rackmark/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const gustomeGlob = import.meta.glob("../../assets/projects/gustome/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const tfgGlob = import.meta.glob("../../assets/projects/tfg/*.{png,jpg,jpeg,svg,webp}", { eager: true });
 const mormasGlob = import.meta.glob("../../assets/projects/mormas/*.{png,jpg,jpeg,svg,webp}", { eager: true });
@@ -16,6 +17,13 @@ const marketpulseGlob = import.meta.glob("../../assets/projects/marketpulse/*.{p
 
 // Mapa declarativo de subtítulos para imágenes de proyectos
 const PROJECT_CAPTION_MAP = {
+  rackmark: {
+    resumen: "projects.captions.rackmark.resumen",
+    progresion: "projects.captions.rackmark.progresion",
+    adherencia: "projects.captions.rackmark.adherencia",
+    cuerpo: "projects.captions.rackmark.cuerpo",
+    entreno_movil: "projects.captions.rackmark.entreno_movil",
+  },
   gustome: {
     landing: "projects.captions.gustome.landing",
     agregar_plato: "projects.captions.gustome.agregar_plato",
@@ -39,6 +47,7 @@ const PROJECT_CAPTION_MAP = {
 
 // Orden de presentación prioritario para las capturas de pantalla de cada proyecto
 const PROJECT_ORDER_MAP = {
+  rackmark: ["resumen", "progresion", "adherencia", "cuerpo", "entreno_movil"],
   gustome: ["landing", "dashboard", "pedidos_restaurante", "pedidos_cliente_movil", "agregar_plato"],
   tfg: ["login", "ejecutivo", "operativo"],
   mormas: ["competiciones", "promotor"],
@@ -46,6 +55,7 @@ const PROJECT_ORDER_MAP = {
 
 // Capturas destacadas que se muestran dentro del modal de arquitectura de cada proyecto
 const MODAL_PREVIEW_KEYS = {
+  rackmark: ["resumen", "progresion"],
   gustome: ["dashboard", "pedidos_restaurante"],
   tfg: ["ejecutivo", "operativo"],
   mormas: ["competiciones", "promotor"],
@@ -146,6 +156,32 @@ function Projects() {
   };
 
   const projectsData = [
+    {
+      key: "rackmark",
+      tag: t("projects.tags.rackmark"),
+      title: t("projects.titles.rackmark"),
+      subtitle: t("projects.periods.rackmark"),
+      role: t("projects.roles.rackmark"),
+      description: t("projects.descriptions.rackmark"),
+      tech: ["TypeScript", "Preact (Vite)", "IndexedDB", "Cloud Firestore", "Web Workers", "Vitest + Biome CI"],
+      images: getProjectImages(rackmarkGlob, "rackmark", t),
+      references: [
+        {
+          label: "Architecture",
+          hasArchitectureModal: true,
+          archKey: "rackmark",
+        },
+        {
+          label: "Demo",
+          isDemo: true,
+          url: "https://rackmark.web.app/?demo=1",
+        },
+        {
+          label: "GitHub",
+          url: "https://github.com/Victor-Blasco/RackMark",
+        },
+      ],
+    },
     {
       key: "tfg",
       tag: t("projects.tags.tfg"),
@@ -308,6 +344,30 @@ function Projects() {
                           </svg>
                           {t("projects.private_repo")}
                         </span>
+                      );
+                    }
+                    if (ref.isDemo) {
+                      return (
+                        <a
+                          key={rIdx}
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-link demo-link"
+                          onClick={() =>
+                            trackEvent("click_project_demo", {
+                              project: project.title,
+                              url: ref.url,
+                            })
+                          }
+                        >
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                          </svg>
+                          {t("projects.view_demo")}
+                        </a>
                       );
                     }
                     return (

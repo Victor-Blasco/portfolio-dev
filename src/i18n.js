@@ -70,6 +70,7 @@ const resources = {
         title: "Proyectos",
         private_repo: "Código privado (NDA)",
         view_on_github: "Ver en GitHub",
+        view_demo: "Probar Demo",
         view_architecture: "Ver Arquitectura",
         previews_title: "Vista Previa de la Interfaz",
         zoom_preview: "Ampliar captura",
@@ -80,17 +81,91 @@ const resources = {
         close_architecture: "Cerrar modal de arquitectura",
         open_lightbox: "Ampliar capturas de {{title}}",
         tags: {
+          rackmark: "Proyecto personal · PWA",
           tfg: "Prácticas en empresa",
           gustome: "Proyecto en equipo",
           mormas: "Proyecto en equipo",
           marketpulse: "Proyecto personal",
         },
         roles: {
+          rackmark: "Rol: Autor único · Arquitectura End-to-End",
           tfg: "Rol: End-to-End Owner · Software Engineer Intern",
           gustome: "Rol: Lead Developer · Contribuidor principal",
           mormas: "Rol: Lead Developer · Contribuidor principal",
         },
         architectures: {
+          rackmark: {
+            badge: "Caso de Estudio • PWA Offline-First",
+            role_badge: "Autor único · Arquitectura End-to-End",
+            title: "RackMark - PWA Offline-First de Entrenamiento",
+            confidential_note: "Aislamiento de datos por UID en Cloud Firestore, persistencia local en IndexedDB y modo demo interactivo sin registro.",
+            flow_title: "Flujo Offline-First y Sincronización Cloud",
+            infra_label: "PWA Instalable (Service Worker) · Firebase Hosting · GitHub Actions CI",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "Cliente PWA (Preact + TS)",
+                sub: "Vistas con Lazy Code Splitting, Hooks y Store Reactivo",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Web Worker (Samsung Health)",
+                sub: "Parseo asíncrono de ZIP/CSV sin bloquear el hilo principal",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "IndexedDB Local",
+                sub: "Persistencia offline-first instantánea y backup completo",
+                type: "db"
+              },
+              {
+                step: "04",
+                title: "Motor de Sync (Buckets)",
+                sub: "Cola de sincronización por bloques mensuales de sesiones",
+                type: "broker"
+              },
+              {
+                step: "05",
+                title: "Firebase Auth + Firestore",
+                sub: "Reglas declarativas por UID y aislamiento por usuario",
+                type: "source"
+              },
+              {
+                step: "06",
+                title: "Coach IA + CI/CD",
+                sub: "Análisis contextual por fase · Vitest (123 tests) + Biome",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Decisiones de Ingeniería",
+            decisions: [
+              {
+                title: "Arquitectura Offline-First y Sync por Buckets Mensuales",
+                desc: "Todas las lecturas y escrituras pasan primero por IndexedDB para responder al instante sin cobertura en gimnasio. La sincronización con Cloud Firestore agrupa las sesiones en documentos por mes para minimizar lecturas/escrituras y mantener consistencia entre dispositivos."
+              },
+              {
+                title: "Parseo de ZIP/CSV en Web Worker Dedicado",
+                desc: "La importación de exportaciones de Samsung Health (descompresión ZIP con fflate y parseo CSV con PapaParse) se ejecuta en un Web Worker dedicado, evitando congelar la interfaz durante la fusión de cientos de sesiones."
+              },
+              {
+                title: "Seguridad Declarativa por UID y Modo Demo (?demo=1)",
+                desc: "Reglas de Firestore que garantizan el aislamiento estricto de datos por UID autenticado, junto a un modo demo interactivo con datos realistas en memoria para evaluar la app sin crear cuenta."
+              },
+              {
+                title: "Code-Splitting, 123 Tests (Vitest) y CI con Biome",
+                desc: "Carga diferida de vistas pesadas y librerías de gráficas con preact/compat, respaldada por 9 suites (123 tests de dominio, sincronización, seguridad y accesibilidad) y validación continua con tsc, Vitest y Biome."
+              }
+            ],
+            contributions_title: "Alcance Técnico Clave",
+            contributions: [
+              "Registro en vivo pensado para móvil: precarga de última sesión, temporizador de descanso persistente en navegación y soporte de carga con peso corporal (+BW).",
+              "Analítica de fuerza y composición corporal: cálculo de e1RM, tendencia de peso con media móvil de 7 días, matriz semanal de volumen muscular y calendario de adherencia.",
+              "Coach IA contextualizado: informes técnicos o sencillos adaptados a la fase nutricional y de entrenamiento activa (definición, volumen, mantenimiento).",
+              "Calidad y portabilidad: 123 tests automatizados en Vitest (incluyendo security.test.ts y ui-a11y.test.ts), exportación/restauración completa y despliegue continuo en Firebase Hosting."
+            ]
+          },
           tfg: {
             badge: "Caso de Estudio • Arquitectura BI",
             role_badge: "End-to-End Owner · Software Engineer Intern",
@@ -309,18 +384,22 @@ const resources = {
           }
         },
         titles: {
+          rackmark: "RackMark - PWA Offline-First de Entrenamiento",
           gustome: "Gustomé - Gestión Inteligente de Cartas",
           tfg: "Plataforma BI de Ciberseguridad (TFG)",
           mormas: "Mountain Race Management System (MoRMaS)",
           marketpulse: "Market Pulse - Análisis Financiero & Dashboard",
         },
         periods: {
+          rackmark: "Noviembre 2026",
           gustome: "Septiembre 2025 - Mayo 2026",
           tfg: "Febrero 2026 - Mayo 2026",
           mormas: "Septiembre 2024 - Mayo 2025",
           marketpulse: "Octubre 2025 - Diciembre 2025",
         },
         descriptions: {
+          rackmark:
+            "PWA offline-first de entrenamiento de fuerza en TypeScript y Preact (Vite): registro en vivo para gimnasio, analítica de progresión (e1RM), volumen muscular, composición corporal y adherencia. Importa exportaciones ZIP/CSV de Samsung Health mediante un Web Worker dedicado, persiste en IndexedDB y sincroniza por bloques mensuales con Cloud Firestore bajo reglas por UID. Incluye Coach IA contextualizado por fases, modo demo sin registro y 123 tests en Vitest con Biome en GitHub Actions CI.",
           tfg: "Plataforma BI diseñada y desplegada end-to-end (en coordinación con el equipo de IT) que cruza telemetría de 3 herramientas corporativas (Cortex XDR, Proofpoint y Endpoint Central) para detectar activos no inventariados (Shadow IT), calcular riesgo por equipo (BitLocker, administradores locales) y analizar amenazas de correo. Pipeline ETL en Python optimizado paralelizando ingestas independientes con Celery y Redis sin bloqueo web, reduciendo el tiempo de ejecución de ~1 min a ~25 s (~58%), con validación por contratos y auditoría histórica en PostgreSQL. Desplegada en producción con Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis y Celery) y CI en GitHub Actions (pytest).",
           gustome:
             "Plataforma SaaS de cartas digitales con planes por suscripción (Free, Basic y Pro) y pasarela de pagos con Stripe: filtros por alérgenos y dieta para el comensal, pedidos sincronizados en tiempo real entre mesa y cocina (Firestore onSnapshot) y digitalización de cartas en papel mediante OCR con OpenAI normalizado contra un catálogo maestro de ingredientes. Autorización por rol con Firestore Security Rules y CI/CD con GitHub Actions.",
@@ -330,6 +409,13 @@ const resources = {
             "Paquete Python de análisis financiero que descarga históricos de Yahoo Finance en una única llamada por lote y calcula rentabilidades diarias, volatilidad y matrices de correlación entre sectores. La lógica está separada de la presentación (Streamlit y Jupyter) y cubierta con tests unitarios y de integración en pytest.",
         },
         captions: {
+          rackmark: {
+            resumen: "Panel de resumen con KPIs principales e informe contextual del Coach IA.",
+            progresion: "Evolución de cargas por ejercicio (e1RM) y prescripción para la próxima sesión.",
+            adherencia: "Calendario mensual de entrenamientos, sueño, HRV y pasos diarios.",
+            cuerpo: "Seguimiento de peso con media móvil de 7 días, % de grasa y perímetros.",
+            entreno_movil: "Vista móvil de entreno en vivo con precarga de última sesión.",
+          },
           gustome: {
             landing: "Página de inicio (landing page) de la plataforma Gustomé.",
             dashboard: "Panel de administración del restaurante para gestionar cartas y pedidos.",
@@ -493,6 +579,7 @@ const resources = {
         title: "Projects",
         private_repo: "Private code (NDA)",
         view_on_github: "View on GitHub",
+        view_demo: "Live Demo",
         view_architecture: "View Architecture",
         previews_title: "Interface Preview",
         zoom_preview: "Enlarge screenshot",
@@ -503,17 +590,91 @@ const resources = {
         close_architecture: "Close architecture modal",
         open_lightbox: "Enlarge screenshots of {{title}}",
         tags: {
+          rackmark: "Personal project · PWA",
           tfg: "Industry internship",
           gustome: "Team project",
           mormas: "Team project",
           marketpulse: "Personal project",
         },
         roles: {
+          rackmark: "Role: Solo Author · End-to-End Architecture",
           tfg: "Role: End-to-End Owner · Software Engineer Intern",
           gustome: "Role: Lead Developer · Main contributor",
           mormas: "Role: Lead Developer · Main contributor",
         },
         architectures: {
+          rackmark: {
+            badge: "Case Study • Offline-First PWA",
+            role_badge: "Solo Author · End-to-End Architecture",
+            title: "RackMark - Offline-First Training PWA",
+            confidential_note: "Strict UID data isolation in Cloud Firestore, local IndexedDB persistence, and no-signup interactive demo mode.",
+            flow_title: "Offline-First Flow & Cloud Synchronization",
+            infra_label: "Installable PWA (Service Worker) · Firebase Hosting · GitHub Actions CI",
+            flow_nodes: [
+              {
+                step: "01",
+                title: "PWA Client (Preact + TS)",
+                sub: "Lazy Code-Split Views, Hooks & Reactive Store",
+                type: "web"
+              },
+              {
+                step: "02",
+                title: "Web Worker (Samsung Health)",
+                sub: "Async ZIP/CSV parsing without blocking the main UI thread",
+                type: "etl"
+              },
+              {
+                step: "03",
+                title: "Local IndexedDB",
+                sub: "Instant offline-first persistence & full backup/restore",
+                type: "db"
+              },
+              {
+                step: "04",
+                title: "Sync Engine (Buckets)",
+                sub: "Monthly session-bucket synchronization queue",
+                type: "broker"
+              },
+              {
+                step: "05",
+                title: "Firebase Auth + Firestore",
+                sub: "Declarative UID security rules & per-user isolation",
+                type: "source"
+              },
+              {
+                step: "06",
+                title: "AI Coach + CI/CD",
+                sub: "Phase-aware analysis · Vitest (123 tests) + Biome",
+                type: "infra"
+              }
+            ],
+            decisions_title: "Engineering Decisions",
+            decisions: [
+              {
+                title: "Offline-First Architecture & Monthly Bucket Sync",
+                desc: "All reads and writes hit IndexedDB first for instant responsiveness in low-connectivity gyms. Cloud Firestore sync groups sessions into monthly documents to minimize read/write costs and keep devices in sync."
+              },
+              {
+                title: "Dedicated Web Worker for ZIP/CSV Parsing",
+                desc: "Samsung Health export ingestion (ZIP decompression with fflate and CSV parsing with PapaParse) runs inside a dedicated Web Worker so merging hundreds of sessions never freezes the UI."
+              },
+              {
+                title: "Declarative UID Security & Demo Mode (?demo=1)",
+                desc: "Firestore security rules enforce strict per-UID data isolation, paired with an in-memory interactive demo mode preloaded with realistic data for instant evaluation without signing up."
+              },
+              {
+                title: "Code-Splitting, 123 Tests (Vitest) & Biome CI",
+                desc: "Lazy-loaded heavy views and charting modules via preact/compat, backed by 9 test suites (123 tests covering domain logic, sync, security, and accessibility) plus tsc, Vitest, and Biome in CI."
+              }
+            ],
+            contributions_title: "Key Technical Scope",
+            contributions: [
+              "Mobile-first live workout logging: preloads previous sets, persistent rest timer across tabs, and bodyweight (+BW) load support.",
+              "Strength & body composition analytics: e1RM progression tracking, 7-day moving average weight trend, weekly muscle volume matrix, and adherence calendar.",
+              "Phase-aware AI Coach: technical or plain-language reports tailored to the active training/nutrition phase (cutting, bulking, maintenance).",
+              "Quality & portability: 123 automated Vitest tests (including security.test.ts and ui-a11y.test.ts), full backup/restore, and continuous deployment on Firebase Hosting."
+            ]
+          },
           tfg: {
             badge: "Case Study • BI Architecture",
             role_badge: "End-to-End Owner · Software Engineer Intern",
@@ -732,18 +893,22 @@ const resources = {
           }
         },
         titles: {
+          rackmark: "RackMark - Offline-First Training PWA",
           gustome: "Gustomé - Intelligent Menu Management",
           tfg: "Cybersecurity BI Platform (TFG)",
           mormas: "Mountain Race Management System (MoRMaS)",
           marketpulse: "Market Pulse - Financial Analysis & Dashboard",
         },
         periods: {
+          rackmark: "November 2026",
           gustome: "September 2025 - May 2026",
           tfg: "February 2026 - May 2026",
           mormas: "September 2024 - May 2025",
           marketpulse: "October 2025 - December 2025",
         },
         descriptions: {
+          rackmark:
+            "Offline-first strength training PWA built with TypeScript and Preact (Vite): live gym workout logging, progression analytics (e1RM), muscle volume, body composition, and adherence. Imports Samsung Health ZIP/CSV exports in a dedicated Web Worker, persists locally in IndexedDB, and syncs in monthly buckets with Cloud Firestore under UID security rules. Includes a phase-aware AI Coach, no-signup interactive demo mode, and 123 Vitest tests with Biome in GitHub Actions CI.",
           tfg: "BI platform designed and deployed end-to-end (in coordination with the IT team) cross-referencing telemetry from 3 corporate security tools (Cortex XDR, Proofpoint, and Endpoint Central) to detect unmanaged assets (Shadow IT), compute endpoint risk scores (BitLocker, local admins), and analyze email threats. Optimized Python ETL pipeline parallelizing independent data ingestions via Celery and Redis without blocking web threads, cutting execution time from ~1 min to ~25 s (~58%), with validation contracts and historical auditing in PostgreSQL. Deployed to production with Docker Compose (Nginx, Gunicorn, PostgreSQL, Redis, and Celery) and GitHub Actions CI (pytest).",
           gustome:
             "Multi-tenant SaaS digital menu platform with subscription tiers (Free, Basic, and Pro) and Stripe payment integration: allergen and dietary filters for diners, real-time order synchronization between table and kitchen (Firestore onSnapshot), and paper menu digitalization via OpenAI OCR normalized against a master ingredient catalog. Role-based Firestore Security Rules and GitHub Actions CI/CD.",
@@ -753,6 +918,13 @@ const resources = {
             "Python financial analysis package that batch-downloads historical series from Yahoo Finance in a single call and computes daily returns, volatility, and cross-sector correlation matrices. Core logic is decoupled from presentation (Streamlit and Jupyter) and covered with unit and integration tests in pytest.",
         },
         captions: {
+          rackmark: {
+            resumen: "Summary dashboard with key KPIs and phase-aware AI Coach report.",
+            progresion: "Exercise load progression (e1RM) and next-session prescription.",
+            adherencia: "Monthly workout calendar, sleep, HRV, and daily steps.",
+            cuerpo: "Body weight tracking with 7-day moving average, body fat %, and measurements.",
+            entreno_movil: "Mobile live workout view with preloaded previous session.",
+          },
           gustome: {
             landing: "Landing page of the Gustomé platform.",
             dashboard: "Restaurant administration dashboard to manage menus and orders.",

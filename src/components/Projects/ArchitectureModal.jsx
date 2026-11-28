@@ -8,14 +8,14 @@ const FOCUSABLE_SELECTOR =
 
 /**
  * Modal interactivo que presenta el Caso de Estudio y Diagrama de Arquitectura
- * para los proyectos del portfolio (TFG, Gustomé, MoRMaS).
+ * para los proyectos del portfolio (RackMark, TFG, Gustomé, MoRMaS).
  * Se renderiza mediante un Portal de React, gestiona Focus Trap y restauración de foco.
  *
  * @param {Object} props - Propiedades del componente.
  * @param {boolean} props.isOpen - Indica si el modal está abierto.
  * @param {boolean} [props.isLightboxOpen=false] - Indica si el visor de imágenes a pantalla completa está abierto.
  * @param {Function} props.onClose - Función para cerrar el modal.
- * @param {string} [props.projectKey='tfg'] - Clave del proyecto ('tfg', 'gustome', 'mormas').
+ * @param {string} [props.projectKey='tfg'] - Clave del proyecto ('rackmark', 'tfg', 'gustome', 'mormas').
  * @param {string} [props.fallbackTitle=''] - Título de respaldo si no se encuentra en i18n.
  * @param {Array<{src: string, caption: string, originalIndex: number}>} [props.previewImages=[]] - Capturas destacadas para mostrar en el modal.
  * @param {Function} [props.onPreviewClick] - Callback invocado al hacer clic en una captura destacada.
